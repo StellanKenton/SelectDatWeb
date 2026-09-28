@@ -98,6 +98,71 @@ USE_TYPE_OPTIONS = [
 USE_TYPES = [label for _, label in USE_TYPE_OPTIONS]
 USE_TYPE_CODE = {label: code for code, label in USE_TYPE_OPTIONS}
 
+
+TRIGRAM_OPTIONS = [
+    {"value": 1, "label": "【北方】坎卦", "name": "坎", "palace": "坎宫", "positions": ["壬", "子", "癸"]},
+    {"value": 2, "label": "【西南】坤卦", "name": "坤", "palace": "坤宫", "positions": ["未", "坤", "申"]},
+    {"value": 3, "label": "【东方】震卦", "name": "震", "palace": "震宫", "positions": ["甲", "卯", "乙"]},
+    {"value": 4, "label": "【东南】巽卦", "name": "巽", "palace": "巽宫", "positions": ["辰", "巽", "巳"]},
+    {"value": 5, "label": "【中央】中宫", "name": "中", "palace": "中宫", "positions": []},
+    {"value": 6, "label": "【西北】乾卦", "name": "乾", "palace": "乾宫", "positions": ["戌", "乾", "亥"]},
+    {"value": 7, "label": "【西方】兑卦", "name": "兑", "palace": "兑宫", "positions": ["庚", "酉", "辛"]},
+    {"value": 8, "label": "【东北】艮卦", "name": "艮", "palace": "艮宫", "positions": ["丑", "艮", "寅"]},
+    {"value": 9, "label": "【南方】离卦", "name": "离", "palace": "离宫", "positions": ["丙", "午", "丁"]},
+]
+
+REPAIR_DIRECTION_BUTTONS = [
+    ("东南巽", "巽宫"), ("正南离", "离宫"), ("西南坤", "坤宫"),
+    ("正东震", "震宫"), ("中", "中宫"), ("正西兑", "兑宫"),
+    ("东北艮", "艮宫"), ("正北坎", "坎宫"), ("西北乾", "乾宫"),
+]
+REPAIR_POSITIONS = {item["palace"]: item["positions"] for item in TRIGRAM_OPTIONS}
+
+BURIAL_USE_TYPES = {
+    "安葬破土", "启攒", "造坟", "安葬", "修坟", "附葬破土", "附葬", "旧坟立碑"
+}
+REPAIR_USE_TYPES = {
+    "修坟", "附葬破土", "附葬", "旧坟立碑", "修方动土",
+    "修方", "升层", "装修", "修方兼竖造", "造门楼", "作灶"
+}
+NO_MOUNTAIN_USE_TYPES = {"其它", "交易", "空方动土"}
+FACING_USE_TYPES = {"安门", "造门楼", "旧坟立碑"}
+AUTO_SEAT_REPAIR_USE_TYPES = {"装修", "作灶", "升层", "修坟"}
+
+def _use_meta(label: str) -> dict:
+    mountain_title = "第二步【选择坐山】"
+    if label in {"附葬", "修方兼竖造"}:
+        mountain_title = "第二步【选择新坐山】"
+    if label in {"安门", "造门楼"}:
+        mountain_title = "第二步【选择门向】"
+    if label == "旧坟立碑":
+        mountain_title = "第二步【选择碑向】"
+
+    life_name = "福主年命"
+    if label in BURIAL_USE_TYPES:
+        life_name = "祭主年命"
+    if label == "作灶":
+        life_name = "馈主年命"
+
+    return {
+        "code": USE_TYPE_CODE[label],
+        "label": label,
+        "show_mountain": label not in NO_MOUNTAIN_USE_TYPES,
+        "show_repair": label in REPAIR_USE_TYPES,
+        "show_deceased": label in BURIAL_USE_TYPES,
+        "show_year_sha": label not in NO_MOUNTAIN_USE_TYPES,
+        "mountain_mode": "facing" if label in FACING_USE_TYPES else "sitting",
+        "mountain_title": mountain_title,
+        "life_name": life_name,
+        "auto_repair": (
+            "seat_facing" if label == "旧坟立碑"
+            else "seat" if label in AUTO_SEAT_REPAIR_USE_TYPES
+            else ""
+        ),
+    }
+
+USE_META = {label: _use_meta(label) for label in USE_TYPES}
+
 USE_TYPE_YI_ALIASES = {
     "建造": ("修造", "竖造", "动土"),
     "进神": ("祭祀", "祈福"),
@@ -393,8 +458,12 @@ def get_options() -> dict:
         })
     return {
         "mountains": mountains,
+        "trigrams": TRIGRAM_OPTIONS,
+        "repair_directions": [{"label": label, "value": value} for label, value in REPAIR_DIRECTION_BUTTONS],
+        "repair_positions": REPAIR_POSITIONS,
         "use_types": USE_TYPES,
         "use_type_options": [{"value": code, "label": label} for code, label in USE_TYPE_OPTIONS],
+        "use_meta": USE_META,
         "levels": [
             {"value": "全部", "label": "全部"},
             {"value": "大吉", "label": "1级大吉"},
@@ -424,7 +493,7 @@ def calculate_days(payload: dict) -> dict:
     if (end - start).days > 366:
         raise ValueError("一次最多计算367天")
 
-    level_filter = str(payload.get("level", "小吉"))
+    level_filter = str(payload.get("level", "大吉"))
     selected_months = {str(x) for x in payload.get("favorable_months", []) if str(x) in ZHI}
 
     raw_hours = payload.get("hours") or [item["hour"] for item in HOUR_OPTIONS]
@@ -436,6 +505,15 @@ def calculate_days(payload: dict) -> dict:
     if isinstance(life_inputs, str):
         life_inputs = [x.strip() for x in life_inputs.replace("，", ",").split(",") if x.strip()]
     life_ganzhi = [g for g in (_life_ganzhi(x) for x in life_inputs) if g]
+
+    deceased_inputs = payload.get("deceased_years", [])
+    if isinstance(deceased_inputs, str):
+        deceased_inputs = [x.strip() for x in deceased_inputs.replace("，", ",").split(",") if x.strip()]
+    deceased_ganzhi = [g for g in (_life_ganzhi(x) for x in deceased_inputs) if g]
+
+    repair_positions = [str(x) for x in payload.get("repair_positions", []) if str(x)]
+    dagua = str(payload.get("dagua", ""))
+    dagua_value = str(payload.get("dagua_value", ""))
 
     results = []
     current = start
@@ -568,6 +646,10 @@ def calculate_days(payload: dict) -> dict:
         },
         "use_type": use_type,
         "life_ganzhi": life_ganzhi,
+        "deceased_ganzhi": deceased_ganzhi,
+        "repair_positions": repair_positions,
+        "dagua": dagua,
+        "dagua_value": dagua_value,
         "count": len(results),
         "results": results,
         "rule_notes": [
