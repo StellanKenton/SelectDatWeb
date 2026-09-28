@@ -7,165 +7,153 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-  <div class="app-shell">
-    <header class="top-text">
-      <span class="title">择日大师</span>
-      <span class="subtitle">山家择日</span>
-      <span class="status" id="statusText">正体五行日课</span>
-    </header>
+<div class="app-shell">
+  <header class="top-bar">
+    <div class="top-left-gap"></div>
+    <button id="calculateTop" class="green-action">评课搜索</button>
+    <select id="calendarType"><option value="公历">干支</option></select>
+    <input id="anchorDate" type="date" aria-label="日期">
+    <select id="rangeSelect" aria-label="范围">
+      <option value="0">全部</option>
+      <option value="-10">前10天</option><option value="-20">前20天</option><option value="-30">前30天</option>
+      <option value="10" selected>后10天</option><option value="20">后20天</option><option value="30">后30天</option>
+    </select>
+    <div class="hour-controls" id="hourControls">
+      <label class="hour-all"><input type="checkbox" id="allHours" checked>全选</label>
+    </div>
+  </header>
 
-    <section class="date-bar">
-      <div class="date-controls">
-        <select id="calendarType" aria-label="历法"><option value="公历">公历</option></select>
-        <input id="anchorDate" type="date" aria-label="日期">
-        <select id="rangeSelect" aria-label="范围">
-          <option value="0">当天</option>
-          <option value="-10">前10天</option><option value="-20">前20天</option><option value="-30">前30天</option>
-          <option value="10" selected>后10天</option><option value="20">后20天</option><option value="30">后30天</option>
-        </select>
+  <main class="main-grid">
+    <aside class="left-panel panel">
+      <div class="panel-buttons"><button>隐藏窗口</button><button>恢复</button><button>满屏</button></div>
+      <div class="side-title">丁酉月凶煞表</div>
+      <div class="sha-static">
+        <div>【正阴府】 午山</div><div>【月破】 卯山方</div><div>【月劫煞】 寅山方</div>
+        <div>【月厌煞】 卯山方</div><div>【月煞】 辰山方</div><div>【伏兵（坐煞）】甲山方</div>
+        <div>【大祸（坐煞）】乙山方</div><div>【荒山运】 艮、卯、巳山</div><div>【罗天大退】 天宫</div>
+        <div>【傍阴府】甲、寅、戌山</div><div>【五黄煞】离宫</div><div class="danger">【大月建】坎宫</div>
+        <div>【小月建】震宫</div><div>【飞天官符】巽宫</div><div>【飞地官符】乾宫</div>
+        <div>【打头火】中宫</div><div>【天独火】中宫</div><div>【丙独火】中宫</div>
+        <div>【丁独火】中宫</div><div>【月游火】离宫</div><div>【土符】未方</div><div>【土皇杀】戌方</div>
       </div>
-      <div class="hour-controls" id="hourControls">
-        <label class="hour-all"><input type="checkbox" id="allHours" checked>全选</label>
+      <div class="left-summary">
+        <div class="mini-head">当前山家</div><div id="mountainSummary">壬山 · 水</div>
+        <div class="mini-head">自动利月</div><div id="favorableSummary">—</div>
       </div>
-      <button id="calculateTop" class="toolbar-button">查找日课</button>
+    </aside>
+
+    <section class="result-panel panel">
+      <div class="result-toolbar">
+        <span>显示： <strong id="resultCount">尚未计算</strong></span>
+        <span>排列顺序：</span>
+        <select><option>斗首择日</option><option>吉度排序</option></select>
+      </div>
+      <div class="method-row">
+        <span>选择要显示的择日法：</span>
+        <label><input type="checkbox">些子吊星</label><label><input type="checkbox">吊贵人到</label>
+        <label><input type="checkbox" checked>斗首择日</label><label><input type="checkbox">玄空大卦</label>
+        <label><input type="checkbox">乌兔择日</label><label><input type="checkbox">先天日课</label>
+        <label><input type="checkbox">玄空紫白</label>
+      </div>
+      <div class="result-caption"><strong id="resultTitle">山家择日</strong><span id="statusText">正体五行日课</span></div>
+      <div id="resultList" class="result-list">
+        <div class="empty-state">请选择右侧条件，然后点击“评课搜索”。</div>
+      </div>
     </section>
 
-    <main class="main-grid">
-      <aside class="left-panel">
-        <div class="pane-title">月煞</div>
-        <div class="left-block">
-          <div class="caption">当前山家</div>
-          <div id="mountainSummary" class="summary-value">壬山 · 水</div>
+    <aside class="year-panel panel">
+      <div class="panel-buttons center"><button>隐藏窗口</button></div>
+      <button id="yearShaButton" class="year-btn">今年年煞</button>
+      <div class="year-box"><div class="year-title">丙午年凶煞【点击选择】不利</div>
+        <div class="year-list">
+          <div>【傍阴府】癸，申，辰山</div><div>【岁破（大耗）】子山方</div><div>【年劫煞】亥山方</div>
+          <div>【年灾煞】子山方</div><div>【岁煞】丑山方</div><div>【伏兵（坐煞）】壬山方</div>
+          <div>【大祸（坐煞）】癸山方</div><div>【罗天大退】艮山方</div><div>【五黄煞】离宫</div>
+          <div>【戊己都天】戊，亥方</div><div>【太岁】午方</div><div class="danger">【点击展开凶煞】</div>
         </div>
-        <div class="left-block">
-          <div class="caption">自动利月</div>
-          <div id="favorableSummary" class="small-copy">按山家五行显示</div>
-        </div>
-        <div class="left-block">
-          <div class="caption">筛选说明</div>
-          <div class="legend">
-            <span class="tag grade-1">1级大吉</span>
-            <span class="tag grade-2">2级小吉</span>
-            <span class="tag grade-3">3级生旺</span>
-            <span class="tag grade-4">4级次旺</span>
+      </div>
+      <div class="year-box"><div class="year-title good-title">丙午年吉神【点击展开】</div><div class="year-list" id="shaSummary">当前结果中未触发年煞提示</div></div>
+      <div class="year-box"><div class="year-title">丁未年凶煞【点击选择】大利</div><div class="year-list"><div>【傍阴府】甲，寅，戌山</div></div></div>
+    </aside>
+
+    <aside class="input-panel panel">
+      <div class="panel-buttons center"><button>隐藏窗口</button></div>
+      <div class="search-title">择课搜索</div>
+      <form id="shanjiaForm" autocomplete="off">
+        <div class="olive-box"><span>五行格局</span><select id="levelSelect"></select></div>
+        <div class="olive-box single"><select><option>显示协纪版</option><option>显示通书版</option></select></div>
+        <button type="button" class="book-mode">通书模式</button>
+
+        <section class="step">
+          <div class="step-title">第一步【选择用事】</div>
+          <div class="step-center"><select id="useType"></select></div>
+        </section>
+
+        <section class="step" id="mountainStep">
+          <div class="step-title" id="mountainStepTitle">第二步【选择坐山】</div>
+          <div class="field-row"><label id="trigramLabel">坐卦</label><select id="trigramSelect"></select></div>
+          <div class="field-row"><label id="mountainLabel">坐山</label><select id="mountainSelect"></select></div>
+          <div class="field-row"><label id="jianLabel">兼山</label><select class="red-select" id="jianSelect"></select></div>
+          <div class="field-row"><label>分金</label><select class="red-select" id="fenjinSelect"></select></div>
+          <div class="field-row"><label>大卦</label><select class="red-select" id="daguaSelect"></select></div>
+        </section>
+
+        <section class="step" id="repairStep" hidden>
+          <div class="step-title" id="repairStepTitle">第三步【选择修方】</div>
+          <div class="repair-wrap">
+            <div class="repair-subtitle">选择方道</div><div class="repair-grid" id="repairDirectionGrid"></div>
+            <div class="repair-subtitle">选择方位</div><div class="repair-grid" id="repairPositionGrid"></div>
+            <div id="selectedRepair" class="selected-repair">未选择修方</div>
+            <button type="button" id="clearRepair" class="blue-small">清空修方</button>
           </div>
-        </div>
-      </aside>
+        </section>
 
-      <section class="result-panel">
-        <div class="result-head">
-          <div><strong id="resultTitle">山家择日</strong><span id="resultCount" class="result-count">尚未计算</span></div>
-          <div class="result-note">点击右侧设置后查找</div>
-        </div>
-        <div id="resultList" class="result-list">
-          <div class="empty-state">
-            <div class="empty-title">请选择用事、坐山和日期范围</div>
-            <div>结果会按日课等级排序，并显示干支、五行、利月、年命冲合与可用时辰。</div>
+        <section class="step" id="lifeStep">
+          <div class="step-title" id="lifeStepTitle">第三步【添加福主年命】</div>
+          <div class="life-line"><span class="blue-add">添加</span><input id="lifeYears" type="text" placeholder=""><span>年, 如:1996</span></div>
+        </section>
+
+        <section class="step" id="deceasedStep" hidden>
+          <div class="step-title" id="deceasedStepTitle">第四步【添加仙命】</div>
+          <div class="life-line"><span class="blue-add">添加</span><input id="deceasedYears" type="text"><span>年, 如:1996</span></div>
+        </section>
+
+        <section class="step" id="yearShaStep">
+          <div class="step-title" id="yearShaStepTitle">第四步【查年煞】</div>
+          <button type="button" class="wide-blue" id="yearShaButton">点击查年煞</button>
+        </section>
+
+        <section class="step" id="monthStep">
+          <div class="step-title" id="monthStepTitle">第五步【添加利月】</div>
+          <button type="button" id="autoMonths" class="wide-blue">自动添加利月</button>
+          <div class="relation-grid" id="relationGrid" hidden>
+            <label><input class="relation-check" type="checkbox" value="旺" checked>旺</label>
+            <label><input class="relation-check" type="checkbox" value="生" checked>生</label>
+            <label><input class="relation-check" type="checkbox" value="耗" checked>耗</label>
+            <label><input class="relation-check" type="checkbox" value="泄">泄</label>
+            <label><input class="relation-check" type="checkbox" value="克">克</label>
           </div>
-        </div>
-      </section>
+          <div class="month-grid" id="monthGrid"></div>
+        </section>
 
-      <aside class="year-panel">
-        <div class="pane-title">年煞</div>
-        <div class="left-block">
-          <div class="caption">当年三煞</div>
-          <div id="shaSummary" class="small-copy">计算后显示当年三煞提示</div>
-        </div>
-        <div class="left-block">
-          <div class="caption">规则</div>
-          <div class="small-copy">申子辰年煞南，寅午戌年煞北，亥卯未年煞西，巳酉丑年煞东。</div>
-        </div>
-        <div class="left-block">
-          <div class="caption">年命</div>
-          <div class="small-copy">福主年命会参与日支冲、六合、三合判断。</div>
-        </div>
-      </aside>
+        <section class="step" id="filterStep">
+          <div class="step-title" id="filterStepTitle">第六步【日课筛选功能】</div>
+          <label class="switch-line"><input type="checkbox" id="showReasons" checked>显示取舍原因</label>
+        </section>
 
-      <aside class="input-panel">
-        <div class="pane-title">输入</div>
-        <form id="shanjiaForm" autocomplete="off">
-          <section class="step">
-            <div class="step-title">第一步【选择用事】</div>
-            <div class="field-row"><label for="levelSelect">筛选</label><select id="levelSelect"></select></div>
-            <div class="field-row"><label for="useType">用事</label><select id="useType"></select></div>
-          </section>
+        <button type="submit" class="side-search">评课搜索</button>
+      </form>
+    </aside>
+  </main>
 
-          <section class="step" id="mountainStep">
-            <div class="step-title" id="mountainStepTitle">第二步【选择坐山】</div>
-            <div class="field-row"><label for="trigramSelect" id="trigramLabel">坐卦</label><select id="trigramSelect"></select></div>
-            <div class="field-row"><label for="mountainSelect" id="mountainLabel">坐山</label><select id="mountainSelect"></select></div>
-            <div class="field-row"><label for="jianSelect" id="jianLabel">兼山</label><select id="jianSelect"></select></div>
-            <div class="field-row"><label for="fenjinSelect">分金</label><select id="fenjinSelect"></select></div>
-            <div class="field-row"><label for="daguaSelect">大卦</label><select id="daguaSelect"></select></div>
-          </section>
-
-          <section class="step" id="repairStep" hidden>
-            <div class="step-title" id="repairStepTitle">第三步【选择修方】</div>
-            <div class="field-column">
-              <div class="repair-title">选择方道</div>
-              <div class="repair-grid" id="repairDirectionGrid"></div>
-              <div class="repair-title">选择方位</div>
-              <div class="repair-grid repair-positions" id="repairPositionGrid"></div>
-              <div class="selected-repair" id="selectedRepair">未选择修方</div>
-              <button type="button" class="secondary-button" id="clearRepair">清空修方</button>
-            </div>
-          </section>
-
-          <section class="step" id="lifeStep">
-            <div class="step-title" id="lifeStepTitle">第三步【添加福主年命】</div>
-            <div class="field-column">
-              <input id="lifeYears" type="text" placeholder="如：1988, 1990 或 甲辰, 庚午">
-              <div class="hint">可输入多个年份或干支，用逗号分隔。</div>
-            </div>
-          </section>
-
-          <section class="step" id="deceasedStep" hidden>
-            <div class="step-title" id="deceasedStepTitle">第四步【添加仙命】</div>
-            <div class="field-column">
-              <input id="deceasedYears" type="text" placeholder="如：1950 或 庚寅">
-              <div class="hint">原站“仙命/亡命”输入；可输入年份或干支。</div>
-            </div>
-          </section>
-
-          <section class="step" id="yearShaStep">
-            <div class="step-title" id="yearShaStepTitle">第四步【查年煞】</div>
-            <div class="field-column">
-              <button type="button" class="secondary-button full-button" id="yearShaButton">点击查年煞</button>
-            </div>
-          </section>
-
-          <section class="step" id="monthStep">
-            <div class="step-title" id="monthStepTitle">第五步【添加利月】</div>
-            <div class="field-column compact-actions">
-              <button type="button" class="secondary-button full-button" id="autoMonths">自动添加利月</button>
-            </div>
-            <div class="relation-grid" id="relationGrid" hidden>
-              <label><input class="relation-check" type="checkbox" value="旺" checked>旺</label>
-              <label><input class="relation-check" type="checkbox" value="生" checked>生</label>
-              <label><input class="relation-check" type="checkbox" value="耗" checked>耗</label>
-              <label><input class="relation-check" type="checkbox" value="泄">泄</label>
-              <label><input class="relation-check" type="checkbox" value="克">克</label>
-            </div>
-            <div class="month-grid" id="monthGrid"></div>
-          </section>
-
-          <section class="step" id="filterStep">
-            <div class="step-title" id="filterStepTitle">第六步【日课筛选功能】</div>
-            <label class="switch-line"><input type="checkbox" id="showReasons" checked>显示取舍原因</label>
-          </section>
-
-          <button type="submit" class="primary-button">查 找 日 课</button>
-        </form>
-      </aside>
-    </main>
-
-    <footer class="bottom-bar">
-      <select aria-label="模块"><option>山家择日</option></select>
-      <select aria-label="功能"><option>日历</option><option>年煞</option><option>收藏</option><option>显示选中的日课</option></select>
-      <button type="button" id="restoreView">显示</button>
-      <span class="footer-spacer"></span><span>HTML UI · Python Core</span>
-    </footer>
-  </div>
-  <script src="{{ url_for('static', filename='app.js') }}"></script>
+  <footer class="bottom-bar">
+    <span></span>
+    <select><option>山家择日</option></select>
+    <select><option>日历</option></select>
+    <button id="restoreView">显示</button>
+    <span></span>
+  </footer>
+</div>
 </body>
+<script src="{{ url_for('static', filename='app.js') }}"></script>
 </html>
