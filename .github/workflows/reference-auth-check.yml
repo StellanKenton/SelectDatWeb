@@ -18,7 +18,7 @@ jobs:
         with:
           python-version: "3.12"
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: pip install -r requirements.txt selenium
       - name: Capture logged-in reference pages
         shell: bash
         run: |
@@ -29,6 +29,12 @@ jobs:
         run: |
           set -euo pipefail
           python tools/probe_reference_search.py
+      - name: Capture browser-executed shanjia result
+        shell: bash
+        run: |
+          set -euo pipefail
+          google-chrome --version || true
+          python tools/browser_reference_sample.py
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -36,4 +42,5 @@ jobs:
           path: |
             reference_capture/
             reference_probe/
+            reference_browser/
           if-no-files-found: warn
