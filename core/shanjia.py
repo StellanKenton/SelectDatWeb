@@ -479,6 +479,95 @@ def _is_sansha_for_mountain(branch: str, mountain: Mountain) -> bool:
     return bool(cardinal and SAN_SHA_DIRECTION.get(branch) == cardinal)
 
 
+# 以下表来自原站“择日神煞 → 山家神煞”的官方解析页。
+ZHENG_YINFU_GAN_BY_MOUNTAIN = {
+    "艮": frozenset("甲己"), "巽": frozenset("甲己"),
+    "酉": frozenset("乙庚"), "乾": frozenset("乙庚"),
+    "子": frozenset("丙辛"), "坤": frozenset("丙辛"),
+    "午": frozenset("丁壬"),
+    "卯": frozenset("戊癸"),
+}
+
+ZHENG_BASHA_GZ_BY_TRIGRAM = {
+    "乾": frozenset({"壬午"}),
+    "震": frozenset({"庚申"}),
+    "坎": frozenset({"戊辰", "戊戌"}),
+    "艮": frozenset({"丙寅"}),
+    "坤": frozenset({"乙卯"}),
+    "巽": frozenset({"辛酉"}),
+    "离": frozenset({"己亥"}),
+    "兑": frozenset({"丁巳"}),
+}
+
+XINGYAO_GZ_BY_ELEMENT = {
+    "水": frozenset({"戊辰", "戊戌", "己丑", "己未"}),
+    "火": frozenset({"壬子", "癸亥"}),
+    "木": frozenset({"庚申", "辛酉"}),
+    "金": frozenset({"丙午", "丁巳"}),
+    "土": frozenset({"甲寅", "乙卯"}),
+}
+
+SHANFANG_GZ_BY_TRIGRAM = {
+    "坎": frozenset({"乙卯", "丁巳"}),
+    "艮": frozenset({"庚申", "壬午"}),
+    "震": frozenset({"己亥", "丙寅"}),
+    "巽": frozenset({"丁巳", "乙卯"}),
+    "离": frozenset({"壬午", "庚申"}),
+    "坤": frozenset({"辛酉", "戊辰"}),
+    "兑": frozenset({"戊辰", "辛酉"}),
+    "乾": frozenset({"丙寅", "己亥"}),
+}
+
+TIANXING_GAN_PAIR_BY_ELEMENT = {
+    "水": frozenset("戊己"),
+    "木": frozenset("庚辛"),
+    "火": frozenset("壬癸"),
+    "土": frozenset("甲乙"),
+    "金": frozenset("丙丁"),
+}
+
+# “地曜煞”解析称四个地支中官杀混杂；水山的土杀分阳土辰戌、
+# 阴土丑未两组，其余四行分别要求阴阳两支同时出现。
+DIyaO_ZHI_GROUPS_BY_ELEMENT = {
+    "水": (frozenset("辰戌"), frozenset("丑未")),
+    "木": (frozenset("申"), frozenset("酉")),
+    "火": (frozenset("亥"), frozenset("子")),
+    "土": (frozenset("寅"), frozenset("卯")),
+    "金": (frozenset("巳"), frozenset("午")),
+}
+
+
+def _hits_zheng_yinfu(ganzhi: str, mountain: Mountain) -> bool:
+    stems = ZHENG_YINFU_GAN_BY_MOUNTAIN.get(mountain.name)
+    return bool(stems and ganzhi and ganzhi[0] in stems)
+
+
+def _hits_zheng_basha(ganzhi: str, mountain: Mountain) -> bool:
+    return ganzhi in ZHENG_BASHA_GZ_BY_TRIGRAM.get(mountain.trigram, frozenset())
+
+
+def _hits_xingyao(ganzhi: str, mountain: Mountain) -> bool:
+    return ganzhi in XINGYAO_GZ_BY_ELEMENT.get(mountain.element, frozenset())
+
+
+def _hits_shanfang(ganzhi: str, mountain: Mountain) -> bool:
+    return ganzhi in SHANFANG_GZ_BY_TRIGRAM.get(mountain.trigram, frozenset())
+
+
+def _hits_tianxing(pillars: Iterable[str], mountain: Mountain) -> bool:
+    required = TIANXING_GAN_PAIR_BY_ELEMENT.get(mountain.element, frozenset())
+    stems = {gz[0] for gz in pillars if len(gz) >= 2}
+    return bool(required and required.issubset(stems))
+
+
+def _hits_diyao(pillars: Iterable[str], mountain: Mountain) -> bool:
+    groups = DIyaO_ZHI_GROUPS_BY_ELEMENT.get(mountain.element)
+    if not groups:
+        return False
+    branches = {gz[1] for gz in pillars if len(gz) >= 2}
+    return all(bool(branches & group) for group in groups)
+
+
 def _day_relation(day_element: str, mountain_element: str) -> tuple[str, int]:
     # 以山家为主体：同我为旺，日干生山为生，山生日干为泄，
     # 山克日干为耗，日干克山为克。对应目标站点“旺/生/耗/泄/克”筛选项。
@@ -735,6 +824,7 @@ def calculate_days(payload: dict) -> dict:
     repair_positions = [str(x) for x in payload.get("repair_positions", []) if str(x)]
     dagua = str(payload.get("dagua", ""))
     dagua_value = str(payload.get("dagua_value", ""))
+    active_sha_filters = set(REFERENCE_SHA_FILTERS.get(use_type, ()))
 
     results = []
     current = start
@@ -769,12 +859,26 @@ def calculate_days(payload: dict) -> dict:
             current += timedelta(days=1)
             continue
 
-        # 原站默认凶煞过滤包含“月三杀、日三杀、时三杀”，但不包含“年三杀”。
-        # 因此年三杀只显示提示；月/日/时三杀会把候选日课直接排除。
-        if _is_sansha_for_mountain(month_zhi, mountain):
+        # 只应用当前用事在原站 arr_shenshaguolv 中默认勾选的硬过滤。
+        if "月三杀" in active_sha_filters and _is_sansha_for_mountain(month_zhi, mountain):
             current += timedelta(days=1)
             continue
-        if _is_sansha_for_mountain(day_zhi, mountain):
+        if "日三杀" in active_sha_filters and _is_sansha_for_mountain(day_zhi, mountain):
+            current += timedelta(days=1)
+            continue
+        if "月正阴府" in active_sha_filters and _hits_zheng_yinfu(month_gz, mountain):
+            current += timedelta(days=1)
+            continue
+        if "日正阴府" in active_sha_filters and _hits_zheng_yinfu(day_gz, mountain):
+            current += timedelta(days=1)
+            continue
+        if "日正八煞" in active_sha_filters and _hits_zheng_basha(day_gz, mountain):
+            current += timedelta(days=1)
+            continue
+        if "日星曜煞" in active_sha_filters and _hits_xingyao(day_gz, mountain):
+            current += timedelta(days=1)
+            continue
+        if "日山方煞" in active_sha_filters and _hits_shanfang(day_gz, mountain):
             current += timedelta(days=1)
             continue
 
@@ -875,7 +979,19 @@ def calculate_days(payload: dict) -> dict:
             # 因此把所选时辰展开为独立 lesson；这也让顶部时辰勾选与
             # “显示：N个日课”计数语义和原站一致。
             for hour_row in _hour_rows(current, hours, mountain):
-                if _is_sansha_for_mountain(hour_row["zhi"], mountain):
+                time_gz = hour_row["ganzhi"]
+                if "时三杀" in active_sha_filters and _is_sansha_for_mountain(hour_row["zhi"], mountain):
+                    continue
+                if "时正阴府" in active_sha_filters and _hits_zheng_yinfu(time_gz, mountain):
+                    continue
+                if "时正八煞" in active_sha_filters and _hits_zheng_basha(time_gz, mountain):
+                    continue
+                if "时星曜煞" in active_sha_filters and _hits_xingyao(time_gz, mountain):
+                    continue
+                pillars = (year_gz, month_gz, day_gz, time_gz)
+                if "天星煞" in active_sha_filters and _hits_tianxing(pillars, mountain):
+                    continue
+                if "地曜煞" in active_sha_filters and _hits_diyao(pillars, mountain):
                     continue
                 results.append({
                     "lesson_id": f"{current.strftime('%Y%m%d')}{int(hour_row['hour']):02d}",
@@ -948,6 +1064,6 @@ def calculate_days(payload: dict) -> dict:
         "rule_notes": [
             "二十四山编号/方位/五行、兼山结构、120分金结构与目标站点前端数据一致。",
             "利月按目标站点公开的寅卯木火、辰土金、巳午火土、未土、申酉金水、戌土金、亥子水木、丑土金规则。",
-            "每个结果按“日期+时辰”作为一个日课；默认按原站启用月三杀、日三杀、时三杀硬过滤，年三杀仅显示不排除。",
+            "每个结果按“日期+时辰”作为一个日课；三杀、正阴府、正八煞、星曜煞、天星煞、地曜煞、山方煞按原站官方解析公式和当前用事默认勾选项硬过滤。",
         ],
     }

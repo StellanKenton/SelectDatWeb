@@ -371,3 +371,71 @@ def test_calculate_accepts_original_yiji_mode_values():
     )
     assert off["edition"] == "不显示"
     assert off["day_ji_filters"] == []
+
+
+def test_official_xingyao_filters_water_mountain_day_and_hour():
+    day_hit = calculate_days(
+        {
+            "start_date": "2026-09-12",
+            "end_date": "2026-09-12",
+            "use_type": "建造",
+            "mountain_id": 1,
+            "level": "全部",
+            "hours": [0, 2, 6, 8, 10, 14, 16, 18, 22],
+        }
+    )
+    assert day_hit["count"] == 0
+
+    time_hit = calculate_days(
+        {
+            "start_date": "2026-09-16",
+            "end_date": "2026-09-16",
+            "use_type": "建造",
+            "mountain_id": 1,
+            "level": "全部",
+            "hours": [14, 16],
+        }
+    )
+    assert [(item["hour"], item["time_ganzhi"]) for item in time_hit["results"]] == [(16, "庚申")]
+
+    time_hit_2 = calculate_days(
+        {
+            "start_date": "2026-10-04",
+            "end_date": "2026-10-04",
+            "use_type": "建造",
+            "mountain_id": 1,
+            "level": "全部",
+            "hours": [2, 6],
+        }
+    )
+    assert [(item["hour"], item["time_ganzhi"]) for item in time_hit_2["results"]] == [(6, "辛卯")]
+
+
+def test_official_shanfang_filters_kangua_day():
+    result = calculate_days(
+        {
+            "start_date": "2026-10-08",
+            "end_date": "2026-10-08",
+            "use_type": "建造",
+            "mountain_id": 1,
+            "level": "全部",
+            "hours": [0, 2, 6],
+        }
+    )
+    assert result["count"] == 0
+
+
+def test_sha_filters_follow_use_type_default_table():
+    # “其它”在原站默认不勾选山家神煞；壬山寅时不应被默认时三杀误删。
+    result = calculate_days(
+        {
+            "start_date": "2026-09-28",
+            "end_date": "2026-09-28",
+            "use_type": "其它",
+            "mountain_id": 1,
+            "level": "全部",
+            "hours": [4],
+        }
+    )
+    assert result["count"] == 1
+    assert result["results"][0]["hour"] == 4
