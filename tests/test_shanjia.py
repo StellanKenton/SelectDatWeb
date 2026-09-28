@@ -121,7 +121,7 @@ def test_calculate_accepts_reference_extra_inputs():
 def test_reference_month_relation_mode():
     meta = get_options()["use_meta"]
     assert meta["修方"]["month_mode"] == "relation"
-    assert meta["修方"]["default_month_relations"] == ["旺", "生", "耗"]
+    assert meta["修方"]["default_month_relations"] == ["旺", "生", "耗", "泄", "克"]
     assert meta["建造"]["month_mode"] == "mountain"
 
 
@@ -203,3 +203,19 @@ def test_calculate_reports_reference_edition_and_filters():
     )
     assert result["edition"] == "协纪版"
     assert result["day_ji_filters"] == ["竖造"]
+
+
+def test_reference_month_relation_defaults_by_use_type():
+    meta = get_options()["use_meta"]
+    assert meta["修方兼竖造"]["default_month_relations"] == ["旺", "生"]
+    assert meta["附葬"]["default_month_relations"] == ["旺", "生"]
+    assert meta["进神"]["default_month_relations"] == ["旺", "生", "耗"]
+    assert meta["修方"]["default_month_relations"] == ["旺", "生", "耗", "泄", "克"]
+
+
+def test_reference_day_ji_filter_tables():
+    options = get_options()
+    assert options["day_ji_filters"]["协纪版"]["建造"] == ["竖造"]
+    assert options["day_ji_filters"]["协纪版"]["修方动土"] == ["修造", "动土"]
+    assert options["day_ji_filters"]["协纪版"]["拆卸"] == ["拆卸", "动土"]
+    assert options["day_ji_filters"]["通书版"]["拆卸"] == ["拆卸"]
