@@ -94,6 +94,20 @@ def login(driver):
     )
 
 
+def capture_initial_center(driver):
+    wait_frame(driver, "centerFrame")
+    WebDriverWait(driver, 30).until(
+        lambda d: "显示：" in d.page_source and "个日课" in d.page_source
+    )
+    time.sleep(0.8)
+    html = redact(driver.page_source)
+    text = redact(driver.find_element(By.TAG_NAME, "body").text)
+    (OUT / "center_initial.html").write_text(html, encoding="utf-8")
+    (OUT / "center_initial.txt").write_text(text, encoding="utf-8")
+    m = re.search(r"显示：\s*(\d+)个日课", text)
+    return int(m.group(1)) if m else -1
+
+
 def configure_and_search(driver):
     # Top date/ganzhi bar.
     wait_frame(driver, "top1Frame")
@@ -166,6 +180,7 @@ def main() -> int:
     driver = webdriver.Chrome(options=options)
     try:
         login(driver)
+        initial_count = capture_initial_center(driver)
         count, state = configure_and_search(driver)
 
         driver.switch_to.default_content()
@@ -173,6 +188,7 @@ def main() -> int:
 
         result = {
             "ok": True,
+            "initial_result_count": initial_count,
             "result_count": count,
             "yongshi": state.get("yongshi"),
             "mountain": state.get("ershisishan"),
