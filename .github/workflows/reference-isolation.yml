@@ -1,0 +1,27 @@
+name: Reference Isolation
+
+on:
+  push:
+    branches:
+      - probe/reference-auth
+
+jobs:
+  isolate:
+    runs-on: ubuntu-latest
+    env:
+      ZERIDASHI_PHONE: ${{ secrets.ZERIDASHI_PHONE }}
+      ZERIDASHI_PASSWORD: ${{ secrets.ZERIDASHI_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt selenium
+      - name: Run one-session reference isolation
+        run: python tools/browser_reference_sample.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: reference-isolation
+          path: reference_browser/
+          if-no-files-found: warn
