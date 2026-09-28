@@ -1,11 +1,12 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from calendar import monthrange
 from datetime import date, datetime, timedelta
 import re
 from typing import Iterable
 
-from lunar_python import Solar
+from lunar_python import LunarYear, Solar
 
 
 GAN = "甲乙丙丁戊己庚辛壬癸"
@@ -451,6 +452,169 @@ def _parse_date(value: str) -> date:
     return datetime.strptime(value, "%Y-%m-%d").date()
 
 
+_LUNAR_MONTH_NUM = {
+    "正": 1, "一": 1, "二": 2, "三": 3, "四": 4, "五": 5, "六": 6,
+    "七": 7, "八": 8, "九": 9, "十": 10, "十一": 11, "十二": 12,
+}
+
+
+def _fanwei_dates(anchor: date, fanwei: str) -> list[date]:
+    match = re.fullmatch(r"(前|后)(10|20|30)", fanwei or "")
+    if not match:
+        return [anchor]
+    count = int(match.group(2))
+    if match.group(1) == "前":
+        start, end = anchor - timedelta(days=count), anchor
+    else:
+        start, end = anchor, anchor + timedelta(days=count)
+    return [start + timedelta(days=i) for i in range((end - start).days + 1)]
+
+
+def _resolve_calendar_query(payload: dict) -> tuple[list[date], dict]:
+    query = payload.get("calendar_query")
+    if not query:
+        start = _parse_date(str(payload["start_date"]))
+        end = _parse_date(str(payload["end_date"]))
+        if end < start:
+            raise ValueError("结束日期不能早于开始日期")
+        if (end - start).days > 366:
+            raise ValueError("一次最多计算367天")
+        return (
+            [start + timedelta(days=i) for i in range((end - start).days + 1)],
+            {"mode": "日期范围", "start_date": start.isoformat(), "end_date": end.isoformat()},
+        )
+
+    mode = str(query.get("mode", "干支"))
+    year = int(query.get("year", datetime.now().year))
+    if not 1990 <= year <= 2049:
+        raise ValueError("原站山家择日年份范围为1990–2049")
+
+    if mode == "公历":
+        month = int(query.get("month", 1))
+        day_value = str(query.get("day", "全部"))
+        if not 1 <= month <= 12:
+            raise ValueError("无效公历月份")
+        if day_value == "全部":
+            last = monthrange(year, month)[1]
+            dates = [date(year, month, d) for d in range(1, last + 1)]
+        else:
+            anchor = date(year, month, int(day_value))
+            dates = _fanwei_dates(anchor, str(query.get("range", "范围")))
+        return dates, {
+            "mode": mode, "year": year, "month": month,
+            "day": day_value, "range": query.get("range", "范围"),
+        }
+
+    if mode == "农历":
+        month_text = str(query.get("month", "正")).replace("月", "")
+        is_leap = month_text.startswith("闰")
+        base_month = month_text[1:] if is_leap else month_text
+        month_num = _LUNAR_MONTH_NUM.get(base_month)
+        if month_num is None:
+            raise ValueError("无效农历月份")
+        target_month = -month_num if is_leap else month_num
+        day_value = str(query.get("day", "全部")).replace("日", "")
+
+        start = date(year, 1, 1)
+        end = date(year + 1, 3, 1)
+        matches: list[date] = []
+        current = start
+        while current <= end:
+            lunar = Solar.fromYmd(current.year, current.month, current.day).getLunar()
+            if lunar.getYear() == year and lunar.getMonth() == target_month:
+                if day_value == "全部" or lunar.getDayInChinese() == day_value:
+                    matches.append(current)
+            current += timedelta(days=1)
+
+        if day_value != "全部" and matches:
+            matches = _fanwei_dates(matches[0], str(query.get("range", "范围")))
+        return matches, {
+            "mode": mode, "year": year, "month": month_text,
+            "day": day_value, "range": query.get("range", "范围"),
+        }
+
+    if mode == "干支":
+        year_gz = str(query.get("year_ganzhi", "")).replace("年", "")
+        month_gz = str(query.get("month_ganzhi", "")).replace("月", "")
+        day_filter = str(query.get("day", "全部")).replace("日", "")
+        if not year_gz or not month_gz:
+            raise ValueError("干支查询需要年柱和月柱")
+
+        start = date(year, 1, 1)
+        end = date(year + 1, 3, 1)
+        matches: list[date] = []
+        current = start
+        while current <= end:
+            eight = Solar.fromYmd(current.year, current.month, current.day).getLunar().getEightChar()
+            day_gz = eight.getDay()
+            day_ok = (
+                day_filter == "全部"
+                or day_gz.startswith(day_filter)
+                or day_gz.endswith(day_filter)
+            )
+            if eight.getYear() == year_gz and eight.getMonth() == month_gz and day_ok:
+                matches.append(current)
+            current += timedelta(days=1)
+        return matches, {
+            "mode": mode, "year": year, "year_ganzhi": year_gz,
+            "month_ganzhi": month_gz, "day": day_filter,
+        }
+
+    raise ValueError("无效历法类型")
+
+_LUNAR_MONTH_NAME = {
+    1: "正", 2: "二", 3: "三", 4: "四", 5: "五", 6: "六",
+    7: "七", 8: "八", 9: "九", 10: "十", 11: "十一", 12: "十二",
+}
+
+
+def _calendar_options() -> dict:
+    solar_years = [{"value": year, "label": f"{year}年"} for year in range(1990, 2050)]
+
+    lunar_leap_months: dict[str, int] = {}
+    for year in range(1990, 2049):
+        leap = 0
+        try:
+            for month in LunarYear.fromYear(year).getMonths():
+                if month.getYear() == year and month.getMonth() < 0:
+                    leap = abs(month.getMonth())
+                    break
+        except Exception:
+            leap = 0
+        lunar_leap_months[str(year)] = leap
+
+    ganzhi_years = [{
+        "value": 126,
+        "year": 1990,
+        "ganzhi": "己巳",
+        "label": "1990己巳年",
+        "month_start": 1512,
+        "partial": True,
+    }]
+    for year in range(1990, 2049):
+        ganzhi = Solar.fromYmd(year, 7, 1).getLunar().getEightChar().getYear()
+        value = year - 1863
+        ganzhi_years.append({
+            "value": value,
+            "year": year,
+            "ganzhi": ganzhi,
+            "label": f"{year}{ganzhi}年",
+            "month_start": 1513 + (year - 1990) * 12,
+            "partial": False,
+        })
+
+    return {
+        "types": ["农历", "公历", "干支"],
+        "solar_years": solar_years,
+        "lunar_years": [{"value": year, "label": f"{year}年"} for year in range(1990, 2049)],
+        "lunar_leap_months": lunar_leap_months,
+        "ganzhi_years": ganzhi_years,
+        "day_filters": ["全部", *list(GAN), *list(ZHI)],
+        "ranges": ["范围", "前10", "前20", "前30", "后10", "后20", "后30"],
+        "default": {"mode": "干支", "year": 2026, "ganzhi_year_value": 163, "ganzhi_month_value": 1952},
+    }
+
+
 def get_options() -> dict:
     mountains = []
     for mountain_id in range(1, 25):
@@ -471,6 +635,7 @@ def get_options() -> dict:
             "auto_favorable_months": list(MOUNTAIN_FAVORABLE_MONTHS[m.id]),
         })
     return {
+        "calendar": _calendar_options(),
         "mountains": mountains,
         "trigrams": TRIGRAM_OPTIONS,
         "repair_directions": [{"label": label, "value": value} for label, value in REPAIR_DIRECTION_BUTTONS],
@@ -500,11 +665,8 @@ def calculate_days(payload: dict) -> dict:
     if use_type not in USE_TYPES:
         raise ValueError("无效的用事类型")
 
-    start = _parse_date(str(payload["start_date"]))
-    end = _parse_date(str(payload["end_date"]))
-    if end < start:
-        raise ValueError("结束日期不能早于开始日期")
-    if (end - start).days > 366:
+    candidate_dates, calendar_query = _resolve_calendar_query(payload)
+    if len(candidate_dates) > 367:
         raise ValueError("一次最多计算367天")
 
     level_filter = str(payload.get("level", "大吉"))
@@ -536,8 +698,7 @@ def calculate_days(payload: dict) -> dict:
     dagua_value = str(payload.get("dagua_value", ""))
 
     results = []
-    current = start
-    while current <= end:
+    for current in candidate_dates:
         lunar = Solar.fromYmd(current.year, current.month, current.day).getLunar()
         eight = lunar.getEightChar()
 
@@ -551,12 +712,10 @@ def calculate_days(payload: dict) -> dict:
         day_element = GAN_ELEMENT[day_gan]
 
         if selected_months and month_zhi not in selected_months:
-            current += timedelta(days=1)
             continue
 
         month_relation, _ = _day_relation(ZHI_ELEMENT[month_zhi], mountain.element)
         if use_type in WANGSHENG_MONTH_USE_TYPES and selected_month_relations and month_relation not in selected_month_relations:
-            current += timedelta(days=1)
             continue
 
         score = 0
@@ -657,8 +816,7 @@ def calculate_days(payload: dict) -> dict:
                 "hours": _hour_rows(current, hours, mountain),
             })
 
-        current += timedelta(days=1)
-
+ 
     results.sort(key=lambda item: (
         9 if item["level"] == 0 else item["level"],
         -item["score"],
@@ -666,6 +824,7 @@ def calculate_days(payload: dict) -> dict:
     ))
 
     return {
+        "calendar_query": calendar_query,
         "mountain": {
             "id": mountain.id,
             "name": mountain.name,
