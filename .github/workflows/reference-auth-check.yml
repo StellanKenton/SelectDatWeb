@@ -28,6 +28,8 @@ jobs:
         run: pip install -r requirements.txt selenium
       - name: Compare fixed reference baseline
         run: python tools/local_reference_counts.py
+      - name: Compare lunar-python yiji names
+        run: python tools/compare_dayji_names.py
       - name: Ablate local sha rules
         run: python tools/local_rule_ablation.py
       - name: Capture original sha explanations
