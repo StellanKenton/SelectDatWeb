@@ -1,0 +1,27 @@
+name: Capture reference pages
+on:
+  push:
+    branches: [probe/reference-site]
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Capture
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p reference
+          base="http://zeridashi.top"
+          ua="Mozilla/5.0"
+          curl -fsSL -A "$ua" "$base/zeridashi/yixue/topzeri.php" -o reference/topzeri.html
+          curl -fsSL -A "$ua" "$base/zeridashi/yixue/topzeri_info.php" -o reference/topzeri_info.html
+          curl -fsSL -A "$ua" "$base/zeridashi/yixue/zeri.php" -o reference/zeri.html
+          curl -fsSL -A "$ua" "$base/zeridashi/inc/topzeri.js?ver=123456" -o reference/topzeri.js
+          curl -fsSL -A "$ua" "$base/zeridashi/yixue/zeri.js?ver=123456" -o reference/zeri.js
+          grep -RhoE 'src=["'\'' ][^"'\'' >]+' reference/*.html | sed -E 's/^src=["'\'' ]//' | sort -u > reference/srcs.txt || true
+          grep -RhoE 'href=["'\'' ][^"'\'' >]+' reference/*.html | sed -E 's/^href=["'\'' ]//' | sort -u > reference/hrefs.txt || true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: reference-pages
+          path: reference/
