@@ -326,3 +326,48 @@ def test_reference_20260928_almanac_metadata():
     assert item["jieqi"] == "秋分"
     assert [x["name"] for x in item["jieqi_times"]] == ["白露", "秋分", "寒露"]
     assert all(x["time"] for x in item["jieqi_times"])
+
+
+def test_reference_yiji_mode_options_match_site():
+    options = get_options()
+    assert options["yiji_modes"] == [
+        {"value": "all", "label": "显示协纪版"},
+        {"value": "all1", "label": "显示潮汕版"},
+        {"value": "all2", "label": "上协纪下潮汕一起显示"},
+        {"value": "off", "label": "不显示"},
+    ]
+    assert options["day_ji_filters"]["潮汕版"]["拆卸"] == ["拆卸"]
+    assert options["day_ji_filters"]["协纪+潮汕"]["拆卸"] == ["拆卸", "动土"]
+    assert options["day_ji_filters"]["不显示"]["建造"] == []
+
+
+def test_calculate_accepts_original_yiji_mode_values():
+    chaoshan = calculate_days(
+        {
+            "start_date": "2026-09-28",
+            "end_date": "2026-09-28",
+            "use_type": "拆卸",
+            "mountain_id": 1,
+            "yiji_mode": "all1",
+            "level": "全部",
+            "hours": [0],
+        }
+    )
+    assert chaoshan["yiji_mode"] == "all1"
+    assert chaoshan["edition"] == "潮汕版"
+    assert chaoshan["yiji_label"] == "显示潮汕版"
+    assert chaoshan["day_ji_filters"] == ["拆卸"]
+
+    off = calculate_days(
+        {
+            "start_date": "2026-09-28",
+            "end_date": "2026-09-28",
+            "use_type": "建造",
+            "mountain_id": 1,
+            "yiji_mode": "off",
+            "level": "全部",
+            "hours": [0],
+        }
+    )
+    assert off["edition"] == "不显示"
+    assert off["day_ji_filters"] == []

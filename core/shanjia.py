@@ -281,15 +281,60 @@ REFERENCE_DAY_JI_FILTERS_XIEJI = {
     "交易": ("交易",),
 }
 
-REFERENCE_DAY_JI_FILTERS_TONGSHU = {
+REFERENCE_DAY_JI_FILTERS_CHAOSHAN = {
     **REFERENCE_DAY_JI_FILTERS_XIEJI,
-    # 原站 yijixuanze1() 唯一可见差异：通书版“拆卸”不再额外排除“动土”。
+    # 原站 yijixuanze1() 对应“显示潮汕版”；唯一可见差异是拆卸不再附带动土。
     "拆卸": ("拆卸",),
 }
 
-REFERENCE_EDITIONS = {
-    "协纪版": REFERENCE_DAY_JI_FILTERS_XIEJI,
-    "通书版": REFERENCE_DAY_JI_FILTERS_TONGSHU,
+
+def _merge_day_ji_tables(*tables: dict[str, tuple[str, ...]]) -> dict[str, tuple[str, ...]]:
+    merged: dict[str, tuple[str, ...]] = {}
+    for use_type in USE_TYPES:
+        values: list[str] = []
+        for table in tables:
+            for item in table.get(use_type, ()):
+                if item not in values:
+                    values.append(item)
+        merged[use_type] = tuple(values)
+    return merged
+
+
+REFERENCE_DAY_JI_FILTERS_BOTH = _merge_day_ji_tables(
+    REFERENCE_DAY_JI_FILTERS_XIEJI,
+    REFERENCE_DAY_JI_FILTERS_CHAOSHAN,
+)
+
+REFERENCE_YIJI_MODES = {
+    "all": {
+        "label": "显示协纪版",
+        "short_label": "协纪版",
+        "filters": REFERENCE_DAY_JI_FILTERS_XIEJI,
+    },
+    "all1": {
+        "label": "显示潮汕版",
+        "short_label": "潮汕版",
+        "filters": REFERENCE_DAY_JI_FILTERS_CHAOSHAN,
+    },
+    "all2": {
+        "label": "上协纪下潮汕一起显示",
+        "short_label": "协纪+潮汕",
+        "filters": REFERENCE_DAY_JI_FILTERS_BOTH,
+    },
+    "off": {
+        "label": "不显示",
+        "short_label": "不显示",
+        "filters": {use_type: () for use_type in USE_TYPES},
+    },
+}
+
+# 兼容此前本地 API 的 edition 字段；原站 UI 实际使用 yiji=all/all1/all2/off。
+LEGACY_EDITION_TO_YIJI_MODE = {
+    "协纪版": "all",
+    "潮汕版": "all1",
+    "通书版": "all1",
+    "协纪+潮汕": "all2",
+    "不显示": "off",
 }
 
 HOUR_OPTIONS = [
@@ -510,14 +555,22 @@ def _same_san_he(a: str, b: str) -> bool:
     return any(a in group and b in group for group in SAN_HE)
 
 
-def _reference_day_ji_filters(use_type: str, edition: str) -> tuple[str, ...]:
-    table = REFERENCE_EDITIONS.get(edition, REFERENCE_DAY_JI_FILTERS_XIEJI)
+def _normalize_yiji_mode(value: str) -> str:
+    value = str(value or "").strip()
+    if value in REFERENCE_YIJI_MODES:
+        return value
+    return LEGACY_EDITION_TO_YIJI_MODE.get(value, "all")
+
+
+def _reference_day_ji_filters(use_type: str, yiji_mode: str) -> tuple[str, ...]:
+    mode = _normalize_yiji_mode(yiji_mode)
+    table = REFERENCE_YIJI_MODES[mode]["filters"]
     return tuple(table.get(use_type, ()))
 
 
-def _is_excluded_by_day_ji(use_type: str, edition: str, day_ji: Iterable[str]) -> tuple[bool, list[str]]:
+def _is_excluded_by_day_ji(use_type: str, yiji_mode: str, day_ji: Iterable[str]) -> tuple[bool, list[str]]:
     ji = set(str(x) for x in day_ji)
-    hits = [item for item in _reference_day_ji_filters(use_type, edition) if item in ji]
+    hits = [item for item in _reference_day_ji_filters(use_type, yiji_mode) if item in ji]
     return bool(hits), hits
 
 
@@ -600,10 +653,22 @@ def get_options() -> dict:
         "use_type_options": [{"value": code, "label": label} for code, label in USE_TYPE_OPTIONS],
         "use_meta": USE_META,
         "default_sha_filters": {k: list(v) for k, v in REFERENCE_SHA_FILTERS.items()},
-        "editions": list(REFERENCE_EDITIONS),
+        "yiji_modes": [
+            {"value": value, "label": meta["label"]}
+            for value, meta in REFERENCE_YIJI_MODES.items()
+        ],
+        "editions": [meta["short_label"] for meta in REFERENCE_YIJI_MODES.values()],
         "day_ji_filters": {
-            edition: {k: list(v) for k, v in table.items()}
-            for edition, table in REFERENCE_EDITIONS.items()
+            meta["short_label"]: {
+                k: list(v) for k, v in meta["filters"].items()
+            }
+            for meta in REFERENCE_YIJI_MODES.values()
+        } | {
+            # 旧客户端兼容别名；UI 不再显示“通书版”这个错误名称。
+            "通书版": {
+                k: list(v)
+                for k, v in REFERENCE_DAY_JI_FILTERS_CHAOSHAN.items()
+            }
         },
         "levels": [
             {"value": "全部", "label": "全部"},
@@ -626,9 +691,11 @@ def calculate_days(payload: dict) -> dict:
     use_type = str(payload.get("use_type", "建造"))
     if use_type not in USE_TYPES:
         raise ValueError("无效的用事类型")
-    edition = str(payload.get("edition", "协纪版"))
-    if edition not in REFERENCE_EDITIONS:
-        raise ValueError("无效的宜忌版本")
+    yiji_mode = _normalize_yiji_mode(
+        payload.get("yiji_mode", payload.get("edition", "协纪版"))
+    )
+    yiji_meta = REFERENCE_YIJI_MODES[yiji_mode]
+    edition = str(yiji_meta["short_label"])
 
     start = _parse_date(str(payload["start_date"]))
     end = _parse_date(str(payload["end_date"]))
@@ -783,7 +850,7 @@ def calculate_days(payload: dict) -> dict:
         day_tian_shen = _safe_value(lunar, "getDayTianShen")
         day_tian_shen_type = _safe_value(lunar, "getDayTianShenType")
         jieqi_name, jieqi_times = _jieqi_context(lunar)
-        excluded_by_ji, ji_hits = _is_excluded_by_day_ji(use_type, edition, day_ji)
+        excluded_by_ji, ji_hits = _is_excluded_by_day_ji(use_type, yiji_mode, day_ji)
         if excluded_by_ji:
             current += timedelta(days=1)
             continue
@@ -861,7 +928,9 @@ def calculate_days(payload: dict) -> dict:
         },
         "use_type": use_type,
         "edition": edition,
-        "day_ji_filters": list(_reference_day_ji_filters(use_type, edition)),
+        "yiji_mode": yiji_mode,
+        "yiji_label": yiji_meta["label"],
+        "day_ji_filters": list(_reference_day_ji_filters(use_type, yiji_mode)),
         "sha_filters": list(REFERENCE_SHA_FILTERS.get(use_type, ())),
         "calendar_filter": {
             "ganzhi_year": ganzhi_year_filter,
