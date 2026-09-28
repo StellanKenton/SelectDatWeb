@@ -583,3 +583,20 @@ button {
   color: #613519;
   line-height: 1.45;
 }
+
+
+.relation-grid {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 6px 8px 2px;
+  background: #645e42;
+  color: #fff;
+}
+
+.relation-grid label {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  cursor: pointer;
+}
