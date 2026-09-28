@@ -13,19 +13,5 @@ jobs:
           set -euo pipefail
           curl -fsSL -A "Mozilla/5.0" \
             "http://zeridashi.top/zeridashi/index-web/login.php?id=17782134566" -o login.html
-          python3 - <<'PY'
-          from pathlib import Path
-          import re
-          s=Path('login.html').read_text('utf-8',errors='replace')
-          print('TITLE', re.findall(r'<title[^>]*>(.*?)</title>',s,re.I|re.S)[:3])
-          print('FORMS')
-          for x in re.findall(r'<form[^>]*>',s,re.I): print(x)
-          print('INPUTS')
-          for x in re.findall(r'<input[^>]*>',s,re.I): print(x)
-          print('SCRIPTS')
-          for x in re.findall(r'<script[^>]*src=["'\'' ]([^"'\'' >]+)',s,re.I): print(x)
-          print('AJAX/URL LINES')
-          for i,l in enumerate(s.splitlines(),1):
-              if re.search(r'(ajax|post|login|password|passwd|pwd|mima|密码|Action|url|submit)',l,re.I):
-                  print(i,l[:1800])
-          PY
+          echo "=== FORM/INPUT/AJAX ==="
+          grep -niE '<form|<input|<script|ajax|post|login|password|passwd|pwd|mima|密码|Action|url|submit' login.html | head -n 400 || true
