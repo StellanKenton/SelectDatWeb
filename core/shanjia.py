@@ -139,7 +139,40 @@ WANGSHENG_MONTH_USE_TYPES = {
     "造门楼", "修方", "修方动土", "作灶", "装修", "升层", "进神",
     "入宅归火", "移香出火", "修方兼竖造", "修坟", "旧坟立碑", "附葬",
 }
-DEFAULT_MONTH_RELATIONS = ("旺", "生", "耗")
+
+# 原站 topzeri_info.html 的 arryyongshiwangsheng。
+REFERENCE_MONTH_RELATIONS = {
+    "建造": (),
+    "进神": ("旺", "生", "耗"),
+    "安门": (),
+    "修方兼竖造": ("旺", "生"),
+    "修方": ("旺", "生", "耗", "泄", "克"),
+    "装修": ("旺", "生", "耗"),
+    "入宅": (),
+    "造门楼": ("旺", "生", "耗"),
+    "竖造动土": (),
+    "修方动土": ("旺", "生", "耗", "泄", "克"),
+    "开业": (),
+    "作灶": ("旺", "生", "耗", "泄", "克"),
+    "封顶上樑": (),
+    "升层": ("旺", "生", "耗"),
+    "安葬": (),
+    "附葬": ("旺", "生"),
+    "修坟": ("旺", "生", "耗"),
+    "旧坟立碑": ("旺", "生", "耗"),
+    "安葬破土": (),
+    "附葬破土": ("旺", "生", "耗", "泄", "克"),
+    "造坟": (),
+    "启攒": (),
+    "移香出火": ("旺", "生", "耗"),
+    "入宅归火": ("旺", "生", "耗"),
+    "拆卸": (),
+    "避宅修方": ("旺", "生", "耗", "泄"),
+    "避宅装修": ("旺", "生", "耗", "泄"),
+    "空方动土": (),
+    "其它": (),
+    "交易": (),
+}
 
 def _use_meta(label: str) -> dict:
     mountain_title = "第二步【选择坐山】"
@@ -172,7 +205,7 @@ def _use_meta(label: str) -> dict:
             else ""
         ),
         "month_mode": "relation" if label in WANGSHENG_MONTH_USE_TYPES else "mountain",
-        "default_month_relations": list(DEFAULT_MONTH_RELATIONS) if label in WANGSHENG_MONTH_USE_TYPES else [],
+        "default_month_relations": list(REFERENCE_MONTH_RELATIONS.get(label, ())) if label in WANGSHENG_MONTH_USE_TYPES else [],
     }
 
 USE_META = {label: _use_meta(label) for label in USE_TYPES}
@@ -534,7 +567,7 @@ def calculate_days(payload: dict) -> dict:
         raw_month_relations = [x for x in re.split(r"[;,，\s]+", raw_month_relations) if x]
     selected_month_relations = {str(x) for x in raw_month_relations if str(x) in {"旺", "生", "耗", "泄", "克"}}
     if use_type in WANGSHENG_MONTH_USE_TYPES and not selected_month_relations:
-        selected_month_relations = set(DEFAULT_MONTH_RELATIONS)
+        selected_month_relations = set(REFERENCE_MONTH_RELATIONS.get(use_type, ()))
 
     raw_hours = payload.get("hours") or [item["hour"] for item in HOUR_OPTIONS]
     hours = sorted({int(h) for h in raw_hours if int(h) in range(0, 24, 2)})
