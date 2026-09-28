@@ -1,0 +1,36 @@
+name: Probe reference site
+on:
+  push:
+    branches:
+      - probe/reference-site
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch public entry page
+        shell: bash
+        run: |
+          set -euxo pipefail
+          curl -L --max-time 30 -A "Mozilla/5.0" -D headers.txt \
+            -o body.html \
+            "http://zeridashi.top/index-web.php?id=17782134566"
+          echo "=== HEADERS ==="
+          cat headers.txt
+          echo "=== HTML SUMMARY ==="
+          python3 - <<'PY'
+          from html.parser import HTMLParser
+          from pathlib import Path
+          import re
+
+          text = Path("body.html").read_text("utf-8", errors="replace")
+          print("bytes:", len(text.encode("utf-8", errors="replace")))
+          print("title:", re.findall(r"<title[^>]*>(.*?)</title>", text, re.I | re.S)[:3])
+          print("forms:", re.findall(r"<form[^>]*>", text, re.I)[:20])
+          print("inputs:", re.findall(r"<input[^>]*>", text, re.I)[:50])
+          print("scripts:", re.findall(r"<script[^>]+src=[\"']([^\"']+)", text, re.I)[:50])
+          print("styles:", re.findall(r"<link[^>]+href=[\"']([^\"']+)", text, re.I)[:50])
+          print("anchors:", re.findall(r"<a[^>]+href=[\"']([^\"']+)", text, re.I)[:50])
+          print("=== FIRST 20000 CHARS ===")
+          print(text[:20000])
+          PY
