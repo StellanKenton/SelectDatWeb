@@ -412,6 +412,37 @@ def _day_relation(day_element: str, mountain_element: str) -> tuple[str, int]:
     return "克", -4
 
 
+def _safe_value(obj, method_name: str, default: str = "") -> str:
+    method = getattr(obj, method_name, None)
+    if not callable(method):
+        return default
+    try:
+        value = method()
+    except Exception:
+        return default
+    return default if value is None else str(value)
+
+
+def _jieqi_context(lunar) -> tuple[str, list[dict]]:
+    rows: list[dict] = []
+    try:
+        prev = lunar.getPrevJieQi()
+        nxt = lunar.getNextJieQi()
+        prev_prev = None
+        if prev is not None:
+            prev_prev = prev.getSolar().next(-1).getLunar().getPrevJieQi()
+        for item in (prev_prev, prev, nxt):
+            if item is None:
+                continue
+            row = {"name": item.getName(), "time": item.getSolar().toYmdHms()}
+            if row not in rows:
+                rows.append(row)
+        active = prev.getName() if prev is not None else ""
+        return active, rows
+    except Exception:
+        return "", []
+
+
 def _safe_list(obj, method_name: str) -> list[str]:
     method = getattr(obj, method_name, None)
     if not callable(method):
@@ -707,6 +738,15 @@ def calculate_days(payload: dict) -> dict:
 
         day_yi = _safe_list(lunar, "getDayYi")
         day_ji = _safe_list(lunar, "getDayJi")
+        day_ji_shen = _safe_list(lunar, "getDayJiShen")
+        day_xiong_sha = _safe_list(lunar, "getDayXiongSha")
+        zhi_xing = _safe_value(lunar, "getZhiXing")
+        xiu = _safe_value(lunar, "getXiu")
+        xiu_luck = _safe_value(lunar, "getXiuLuck")
+        day_position_tai = _safe_value(lunar, "getDayPositionTai")
+        day_tian_shen = _safe_value(lunar, "getDayTianShen")
+        day_tian_shen_type = _safe_value(lunar, "getDayTianShenType")
+        jieqi_name, jieqi_times = _jieqi_context(lunar)
         excluded_by_ji, ji_hits = _is_excluded_by_day_ji(use_type, edition, day_ji)
         if excluded_by_ji:
             current += timedelta(days=1)
@@ -755,6 +795,16 @@ def calculate_days(payload: dict) -> dict:
                     "bad": list(bad),
                     "yi": day_yi,
                     "ji": day_ji,
+                    "ji_shen": day_ji_shen,
+                    "xiong_sha": day_xiong_sha,
+                    "zhi_xing": zhi_xing,
+                    "xiu": xiu,
+                    "xiu_luck": xiu_luck,
+                    "day_position_tai": day_position_tai,
+                    "day_tian_shen": day_tian_shen,
+                    "day_tian_shen_type": day_tian_shen_type,
+                    "jieqi": jieqi_name,
+                    "jieqi_times": jieqi_times,
                     "hours": [hour_row],
                 })
 
