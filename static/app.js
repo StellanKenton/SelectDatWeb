@@ -68,6 +68,7 @@ function updateUseMeta(){
   setHidden("repairStep",!meta.show_repair);
   setHidden("deceasedStep",!meta.show_deceased);
   setHidden("yearShaStep",!meta.show_year_sha);
+  setHidden("relationGrid",meta.month_mode!=="relation");
 
   $("trigramLabel").textContent=meta.mountain_mode==="facing"?"向卦":"坐卦";
   $("mountainLabel").textContent=meta.mountain_mode==="facing"?"向位":"坐山";
@@ -82,6 +83,10 @@ function updateUseMeta(){
   stepTitle("monthStepTitle",n++,"添加利月");
   stepTitle("filterStepTitle",n++,"日课筛选功能");
 
+  if(meta.month_mode==="relation"){
+    const wanted=new Set(meta.default_month_relations||["旺","生","耗"]);
+    document.querySelectorAll(".relation-check").forEach(x=>x.checked=wanted.has(x.value));
+  }
   populateMountains(keep);
 }
 function renderRepair(){
@@ -124,6 +129,12 @@ function applyAutoRepair(){
   }
 }
 function autoMonths(){
+  const meta=currentMeta();
+  if(meta.month_mode==="relation"){
+    const wanted=new Set(meta.default_month_relations||["旺","生","耗"]);
+    document.querySelectorAll(".relation-check").forEach(x=>x.checked=wanted.has(x.value));
+    return;
+  }
   const wanted=new Set(currentMountain()?.auto_favorable_months||[]);
   document.querySelectorAll(".month-check").forEach(x=>x.checked=wanted.has(x.value));
 }
@@ -136,7 +147,7 @@ function payload(){
     jian:$("jianSelect").value,fenjin:$("fenjinSelect").value,
     dagua:dagua.options[dagua.selectedIndex]?.text||"",dagua_value:dagua.value,
     repair_positions:[...S.repair],life_years:$("lifeYears").value,deceased_years:$("deceasedYears").value,
-    favorable_months:selected(".month-check"),level:$("levelSelect").value,
+    favorable_months:selected(".month-check"),month_relations:selected(".relation-check"),level:$("levelSelect").value,
     hours:selected(".hour-check").map(Number)
   };
 }
