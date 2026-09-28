@@ -304,6 +304,21 @@ def main() -> int:
             individual[rule] = parsed
             time.sleep(1.4)
 
+        # Leave-one-out is the reliable way to measure a rule's marginal
+        # effect because the original PHP expects the normal rule set shape.
+        baseline_ids = set(baseline["lesson_ids"])
+        leave_one_out = {}
+        for rule in default_sha:
+            kept = [x for x in default_sha if x != rule]
+            html = fetch_variant(session, snapshot.action, snapshot.fields, kept, default_ji)
+            parsed = parse_html(html)
+            ids = set(parsed["lesson_ids"])
+            parsed["restored_ids"] = sorted(ids - baseline_ids)
+            parsed["restored_count"] = len(parsed["restored_ids"])
+            parsed["restored_dates"] = sorted({x[:8] for x in parsed["restored_ids"]})
+            leave_one_out[rule] = parsed
+            time.sleep(1.0)
+
         day_ji_ids = set(variants["day_ji_only"]["lesson_ids"])
         variants["day_ji_only"]["excluded_ids"] = sorted(none_ids - day_ji_ids)
         variants["day_ji_only"]["excluded_count"] = len(none_ids - day_ji_ids)
@@ -314,6 +329,7 @@ def main() -> int:
             "default_day_ji": default_ji,
             "variants": variants,
             "individual_sha": individual,
+            "leave_one_out": leave_one_out,
         }
         (OUT / "filter_isolation.json").write_text(
             json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8"
@@ -327,6 +343,10 @@ def main() -> int:
             "individual": {
                 k: {"count": v["count"], "excluded": v["excluded_count"]}
                 for k, v in individual.items()
+            },
+            "leave_one_out": {
+                k: {"count": v["count"], "restored": v["restored_count"], "dates": v["restored_dates"]}
+                for k, v in leave_one_out.items()
             },
         }
         print(json.dumps(compact, ensure_ascii=False))
