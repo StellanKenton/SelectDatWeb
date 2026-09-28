@@ -52,3 +52,24 @@ def test_manual_favorable_month_filter():
     )
     assert result["results"]
     assert all(item["month_zhi"] == "寅" for item in result["results"])
+
+
+def test_reference_auto_favorable_months_are_per_mountain():
+    options = get_options()
+    by_id = {m["id"]: m for m in options["mountains"]}
+    assert by_id[1]["favorable_months"] == ["申", "酉", "亥", "子"]
+    assert by_id[4]["favorable_months"] == ["巳", "辰", "丑"]
+    assert by_id[5]["favorable_months"] == ["巳", "午", "辰", "未", "戌", "丑"]
+    assert by_id[18]["favorable_months"] == ["申", "酉", "辰", "戌", "丑"]
+    assert by_id[22]["favorable_months"] == ["巳", "午", "戌"]
+
+
+def test_reference_dagua_table():
+    options = get_options()
+    by_id = {m["id"]: m for m in options["mountains"]}
+    assert by_id[1]["dagua"] == [
+        {"name": "风地观", "value": "2;2"},
+        {"name": "水地比", "value": "7;7"},
+        {"name": "山地剥", "value": "6;6"},
+    ]
+    assert {"name": "乾为天", "value": "9;1"} in by_id[14]["dagua"]
