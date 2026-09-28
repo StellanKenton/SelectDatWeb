@@ -149,6 +149,7 @@ def configure_and_search(driver):
         redact(json.dumps(base_state, ensure_ascii=False, indent=2)),
         encoding="utf-8",
     )
+    (OUT / "shuru_configured.html").write_text(redact(driver.page_source), encoding="utf-8")
 
     counts = {}
     for level in ["全部", "大吉", "小吉", "生旺", "耗"]:
@@ -171,6 +172,20 @@ def configure_and_search(driver):
         m = re.search(r"显示：\s*(\d+)个日课", text_body)
         counts[level] = int(m.group(1)) if m else -1
         time.sleep(1.2)
+
+    # Capture the other frames after the final real search.
+    for frame_name, file_name in [
+        ("top1Frame", "top1_after.html"),
+        ("yuesha_baziFrame", "yuesha_after.html"),
+        ("nianshaFrame", "niansha_after.html"),
+    ]:
+        try:
+            wait_frame(driver, frame_name)
+            (OUT / file_name).write_text(redact(driver.page_source), encoding="utf-8")
+            body = driver.find_element(By.TAG_NAME, "body").text
+            (OUT / file_name.replace(".html", ".txt")).write_text(redact(body), encoding="utf-8")
+        except Exception as exc:
+            (OUT / file_name.replace(".html", ".error.txt")).write_text(str(exc), encoding="utf-8")
 
     return counts, base_state
 
