@@ -144,14 +144,26 @@ def set_day_ji(driver, values: list[str]) -> None:
 
 
 def run_filter_variant(driver, name: str, sha_values: list[str], day_ji: list[str]) -> dict:
-    wait_frame(driver, "shuruFrame")
-    select_value(driver, "paichubiaozhi", "全部")
-    set_sha_selection(driver, sha_values)
-    set_day_ji(driver, day_ji)
-    time.sleep(0.7)
-    driver.execute_script("toframes();")
-
+    # After each search the site's frames may reload asynchronously.  The
+    # center result page already owns the complete hidden form, so mutate that
+    # form directly instead of returning to shuruFrame.  This is both closer to
+    # the server request and much more stable for repeated black-box probes.
     wait_frame(driver, "centerFrame")
+    driver.execute_script(
+        """
+        const setv=(id,value)=>{const el=document.getElementById(id); if(el) el.value=value;};
+        setv('Action','kaishisousuo');
+        setv('weizhi','');
+        setv('paichubiaozhi','全部');
+        setv('xiongsha', arguments[0].join(';'));
+        const vals=arguments[1];
+        for(let i=0;i<4;i++) setv('rijishi'+i, vals[i] || '');
+        document.getElementById('form1').submit();
+        """,
+        sha_values,
+        list(day_ji[:4]),
+    )
+
     WebDriverWait(driver, 45).until(
         lambda d: "显示：" in d.page_source and "个日课" in d.page_source
     )
@@ -207,11 +219,19 @@ def isolate_reference_filters(driver, base_state: dict) -> dict:
         json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8"
     )
 
-    # Restore the real reference defaults before side-frame capture.
-    wait_frame(driver, "shuruFrame")
-    set_sha_selection(driver, default_sha)
-    set_day_ji(driver, default_day_ji)
-    select_value(driver, "paichubiaozhi", "全部")
+    # Restore the real reference defaults in the result form.
+    wait_frame(driver, "centerFrame")
+    driver.execute_script(
+        """
+        const setv=(id,value)=>{const el=document.getElementById(id); if(el) el.value=value;};
+        setv('xiongsha', arguments[0].join(';'));
+        const vals=arguments[1];
+        for(let i=0;i<4;i++) setv('rijishi'+i, vals[i] || '');
+        setv('paichubiaozhi','全部');
+        """,
+        default_sha,
+        default_day_ji,
+    )
     return result
 
 
