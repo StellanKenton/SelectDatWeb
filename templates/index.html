@@ -16,31 +16,23 @@
 
     <section class="date-bar">
       <div class="date-controls">
-        <select id="calendarType" aria-label="历法">
-          <option value="公历">公历</option>
-        </select>
+        <select id="calendarType" aria-label="历法"><option value="公历">公历</option></select>
         <input id="anchorDate" type="date" aria-label="日期">
         <select id="rangeSelect" aria-label="范围">
           <option value="0">当天</option>
-          <option value="-10">前10天</option>
-          <option value="-20">前20天</option>
-          <option value="-30">前30天</option>
-          <option value="10" selected>后10天</option>
-          <option value="20">后20天</option>
-          <option value="30">后30天</option>
+          <option value="-10">前10天</option><option value="-20">前20天</option><option value="-30">前30天</option>
+          <option value="10" selected>后10天</option><option value="20">后20天</option><option value="30">后30天</option>
         </select>
       </div>
-
       <div class="hour-controls" id="hourControls">
         <label class="hour-all"><input type="checkbox" id="allHours" checked>全选</label>
       </div>
-
       <button id="calculateTop" class="toolbar-button">查找日课</button>
     </section>
 
     <main class="main-grid">
       <aside class="left-panel">
-        <div class="pane-title">月煞 / 年煞</div>
+        <div class="pane-title">月煞</div>
         <div class="left-block">
           <div class="caption">当前山家</div>
           <div id="mountainSummary" class="summary-value">壬山 · 水</div>
@@ -48,10 +40,6 @@
         <div class="left-block">
           <div class="caption">自动利月</div>
           <div id="favorableSummary" class="small-copy">按山家五行显示</div>
-        </div>
-        <div class="left-block">
-          <div class="caption">年煞提示</div>
-          <div id="shaSummary" class="small-copy">计算后显示当年三煞提示</div>
         </div>
         <div class="left-block">
           <div class="caption">筛选说明</div>
@@ -66,10 +54,7 @@
 
       <section class="result-panel">
         <div class="result-head">
-          <div>
-            <strong id="resultTitle">山家择日</strong>
-            <span id="resultCount" class="result-count">尚未计算</span>
-          </div>
+          <div><strong id="resultTitle">山家择日</strong><span id="resultCount" class="result-count">尚未计算</span></div>
           <div class="result-note">点击右侧设置后查找</div>
         </div>
         <div id="resultList" class="result-list">
@@ -80,39 +65,37 @@
         </div>
       </section>
 
+      <aside class="year-panel">
+        <div class="pane-title">年煞</div>
+        <div class="left-block">
+          <div class="caption">当年三煞</div>
+          <div id="shaSummary" class="small-copy">计算后显示当年三煞提示</div>
+        </div>
+        <div class="left-block">
+          <div class="caption">规则</div>
+          <div class="small-copy">申子辰年煞南，寅午戌年煞北，亥卯未年煞西，巳酉丑年煞东。</div>
+        </div>
+        <div class="left-block">
+          <div class="caption">年命</div>
+          <div class="small-copy">福主年命会参与日支冲、六合、三合判断。</div>
+        </div>
+      </aside>
+
       <aside class="input-panel">
         <div class="pane-title">输入</div>
         <form id="shanjiaForm" autocomplete="off">
           <section class="step">
             <div class="step-title">第一步【选择用事】</div>
-            <div class="field-row">
-              <label for="levelSelect">筛选</label>
-              <select id="levelSelect"></select>
-            </div>
-            <div class="field-row">
-              <label for="useType">用事</label>
-              <select id="useType"></select>
-            </div>
+            <div class="field-row"><label for="levelSelect">筛选</label><select id="levelSelect"></select></div>
+            <div class="field-row"><label for="useType">用事</label><select id="useType"></select></div>
           </section>
 
           <section class="step">
             <div class="step-title">第二步【选择坐山】</div>
-            <div class="field-row">
-              <label for="trigramSelect">坐卦</label>
-              <select id="trigramSelect"></select>
-            </div>
-            <div class="field-row">
-              <label for="mountainSelect">坐山</label>
-              <select id="mountainSelect"></select>
-            </div>
-            <div class="field-row">
-              <label for="jianSelect">兼山</label>
-              <select id="jianSelect"></select>
-            </div>
-            <div class="field-row">
-              <label for="fenjinSelect">分金</label>
-              <select id="fenjinSelect"></select>
-            </div>
+            <div class="field-row"><label for="trigramSelect">坐卦</label><select id="trigramSelect"></select></div>
+            <div class="field-row"><label for="mountainSelect">坐山</label><select id="mountainSelect"></select></div>
+            <div class="field-row"><label for="jianSelect">兼山</label><select id="jianSelect"></select></div>
+            <div class="field-row"><label for="fenjinSelect">分金</label><select id="fenjinSelect"></select></div>
           </section>
 
           <section class="step">
@@ -131,10 +114,7 @@
 
           <section class="step">
             <div class="step-title">第五步【日课筛选功能】</div>
-            <label class="switch-line">
-              <input type="checkbox" id="showReasons" checked>
-              显示取舍原因
-            </label>
+            <label class="switch-line"><input type="checkbox" id="showReasons" checked>显示取舍原因</label>
           </section>
 
           <button type="submit" class="primary-button">查 找 日 课</button>
@@ -143,21 +123,12 @@
     </main>
 
     <footer class="bottom-bar">
-      <select aria-label="模块">
-        <option>山家择日</option>
-      </select>
-      <select aria-label="功能">
-        <option>日历</option>
-        <option>年煞</option>
-        <option>收藏</option>
-        <option>显示选中的日课</option>
-      </select>
+      <select aria-label="模块"><option>山家择日</option></select>
+      <select aria-label="功能"><option>日历</option><option>年煞</option><option>收藏</option><option>显示选中的日课</option></select>
       <button type="button" id="restoreView">显示</button>
-      <span class="footer-spacer"></span>
-      <span>HTML UI · Python Core</span>
+      <span class="footer-spacer"></span><span>HTML UI · Python Core</span>
     </footer>
   </div>
-
   <script src="{{ url_for('static', filename='app.js') }}"></script>
 </body>
 </html>
