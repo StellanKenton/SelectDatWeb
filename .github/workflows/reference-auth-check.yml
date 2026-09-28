@@ -1,4 +1,4 @@
-name: Reference Auth Check
+name: Reference Capture
 
 on:
   push:
@@ -6,18 +6,27 @@ on:
       - probe/reference-auth
 
 jobs:
-  auth-check:
+  capture:
     runs-on: ubuntu-latest
     env:
       ZERIDASHI_PHONE: ${{ secrets.ZERIDASHI_PHONE }}
       ZERIDASHI_PASSWORD: ${{ secrets.ZERIDASHI_PASSWORD }}
+      ZERIDASHI_REQUEST_INTERVAL: "1.8"
     steps:
-      - name: Check secret presence
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Capture logged-in reference pages
         shell: bash
         run: |
           set -euo pipefail
-          if [ -n "$ZERIDASHI_PHONE" ] && [ -n "$ZERIDASHI_PASSWORD" ]; then
-            echo "REFERENCE_CREDENTIALS=READY"
-          else
-            echo "REFERENCE_CREDENTIALS=MISSING"
-          fi
+          python tools/capture_reference.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: reference-capture
+          path: reference_capture/
+          if-no-files-found: warn
