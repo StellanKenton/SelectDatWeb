@@ -8,28 +8,25 @@ jobs:
   probe:
     runs-on: ubuntu-latest
     steps:
-      - name: Inspect reference frames
+      - name: Inspect shanjia endpoints
         shell: bash
         run: |
           set -e
           curl -L --max-time 30 -A "Mozilla/5.0" -c cookies.txt -b cookies.txt -o index.html "http://zeridashi.top/index-web.php?id=17782134566"
-          curl -L --max-time 30 -A "Mozilla/5.0" -c cookies.txt -b cookies.txt -o toptext.html "http://zeridashi.top/zeridashi/yixue/toptext.php"
           curl -L --max-time 30 -A "Mozilla/5.0" -c cookies.txt -b cookies.txt -o topzeri.html "http://zeridashi.top/zeridashi/yixue/topzeri.php"
           curl -L --max-time 30 -A "Mozilla/5.0" -c cookies.txt -b cookies.txt -o info.html "http://zeridashi.top/zeridashi/yixue/topzeri_info.php"
-          curl -L --max-time 30 -A "Mozilla/5.0" -c cookies.txt -b cookies.txt -o bottom.html "http://zeridashi.top/zeridashi/yixue/bottom.php"
-          curl -L --max-time 30 -A "Mozilla/5.0" -c cookies.txt -b cookies.txt -o hidden.html "http://zeridashi.top/zeridashi/yixue/5.php"
+          curl -L --max-time 30 -A "Mozilla/5.0" -c cookies.txt -b cookies.txt -o zeri.html "http://zeridashi.top/zeridashi/yixue/zeri.php"
+          curl -L --max-time 30 -A "Mozilla/5.0" -c cookies.txt -b cookies.txt -o topzeri.js "http://zeridashi.top/zeridashi/inc/topzeri.js?ver=123456"
+          curl -L --max-time 30 -A "Mozilla/5.0" -c cookies.txt -b cookies.txt -o zeri.js "http://zeridashi.top/zeridashi/yixue/zeri.js?ver=123456"
           python3 - <<'PY'
           from pathlib import Path
           import re
-          for name in ['index.html','toptext.html','topzeri.html','info.html','bottom.html','hidden.html']:
-              p=Path(name)
-              text=p.read_text('utf-8',errors='replace')
-              print('\n===',name,'===')
-              print('title',re.findall(r'<title[^>]*>(.*?)</title>',text,re.I|re.S)[:5])
-              print('forms',re.findall(r'<form[^>]*>',text,re.I)[:20])
-              print('inputs',re.findall(r'<input[^>]*>',text,re.I)[:80])
-              print('selects',re.findall(r'<select[^>]*>',text,re.I)[:50])
-              print('anchors',re.findall(r'<a[^>]+href=[\"\']([^\"\']+)',text,re.I)[:100])
-              print('scripts',re.findall(r'<script[^>]+src=[\"\']([^\"\']+)',text,re.I)[:50])
-              print(text[:30000])
+          files=['topzeri.html','info.html','zeri.html','topzeri.js','zeri.js']
+          keys=re.compile(r'(山家|坐山|向|分金|年命|主命|造命|Action|ChaZhao|submit|ajax|url|post|form|select|option|input|shichen|fanwei|gongli|nongli|ganzhi|start|end|nian|yue|ri|hour|时辰|范围|公历|农历|干支)',re.I)
+          for name in files:
+              text=Path(name).read_text('utf-8',errors='replace')
+              print('\n===',name,'size',len(text),'===')
+              for i,line in enumerate(text.splitlines(),1):
+                  if keys.search(line):
+                      print(f'{i}: {line[:1200]}')
           PY
