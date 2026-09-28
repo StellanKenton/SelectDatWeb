@@ -45,9 +45,9 @@ function updateMountain(){
   const m=currentMountain();if(!m)return;
   setOpts($("jianSelect"),m.jian);
   setOpts($("fenjinSelect"),m.fenjin.map(x=>({value:x,label:"【"+x+"】分金"})));
+  setOpts($("daguaSelect"),m.dagua);
   $("mountainSummary").textContent=m.name+"山 · "+m.element+" · "+m.direction;
-  const ms=Object.entries(S.options.month_favorable).filter(x=>x[1].includes(m.element)).map(x=>x[0]);
-  $("favorableSummary").textContent=ms.join("、")+"月对"+m.element+"山有利";
+  $("favorableSummary").textContent=m.favorable_months.join("、")+"月（原站逐山自动利月表）";
 }
 function updateUseLabels(){
   const v=$("useType").value;
@@ -62,7 +62,7 @@ function payload(){
   return{
     start_date:ymd(r<0?addDays(d,r):d),end_date:ymd(r<0?d:addDays(d,r)),
     use_type:$("useType").value,mountain_id:Number($("mountainSelect").value),
-    jian:$("jianSelect").value,fenjin:$("fenjinSelect").value,life_years:$("lifeYears").value,
+    jian:$("jianSelect").value,fenjin:$("fenjinSelect").value,dagua:$("daguaSelect").value,life_years:$("lifeYears").value,
     favorable_months:selected(".month-check"),level:$("levelSelect").value,
     hours:selected(".hour-check").map(Number)
   };
