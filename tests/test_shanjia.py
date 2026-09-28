@@ -36,7 +36,9 @@ def test_calculate_days_returns_calendar_data():
     first = result["results"][0]
     assert len(first["day_ganzhi"]) == 2
     assert "month_ganzhi" in first
-    assert len(first["hours"]) == 2
+    assert len(first["hours"]) == 1
+    assert first["lesson_id"].startswith(first["date"].replace("-", ""))
+    assert first["time_ganzhi"] == first["hours"][0]["ganzhi"]
 
 
 def test_manual_favorable_month_filter():
@@ -203,3 +205,49 @@ def test_calculate_reports_reference_edition_and_filters():
     )
     assert result["edition"] == "协纪版"
     assert result["day_ji_filters"] == ["竖造"]
+
+
+def test_reference_lesson_count_is_date_plus_hour():
+    result = calculate_days(
+        {
+            "start_date": "2026-09-28",
+            "end_date": "2026-09-28",
+            "use_type": "建造",
+            "mountain_id": 1,
+            "edition": "协纪版",
+            "level": "全部",
+            "hours": [0, 2, 16],
+        }
+    )
+    assert result["count"] == 3
+    assert [item["hour"] for item in result["results"]] == [0, 2, 16]
+
+
+def test_reference_shengwang_and_hao_are_independent_relations():
+    shengwang = calculate_days(
+        {
+            "start_date": "2026-09-01",
+            "end_date": "2026-10-08",
+            "use_type": "建造",
+            "mountain_id": 1,
+            "edition": "协纪版",
+            "level": "生旺",
+            "hours": [0],
+        }
+    )
+    assert shengwang["results"]
+    assert all(item["relation"] in {"生", "旺"} for item in shengwang["results"])
+
+    hao = calculate_days(
+        {
+            "start_date": "2026-09-01",
+            "end_date": "2026-10-08",
+            "use_type": "建造",
+            "mountain_id": 1,
+            "edition": "协纪版",
+            "level": "耗",
+            "hours": [0],
+        }
+    )
+    assert hao["results"]
+    assert all(item["relation"] == "耗" for item in hao["results"])
