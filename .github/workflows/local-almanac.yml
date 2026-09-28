@@ -1,0 +1,47 @@
+name: Local Almanac Diagnostic
+
+on:
+  push:
+    branches:
+      - probe/local-almanac
+
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - name: Print local almanac Yi/Ji for fixed reference month
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from datetime import date, timedelta
+          from lunar_python import Solar
+
+          ref_survive = {
+              "2026-09-08","2026-09-10","2026-09-12","2026-09-13",
+              "2026-09-15","2026-09-16","2026-09-18","2026-09-23",
+              "2026-09-25","2026-09-28","2026-10-03","2026-10-04",
+              "2026-10-06",
+          }
+          d=date(2026,9,7)
+          end=date(2026,10,8)
+          while d<=end:
+              lunar=Solar.fromYmd(d.year,d.month,d.day).getLunar()
+              yi=[str(x) for x in lunar.getDayYi()]
+              ji=[str(x) for x in lunar.getDayJi()]
+              row={
+                  "date":d.isoformat(),
+                  "ref_survives_zhuzao_filter":d.isoformat() in ref_survive,
+                  "day_ganzhi":lunar.getEightChar().getDay(),
+                  "yi":yi,
+                  "ji":ji,
+                  "ji_flags":{x:(x in ji) for x in ["竖造","修造","动土","上梁","破土"]},
+              }
+              print(json.dumps(row,ensure_ascii=False))
+              d+=timedelta(days=1)
+          PY
