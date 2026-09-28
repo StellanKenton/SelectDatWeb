@@ -4,6 +4,7 @@ import json
 from datetime import date, timedelta
 
 from lunar_python import Solar
+import cnlunar
 
 ORIGINAL = {
     "2026-09-07": "J", "2026-09-08": "Y", "2026-09-09": "J",
@@ -33,6 +34,7 @@ end=date(2026,10,8)
 while d<=end:
     lunar=Solar.fromYmd(d.year,d.month,d.day).getLunar()
     ec=lunar.getEightChar()
+    xj = cnlunar.Lunar(__import__("datetime").datetime(d.year,d.month,d.day,12,0), godType="8char")
     row={
         "date":d.isoformat(),
         "original":ORIGINAL[d.isoformat()],
@@ -43,6 +45,11 @@ while d<=end:
         "xiong_sha":safe_list(lunar,"getDayXiongSha"),
         "yi":safe_list(lunar,"getDayYi"),
         "ji":safe_list(lunar,"getDayJi"),
+        "cn_good": list(xj.goodThing),
+        "cn_bad": list(xj.badThing),
+        "cn_level": str(xj.todayLevelName),
+        "cn_good_gods": list(xj.goodGodName),
+        "cn_bad_gods": list(xj.badGodName),
     }
     print(json.dumps(row,ensure_ascii=False))
     d+=timedelta(days=1)
