@@ -164,6 +164,9 @@ def run_filter_variant(driver, name: str, sha_values: list[str], day_ji: list[st
         list(day_ji[:4]),
     )
 
+    # submit() replaces the frame document; reacquire the freshly loaded
+    # centerFrame before reading the result.
+    wait_frame(driver, "centerFrame")
     WebDriverWait(driver, 45).until(
         lambda d: "显示：" in d.page_source and "个日课" in d.page_source
     )
