@@ -16,13 +16,27 @@
 
     <section class="date-bar">
       <div class="date-controls">
-        <select id="calendarType" aria-label="历法"><option value="公历">公历</option></select>
-        <input id="anchorDate" type="date" aria-label="日期">
-        <select id="rangeSelect" aria-label="范围">
-          <option value="0">当天</option>
-          <option value="-10">前10天</option><option value="-20">前20天</option><option value="-30">前30天</option>
-          <option value="10" selected>后10天</option><option value="20">后20天</option><option value="30">后30天</option>
-        </select>
+        <select id="calendarType" aria-label="历法"></select>
+
+        <span class="calendar-group" id="solarGroup" hidden>
+          <select id="solarYear" aria-label="公历年"></select>
+          <select id="solarMonth" aria-label="公历月"></select>
+          <select id="solarDay" aria-label="公历日"></select>
+        </span>
+
+        <span class="calendar-group" id="lunarGroup" hidden>
+          <select id="lunarYear" aria-label="农历年"></select>
+          <select id="lunarMonth" aria-label="农历月"></select>
+          <select id="lunarDay" aria-label="农历日"></select>
+        </span>
+
+        <span class="calendar-group" id="ganzhiGroup">
+          <select id="ganzhiYear" aria-label="干支年"></select>
+          <select id="ganzhiMonth" aria-label="干支月"></select>
+          <select id="ganzhiDay" aria-label="干支日"></select>
+        </span>
+
+        <select id="rangeSelect" aria-label="范围" hidden></select>
       </div>
       <div class="hour-controls" id="hourControls">
         <label class="hour-all"><input type="checkbox" id="allHours" checked>全选</label>
