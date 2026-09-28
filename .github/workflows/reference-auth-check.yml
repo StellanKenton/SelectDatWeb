@@ -1,0 +1,23 @@
+name: Reference Auth Check
+
+on:
+  push:
+    branches:
+      - probe/reference-auth
+
+jobs:
+  auth-check:
+    runs-on: ubuntu-latest
+    env:
+      ZERIDASHI_PHONE: ${{ secrets.ZERIDASHI_PHONE }}
+      ZERIDASHI_PASSWORD: ${{ secrets.ZERIDASHI_PASSWORD }}
+    steps:
+      - name: Check secret presence
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -n "$ZERIDASHI_PHONE" ] && [ -n "$ZERIDASHI_PASSWORD" ]; then
+            echo "REFERENCE_CREDENTIALS=READY"
+          else
+            echo "REFERENCE_CREDENTIALS=MISSING"
+          fi
