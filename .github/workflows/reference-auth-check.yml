@@ -41,6 +41,7 @@ jobs:
           google-chrome --version || true
           python tools/browser_reference_sample.py
       - name: Scan months for daji/xiaoji samples
+        if: always()
         shell: bash
         run: |
           set -euo pipefail
