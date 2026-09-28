@@ -174,6 +174,53 @@ REFERENCE_MONTH_RELATIONS = {
     "交易": (),
 }
 
+
+ALL_SHA_FILTERS = (
+    "月冲山", "日冲山", "时冲山",
+    "月三杀", "日三杀", "时三杀",
+    "月正阴府", "日正阴府", "时正阴府",
+    "日正八煞", "时正八煞",
+    "五黄重叠", "二五交加", "月五黄煞", "日五黄煞", "时五黄煞",
+    "日星曜煞", "时星曜煞", "天星煞", "地曜煞",
+    "日流太岁", "日消灭煞", "日山方煞", "时山方煞",
+    "月克山运", "日克山运", "时克山运",
+    "月傍阴府", "日傍阴府", "时傍阴府",
+)
+
+# 原站 topzeri_info.php 的 arr_shenshaguolv 原值。
+REFERENCE_SHA_FILTERS = {
+    "建造": ("月冲山", "日冲山", "时冲山", "月三杀", "日三杀", "时三杀", "月正阴府", "日正阴府", "时正阴府", "日正八煞", "时正八煞", "日星曜煞", "时星曜煞", "天星煞", "地曜煞", "日流太岁", "日消灭煞", "日山方煞"),
+    "进神": ("月冲山", "日冲山", "时冲山", "月三杀", "日三杀", "时三杀", "日正八煞", "时正八煞", "日星曜煞", "时星曜煞", "天星煞", "地曜煞", "日流太岁"),
+    "安门": ("日冲山", "时冲山", "日三杀", "时三杀"),
+    "修方兼竖造": ("月冲山", "日冲山", "时冲山", "月三杀", "日三杀", "时三杀", "月正阴府", "日正阴府", "时正阴府", "日正八煞", "时正八煞", "日星曜煞", "时星曜煞", "天星煞", "地曜煞", "日流太岁", "日消灭煞", "日山方煞"),
+    "修方": ("月冲山", "日冲山", "时冲山", "月三杀", "日三杀", "时三杀", "日星曜煞", "时星曜煞", "天星煞", "地曜煞"),
+    "装修": ("月冲山", "日冲山", "时冲山", "月三杀", "日三杀", "时三杀", "日正八煞", "时正八煞", "日星曜煞", "时星曜煞", "天星煞", "地曜煞", "日流太岁", "日消灭煞"),
+    "入宅": ("月冲山", "日冲山", "时冲山", "月三杀", "日三杀", "时三杀", "日正八煞", "时正八煞", "日星曜煞", "时星曜煞", "天星煞", "地曜煞", "日流太岁"),
+    "造门楼": ("月冲山", "日冲山", "时冲山", "月三杀", "日三杀", "时三杀", "日星曜煞", "时星曜煞", "天星煞", "地曜煞"),
+    "竖造动土": ("月冲山", "日冲山", "时冲山", "月三杀", "日三杀", "时三杀", "日星曜煞", "时星曜煞", "天星煞", "地曜煞"),
+    "修方动土": ("月冲山", "日冲山", "时冲山", "月三杀", "日三杀", "时三杀", "日星曜煞", "时星曜煞", "天星煞", "地曜煞"),
+    "开业": ("月冲山", "日冲山", "时冲山", "月三杀", "日三杀", "时三杀", "日正八煞", "时正八煞", "日星曜煞", "时星曜煞", "天星煞", "地曜煞"),
+    "作灶": ("月冲山", "日冲山", "时冲山", "月三杀", "日三杀", "时三杀", "日星曜煞", "时星曜煞", "天星煞", "地曜煞"),
+    "封顶上樑": ("日冲山", "时冲山", "日三杀", "时三杀"),
+    "升层": ("月冲山", "日冲山", "时冲山", "月三杀", "日三杀", "时三杀", "日正八煞", "时正八煞", "日星曜煞", "时星曜煞", "天星煞", "地曜煞", "日流太岁", "日消灭煞", "日山方煞"),
+    "安葬": ("月冲山", "日冲山", "时冲山", "月三杀", "日三杀", "时三杀", "月正阴府", "日正阴府", "时正阴府", "日正八煞", "时正八煞", "日星曜煞", "时星曜煞", "天星煞", "地曜煞", "日流太岁", "日消灭煞", "日山方煞"),
+    "附葬": ("月冲山", "日冲山", "时冲山", "月三杀", "日三杀", "时三杀", "月正阴府", "日正阴府", "时正阴府", "日正八煞", "时正八煞", "日星曜煞", "时星曜煞", "天星煞", "地曜煞", "日流太岁", "日消灭煞", "日山方煞"),
+    "修坟": ("月冲山", "日冲山", "时冲山", "月三杀", "日三杀", "时三杀", "日星曜煞", "时星曜煞", "天星煞", "地曜煞"),
+    "旧坟立碑": ("月冲山", "日冲山", "时冲山", "月三杀", "日三杀", "时三杀", "日星曜煞", "时星曜煞", "天星煞", "地曜煞"),
+    "安葬破土": ("月冲山", "日冲山", "时冲山", "月三杀", "日三杀", "时三杀"),
+    "附葬破土": ("月冲山", "日冲山", "时冲山", "月三杀", "日三杀", "时三杀"),
+    "造坟": ("月冲山", "日冲山", "时冲山", "月三杀", "日三杀", "时三杀", "月正阴府", "日正阴府", "时正阴府", "日正八煞", "时正八煞", "日星曜煞", "时星曜煞", "天星煞", "地曜煞", "日流太岁", "日消灭煞", "日山方煞"),
+    "移香出火": ("月冲山", "日冲山", "时冲山", "月三杀", "日三杀", "时三杀", "日正八煞", "时正八煞", "日星曜煞", "时星曜煞", "天星煞", "地曜煞", "日流太岁"),
+    "入宅归火": ("月冲山", "日冲山", "时冲山", "月三杀", "日三杀", "时三杀", "日正八煞", "时正八煞", "日星曜煞", "时星曜煞", "天星煞", "地曜煞", "日流太岁"),
+    "拆卸": ("月冲山", "日冲山", "时冲山"),
+    "避宅修方": ("月冲山", "日冲山", "时冲山", "月三杀", "日三杀", "时三杀"),
+    "避宅装修": ("月冲山", "日冲山", "时冲山", "月三杀", "日三杀", "时三杀"),
+    "空方动土": (),
+    "其它": (),
+    "启攒": ("月冲山", "日冲山", "时冲山", "月三杀", "日三杀", "时三杀"),
+    "交易": (),
+}
+
 def _use_meta(label: str) -> dict:
     mountain_title = "第二步【选择坐山】"
     if label in {"附葬", "修方兼竖造"}:
@@ -206,6 +253,7 @@ def _use_meta(label: str) -> dict:
         ),
         "month_mode": "relation" if label in WANGSHENG_MONTH_USE_TYPES else "mountain",
         "default_month_relations": list(REFERENCE_MONTH_RELATIONS.get(label, ())) if label in WANGSHENG_MONTH_USE_TYPES else [],
+        "default_sha_filters": list(REFERENCE_SHA_FILTERS.get(label, ())),
     }
 
 USE_META = {label: _use_meta(label) for label in USE_TYPES}
@@ -538,6 +586,8 @@ def get_options() -> dict:
             edition: {k: list(v) for k, v in table.items()}
             for edition, table in REFERENCE_EDITIONS.items()
         },
+        "sha_filter_options": list(ALL_SHA_FILTERS),
+        "sha_filter_defaults": {k: list(v) for k, v in REFERENCE_SHA_FILTERS.items()},
         "levels": [
             {"value": "全部", "label": "全部"},
             {"value": "大吉", "label": "1级大吉"},
@@ -575,6 +625,13 @@ def calculate_days(payload: dict) -> dict:
     ganzhi_day_filter = str(payload.get("ganzhi_day_filter", "")).strip()
 
     level_filter = str(payload.get("level", "大吉"))
+    if "sha_filters" in payload:
+        raw_sha_filters = payload.get("sha_filters") or []
+        if isinstance(raw_sha_filters, str):
+            raw_sha_filters = [x for x in raw_sha_filters.split(";") if x]
+        selected_sha_filters = {str(x) for x in raw_sha_filters if str(x) in ALL_SHA_FILTERS}
+    else:
+        selected_sha_filters = set(REFERENCE_SHA_FILTERS.get(use_type, ()))
     selected_months = {str(x) for x in payload.get("favorable_months", []) if str(x) in ZHI}
     raw_month_relations = payload.get("month_relations", [])
     if isinstance(raw_month_relations, str):
@@ -637,10 +694,16 @@ def calculate_days(payload: dict) -> dict:
 
         # 原站默认凶煞过滤包含“月三杀、日三杀、时三杀”，但不包含“年三杀”。
         # 因此年三杀只显示提示；月/日/时三杀会把候选日课直接排除。
-        if _is_sansha_for_mountain(month_zhi, mountain):
+        if "月三杀" in selected_sha_filters and _is_sansha_for_mountain(month_zhi, mountain):
             current += timedelta(days=1)
             continue
-        if _is_sansha_for_mountain(day_zhi, mountain):
+        if "日三杀" in selected_sha_filters and _is_sansha_for_mountain(day_zhi, mountain):
+            current += timedelta(days=1)
+            continue
+        if "月冲山" in selected_sha_filters and mountain.name in ZHI and CLASH[month_zhi] == mountain.name:
+            current += timedelta(days=1)
+            continue
+        if "日冲山" in selected_sha_filters and mountain.name in ZHI and CLASH[day_zhi] == mountain.name:
             current += timedelta(days=1)
             continue
 
@@ -732,7 +795,9 @@ def calculate_days(payload: dict) -> dict:
             # 因此把所选时辰展开为独立 lesson；这也让顶部时辰勾选与
             # “显示：N个日课”计数语义和原站一致。
             for hour_row in _hour_rows(current, hours, mountain):
-                if _is_sansha_for_mountain(hour_row["zhi"], mountain):
+                if "时三杀" in selected_sha_filters and _is_sansha_for_mountain(hour_row["zhi"], mountain):
+                    continue
+                if "时冲山" in selected_sha_filters and mountain.name in ZHI and CLASH[hour_row["zhi"]] == mountain.name:
                     continue
                 results.append({
                     "lesson_id": f"{current.strftime('%Y%m%d')}{int(hour_row['hour']):02d}",
@@ -776,6 +841,7 @@ def calculate_days(payload: dict) -> dict:
         "use_type": use_type,
         "edition": edition,
         "day_ji_filters": list(_reference_day_ji_filters(use_type, edition)),
+        "sha_filters": [x for x in ALL_SHA_FILTERS if x in selected_sha_filters],
         "calendar_filter": {
             "ganzhi_year": ganzhi_year_filter,
             "ganzhi_month": ganzhi_month_filter,
