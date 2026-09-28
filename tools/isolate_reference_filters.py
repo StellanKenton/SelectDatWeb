@@ -270,6 +270,12 @@ def main() -> int:
         for name, sha, ji in plan:
             html = fetch_variant(session, snapshot.action, snapshot.fields, sha, ji)
             variants[name] = parse_html(html)
+            if variants[name]["count"] < 0:
+                (OUT / f"debug_{name}.html").write_text(html, encoding="utf-8")
+                variants[name]["debug_bytes"] = len(html.encode("utf-8"))
+                variants[name]["debug_login"] = "使用前请先点击顶部【登录】" in html or "请先登录" in html
+                title = re.search(r"<title[^>]*>(.*?)</title>", html, re.I | re.S)
+                variants[name]["debug_title"] = re.sub(r"\s+", " ", title.group(1)).strip() if title else ""
             time.sleep(1.4)
 
         none_ids = set(variants["none"]["lesson_ids"])
@@ -277,6 +283,12 @@ def main() -> int:
         for rule in default_sha:
             html = fetch_variant(session, snapshot.action, snapshot.fields, [rule], [])
             parsed = parse_html(html)
+            if parsed["count"] < 0 and not (OUT / "debug_single_sha.html").exists():
+                (OUT / "debug_single_sha.html").write_text(html, encoding="utf-8")
+                parsed["debug_bytes"] = len(html.encode("utf-8"))
+                parsed["debug_login"] = "使用前请先点击顶部【登录】" in html or "请先登录" in html
+                title = re.search(r"<title[^>]*>(.*?)</title>", html, re.I | re.S)
+                parsed["debug_title"] = re.sub(r"\s+", " ", title.group(1)).strip() if title else ""
             ids = set(parsed["lesson_ids"])
             parsed["excluded_ids"] = sorted(none_ids - ids)
             parsed["excluded_count"] = len(parsed["excluded_ids"])
