@@ -115,3 +115,27 @@ def test_calculate_accepts_reference_extra_inputs():
     assert result["repair_positions"] == ["坎宫", "壬", "离宫", "丙"]
     assert result["dagua"] == "风地观"
     assert result["dagua_value"] == "2;2"
+
+
+
+def test_reference_month_relation_mode():
+    meta = get_options()["use_meta"]
+    assert meta["修方"]["month_mode"] == "relation"
+    assert meta["修方"]["default_month_relations"] == ["旺", "生", "耗"]
+    assert meta["建造"]["month_mode"] == "mountain"
+
+
+def test_month_relation_filter_is_applied():
+    result = calculate_days(
+        {
+            "start_date": "2026-01-01",
+            "end_date": "2026-03-31",
+            "use_type": "修方",
+            "mountain_id": 8,
+            "month_relations": ["旺"],
+            "level": "全部",
+        }
+    )
+    assert result["month_relations"] == ["旺"]
+    assert result["results"]
+    assert all("为旺" in "；".join(item["good"]) for item in result["results"])
