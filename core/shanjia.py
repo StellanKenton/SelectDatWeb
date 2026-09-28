@@ -135,11 +135,76 @@ NO_MOUNTAIN_USE_TYPES = {"其它", "交易", "空方动土"}
 FACING_USE_TYPES = {"安门", "造门楼", "旧坟立碑"}
 AUTO_SEAT_REPAIR_USE_TYPES = {"装修", "作灶", "升层", "修坟"}
 
-WANGSHENG_MONTH_USE_TYPES = {
-    "造门楼", "修方", "修方动土", "作灶", "装修", "升层", "进神",
-    "入宅归火", "移香出火", "修方兼竖造", "修坟", "旧坟立碑", "附葬",
+# 原站 topzeri_info.html 的 arryyongshiwangsheng，逐项原值复刻。
+REFERENCE_MONTH_RELATIONS = {
+    "建造": (),
+    "进神": ("旺", "生", "耗"),
+    "安门": (),
+    "修方兼竖造": ("旺", "生"),
+    "修方": ("旺", "生", "耗", "泄", "克"),
+    "装修": ("旺", "生", "耗"),
+    "入宅": (),
+    "造门楼": ("旺", "生", "耗"),
+    "竖造动土": (),
+    "修方动土": ("旺", "生", "耗", "泄", "克"),
+    "开业": (),
+    "作灶": ("旺", "生", "耗", "泄", "克"),
+    "封顶上樑": (),
+    "升层": ("旺", "生", "耗"),
+    "安葬": (),
+    "附葬": ("旺", "生"),
+    "修坟": ("旺", "生", "耗"),
+    "旧坟立碑": ("旺", "生", "耗"),
+    "安葬破土": (),
+    "附葬破土": ("旺", "生", "耗", "泄", "克"),
+    "造坟": (),
+    "启攒": (),
+    "移香出火": ("旺", "生", "耗"),
+    "入宅归火": ("旺", "生", "耗"),
+    "拆卸": (),
+    "避宅修方": ("旺", "生", "耗", "泄"),
+    "避宅装修": ("旺", "生", "耗", "泄"),
+    "空方动土": (),
+    "其它": (),
+    "交易": (),
 }
-DEFAULT_MONTH_RELATIONS = ("旺", "生", "耗")
+WANGSHENG_MONTH_USE_TYPES = {
+    use_type for use_type, relations in REFERENCE_MONTH_RELATIONS.items() if relations
+}
+
+# 原站 topzeri_info.html 的 arr_shenshaguolv，逐项原值复刻。
+REFERENCE_SHA_FILTERS = {
+    "建造": ("月冲山", "日冲山", "时冲山", "月三杀", "日三杀", "时三杀", "月正阴府", "日正阴府", "时正阴府", "日正八煞", "时正八煞", "日星曜煞", "时星曜煞", "天星煞", "地曜煞", "日流太岁", "日消灭煞", "日山方煞"),
+    "进神": ("月冲山", "日冲山", "时冲山", "月三杀", "日三杀", "时三杀", "日正八煞", "时正八煞", "日星曜煞", "时星曜煞", "天星煞", "地曜煞", "日流太岁"),
+    "安门": ("日冲山", "时冲山", "日三杀", "时三杀"),
+    "修方兼竖造": ("月冲山", "日冲山", "时冲山", "月三杀", "日三杀", "时三杀", "月正阴府", "日正阴府", "时正阴府", "日正八煞", "时正八煞", "日星曜煞", "时星曜煞", "天星煞", "地曜煞", "日流太岁", "日消灭煞", "日山方煞"),
+    "修方": ("月冲山", "日冲山", "时冲山", "月三杀", "日三杀", "时三杀", "日星曜煞", "时星曜煞", "天星煞", "地曜煞"),
+    "装修": ("月冲山", "日冲山", "时冲山", "月三杀", "日三杀", "时三杀", "日正八煞", "时正八煞", "日星曜煞", "时星曜煞", "天星煞", "地曜煞", "日流太岁", "日消灭煞"),
+    "入宅": ("月冲山", "日冲山", "时冲山", "月三杀", "日三杀", "时三杀", "日正八煞", "时正八煞", "日星曜煞", "时星曜煞", "天星煞", "地曜煞", "日流太岁"),
+    "造门楼": ("月冲山", "日冲山", "时冲山", "月三杀", "日三杀", "时三杀", "日星曜煞", "时星曜煞", "天星煞", "地曜煞"),
+    "竖造动土": ("月冲山", "日冲山", "时冲山", "月三杀", "日三杀", "时三杀", "日星曜煞", "时星曜煞", "天星煞", "地曜煞"),
+    "修方动土": ("月冲山", "日冲山", "时冲山", "月三杀", "日三杀", "时三杀", "日星曜煞", "时星曜煞", "天星煞", "地曜煞"),
+    "开业": ("月冲山", "日冲山", "时冲山", "月三杀", "日三杀", "时三杀", "日正八煞", "时正八煞", "日星曜煞", "时星曜煞", "天星煞", "地曜煞"),
+    "作灶": ("月冲山", "日冲山", "时冲山", "月三杀", "日三杀", "时三杀", "日星曜煞", "时星曜煞", "天星煞", "地曜煞"),
+    "封顶上樑": ("日冲山", "时冲山", "日三杀", "时三杀"),
+    "升层": ("月冲山", "日冲山", "时冲山", "月三杀", "日三杀", "时三杀", "日正八煞", "时正八煞", "日星曜煞", "时星曜煞", "天星煞", "地曜煞", "日流太岁", "日消灭煞", "日山方煞"),
+    "安葬": ("月冲山", "日冲山", "时冲山", "月三杀", "日三杀", "时三杀", "月正阴府", "日正阴府", "时正阴府", "日正八煞", "时正八煞", "日星曜煞", "时星曜煞", "天星煞", "地曜煞", "日流太岁", "日消灭煞", "日山方煞"),
+    "附葬": ("月冲山", "日冲山", "时冲山", "月三杀", "日三杀", "时三杀", "月正阴府", "日正阴府", "时正阴府", "日正八煞", "时正八煞", "日星曜煞", "时星曜煞", "天星煞", "地曜煞", "日流太岁", "日消灭煞", "日山方煞"),
+    "修坟": ("月冲山", "日冲山", "时冲山", "月三杀", "日三杀", "时三杀", "日星曜煞", "时星曜煞", "天星煞", "地曜煞"),
+    "旧坟立碑": ("月冲山", "日冲山", "时冲山", "月三杀", "日三杀", "时三杀", "日星曜煞", "时星曜煞", "天星煞", "地曜煞"),
+    "安葬破土": ("月冲山", "日冲山", "时冲山", "月三杀", "日三杀", "时三杀"),
+    "附葬破土": ("月冲山", "日冲山", "时冲山", "月三杀", "日三杀", "时三杀"),
+    "造坟": ("月冲山", "日冲山", "时冲山", "月三杀", "日三杀", "时三杀", "月正阴府", "日正阴府", "时正阴府", "日正八煞", "时正八煞", "日星曜煞", "时星曜煞", "天星煞", "地曜煞", "日流太岁", "日消灭煞", "日山方煞"),
+    "移香出火": ("月冲山", "日冲山", "时冲山", "月三杀", "日三杀", "时三杀", "日正八煞", "时正八煞", "日星曜煞", "时星曜煞", "天星煞", "地曜煞", "日流太岁"),
+    "入宅归火": ("月冲山", "日冲山", "时冲山", "月三杀", "日三杀", "时三杀", "日正八煞", "时正八煞", "日星曜煞", "时星曜煞", "天星煞", "地曜煞", "日流太岁"),
+    "拆卸": ("月冲山", "日冲山", "时冲山"),
+    "避宅修方": ("月冲山", "日冲山", "时冲山", "月三杀", "日三杀", "时三杀"),
+    "避宅装修": ("月冲山", "日冲山", "时冲山", "月三杀", "日三杀", "时三杀"),
+    "空方动土": (),
+    "其它": (),
+    "启攒": ("月冲山", "日冲山", "时冲山", "月三杀", "日三杀", "时三杀"),
+    "交易": (),
+}
 
 def _use_meta(label: str) -> dict:
     mountain_title = "第二步【选择坐山】"
@@ -172,7 +237,8 @@ def _use_meta(label: str) -> dict:
             else ""
         ),
         "month_mode": "relation" if label in WANGSHENG_MONTH_USE_TYPES else "mountain",
-        "default_month_relations": list(DEFAULT_MONTH_RELATIONS) if label in WANGSHENG_MONTH_USE_TYPES else [],
+        "default_month_relations": list(REFERENCE_MONTH_RELATIONS.get(label, ())),
+        "default_sha_filters": list(REFERENCE_SHA_FILTERS.get(label, ())),
     }
 
 USE_META = {label: _use_meta(label) for label in USE_TYPES}
@@ -494,6 +560,8 @@ def get_options() -> dict:
         "use_types": USE_TYPES,
         "use_type_options": [{"value": code, "label": label} for code, label in USE_TYPE_OPTIONS],
         "use_meta": USE_META,
+        "default_sha_filters": {k: list(v) for k, v in REFERENCE_SHA_FILTERS.items()},
+        "reference_month_relations": {k: list(v) for k, v in REFERENCE_MONTH_RELATIONS.items()},
         "editions": list(REFERENCE_EDITIONS),
         "day_ji_filters": {
             edition: {k: list(v) for k, v in table.items()}
@@ -542,7 +610,7 @@ def calculate_days(payload: dict) -> dict:
         raw_month_relations = [x for x in re.split(r"[;,，\s]+", raw_month_relations) if x]
     selected_month_relations = {str(x) for x in raw_month_relations if str(x) in {"旺", "生", "耗", "泄", "克"}}
     if use_type in WANGSHENG_MONTH_USE_TYPES and not selected_month_relations:
-        selected_month_relations = set(DEFAULT_MONTH_RELATIONS)
+        selected_month_relations = set(REFERENCE_MONTH_RELATIONS.get(use_type, ()))
 
     raw_hours = payload.get("hours") or [item["hour"] for item in HOUR_OPTIONS]
     hours = sorted({int(h) for h in raw_hours if int(h) in range(0, 24, 2)})
@@ -726,6 +794,7 @@ def calculate_days(payload: dict) -> dict:
         "use_type": use_type,
         "edition": edition,
         "day_ji_filters": list(_reference_day_ji_filters(use_type, edition)),
+        "sha_filters": list(REFERENCE_SHA_FILTERS.get(use_type, ())),
         "calendar_filter": {
             "ganzhi_year": ganzhi_year_filter,
             "ganzhi_month": ganzhi_month_filter,
