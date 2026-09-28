@@ -276,3 +276,27 @@ def test_reference_20260928_ren_mountain_hour_sansha_sample():
     assert result["count"] == 9
     assert [item["hour"] for item in result["results"]] == [0, 2, 6, 8, 10, 14, 16, 18, 22]
     assert any("年三煞在北方" in reason for reason in result["results"][0]["bad"])
+
+
+def test_reference_20260928_almanac_metadata():
+    result = calculate_days(
+        {
+            "start_date": "2026-09-28",
+            "end_date": "2026-09-28",
+            "use_type": "建造",
+            "edition": "协纪版",
+            "mountain_id": 1,
+            "level": "全部",
+            "hours": [16],
+        }
+    )
+    assert result["count"] == 1
+    item = result["results"][0]
+    assert item["zhi_xing"] == "成"
+    assert item["xiu"] == "危"
+    assert item["xiu_luck"] == "凶"
+    assert item["jieqi"] == "秋分"
+    assert [x["name"] for x in item["jieqi_times"]] == ["白露", "秋分", "寒露"]
+    assert item["jieqi_times"][0]["time"].startswith("2026-09-07 22:40:59")
+    assert item["jieqi_times"][1]["time"].startswith("2026-09-23 08:04:56")
+    assert item["jieqi_times"][2]["time"].startswith("2026-10-08 14:28:59")
