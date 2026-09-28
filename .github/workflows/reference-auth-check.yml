@@ -1,4 +1,4 @@
-name: Reference Capture
+name: Reference Filter Isolation
 
 on:
   push:
@@ -6,12 +6,11 @@ on:
       - probe/reference-auth
 
 jobs:
-  capture:
+  isolate:
     runs-on: ubuntu-latest
     env:
       ZERIDASHI_PHONE: ${{ secrets.ZERIDASHI_PHONE }}
       ZERIDASHI_PASSWORD: ${{ secrets.ZERIDASHI_PASSWORD }}
-      ZERIDASHI_REQUEST_INTERVAL: "1.8"
     steps:
       - uses: actions/checkout@v4
       - uses: actions/checkout@v4
@@ -23,51 +22,13 @@ jobs:
           python-version: "3.12"
       - name: Install dependencies
         run: pip install -r requirements.txt selenium
-      - name: Compare fixed reference counts
-        shell: bash
-        run: |
-          set -euo pipefail
-          python tools/local_reference_counts.py
-      - name: Capture logged-in reference pages
-        shell: bash
-        run: |
-          set -euo pipefail
-          python tools/capture_reference.py
-      - name: Compare local core with captured reference
-        shell: bash
-        run: |
-          set -euo pipefail
-          python tools/compare_reference_sample.py
-      - name: Probe shanjia search result
-        shell: bash
-        run: |
-          set -euo pipefail
-          python tools/probe_reference_search.py
-      - name: Capture browser-executed shanjia result
-        shell: bash
-        run: |
-          set -euo pipefail
-          google-chrome --version || true
-          python tools/browser_reference_sample.py
-      - name: Compare captured levels with latest main
-        shell: bash
-        run: |
-          set -euo pipefail
-          python tools/compare_reference_levels.py
-      - name: Scan months for daji/xiaoji samples
-        if: always()
-        shell: bash
-        run: |
-          set -euo pipefail
-          python tools/scan_reference_levels.py
+      - name: Compare fixed reference baseline
+        run: python tools/local_reference_counts.py
+      - name: Isolate reference sha rules
+        run: python tools/isolate_reference_filters.py
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: reference-capture
-          path: |
-            reference_capture/
-            reference_probe/
-            reference_browser/
-            reference_compare/
-            reference_level_scan/
+          name: reference-isolation
+          path: reference_isolation/
           if-no-files-found: warn
