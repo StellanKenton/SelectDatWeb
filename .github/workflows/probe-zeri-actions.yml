@@ -1,0 +1,59 @@
+name: Probe zeri actions
+on:
+  push:
+    branches: [probe/reference-site]
+
+jobs:
+  probe-actions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Probe normal unauthenticated POST behavior
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="http://zeridashi.top/zeridashi/yixue/zeri.php"
+          mkdir -p out
+          common=(
+            --data-urlencode "formid=择日"
+            --data-urlencode "rilitype=干支"
+            --data-urlencode "gonglinian=2026"
+            --data-urlencode "gongliyue=9"
+            --data-urlencode "gongliri=28"
+            --data-urlencode "ganzhinian=丙午"
+            --data-urlencode "ganzhiyue=丁酉"
+            --data-urlencode "ganzhiri=全部"
+            --data-urlencode "jieqinianxuhao=163"
+            --data-urlencode "jieqiyuexuhao=1952"
+            --data-urlencode "yongshi=0"
+            --data-urlencode "zuobagua=1"
+            --data-urlencode "ershisishan=1"
+            --data-urlencode "jian=亥巳"
+            --data-urlencode "fenjin=乙亥"
+            --data-urlencode "dagua=风地观"
+            --data-urlencode "daguaval=2;2"
+            --data-urlencode "paichubiaozhi=全部"
+            --data-urlencode "shichen=全部时辰"
+          )
+          for action in EMPTY ChaZhao chazhao search sousuo pingke chaniansha; do
+            value="$action"
+            [ "$action" = "EMPTY" ] && value=""
+            curl -sS -L --max-time 30 -A "Mozilla/5.0"               -H "Content-Type: application/x-www-form-urlencoded"               --data-urlencode "Action=$value" "${common[@]}"               "$base" -o "out/$action.html"
+            ACTION="$action" python3 - <<'PY'
+          import os, re
+          from pathlib import Path
+          a=os.environ["ACTION"]
+          s=Path("out/"+a+".html").read_text("utf-8",errors="replace")
+          print("\n===",a,"bytes",len(s.encode("utf-8",errors="replace")),"===")
+          print("login_prompt", "请先登录" in s)
+          print("forms", len(re.findall(r"<form\b",s,re.I)))
+          for pat in ["大吉","小吉","日干生旺","日课","公历","农历","时辰","神煞","收藏"]:
+              print(pat, s.count(pat))
+          for i,line in enumerate(s.splitlines(),1):
+              if re.search(r"(大吉|小吉|日干生旺|请先登录|Action|结果|日课)",line,re.I):
+                  print(i,line[:800])
+          PY
+          done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: zeri-action-probe
+          path: out/
