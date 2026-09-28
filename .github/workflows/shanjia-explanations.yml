@@ -1,0 +1,25 @@
+name: Shanjia Explanations
+
+on:
+  push:
+    branches:
+      - probe/shanjia-explanations
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    env:
+      ZERIDASHI_PHONE: ${{ secrets.ZERIDASHI_PHONE }}
+      ZERIDASHI_PASSWORD: ${{ secrets.ZERIDASHI_PASSWORD }}
+      ZERIDASHI_REQUEST_INTERVAL: "2.0"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - run: python tools/capture_shanjia_explanations.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: shanjia-explanations
+          path: reference_explanations/
