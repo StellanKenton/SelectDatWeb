@@ -276,3 +276,31 @@ def test_reference_20260928_ren_mountain_hour_sansha_sample():
     assert result["count"] == 9
     assert [item["hour"] for item in result["results"]] == [0, 2, 6, 8, 10, 14, 16, 18, 22]
     assert any("年三煞在北方" in reason for reason in result["results"][0]["bad"])
+
+
+
+def test_reference_default_sha_filters_are_exposed():
+    options = get_options()
+    assert options["default_sha_filters"]["建造"] == [
+        "月冲山", "日冲山", "时冲山", "月三杀", "日三杀", "时三杀",
+        "月正阴府", "日正阴府", "时正阴府", "日正八煞", "时正八煞",
+        "日星曜煞", "时星曜煞", "天星煞", "地曜煞", "日流太岁",
+        "日消灭煞", "日山方煞",
+    ]
+    assert options["default_sha_filters"]["安门"] == ["日冲山", "时冲山", "日三杀", "时三杀"]
+    assert options["default_sha_filters"]["拆卸"] == ["月冲山", "日冲山", "时冲山"]
+    assert options["default_sha_filters"]["其它"] == []
+
+
+def test_calculate_reports_reference_default_sha_filters():
+    result = calculate_days(
+        {
+            "start_date": "2026-09-28",
+            "end_date": "2026-09-28",
+            "use_type": "建造",
+            "mountain_id": 1,
+            "level": "全部",
+            "hours": [0],
+        }
+    )
+    assert result["sha_filters"][-3:] == ["日流太岁", "日消灭煞", "日山方煞"]
