@@ -446,13 +446,21 @@ def _grade(score: int, fatal: bool) -> tuple[int, str]:
     return 4, "4级日干次旺"
 
 
-def _passes_level(level: int, filter_name: str) -> bool:
+def _passes_level(level: int, filter_name: str, day_relation: str) -> bool:
+    # 原站 paichubiaozhi 中“生旺/耗”是日干对山家的独立五行分类，
+    # 不是 1~4 级的累计阈值。黑盒样本已确认：壬山“生旺”只出现
+    # 庚辛壬癸日，“耗”只出现丙丁日。
     if filter_name == "全部":
         return True
-    if level == 0:
-        return False
-    max_level = {"大吉": 1, "小吉": 2, "生旺": 3, "耗": 4}.get(filter_name, 4)
-    return level <= max_level
+    if filter_name == "生旺":
+        return day_relation in {"生", "旺"}
+    if filter_name == "耗":
+        return day_relation == "耗"
+    if filter_name == "大吉":
+        return level == 1
+    if filter_name == "小吉":
+        return level == 2
+    return True
 
 
 def _parse_date(value: str) -> date:
@@ -671,33 +679,38 @@ def calculate_days(payload: dict) -> dict:
             bad.append("黑道日")
 
         level, level_name = _grade(score, fatal)
-        if _passes_level(level, level_filter):
-            results.append({
-                "date": current.isoformat(),
-                "lunar": lunar.toString(),
-                "year_ganzhi": year_gz,
-                "month_ganzhi": month_gz,
-                "day_ganzhi": day_gz,
-                "month_zhi": month_zhi,
-                "day_element": day_element,
-                "relation": relation,
-                "score": score,
-                "level": level,
-                "level_name": level_name,
-                "good": good,
-                "bad": bad,
-                "yi": day_yi,
-                "ji": day_ji,
-                "hours": _hour_rows(current, hours, mountain),
-            })
+        if _passes_level(level, level_filter, relation):
+            # 原站一个“日课”对应一个具体日期+时辰，而不是一天一个结果。
+            # 因此把所选时辰展开为独立 lesson；这也让顶部时辰勾选与
+            # “显示：N个日课”计数语义和原站一致。
+            for hour_row in _hour_rows(current, hours, mountain):
+                results.append({
+                    "lesson_id": f"{current.strftime('%Y%m%d')}{int(hour_row['hour']):02d}",
+                    "date": current.isoformat(),
+                    "hour": hour_row["hour"],
+                    "time_zhi": hour_row["zhi"],
+                    "time_ganzhi": hour_row["ganzhi"],
+                    "time_relation": hour_row["relation"],
+                    "lunar": lunar.toString(),
+                    "year_ganzhi": year_gz,
+                    "month_ganzhi": month_gz,
+                    "day_ganzhi": day_gz,
+                    "month_zhi": month_zhi,
+                    "day_element": day_element,
+                    "relation": relation,
+                    "score": score,
+                    "level": level,
+                    "level_name": level_name,
+                    "good": list(good),
+                    "bad": list(bad),
+                    "yi": day_yi,
+                    "ji": day_ji,
+                    "hours": [hour_row],
+                })
 
         current += timedelta(days=1)
 
-    results.sort(key=lambda item: (
-        9 if item["level"] == 0 else item["level"],
-        -item["score"],
-        item["date"],
-    ))
+    results.sort(key=lambda item: (item["date"], item["hour"]))
 
     return {
         "mountain": {
@@ -729,6 +742,6 @@ def calculate_days(payload: dict) -> dict:
         "rule_notes": [
             "二十四山编号/方位/五行、兼山结构、120分金结构与目标站点前端数据一致。",
             "利月按目标站点公开的寅卯木火、辰土金、巳午火土、未土、申酉金水、戌土金、亥子水木、丑土金规则。",
-            "日课等级由可公开确认的五行、利月、冲合、年三煞、通胜宜忌组合计算；目标站点服务端未公开的私有权重不做伪造。",
+            "每个结果按“日期+时辰”作为一个日课，和目标站点计数语义一致；生旺/耗按日干对山家五行关系独立筛选。",
         ],
     }
