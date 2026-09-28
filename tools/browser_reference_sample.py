@@ -156,7 +156,9 @@ def run_filter_variant(driver, name: str, sha_values: list[str], day_ji: list[st
         lambda d: "显示：" in d.page_source and "个日课" in d.page_source
     )
     time.sleep(0.9)
-    body = redact(driver.find_element(By.TAG_NAME, "body").text)
+    body = redact(driver.execute_script(
+        "return document.documentElement ? (document.documentElement.innerText || '') : '';"
+    ))
     count_match = re.search(r"显示：\s*(\d+)个日课", body)
     pairs = parse_lesson_pairs(body)
     return {
