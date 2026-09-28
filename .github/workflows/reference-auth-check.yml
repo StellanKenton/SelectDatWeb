@@ -23,6 +23,11 @@ jobs:
           python-version: "3.12"
       - name: Install dependencies
         run: pip install -r requirements.txt selenium
+      - name: Compare fixed reference counts
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/local_reference_counts.py
       - name: Capture logged-in reference pages
         shell: bash
         run: |
