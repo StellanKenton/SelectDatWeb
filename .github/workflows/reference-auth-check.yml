@@ -24,11 +24,15 @@ jobs:
         run: pip install -r requirements.txt selenium
       - name: Compare fixed reference baseline
         run: python tools/local_reference_counts.py
+      - name: Capture original sha explanations
+        run: python tools/capture_sha_explanations.py
       - name: Isolate reference sha rules
         run: python tools/isolate_reference_filters.py
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: reference-isolation
-          path: reference_isolation/
+          path: |
+            reference_isolation/
+            reference_explanations/
           if-no-files-found: warn
