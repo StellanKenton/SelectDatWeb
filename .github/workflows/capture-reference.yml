@@ -16,7 +16,7 @@ jobs:
           ua="Mozilla/5.0"
           curl -fsSL -A "$ua" "$base/zeridashi/yixue/topzeri.php" -o reference/topzeri.html
           curl -fsSL -A "$ua" "$base/zeridashi/yixue/topzeri_info.php" -o reference/topzeri_info.html
-          curl -fsSL -A "$ua" "$base/zeridashi/yixue/zeri.php" -o reference/zeri.html
+          curl -fsSL -A "$ua" "$base/zeridashi/yixue/zeri.php" -o reference/zeri.html\n          curl -fsSL -A "$ua" "$base/zeridashi/yixue/zeri_z.php" -o reference/zeri_z.html || true\n          curl -fsSL -A "$ua" "$base/zeridashi/yixue/ajax.php" -o reference/ajax.html || true\n          curl -fsSL -A "$ua" "$base/zeridashi/index-web/login.php?id=17782134566" -o reference/login.html || true
           curl -fsSL -A "$ua" "$base/zeridashi/inc/topzeri.js?ver=123456" -o reference/topzeri.js
           curl -fsSL -A "$ua" "$base/zeridashi/yixue/zeri.js?ver=123456" -o reference/zeri.js
           grep -RhoE 'src=["'\'' ][^"'\'' >]+' reference/*.html | sed -E 's/^src=["'\'' ]//' | sort -u > reference/srcs.txt || true
