@@ -139,3 +139,43 @@ def test_month_relation_filter_is_applied():
     assert result["month_relations"] == ["旺"]
     assert result["results"]
     assert all("为旺" in "；".join(item["good"]) for item in result["results"])
+
+
+def test_ganzhi_toolbar_filters_calendar_results():
+    result = calculate_days(
+        {
+            "start_date": "2026-01-15",
+            "end_date": "2027-02-15",
+            "ganzhi_year": "丙午",
+            "ganzhi_month": "丁酉",
+            "ganzhi_day_filter": "全部",
+            "use_type": "建造",
+            "mountain_id": 1,
+            "level": "全部",
+        }
+    )
+    assert result["calendar_filter"] == {
+        "ganzhi_year": "丙午",
+        "ganzhi_month": "丁酉",
+        "ganzhi_day_filter": "全部",
+    }
+    assert result["results"]
+    assert all(item["year_ganzhi"] == "丙午" for item in result["results"])
+    assert all(item["month_ganzhi"] == "丁酉" for item in result["results"])
+
+
+def test_ganzhi_day_stem_filter():
+    result = calculate_days(
+        {
+            "start_date": "2026-01-15",
+            "end_date": "2027-02-15",
+            "ganzhi_year": "丙午",
+            "ganzhi_month": "丁酉",
+            "ganzhi_day_filter": "甲",
+            "use_type": "建造",
+            "mountain_id": 1,
+            "level": "全部",
+        }
+    )
+    assert result["results"]
+    assert all(item["day_ganzhi"].startswith("甲") for item in result["results"])
