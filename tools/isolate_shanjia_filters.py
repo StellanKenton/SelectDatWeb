@@ -145,6 +145,53 @@ def set_filters(driver, sha_values: list[str], day_ji: list[str]) -> None:
     )
 
 
+def submit_center_only(driver) -> None:
+    wait_frame(driver, "shuruFrame")
+    WebDriverWait(driver, 25).until(
+        lambda d: d.execute_script(
+            """
+            const c=parent.frames['centerFrame'];
+            if(!c || !c.document) return false;
+            const need=['Action','weizhi','ganzhiri','form1','yongshiType','yongshi',
+              'zuobagua','ershisishan','jian','fenjin','dagua','daguaval','nianming',
+              'wangming','mingshaguolv','huamingshaguolv','yueli','paichubiaozhi',
+              'rijishi0','rijishi1','rijishi2','rijishi3','shenshawei1','shenshawei2',
+              'xiongsha','jxiongsha','xiufang'];
+            return need.every(id => c.document.getElementById(id));
+            """
+        )
+    )
+    driver.execute_script(
+        """
+        const c=parent.frames['centerFrame'].document;
+        c.getElementById('Action').value='kaishisousuo';
+        c.getElementById('weizhi').value='';
+        c.getElementById('ganzhiri').value='全部';
+
+        const copy=['yongshiType','yongshi','zuobagua','ershisishan','jian','fenjin',
+          'nianming','wangming','mingshaguolv','huamingshaguolv','yueli',
+          'paichubiaozhi','rijishi0','rijishi1','rijishi2','rijishi3',
+          'shenshawei1','shenshawei2','xiufang'];
+        for(const id of copy){
+          const src=document.getElementById(id), dst=c.getElementById(id);
+          if(src && dst) dst.value=src.value || '';
+        }
+
+        const dg=document.getElementById('dagua');
+        if(dg){
+          c.getElementById('daguaval').value=dg.value || '';
+          c.getElementById('dagua').value=dg.options[dg.selectedIndex]?.text || '';
+        }
+
+        dClick();
+        jdClick();
+        c.getElementById('xiongsha').value=document.getElementById('xiongsha').value || '';
+        c.getElementById('jxiongsha').value=document.getElementById('jxiongsha').value || '';
+        c.getElementById('form1').submit();
+        """
+    )
+
+
 def read_center_result(driver, timeout: float = 55.0) -> str:
     deadline=time.time()+timeout
     last_error=""
@@ -186,7 +233,7 @@ def parse_result(text: str) -> dict:
 
 def run_variant(driver, sha_values: list[str], day_ji: list[str]) -> dict:
     set_filters(driver, sha_values, day_ji)
-    driver.execute_script("toframes();")
+    submit_center_only(driver)
     driver.switch_to.default_content()
     time.sleep(0.9)
     text=read_center_result(driver)
