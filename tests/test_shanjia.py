@@ -304,3 +304,25 @@ def test_calculate_reports_reference_default_sha_filters():
         }
     )
     assert result["sha_filters"][-3:] == ["日流太岁", "日消灭煞", "日山方煞"]
+
+
+def test_reference_20260928_almanac_metadata():
+    result = calculate_days(
+        {
+            "start_date": "2026-09-28",
+            "end_date": "2026-09-28",
+            "use_type": "建造",
+            "edition": "协纪版",
+            "mountain_id": 1,
+            "level": "全部",
+            "hours": [16],
+        }
+    )
+    assert result["count"] == 1
+    item = result["results"][0]
+    assert item["zhi_xing"] == "成"
+    assert item["xiu"] == "危"
+    assert item["xiu_luck"] == "凶"
+    assert item["jieqi"] == "秋分"
+    assert [x["name"] for x in item["jieqi_times"]] == ["白露", "秋分", "寒露"]
+    assert all(x["time"] for x in item["jieqi_times"])
