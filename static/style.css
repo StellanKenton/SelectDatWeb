@@ -528,3 +528,58 @@ button {
     grid-template-columns: 95px 110px 90px 85px 1fr;
   }
 }
+
+
+[hidden] {
+  display: none !important;
+}
+
+.secondary-button,
+.repair-button {
+  border: 1px solid #ad5f1e;
+  background: #f0d3a9;
+  color: #6f2d0d;
+  font-weight: 700;
+}
+
+.full-button {
+  width: 100%;
+}
+
+.compact-actions {
+  padding-bottom: 2px;
+}
+
+.repair-title {
+  margin: 2px 0 5px;
+  color: #55483a;
+  font-weight: 700;
+}
+
+.repair-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5px;
+  margin-bottom: 8px;
+}
+
+.repair-button {
+  min-width: 0;
+  height: 29px;
+  padding: 0 3px;
+}
+
+.repair-positions {
+  grid-template-columns: repeat(3, 48px);
+  justify-content: center;
+}
+
+.selected-repair {
+  min-height: 34px;
+  margin: 5px 0;
+  padding: 6px;
+  border: 1px solid #c9b89d;
+  background: #fff;
+  color: #613519;
+  line-height: 1.45;
+}
