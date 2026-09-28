@@ -1,0 +1,27 @@
+name: Shanjia Request Isolation
+
+on:
+  push:
+    branches:
+      - probe/shanjia-request-isolation
+
+jobs:
+  isolate:
+    runs-on: ubuntu-latest
+    env:
+      ZERIDASHI_PHONE: ${{ secrets.ZERIDASHI_PHONE }}
+      ZERIDASHI_PASSWORD: ${{ secrets.ZERIDASHI_PASSWORD }}
+      ZERIDASHI_REQUEST_INTERVAL: "1.5"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - run: python tools/isolate_reference_request.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: shanjia-request-isolation
+          path: reference_request_isolation/
+          if-no-files-found: warn
