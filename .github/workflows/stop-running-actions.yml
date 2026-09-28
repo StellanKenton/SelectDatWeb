@@ -1,0 +1,35 @@
+name: Stop Running Actions
+
+on:
+  push:
+    branches:
+      - ops/stop-running-actions
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  stop:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cancel other active runs
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          SELF_RUN_ID: ${{ github.run_id }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          ids="$(
+            for status in in_progress queued waiting requested pending; do
+              curl -fsSL                 -H "Authorization: Bearer $GH_TOKEN"                 -H "Accept: application/vnd.github+json"                 "https://api.github.com/repos/$REPO/actions/runs?status=$status&per_page=100"                 | jq -r '.workflow_runs[].id'
+            done | sort -u
+          )"
+          for id in $ids; do
+            if [ "$id" = "$SELF_RUN_ID" ]; then
+              continue
+            fi
+            echo "Cancelling run $id"
+            curl -fsSL -X POST               -H "Authorization: Bearer $GH_TOKEN"               -H "Accept: application/vnd.github+json"               "https://api.github.com/repos/$REPO/actions/runs/$id/cancel"               >/dev/null || true
+          done
