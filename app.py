@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from flask import Flask, jsonify, render_template, request
 
-from core import calculate_days, get_options
+from core import calculate_days, get_options, get_year_sha
 
 
 app = Flask(__name__)
@@ -16,6 +16,14 @@ def index():
 @app.get("/api/options")
 def options():
     return jsonify(get_options())
+
+
+@app.get("/api/year-sha")
+def year_sha():
+    try:
+        return jsonify(get_year_sha(int(request.args.get("year", "2026")), int(request.args.get("mountain_id", "1"))))
+    except ValueError as exc:
+        return jsonify({"error": str(exc)}), 400
 
 
 @app.post("/api/calculate")

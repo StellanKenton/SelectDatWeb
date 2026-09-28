@@ -59,27 +59,18 @@
     </section>
 
     <aside class="year-panel panel">
-      <div class="panel-buttons center"><button>隐藏窗口</button></div>
-      <button id="yearShaButton" class="year-btn">今年年煞</button>
-      <div class="year-box"><div class="year-title" id="yearShaTitle">丙午年凶煞【点击选择】不利</div>
-        <div class="year-list">
-          <div>【傍阴府】癸，申，辰山</div><div>【岁破（大耗）】子山方</div><div>【年劫煞】亥山方</div>
-          <div>【年灾煞】子山方</div><div>【岁煞】丑山方</div><div>【伏兵（坐煞）】壬山方</div>
-          <div>【大祸（坐煞）】癸山方</div><div>【罗天大退】艮山方</div><div>【五黄煞】离宫</div>
-          <div>【戊己都天】戊，亥方</div><div>【太岁】午方</div><div class="danger">【点击展开凶煞】</div>
-        </div>
-      </div>
-      <div class="year-box"><div class="year-title good-title">丙午年吉神【点击展开】</div><div class="year-list" id="shaSummary">当前结果中未触发年煞提示</div></div>
-      <div class="year-box"><div class="year-title" id="nextYearShaTitle">丁未年凶煞【点击选择】大利</div><div class="year-list"><div>【傍阴府】甲，寅，戌山</div></div></div>
+      <div class="panel-buttons center"><button type="button" class="hide-panel" data-panel="year">隐藏窗口</button></div>
+      <button type="button" id="yearShaButton" class="year-btn">今年年煞</button>
+      <div id="yearShaCards" aria-live="polite"></div>
     </aside>
 
     <aside class="input-panel panel">
-      <div class="panel-buttons center"><button>隐藏窗口</button></div>
+      <div class="panel-buttons center"><button type="button" class="hide-panel" data-panel="input">隐藏窗口</button></div>
       <div class="search-title">择课搜索</div>
       <form id="shanjiaForm" autocomplete="off">
         <div class="olive-box"><span>五行格局</span><select id="levelSelect"></select></div>
         <div class="olive-box single"><select id="editionSelect"><option value="all">显示协纪版</option><option value="all1">显示潮汕版</option><option value="all2">上协纪下潮汕一起显示</option><option value="off">不显示</option></select></div>
-        <button type="button" class="book-mode">通书模式</button>
+        <button type="button" class="book-mode" id="bookMode">通书模式</button>
 
         <section class="step">
           <div class="step-title">第一步【选择用事】</div>
@@ -107,22 +98,28 @@
 
         <section class="step" id="lifeStep">
           <div class="step-title" id="lifeStepTitle">第三步【添加福主年命】</div>
-          <div class="life-line"><span class="blue-add">添加</span><input id="lifeYears" type="text" placeholder=""><span>年, 如:1996</span></div>
+          <div class="life-line"><button type="button" class="blue-add" id="addLifeYear">添加</button><input id="lifeYears" type="number" min="1" max="9999" placeholder="1996" aria-label="福主出生年份"><span>年, 如:1996</span></div>
+          <div class="life-line"><button type="button" class="blue-add" id="addLifeGanzhi">添加</button><select id="lifeStem" aria-label="年命天干"></select><select id="lifeBranch" aria-label="年命地支"></select><span>命</span></div>
+          <div class="entry-list" id="lifeEntries" aria-live="polite"></div>
+          <div class="step-center"><select id="lifeShaFilter" aria-label="命煞过滤"><option value="on">命煞过滤</option><option value="off">命煞过滤已关闭</option></select></div>
         </section>
 
         <section class="step" id="deceasedStep" hidden>
           <div class="step-title" id="deceasedStepTitle">第四步【添加仙命】</div>
-          <div class="life-line"><span class="blue-add">添加</span><input id="deceasedYears" type="text"><span>年, 如:1996</span></div>
+          <div class="life-line"><button type="button" class="blue-add" id="addDeceasedYear">添加</button><input id="deceasedYears" type="number" min="1" max="9999" placeholder="1996" aria-label="仙命出生年份"><span>年, 如:1996</span></div>
+          <div class="entry-list" id="deceasedEntries" aria-live="polite"></div>
+          <div class="field-note">仙命目前显示在结果摘要，取舍规则待对照原站校准。</div>
         </section>
 
         <section class="step" id="yearShaStep">
           <div class="step-title" id="yearShaStepTitle">第四步【查年煞】</div>
-          <button type="button" class="wide-blue" id="yearShaButtonInline" onclick="document.getElementById('yearShaButton').click()">点击查年煞</button>
+          <button type="button" class="wide-blue" id="yearShaButtonInline">点击查年煞</button>
         </section>
 
         <section class="step" id="monthStep">
           <div class="step-title" id="monthStepTitle">第五步【添加利月】</div>
           <button type="button" id="autoMonths" class="wide-blue">自动添加利月</button>
+          <div class="step-center"><select id="manualMonth" aria-label="手动添加利月"><option value="">手动添加利月</option></select></div>
           <div class="relation-grid" id="relationGrid" hidden>
             <label><input class="relation-check" type="checkbox" value="旺" checked>旺</label>
             <label><input class="relation-check" type="checkbox" value="生" checked>生</label>
@@ -130,12 +127,19 @@
             <label><input class="relation-check" type="checkbox" value="泄">泄</label>
             <label><input class="relation-check" type="checkbox" value="克">克</label>
           </div>
-          <div class="month-grid" id="monthGrid"></div>
+          <div class="month-grid" id="monthGrid" hidden></div>
+          <div class="selected-months" id="selectedMonths" aria-live="polite" hidden></div>
         </section>
 
         <section class="step" id="filterStep">
           <div class="step-title" id="filterStepTitle">第六步【日课筛选功能】</div>
-          <label class="switch-line"><input type="checkbox" id="showReasons" checked>显示取舍原因</label>
+          <div class="filter-heading">【神煞过滤功能】</div>
+          <div class="filter-position"><label for="filterPositionOne">过滤一</label><select id="filterPositionOne"></select></div>
+          <div class="filter-position"><label for="filterPositionTwo">过滤二</label><select id="filterPositionTwo"></select></div>
+          <div class="filter-actions"><label><input type="checkbox" id="allShaFilters">全选</label><button type="button" id="resetShaFilters">恢复默认</button></div>
+          <div class="sha-filter-grid" id="shaFilterGrid"></div>
+          <div class="filter-heading">【兼山过滤功能】</div>
+          <div class="sha-filter-grid" id="jianFilterGrid"></div>
         </section>
 
         <button type="submit" class="side-search">评课搜索</button>

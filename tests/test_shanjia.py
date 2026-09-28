@@ -1,4 +1,4 @@
-from core.shanjia import calculate_days, get_options
+from core.shanjia import calculate_days, get_options, get_year_sha
 
 
 def test_reference_mountain_table():
@@ -304,6 +304,42 @@ def test_calculate_reports_reference_default_sha_filters():
         }
     )
     assert result["sha_filters"][-3:] == ["日流太岁", "日消灭煞", "日山方煞"]
+
+
+def test_year_sha_uses_reference_rows_and_marks_current_mountain():
+    data = get_year_sha(2026, 1)
+    current, next_year = data["cards"][:2]
+    assert current["ganzhi"] == "丙午"
+    assert current["reference_rows_verified"] is True
+    assert current["san_sha_hits"] is True
+    assert any(row["name"] == "伏兵（坐煞）" and row["applies"] for row in current["rows"])
+    assert next_year["ganzhi"] == "丁未"
+    assert next_year["san_sha_hits"] is False
+    later = get_year_sha(2036, 1)["cards"][0]
+    assert later["reference_rows_verified"] is False
+    assert [row["name"] for row in later["rows"]] == ["太岁", "岁破（大耗）"]
+
+
+def test_selected_sha_filters_change_result_set():
+    payload = {
+        "start_date": "2026-09-01", "end_date": "2026-10-08",
+        "use_type": "建造", "mountain_id": 2, "level": "全部",
+        "hours": [0], "yiji_mode": "off",
+    }
+    unrestricted = calculate_days({**payload, "sha_filters": []})
+    filtered = calculate_days({**payload, "sha_filters": ["日冲山"]})
+    assert unrestricted["count"] > filtered["count"]
+    assert filtered["active_sha_filters"] == ["日冲山"]
+    assert all(item["day_ganzhi"][1] != "午" for item in filtered["results"])
+
+
+def test_year_and_ganzhi_input_do_not_count_same_life_twice():
+    result = calculate_days({
+        "start_date": "2026-09-28", "end_date": "2026-09-28",
+        "use_type": "建造", "mountain_id": 1, "level": "全部",
+        "hours": [0], "life_years": ["1996", "丙子"],
+    })
+    assert result["life_ganzhi"] == ["丙子"]
 
 
 def test_reference_20260928_almanac_metadata():

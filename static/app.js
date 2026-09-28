@@ -1,5 +1,5 @@
 
-const S={options:null,mountains:[],repair:new Set(),repairPalace:""};
+const S={options:null,mountains:[],repair:new Set(),repairPalace:"",lifeEntries:[],deceasedEntries:[],yearRequest:0};
 const $=id=>document.getElementById(id);
 const GAN="甲乙丙丁戊己庚辛壬癸";
 const ZHI="子丑寅卯辰巳午未申酉戌亥";
@@ -28,8 +28,10 @@ function populateGanzhiToolbar(){
 function refreshGanzhiMonths(){
   const y=Number($("ganzhiYearSelect").value)||new Date().getFullYear();
   const old=$("ganzhiMonthSelect").value;
+  const oldIndex=$("ganzhiMonthSelect").selectedIndex;
   setOpts($("ganzhiMonthSelect"),ganzhiMonths(y).map(x=>({value:x,label:x+"月"})));
   if(old && [...$("ganzhiMonthSelect").options].some(o=>o.value===old))$("ganzhiMonthSelect").value=old;
+  else if(oldIndex>=0)$("ganzhiMonthSelect").selectedIndex=oldIndex;
   syncGanzhiTitles();
 }
 function syncGanzhiTitles(){
@@ -37,8 +39,6 @@ function syncGanzhiTitles(){
   const month=$("ganzhiMonthSelect")?.value;
   if(year && month){
     if($("monthShaTitle"))$("monthShaTitle").textContent=month+"月凶煞表";
-    if($("yearShaTitle"))$("yearShaTitle").textContent=ganzhiYear(Number(year))+"年凶煞【点击选择】不利";
-    if($("nextYearShaTitle"))$("nextYearShaTitle").textContent=ganzhiYear(Number(year)+1)+"年凶煞【点击选择】";
   }
 }
 function parseDate(s){const a=s.split("-").map(Number);return new Date(a[0],a[1]-1,a[2]);}
@@ -51,6 +51,66 @@ function setOpts(el,items,vk,lk){
 function currentMountain(){const id=Number($("mountainSelect").value);return S.mountains.find(x=>x.id===id)||S.mountains[0];}
 function currentMeta(){return S.options.use_meta[$("useType").value]||{};}
 function selected(cls){return [...document.querySelectorAll(cls+":checked")].map(x=>x.value);}
+
+function renderYearSha(data){
+  $("yearShaCards").innerHTML=data.cards.map((card,i)=>{
+    const rows=card.rows.map(row=>'<div class="year-sha-row'+(row.applies?' year-sha-hit':'')+'"><span>【'+esc(row.name)+'】</span><span>'+esc(row.value)+'</span></div>').join("");
+    const note=card.reference_rows_verified?'':'<div class="year-sha-note">其余年煞规则尚未核实；此处只显示已实现的项目。</div>';
+    const selectable=[...$("ganzhiYearSelect").options].some(option=>option.value===String(card.year));
+    return '<details class="year-box" '+(i<2?'open':'')+'><summary class="year-title">'+esc(card.ganzhi)+'年凶煞 <span>'+(card.san_sha_hits?'本山三煞不利':'点击查看')+'</span></summary>'+
+      '<div class="year-list"><button type="button" class="choose-year" data-year="'+card.year+'" '+(selectable?'':'disabled')+'>选此年</button>'+rows+'<div class="year-san-sha'+(card.san_sha_hits?' danger':'')+'">【年三煞】'+esc(card.san_sha_direction)+'方'+(card.san_sha_hits?'（犯本山）':'')+'</div>'+note+'</div></details>';
+  }).join("");
+}
+async function loadYearSha(){
+  const year=Number($("ganzhiYearSelect").value), mountain=currentMountain();
+  if(!year||!mountain)return;
+  const requestId=++S.yearRequest;
+  try{
+    const response=await fetch('/api/year-sha?year='+year+'&mountain_id='+mountain.id);
+    const data=await response.json();
+    if(!response.ok)throw new Error(data.error||'无法读取年煞');
+    if(requestId===S.yearRequest)renderYearSha(data);
+  }catch(error){if(requestId===S.yearRequest)$("yearShaCards").innerHTML='<div class="error-box">'+esc(error.message)+'</div>';}
+}
+
+function setupYearEntries(){
+  setOpts($("lifeStem"),GAN.split(""));
+  function syncBranches(){
+    const parity=GAN.indexOf($("lifeStem").value)%2;
+    const old=$("lifeBranch").value;
+    setOpts($("lifeBranch"),ZHI.split("").filter((_,i)=>i%2===parity));
+    if([...$("lifeBranch").options].some(o=>o.value===old))$("lifeBranch").value=old;
+  }
+  $("lifeStem").onchange=syncBranches;syncBranches();
+  function add(kind,value){
+    const list=kind==="life"?S.lifeEntries:S.deceasedEntries;
+    value=String(value||"").trim();
+    if(!value)return;
+    if(!list.includes(value))list.push(value);
+    renderEntries(kind);
+  }
+  $("addLifeYear").onclick=()=>{const field=$("lifeYears");if(!field.reportValidity())return;add("life",field.value);field.value="";};
+  $("addLifeGanzhi").onclick=()=>add("life",$("lifeStem").value+$("lifeBranch").value);
+  $("addDeceasedYear").onclick=()=>{const field=$("deceasedYears");if(!field.reportValidity())return;add("deceased",field.value);field.value="";};
+  for(const kind of ["life","deceased"]){
+    $(kind+"Entries").onclick=e=>{
+      const button=e.target.closest("button[data-index]");if(!button)return;
+      (kind==="life"?S.lifeEntries:S.deceasedEntries).splice(Number(button.dataset.index),1);
+      renderEntries(kind);
+    };
+  }
+  $("lifeYears").onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();$("addLifeYear").click();}};
+  $("deceasedYears").onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();$("addDeceasedYear").click();}};
+}
+function renderEntries(kind){
+  const list=kind==="life"?S.lifeEntries:S.deceasedEntries;
+  $(kind+"Entries").innerHTML=list.map((value,index)=>'<span class="entry-chip">'+esc(value)+'<button type="button" data-index="'+index+'" aria-label="删除'+esc(value)+'">×</button></span>').join("");
+}
+function yearEntries(kind){
+  const list=kind==="life"?S.lifeEntries:S.deceasedEntries;
+  const draft=$(kind==="life"?"lifeYears":"deceasedYears").value.trim();
+  return [...new Set([...list,...(draft?[draft]:[])])];
+}
 
 function populateHours(){
   const host=$("hourControls");
@@ -67,8 +127,31 @@ function populateHours(){
   };
 }
 function populateMonths(){
-  $("monthGrid").innerHTML=["寅","卯","辰","巳","午","未","申","酉","戌","亥","子","丑"]
+  const months=["寅","卯","辰","巳","午","未","申","酉","戌","亥","子","丑"];
+  const monthHints={寅:"木火",卯:"木火",辰:"土金",巳:"火土",午:"火土",未:"土",申:"金水",酉:"金水",戌:"土金",亥:"水木",子:"水木",丑:"土金"};
+  $("monthGrid").innerHTML=months
     .map(x=>'<label><input class="month-check" type="checkbox" value="'+x+'">'+x+'月</label>').join("");
+  setOpts($("manualMonth"),[{value:"",label:"手动添加利月"},...months.map(x=>({value:x,label:x+"月"+monthHints[x]+"山有利"}))]);
+  $("manualMonth").onchange=e=>{
+    if(e.target.value){$("monthGrid").querySelector('input[value="'+e.target.value+'"]').checked=true;updateMonthSummary();}
+    e.target.value="";
+  };
+  $("monthGrid").onchange=updateMonthSummary;
+  updateMonthSummary();
+}
+function updateMonthSummary(){
+  const months=selected(".month-check");
+  $("selectedMonths").textContent=months.length?"已选利月："+months.join("、")+"月":"未限定利月";
+}
+function populateShaFilters(){
+  const defaults=new Set(currentMeta().default_sha_filters||[]);
+  $("shaFilterGrid").innerHTML=S.options.supported_sha_filters.map(name=>'<label><input class="sha-filter-check" type="checkbox" value="'+esc(name)+'" '+(defaults.has(name)?'checked':'')+'>'+esc(name)+'</label>').join("");
+  syncAllShaFilters();
+}
+function syncAllShaFilters(){
+  const filters=[...document.querySelectorAll(".sha-filter-check")];
+  $("allShaFilters").checked=filters.length>0&&filters.every(x=>x.checked);
+  $("allShaFilters").indeterminate=filters.some(x=>x.checked)&&!$("allShaFilters").checked;
 }
 function populateTrigrams(){
   const a=S.options.trigrams.filter(x=>x.value!==5);
@@ -95,9 +178,10 @@ function updateMountain(){
   $("mountainSummary").textContent=m.name+(meta.mountain_mode==="facing"?"向":"山")+" · "+m.element+" · "+(meta.mountain_mode==="facing"?m.facing_direction:m.direction);
   $("favorableSummary").textContent=m.auto_favorable_months.join("、")+"月";
   applyAutoRepair();
+  loadYearSha();
 }
 function setHidden(id,hidden){$(id).hidden=!!hidden;}
-function stepTitle(id,n,text){$(id).textContent="第"+n+"步【"+text+"】";}
+function stepTitle(id,n,text){$(id).textContent="第"+["","一","二","三","四","五","六","七","八"][n]+"步【"+text+"】";}
 
 function updateUseMeta(){
   const meta=currentMeta();
@@ -107,6 +191,9 @@ function updateUseMeta(){
   setHidden("deceasedStep",!meta.show_deceased);
   setHidden("yearShaStep",!meta.show_year_sha);
   setHidden("relationGrid",meta.month_mode!=="relation");
+  setHidden("manualMonth",meta.month_mode==="relation");
+  setHidden("monthGrid",meta.month_mode==="relation");
+  setHidden("selectedMonths",meta.month_mode==="relation");
 
   $("trigramLabel").textContent=meta.mountain_mode==="facing"?"向卦":"坐卦";
   $("mountainLabel").textContent=meta.mountain_mode==="facing"?"向位":"坐山";
@@ -125,6 +212,7 @@ function updateUseMeta(){
     const wanted=new Set(meta.default_month_relations||["旺","生","耗"]);
     document.querySelectorAll(".relation-check").forEach(x=>x.checked=wanted.has(x.value));
   }
+  populateShaFilters();
   populateMountains(keep);
 }
 function renderRepair(){
@@ -175,6 +263,7 @@ function autoMonths(){
   }
   const wanted=new Set(currentMountain()?.auto_favorable_months||[]);
   document.querySelectorAll(".month-check").forEach(x=>x.checked=wanted.has(x.value));
+  updateMonthSummary();
 }
 function payload(){
   const y=Number($("ganzhiYearSelect").value),m=currentMountain();
@@ -186,8 +275,9 @@ function payload(){
     use_type:$("useType").value,use_type_code:currentMeta().code,yiji_mode:$("editionSelect").value,mountain_id:Number($("mountainSelect").value),
     jian:$("jianSelect").value,fenjin:$("fenjinSelect").value,
     dagua:dagua.options[dagua.selectedIndex]?.text||"",dagua_value:dagua.value,
-    repair_positions:[...S.repair],life_years:$("lifeYears").value,deceased_years:$("deceasedYears").value,
-    favorable_months:selected(".month-check"),month_relations:selected(".relation-check"),level:$("levelSelect").value,
+    repair_positions:[...S.repair],life_years:yearEntries("life"),deceased_years:yearEntries("deceased"),
+    life_sha_filter:$("lifeShaFilter").value==="on",sha_filters:selected(".sha-filter-check"),
+    favorable_months:currentMeta().month_mode==="relation"?[]:selected(".month-check"),month_relations:selected(".relation-check"),level:$("levelSelect").value,
     hours:selected(".hour-check").map(Number)
   };
 }
@@ -209,8 +299,6 @@ function render(data){
   let status=data.life_ganzhi.length?"年命："+data.life_ganzhi.join("、"):"正体五行日课";
   if(data.deceased_ganzhi?.length)status+="　仙命："+data.deceased_ganzhi.join("、");
   $("statusText").textContent=status;
-  const sh=data.results.find(x=>x.bad.some(y=>y.includes("三煞")));
-  $("shaSummary").textContent=sh?sh.bad.find(y=>y.includes("三煞")):"当前结果中未触发正四方年三煞提示";
   if(!data.results.length){$("resultList").innerHTML='<div class="empty-state"><div class="empty-title">当前条件没有匹配日课</div><div>可扩大日期范围、放宽等级，或取消手动利月限定。</div></div>';return;}
   $("resultList").innerHTML=data.results.map(x=>{
     const firstGood=x.good.length?'<div class="reason-good">'+esc(x.good[0])+'</div>':"";
@@ -225,6 +313,8 @@ function render(data){
   }).join("");
 }
 async function calculate(){
+  if($("lifeYears").value&&!$("lifeYears").reportValidity())return;
+  if(currentMeta().show_deceased&&$("deceasedYears").value&&!$("deceasedYears").reportValidity())return;
   $("resultList").innerHTML='<div class="loading">正在计算日课……</div>';$("resultCount").textContent="计算中";
   try{
     const r=await fetch("/api/calculate",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload())});
@@ -234,18 +324,49 @@ async function calculate(){
 async function init(){
   const r=await fetch("/api/options");S.options=await r.json();S.mountains=S.options.mountains;
   setOpts($("useType"),S.options.use_types);setOpts($("levelSelect"),S.options.levels);$("levelSelect").value="大吉";
-  populateGanzhiToolbar();populateHours();populateMonths();populateTrigrams();setupRepair();
-  $("ganzhiYearSelect").onchange=()=>{refreshGanzhiMonths();calculate();};
+  populateGanzhiToolbar();populateHours();populateMonths();populateTrigrams();setupRepair();setupYearEntries();
+  $("ganzhiYearSelect").onchange=()=>{refreshGanzhiMonths();loadYearSha();calculate();};
   $("ganzhiMonthSelect").onchange=()=>{syncGanzhiTitles();calculate();};
   $("ganzhiDaySelect").onchange=calculate;$("editionSelect").onchange=calculate;
   $("trigramSelect").onchange=()=>populateMountains();
   $("mountainSelect").onchange=updateMountain;
   $("useType").onchange=updateUseMeta;
   $("autoMonths").onclick=autoMonths;
-  $("yearShaButton").onclick=calculate;
+  $("yearShaButton").onclick=()=>{
+    document.querySelector(".year-panel").hidden=false;
+    document.querySelector(".main-grid").classList.remove("year-hidden");
+    const year=String(new Date().getFullYear());
+    if([...$("ganzhiYearSelect").options].some(option=>option.value===year)){
+      $("ganzhiYearSelect").value=year;refreshGanzhiMonths();
+      $("ganzhiMonthSelect").selectedIndex=(new Date().getMonth()+11)%12;
+      syncGanzhiTitles();loadYearSha();calculate();
+    }
+    document.querySelector(".year-panel").scrollTop=0;
+  };
+  $("yearShaButtonInline").onclick=()=>{
+    document.querySelector(".year-panel").hidden=false;
+    document.querySelector(".main-grid").classList.remove("year-hidden");
+    document.querySelector(".year-panel").scrollTop=0;
+  };
+  $("yearShaCards").onclick=e=>{
+    const button=e.target.closest(".choose-year");if(!button)return;
+    $("ganzhiYearSelect").value=button.dataset.year;
+    refreshGanzhiMonths();loadYearSha();calculate();
+  };
+  $("allShaFilters").onchange=e=>{document.querySelectorAll(".sha-filter-check").forEach(x=>x.checked=e.target.checked);syncAllShaFilters();};
+  $("shaFilterGrid").onchange=syncAllShaFilters;
+  $("resetShaFilters").onclick=populateShaFilters;
   $("shanjiaForm").onsubmit=e=>{e.preventDefault();calculate();};
   $("calculateTop").onclick=calculate;
-  $("restoreView").onclick=()=>{document.querySelector(".input-panel").scrollTop=0;document.querySelector(".result-panel").scrollTop=0;};
+  document.querySelectorAll(".hide-panel").forEach(button=>button.onclick=()=>{
+    const side=button.dataset.panel;
+    document.querySelector("."+side+"-panel").hidden=true;
+    document.querySelector(".main-grid").classList.add(side+"-hidden");
+  });
+  $("restoreView").onclick=()=>{
+    for(const side of ["year","input"]){document.querySelector("."+side+"-panel").hidden=false;document.querySelector(".main-grid").classList.remove(side+"-hidden");}
+    document.querySelector(".input-panel").scrollTop=0;document.querySelector(".result-panel").scrollTop=0;
+  };
   updateUseMeta();
   calculate();
 }

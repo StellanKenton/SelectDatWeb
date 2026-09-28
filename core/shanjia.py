@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from datetime import date, datetime, timedelta
+import json
+from pathlib import Path
 import re
 from typing import Iterable
 
@@ -208,6 +210,49 @@ REFERENCE_SHA_FILTERS = {
     "其它": (),
     "交易": (),
 }
+
+# Only these reference switches currently have a calculation behind them.
+# The other switches visible on the original site must not silently do nothing.
+SUPPORTED_SHA_FILTERS = (
+    "月冲山", "日冲山", "时冲山", "月三杀", "日三杀", "时三杀",
+    "月正阴府", "日正阴府", "时正阴府", "日正八煞", "时正八煞",
+    "日星曜煞", "时星曜煞", "天星煞", "地曜煞", "日山方煞",
+)
+
+# Rows copied from the visible 2026-2035 year-sha cards of the reference site.
+# Keep unverified years separate: get_year_sha supplies only rules we can calculate.
+REFERENCE_YEAR_SHA = {
+    int(year): tuple(tuple(row) for row in rows)
+    for year, rows in json.loads(
+        Path(__file__).with_name("year_sha_reference.json").read_text(encoding="utf-8")
+    ).items()
+}
+
+
+def get_year_sha(year: int, mountain_id: int = 1) -> dict:
+    if year < 1900 or year > 2100:
+        raise ValueError("年煞年份须在1900至2100年之间")
+    if mountain_id not in MOUNTAINS:
+        raise ValueError("无效的二十四山编号")
+    mountain = MOUNTAINS[mountain_id]
+    cards = []
+    for y in range(year, year + 10):
+        stem, branch = GAN[(y - 4) % 10], ZHI[(y - 4) % 12]
+        direction = SAN_SHA_DIRECTION[branch]
+        rows = REFERENCE_YEAR_SHA.get(y)
+        if rows is None:
+            rows = (("太岁", f"{branch}方"), ("岁破（大耗）", f"{CLASH[branch]}山方"))
+        cards.append({
+            "year": y,
+            "ganzhi": stem + branch,
+            "rows": [{"name": name, "value": value,
+                      "applies": bool(re.search(rf"(?<![\u4e00-\u9fff]){re.escape(mountain.name)}(?=[,山方]|$)", value))}
+                     for name, value in rows],
+            "san_sha_direction": direction,
+            "san_sha_hits": _mountain_cardinal(mountain) == direction,
+            "reference_rows_verified": y in REFERENCE_YEAR_SHA,
+        })
+    return {"mountain": mountain.name, "cards": cards}
 
 def _use_meta(label: str) -> dict:
     mountain_title = "第二步【选择坐山】"
@@ -742,6 +787,7 @@ def get_options() -> dict:
         "use_type_options": [{"value": code, "label": label} for code, label in USE_TYPE_OPTIONS],
         "use_meta": USE_META,
         "default_sha_filters": {k: list(v) for k, v in REFERENCE_SHA_FILTERS.items()},
+        "supported_sha_filters": list(SUPPORTED_SHA_FILTERS),
         "yiji_modes": [
             {"value": value, "label": meta["label"]}
             for value, meta in REFERENCE_YIJI_MODES.items()
@@ -814,17 +860,24 @@ def calculate_days(payload: dict) -> dict:
     life_inputs = payload.get("life_years", [])
     if isinstance(life_inputs, str):
         life_inputs = [x.strip() for x in life_inputs.replace("，", ",").split(",") if x.strip()]
-    life_ganzhi = [g for g in (_life_ganzhi(x) for x in life_inputs) if g]
+    life_ganzhi = list(dict.fromkeys(g for g in (_life_ganzhi(x) for x in life_inputs) if g))
 
     deceased_inputs = payload.get("deceased_years", [])
     if isinstance(deceased_inputs, str):
         deceased_inputs = [x.strip() for x in deceased_inputs.replace("，", ",").split(",") if x.strip()]
-    deceased_ganzhi = [g for g in (_life_ganzhi(x) for x in deceased_inputs) if g]
+    deceased_ganzhi = list(dict.fromkeys(g for g in (_life_ganzhi(x) for x in deceased_inputs) if g))
 
     repair_positions = [str(x) for x in payload.get("repair_positions", []) if str(x)]
     dagua = str(payload.get("dagua", ""))
     dagua_value = str(payload.get("dagua_value", ""))
-    active_sha_filters = set(REFERENCE_SHA_FILTERS.get(use_type, ()))
+    supplied_filters = payload.get("sha_filters")
+    if supplied_filters is None:
+        active_sha_filters = set(REFERENCE_SHA_FILTERS.get(use_type, ())) & set(SUPPORTED_SHA_FILTERS)
+    elif isinstance(supplied_filters, list):
+        active_sha_filters = {str(x) for x in supplied_filters} & set(SUPPORTED_SHA_FILTERS)
+    else:
+        raise ValueError("神煞过滤须为列表")
+    life_sha_filter = payload.get("life_sha_filter", True) is not False
 
     results = []
     current = start
@@ -860,6 +913,12 @@ def calculate_days(payload: dict) -> dict:
             continue
 
         # 只应用当前用事在原站 arr_shenshaguolv 中默认勾选的硬过滤。
+        if "月冲山" in active_sha_filters and mountain.name in ZHI and CLASH[month_zhi] == mountain.name:
+            current += timedelta(days=1)
+            continue
+        if "日冲山" in active_sha_filters and mountain.name in ZHI and CLASH[day_zhi] == mountain.name:
+            current += timedelta(days=1)
+            continue
         if "月三杀" in active_sha_filters and _is_sansha_for_mountain(month_zhi, mountain):
             current += timedelta(days=1)
             continue
@@ -931,7 +990,7 @@ def calculate_days(payload: dict) -> dict:
             score -= 6
             bad.append(f"{year_zhi}年三煞在{san_sha}方")
 
-        for life in life_ganzhi:
+        for life in life_ganzhi if life_sha_filter else ():
             life_zhi = life[1]
             if CLASH[day_zhi] == life_zhi:
                 score -= 3
@@ -980,6 +1039,8 @@ def calculate_days(payload: dict) -> dict:
             # “显示：N个日课”计数语义和原站一致。
             for hour_row in _hour_rows(current, hours, mountain):
                 time_gz = hour_row["ganzhi"]
+                if "时冲山" in active_sha_filters and mountain.name in ZHI and CLASH[hour_row["zhi"]] == mountain.name:
+                    continue
                 if "时三杀" in active_sha_filters and _is_sansha_for_mountain(hour_row["zhi"], mountain):
                     continue
                 if "时正阴府" in active_sha_filters and _hits_zheng_yinfu(time_gz, mountain):
@@ -1048,6 +1109,8 @@ def calculate_days(payload: dict) -> dict:
         "yiji_label": yiji_meta["label"],
         "day_ji_filters": list(_reference_day_ji_filters(use_type, yiji_mode)),
         "sha_filters": list(REFERENCE_SHA_FILTERS.get(use_type, ())),
+        "active_sha_filters": [name for name in SUPPORTED_SHA_FILTERS if name in active_sha_filters],
+        "life_sha_filter": life_sha_filter,
         "calendar_filter": {
             "ganzhi_year": ganzhi_year_filter,
             "ganzhi_month": ganzhi_month_filter,
