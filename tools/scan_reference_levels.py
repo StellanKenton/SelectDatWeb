@@ -11,7 +11,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select, WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-from browser_reference_sample import login, wait_frame, select_value
+from browser_reference_sample import login, wait_frame, select_value, redact
 
 
 OUT = Path("reference_level_scan")
@@ -74,6 +74,13 @@ def main() -> int:
                 select_value(driver, "paichubiaozhi", level)
                 driver.execute_script("toframes();")
                 row[level] = result_count(driver)
+                if row[level] > 0:
+                    safe_level = {"大吉": "daji", "小吉": "xiaoji"}[level]
+                    safe_month = re.sub(r"[^0-9A-Za-z_-]+", "_", month["value"])
+                    body_text = redact(driver.find_element(By.TAG_NAME, "body").text)
+                    page_html = redact(driver.page_source)
+                    (OUT / f"{safe_month}_{safe_level}.txt").write_text(body_text, encoding="utf-8")
+                    (OUT / f"{safe_month}_{safe_level}.html").write_text(page_html, encoding="utf-8")
                 time.sleep(1.0)
             report.append(row)
             print(json.dumps(row, ensure_ascii=False), flush=True)
