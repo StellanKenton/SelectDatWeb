@@ -24,6 +24,11 @@ jobs:
         run: |
           set -euo pipefail
           python tools/capture_reference.py
+      - name: Compare local core with captured reference
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/compare_reference_sample.py
       - name: Probe shanjia search result
         shell: bash
         run: |
@@ -43,4 +48,5 @@ jobs:
             reference_capture/
             reference_probe/
             reference_browser/
+            reference_compare/
           if-no-files-found: warn
