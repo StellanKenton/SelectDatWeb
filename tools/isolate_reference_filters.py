@@ -275,6 +275,8 @@ def main() -> int:
         ]
         for name, sha, ji in plan:
             html = fetch_variant(session, snapshot.action, snapshot.fields, sha, ji)
+            if name in {"none", "day_ji_only", "all_sha_only", "baseline"}:
+                (OUT / f"variant_{name}.html").write_text(html, encoding="utf-8")
             variants[name] = parse_html(html)
             if variants[name]["count"] < 0:
                 (OUT / f"debug_{name}.html").write_text(html, encoding="utf-8")
