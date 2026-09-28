@@ -21,7 +21,8 @@ jobs:
           curl -fsSL -A "$ua" "$base/zeridashi/yixue/ajax.php" -o reference/ajax.html || true
           curl -fsSL -A "$ua" "$base/zeridashi/index-web/login.php?id=17782134566" -o reference/login.html || true
           curl -fsSL -A "$ua" "$base/zeridashi/inc/topzeri.js?ver=123456" -o reference/topzeri.js
-          curl -fsSL -A "$ua" "$base/zeridashi/yixue/zeri.js?ver=123456" -o reference/zeri.js\n          curl -fsSL -A "$ua" "$base/zeridashi/index-web/login_yz.js?ver=202010068" -o reference/login_yz.js
+          curl -fsSL -A "$ua" "$base/zeridashi/yixue/zeri.js?ver=123456" -o reference/zeri.js
+          curl -fsSL -A "$ua" "$base/zeridashi/index-web/login_yz.js?ver=202010068" -o reference/login_yz.js
           grep -RhoE 'src=["'\'' ][^"'\'' >]+' reference/*.html | sed -E 's/^src=["'\'' ]//' | sort -u > reference/srcs.txt || true
           grep -RhoE 'href=["'\'' ][^"'\'' >]+' reference/*.html | sed -E 's/^href=["'\'' ]//' | sort -u > reference/hrefs.txt || true
       - uses: actions/upload-artifact@v4
