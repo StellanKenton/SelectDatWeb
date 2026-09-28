@@ -203,6 +203,8 @@ def mutate_fields(
     seen = set()
     fields: list[tuple[str, str]] = []
     for name, value in base_fields:
+        if name == "Arry_xiongsha[]":
+            continue
         if name in replacements:
             if name not in seen:
                 fields.append((name, replacements[name]))
@@ -212,6 +214,10 @@ def mutate_fields(
     for name, value in replacements.items():
         if name not in seen:
             fields.append((name, value))
+    # 原站输入页同时提交隐藏 xiongsha 字符串和同名 checkbox 数组。
+    # 服务端部分规则依赖 Arry_xiongsha[]，仅提交隐藏字段会得到不完整结果。
+    for rule in sha_values:
+        fields.append(("Arry_xiongsha[]", rule))
     return fields
 
 
