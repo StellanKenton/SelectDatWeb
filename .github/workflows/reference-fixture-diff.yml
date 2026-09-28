@@ -1,0 +1,21 @@
+name: Reference Fixture Diff
+
+on:
+  push:
+    branches:
+      - probe/reference-fixture-diff
+
+jobs:
+  diff:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - run: python tools/diff_reference_fixture.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: reference-fixture-diff
+          path: reference_fixtures/latest_diff.json
