@@ -119,7 +119,6 @@ def configure_and_search(driver):
     # Input panel: execute the site's own change handlers so all hidden
     # filters are filled exactly as the original UI would do.
     wait_frame(driver, "shuruFrame")
-    select_value(driver, "paichubiaozhi", "大吉")
     select_value(driver, "yiji", "all")
     select_value(driver, "yongshi", "0")
     select_value(driver, "zuobagua", "1")
@@ -131,11 +130,12 @@ def configure_and_search(driver):
     select_value(driver, "dagua", "2;2")
     time.sleep(0.5)
 
-    state = driver.execute_script(
+    base_state = driver.execute_script(
         """
-        const ids=['paichubiaozhi','yiji','yongshi','yongshiType','zuobagua',
-          'ershisishan','jian','fenjin','dagua','xiufang','nianming','wangming',
-          'mingshaguolv','huamingshaguolv','yueli','xiongsha','jxiongsha'];
+        const ids=['yiji','yongshi','yongshiType','zuobagua','ershisishan',
+          'jian','fenjin','dagua','xiufang','nianming','wangming',
+          'mingshaguolv','huamingshaguolv','yueli','xiongsha','jxiongsha',
+          'rijishi0','rijishi1','rijishi2','rijishi3'];
         const out={};
         for (const id of ids) {
           const el=document.getElementById(id);
@@ -144,30 +144,35 @@ def configure_and_search(driver):
         return out;
         """
     )
-    state["ganzhiyue_seq"] = month_seq
+    base_state["ganzhiyue_seq"] = month_seq
     (OUT / "configured_state.json").write_text(
-        redact(json.dumps(state, ensure_ascii=False, indent=2)),
+        redact(json.dumps(base_state, ensure_ascii=False, indent=2)),
         encoding="utf-8",
     )
 
-    # Call the exact function behind the original “择课搜索” link.
-    driver.execute_script("toframes();")
+    counts = {}
+    for level in ["全部", "大吉", "小吉", "生旺", "耗"]:
+        wait_frame(driver, "shuruFrame")
+        select_value(driver, "paichubiaozhi", level)
+        time.sleep(0.35)
+        driver.execute_script("toframes();")
 
-    wait_frame(driver, "centerFrame")
-    WebDriverWait(driver, 45).until(
-        lambda d: "显示：" in d.page_source and "个日课" in d.page_source
-    )
-    time.sleep(1.0)
+        wait_frame(driver, "centerFrame")
+        WebDriverWait(driver, 45).until(
+            lambda d: "显示：" in d.page_source and "个日课" in d.page_source
+        )
+        time.sleep(1.1)
 
-    html = redact(driver.page_source)
-    (OUT / "center_result.html").write_text(html, encoding="utf-8")
+        html = redact(driver.page_source)
+        text_body = redact(driver.find_element(By.TAG_NAME, "body").text)
+        safe = {"全部": "all", "大吉": "daji", "小吉": "xiaoji", "生旺": "shengwang", "耗": "hao"}[level]
+        (OUT / f"center_result_{safe}.html").write_text(html, encoding="utf-8")
+        (OUT / f"center_result_{safe}.txt").write_text(text_body, encoding="utf-8")
+        m = re.search(r"显示：\s*(\d+)个日课", text_body)
+        counts[level] = int(m.group(1)) if m else -1
+        time.sleep(1.2)
 
-    text = driver.find_element(By.TAG_NAME, "body").text
-    (OUT / "center_result.txt").write_text(redact(text), encoding="utf-8")
-
-    match = re.search(r"显示：\s*(\d+)个日课", text)
-    count = int(match.group(1)) if match else -1
-    return count, state
+    return counts, base_state
 
 
 def main() -> int:
@@ -181,7 +186,7 @@ def main() -> int:
     try:
         login(driver)
         initial_count = capture_initial_center(driver)
-        count, state = configure_and_search(driver)
+        counts, state = configure_and_search(driver)
 
         driver.switch_to.default_content()
         driver.save_screenshot(str(OUT / "reference_page.png"))
@@ -189,13 +194,14 @@ def main() -> int:
         result = {
             "ok": True,
             "initial_result_count": initial_count,
-            "result_count": count,
+            "result_counts": counts,
             "yongshi": state.get("yongshi"),
             "mountain": state.get("ershisishan"),
             "jian": state.get("jian"),
             "fenjin": state.get("fenjin"),
             "dagua": state.get("dagua"),
-            "paichubiaozhi": state.get("paichubiaozhi"),
+            "day_ji": [state.get("rijishi0"), state.get("rijishi1"), state.get("rijishi2"), state.get("rijishi3")],
+            "xiongsha": state.get("xiongsha"),
             "yiji": state.get("yiji"),
         }
         (OUT / "summary.json").write_text(
