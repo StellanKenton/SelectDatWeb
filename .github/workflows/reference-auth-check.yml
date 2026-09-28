@@ -5,6 +5,10 @@ on:
     branches:
       - probe/reference-auth
 
+concurrency:
+  group: zeridashi-reference-auth
+  cancel-in-progress: true
+
 jobs:
   isolate:
     runs-on: ubuntu-latest

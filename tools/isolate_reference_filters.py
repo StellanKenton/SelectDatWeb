@@ -236,7 +236,8 @@ def fetch_variant(
         allow_redirects=True,
     )
     response.raise_for_status()
-    response.encoding = response.apparent_encoding or response.encoding
+    # 原站声明 UTF-8；自动探测会把中文误判成其他编码。
+    response.encoding = "utf-8"
     return redact(response.text)
 
 
