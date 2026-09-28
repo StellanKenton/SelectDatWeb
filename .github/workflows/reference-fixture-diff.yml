@@ -3,7 +3,7 @@ name: Reference Fixture Diff
 on:
   push:
     branches:
-      - probe/reference-fixture-diff
+      - probe/reference-fixture-diff-latest
 
 jobs:
   diff:
