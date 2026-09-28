@@ -112,6 +112,10 @@ def configure_and_search(driver):
     time.sleep(0.5)
     select_value(driver, "ershisishan", "1")
     time.sleep(0.5)
+    select_value(driver, "jian", "亥巳")
+    select_value(driver, "fenjin", "乙亥")
+    select_value(driver, "dagua", "2;2")
+    time.sleep(0.5)
 
     state = driver.execute_script(
         """
