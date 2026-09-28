@@ -6,7 +6,7 @@ from datetime import date, datetime, timedelta
 import re
 from typing import Iterable
 
-from lunar_python import Solar
+from lunar_python import LunarYear, Solar
 
 
 GAN = "甲乙丙丁戊己庚辛壬癸"
@@ -562,6 +562,59 @@ def _resolve_calendar_query(payload: dict) -> tuple[list[date], dict]:
 
     raise ValueError("无效历法类型")
 
+_LUNAR_MONTH_NAME = {
+    1: "正", 2: "二", 3: "三", 4: "四", 5: "五", 6: "六",
+    7: "七", 8: "八", 9: "九", 10: "十", 11: "十一", 12: "十二",
+}
+
+
+def _calendar_options() -> dict:
+    solar_years = [{"value": year, "label": f"{year}年"} for year in range(1990, 2050)]
+
+    lunar_leap_months: dict[str, int] = {}
+    for year in range(1990, 2049):
+        leap = 0
+        try:
+            for month in LunarYear.fromYear(year).getMonths():
+                if month.getYear() == year and month.getMonth() < 0:
+                    leap = abs(month.getMonth())
+                    break
+        except Exception:
+            leap = 0
+        lunar_leap_months[str(year)] = leap
+
+    ganzhi_years = [{
+        "value": 126,
+        "year": 1990,
+        "ganzhi": "己巳",
+        "label": "1990己巳年",
+        "month_start": 1512,
+        "partial": True,
+    }]
+    for year in range(1990, 2049):
+        ganzhi = Solar.fromYmd(year, 7, 1).getLunar().getEightChar().getYear()
+        value = year - 1863
+        ganzhi_years.append({
+            "value": value,
+            "year": year,
+            "ganzhi": ganzhi,
+            "label": f"{year}{ganzhi}年",
+            "month_start": 1513 + (year - 1990) * 12,
+            "partial": False,
+        })
+
+    return {
+        "types": ["农历", "公历", "干支"],
+        "solar_years": solar_years,
+        "lunar_years": [{"value": year, "label": f"{year}年"} for year in range(1990, 2049)],
+        "lunar_leap_months": lunar_leap_months,
+        "ganzhi_years": ganzhi_years,
+        "day_filters": ["全部", *list(GAN), *list(ZHI)],
+        "ranges": ["范围", "前10", "前20", "前30", "后10", "后20", "后30"],
+        "default": {"mode": "干支", "year": 2026, "ganzhi_year_value": 163, "ganzhi_month_value": 1952},
+    }
+
+
 def get_options() -> dict:
     mountains = []
     for mountain_id in range(1, 25):
@@ -582,6 +635,7 @@ def get_options() -> dict:
             "auto_favorable_months": list(MOUNTAIN_FAVORABLE_MONTHS[m.id]),
         })
     return {
+        "calendar": _calendar_options(),
         "mountains": mountains,
         "trigrams": TRIGRAM_OPTIONS,
         "repair_directions": [{"label": label, "value": value} for label, value in REPAIR_DIRECTION_BUTTONS],
