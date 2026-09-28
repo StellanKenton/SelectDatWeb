@@ -183,7 +183,7 @@ function payload(){
     start_date:ymdParts(y,1,15),end_date:ymdParts(y+1,2,15),
     ganzhi_year:ganzhiYear(y),ganzhi_month:$("ganzhiMonthSelect").value,
     ganzhi_day_filter:$("ganzhiDaySelect").value,
-    use_type:$("useType").value,use_type_code:currentMeta().code,mountain_id:Number($("mountainSelect").value),
+    use_type:$("useType").value,use_type_code:currentMeta().code,edition:$("editionSelect").value,mountain_id:Number($("mountainSelect").value),
     jian:$("jianSelect").value,fenjin:$("fenjinSelect").value,
     dagua:dagua.options[dagua.selectedIndex]?.text||"",dagua_value:dagua.value,
     repair_positions:[...S.repair],life_years:$("lifeYears").value,deceased_years:$("deceasedYears").value,
@@ -237,7 +237,7 @@ async function init(){
   populateGanzhiToolbar();populateHours();populateMonths();populateTrigrams();setupRepair();
   $("ganzhiYearSelect").onchange=()=>{refreshGanzhiMonths();calculate();};
   $("ganzhiMonthSelect").onchange=()=>{syncGanzhiTitles();calculate();};
-  $("ganzhiDaySelect").onchange=calculate;
+  $("ganzhiDaySelect").onchange=calculate;$("editionSelect").onchange=calculate;
   $("trigramSelect").onchange=()=>populateMountains();
   $("mountainSelect").onchange=updateMountain;
   $("useType").onchange=updateUseMeta;
