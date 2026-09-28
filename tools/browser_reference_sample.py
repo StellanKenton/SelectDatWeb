@@ -108,6 +108,111 @@ def capture_initial_center(driver):
     return int(m.group(1)) if m else -1
 
 
+def parse_lesson_pairs(text: str) -> list[str]:
+    pairs = []
+    for block in text.split("[打印]")[1:]:
+        dm = re.search(r"公历:(\d+)月(\d+)日", block)
+        hm = re.search(r"\n(\d{1,2})点\n时[吉凶]", block)
+        if dm and hm:
+            pairs.append(f"2026-{int(dm.group(1)):02d}-{int(dm.group(2)):02d}T{int(hm.group(1)):02d}")
+    return pairs
+
+
+def set_sha_selection(driver, values: list[str]) -> None:
+    driver.execute_script(
+        """
+        const wanted = new Set(arguments[0]);
+        document.querySelectorAll("input[name='Arry_xiongsha[]']").forEach(
+          el => { el.checked = wanted.has(el.value); }
+        );
+        """,
+        values,
+    )
+
+
+def set_day_ji(driver, values: list[str]) -> None:
+    vals = list(values[:4]) + [""] * (4 - len(values[:4]))
+    driver.execute_script(
+        """
+        for (let i=0;i<4;i++) {
+          const el=document.getElementById('rijishi'+i);
+          if (el) el.value=arguments[0][i] || '';
+        }
+        """,
+        vals,
+    )
+
+
+def run_filter_variant(driver, name: str, sha_values: list[str], day_ji: list[str]) -> dict:
+    wait_frame(driver, "shuruFrame")
+    select_value(driver, "paichubiaozhi", "全部")
+    set_sha_selection(driver, sha_values)
+    set_day_ji(driver, day_ji)
+    time.sleep(0.7)
+    driver.execute_script("toframes();")
+
+    wait_frame(driver, "centerFrame")
+    WebDriverWait(driver, 45).until(
+        lambda d: "显示：" in d.page_source and "个日课" in d.page_source
+    )
+    time.sleep(0.9)
+    body = redact(driver.find_element(By.TAG_NAME, "body").text)
+    count_match = re.search(r"显示：\s*(\d+)个日课", body)
+    pairs = parse_lesson_pairs(body)
+    return {
+        "name": name,
+        "count": int(count_match.group(1)) if count_match else -1,
+        "pair_count": len(pairs),
+        "pairs": pairs,
+        "dates": sorted({p[:10] for p in pairs}),
+    }
+
+
+def isolate_reference_filters(driver, base_state: dict) -> dict:
+    default_sha = [x for x in str(base_state.get("xiongsha") or "").split(";") if x]
+    default_day_ji = [
+        str(base_state.get(f"rijishi{i}") or "") for i in range(4)
+    ]
+    default_day_ji = [x for x in default_day_ji if x]
+
+    variants: dict[str, dict] = {}
+    variants["none"] = run_filter_variant(driver, "none", [], [])
+    variants["day_ji_only"] = run_filter_variant(driver, "day_ji_only", [], default_day_ji)
+    variants["all_sha_only"] = run_filter_variant(driver, "all_sha_only", default_sha, [])
+    variants["baseline"] = run_filter_variant(driver, "baseline", default_sha, default_day_ji)
+
+    none_pairs = set(variants["none"]["pairs"])
+    individual = {}
+    for index, rule in enumerate(default_sha):
+        item = run_filter_variant(driver, f"sha_{index:02d}", [rule], [])
+        item["rule"] = rule
+        item["excluded_pairs"] = sorted(none_pairs - set(item["pairs"]))
+        item["excluded_dates"] = sorted({p[:10] for p in item["excluded_pairs"]})
+        individual[rule] = item
+        time.sleep(0.7)
+
+    day_ji_item = variants["day_ji_only"]
+    day_ji_item["excluded_pairs"] = sorted(none_pairs - set(day_ji_item["pairs"]))
+    day_ji_item["excluded_dates"] = sorted({p[:10] for p in day_ji_item["excluded_pairs"]})
+
+    result = {
+        "default_sha": default_sha,
+        "default_day_ji": default_day_ji,
+        "variants": variants,
+        "individual_sha": individual,
+    }
+    (OUT / "filter_isolation.json").write_text(
+        json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
+
+    # Restore the real reference defaults before side-frame capture.
+    wait_frame(driver, "shuruFrame")
+    set_sha_selection(driver, default_sha)
+    set_day_ji(driver, default_day_ji)
+    select_value(driver, "paichubiaozhi", "全部")
+    return result
+
+
 def configure_and_search(driver):
     # Top date/ganzhi bar.
     wait_frame(driver, "top1Frame")
@@ -173,6 +278,8 @@ def configure_and_search(driver):
         counts[level] = int(m.group(1)) if m else -1
         time.sleep(1.2)
 
+    isolation = isolate_reference_filters(driver, base_state)
+
     # Capture the other frames after the final real search.
     for frame_name, file_name in [
         ("top1Frame", "top1_after.html"),
@@ -187,7 +294,7 @@ def configure_and_search(driver):
         except Exception as exc:
             (OUT / file_name.replace(".html", ".error.txt")).write_text(str(exc), encoding="utf-8")
 
-    return counts, base_state
+    return counts, base_state, isolation
 
 
 def main() -> int:
@@ -201,7 +308,7 @@ def main() -> int:
     try:
         login(driver)
         initial_count = capture_initial_center(driver)
-        counts, state = configure_and_search(driver)
+        counts, state, isolation = configure_and_search(driver)
 
         driver.switch_to.default_content()
         driver.save_screenshot(str(OUT / "reference_page.png"))
@@ -218,6 +325,10 @@ def main() -> int:
             "day_ji": [state.get("rijishi0"), state.get("rijishi1"), state.get("rijishi2"), state.get("rijishi3")],
             "xiongsha": state.get("xiongsha"),
             "yiji": state.get("yiji"),
+            "isolation_counts": {
+                key: value.get("count")
+                for key, value in isolation.get("variants", {}).items()
+            },
         }
         (OUT / "summary.json").write_text(
             json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8"
