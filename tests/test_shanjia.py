@@ -179,3 +179,27 @@ def test_ganzhi_day_stem_filter():
     )
     assert result["results"]
     assert all(item["day_ganzhi"].startswith("甲") for item in result["results"])
+
+
+def test_reference_day_ji_filter_tables():
+    options = get_options()
+    assert options["day_ji_filters"]["协纪版"]["建造"] == ["竖造"]
+    assert options["day_ji_filters"]["协纪版"]["修方动土"] == ["修造", "动土"]
+    assert options["day_ji_filters"]["协纪版"]["附葬破土"] == ["破土", "修造"]
+    assert options["day_ji_filters"]["协纪版"]["拆卸"] == ["拆卸", "动土"]
+    assert options["day_ji_filters"]["通书版"]["拆卸"] == ["拆卸"]
+
+
+def test_calculate_reports_reference_edition_and_filters():
+    result = calculate_days(
+        {
+            "start_date": "2026-09-28",
+            "end_date": "2026-09-28",
+            "use_type": "建造",
+            "mountain_id": 1,
+            "edition": "协纪版",
+            "level": "全部",
+        }
+    )
+    assert result["edition"] == "协纪版"
+    assert result["day_ji_filters"] == ["竖造"]
