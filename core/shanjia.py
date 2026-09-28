@@ -500,7 +500,10 @@ def _resolve_calendar_query(payload: dict) -> tuple[list[date], dict]:
         else:
             anchor = date(year, month, int(day_value))
             dates = _fanwei_dates(anchor, str(query.get("range", "范围")))
-        return dates, {"mode": mode, "year": year, "month": month, "day": day_value, "range": query.get("range", "范围")}
+        return dates, {
+            "mode": mode, "year": year, "month": month,
+            "day": day_value, "range": query.get("range", "范围"),
+        }
 
     if mode == "农历":
         month_text = str(query.get("month", "正")).replace("月", "")
@@ -512,7 +515,6 @@ def _resolve_calendar_query(payload: dict) -> tuple[list[date], dict]:
         target_month = -month_num if is_leap else month_num
         day_value = str(query.get("day", "全部")).replace("日", "")
 
-        # 农历年跨公历年，扫描当年1月到次年3月后按农历年月精确筛选。
         start = date(year, 1, 1)
         end = date(year + 1, 3, 1)
         matches: list[date] = []
@@ -522,9 +524,14 @@ def _resolve_calendar_query(payload: dict) -> tuple[list[date], dict]:
             if lunar.getYear() == year and lunar.getMonth() == target_month:
                 if day_value == "全部" or lunar.getDayInChinese() == day_value:
                     matches.append(current)
-             if day_value != "全部" and matches:
+            current += timedelta(days=1)
+
+        if day_value != "全部" and matches:
             matches = _fanwei_dates(matches[0], str(query.get("range", "范围")))
-        return matches, {"mode": mode, "year": year, "month": month_text, "day": day_value, "range": query.get("range", "范围")}
+        return matches, {
+            "mode": mode, "year": year, "month": month_text,
+            "day": day_value, "range": query.get("range", "范围"),
+        }
 
     if mode == "干支":
         year_gz = str(query.get("year_ganzhi", "")).replace("年", "")
@@ -533,21 +540,27 @@ def _resolve_calendar_query(payload: dict) -> tuple[list[date], dict]:
         if not year_gz or not month_gz:
             raise ValueError("干支查询需要年柱和月柱")
 
-        # 干支年以立春切换，扫描公历标注年到下一年3月并按八字年/月柱精确匹配。
         start = date(year, 1, 1)
         end = date(year + 1, 3, 1)
-        matches = []
+        matches: list[date] = []
         current = start
         while current <= end:
             eight = Solar.fromYmd(current.year, current.month, current.day).getLunar().getEightChar()
             day_gz = eight.getDay()
-            day_ok = day_filter == "全部" or day_gz.startswith(day_filter) or day_gz.endswith(day_filter)
+            day_ok = (
+                day_filter == "全部"
+                or day_gz.startswith(day_filter)
+                or day_gz.endswith(day_filter)
+            )
             if eight.getYear() == year_gz and eight.getMonth() == month_gz and day_ok:
                 matches.append(current)
-             return matches, {"mode": mode, "year": year, "year_ganzhi": year_gz, "month_ganzhi": month_gz, "day": day_filter}
+            current += timedelta(days=1)
+        return matches, {
+            "mode": mode, "year": year, "year_ganzhi": year_gz,
+            "month_ganzhi": month_gz, "day": day_filter,
+        }
 
     raise ValueError("无效历法类型")
-
 
 def get_options() -> dict:
     mountains = []
