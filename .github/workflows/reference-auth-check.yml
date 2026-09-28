@@ -40,6 +40,11 @@ jobs:
           set -euo pipefail
           google-chrome --version || true
           python tools/browser_reference_sample.py
+      - name: Scan months for daji/xiaoji samples
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/scan_reference_levels.py
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -49,4 +54,5 @@ jobs:
             reference_probe/
             reference_browser/
             reference_compare/
+            reference_level_scan/
           if-no-files-found: warn
