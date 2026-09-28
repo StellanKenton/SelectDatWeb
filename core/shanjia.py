@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from datetime import date, datetime, timedelta
+import re
 from typing import Iterable
 
 from lunar_python import Solar
@@ -13,6 +14,11 @@ ZHI = "子丑寅卯辰巳午未申酉戌亥"
 GAN_ELEMENT = {
     "甲": "木", "乙": "木", "丙": "火", "丁": "火", "戊": "土",
     "己": "土", "庚": "金", "辛": "金", "壬": "水", "癸": "水",
+}
+ZHI_ELEMENT = {
+    "寅": "木", "卯": "木", "巳": "火", "午": "火",
+    "申": "金", "酉": "金", "亥": "水", "子": "水",
+    "辰": "土", "戌": "土", "丑": "土", "未": "土",
 }
 
 GENERATES = {"木": "火", "火": "土", "土": "金", "金": "水", "水": "木"}
@@ -129,6 +135,12 @@ NO_MOUNTAIN_USE_TYPES = {"其它", "交易", "空方动土"}
 FACING_USE_TYPES = {"安门", "造门楼", "旧坟立碑"}
 AUTO_SEAT_REPAIR_USE_TYPES = {"装修", "作灶", "升层", "修坟"}
 
+WANGSHENG_MONTH_USE_TYPES = {
+    "造门楼", "修方", "修方动土", "作灶", "装修", "升层", "进神",
+    "入宅归火", "移香出火", "修方兼竖造", "修坟", "旧坟立碑", "附葬",
+}
+DEFAULT_MONTH_RELATIONS = ("旺", "生", "耗")
+
 def _use_meta(label: str) -> dict:
     mountain_title = "第二步【选择坐山】"
     if label in {"附葬", "修方兼竖造"}:
@@ -159,6 +171,8 @@ def _use_meta(label: str) -> dict:
             else "seat" if label in AUTO_SEAT_REPAIR_USE_TYPES
             else ""
         ),
+        "month_mode": "relation" if label in WANGSHENG_MONTH_USE_TYPES else "mountain",
+        "default_month_relations": list(DEFAULT_MONTH_RELATIONS) if label in WANGSHENG_MONTH_USE_TYPES else [],
     }
 
 USE_META = {label: _use_meta(label) for label in USE_TYPES}
@@ -495,6 +509,12 @@ def calculate_days(payload: dict) -> dict:
 
     level_filter = str(payload.get("level", "大吉"))
     selected_months = {str(x) for x in payload.get("favorable_months", []) if str(x) in ZHI}
+    raw_month_relations = payload.get("month_relations", [])
+    if isinstance(raw_month_relations, str):
+        raw_month_relations = [x for x in re.split(r"[;,，\s]+", raw_month_relations) if x]
+    selected_month_relations = {str(x) for x in raw_month_relations if str(x) in {"旺", "生", "耗", "泄", "克"}}
+    if use_type in WANGSHENG_MONTH_USE_TYPES and not selected_month_relations:
+        selected_month_relations = set(DEFAULT_MONTH_RELATIONS)
 
     raw_hours = payload.get("hours") or [item["hour"] for item in HOUR_OPTIONS]
     hours = sorted({int(h) for h in raw_hours if int(h) in range(0, 24, 2)})
@@ -534,6 +554,11 @@ def calculate_days(payload: dict) -> dict:
             current += timedelta(days=1)
             continue
 
+        month_relation, _ = _day_relation(ZHI_ELEMENT[month_zhi], mountain.element)
+        if use_type in WANGSHENG_MONTH_USE_TYPES and selected_month_relations and month_relation not in selected_month_relations:
+            current += timedelta(days=1)
+            continue
+
         score = 0
         fatal = False
         good: list[str] = []
@@ -548,13 +573,20 @@ def calculate_days(payload: dict) -> dict:
         else:
             good.append(f"日干与山家关系：{relation}")
 
-        auto_months = MOUNTAIN_FAVORABLE_MONTHS[mountain.id]
-        if month_zhi in auto_months:
-            score += 3
-            good.append(f"{month_zhi}月在{mountain.name}山自动利月表内")
+        if use_type in WANGSHENG_MONTH_USE_TYPES:
+            if month_relation in {"旺", "生"}:
+                score += 3
+            elif month_relation == "耗":
+                score += 1
+            good.append(f"{month_zhi}月对{mountain.name}山为{month_relation}")
         else:
-            score -= 1
-            bad.append(f"{month_zhi}月不在{mountain.name}山自动利月表内")
+            auto_months = MOUNTAIN_FAVORABLE_MONTHS[mountain.id]
+            if month_zhi in auto_months:
+                score += 3
+                good.append(f"{month_zhi}月在{mountain.name}山自动利月表内")
+            else:
+                score -= 1
+                bad.append(f"{month_zhi}月不在{mountain.name}山自动利月表内")
 
         if mountain.name in ZHI and CLASH[day_zhi] == mountain.name:
             score -= 8
@@ -650,6 +682,7 @@ def calculate_days(payload: dict) -> dict:
         "repair_positions": repair_positions,
         "dagua": dagua,
         "dagua_value": dagua_value,
+        "month_relations": sorted(selected_month_relations),
         "count": len(results),
         "results": results,
         "rule_notes": [
