@@ -1,0 +1,26 @@
+name: Shanjia HTTP Isolation
+
+on:
+  push:
+    branches:
+      - probe/shanjia-http-isolation
+
+jobs:
+  isolate:
+    runs-on: ubuntu-latest
+    env:
+      ZERIDASHI_PHONE: ${{ secrets.ZERIDASHI_PHONE }}
+      ZERIDASHI_PASSWORD: ${{ secrets.ZERIDASHI_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt selenium
+      - run: python tools/isolate_shanjia_filters_http.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: shanjia-http-isolation
+          path: reference_http_isolation/
+          if-no-files-found: warn
