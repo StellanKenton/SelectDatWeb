@@ -90,30 +90,67 @@
             <div class="field-row"><label for="useType">用事</label><select id="useType"></select></div>
           </section>
 
-          <section class="step">
-            <div class="step-title">第二步【选择坐山】</div>
-            <div class="field-row"><label for="trigramSelect">坐卦</label><select id="trigramSelect"></select></div>
-            <div class="field-row"><label for="mountainSelect">坐山</label><select id="mountainSelect"></select></div>
-            <div class="field-row"><label for="jianSelect">兼山</label><select id="jianSelect"></select></div>
+          <section class="step" id="mountainStep">
+            <div class="step-title" id="mountainStepTitle">第二步【选择坐山】</div>
+            <div class="field-row"><label for="trigramSelect" id="trigramLabel">坐卦</label><select id="trigramSelect"></select></div>
+            <div class="field-row"><label for="mountainSelect" id="mountainLabel">坐山</label><select id="mountainSelect"></select></div>
+            <div class="field-row"><label for="jianSelect" id="jianLabel">兼山</label><select id="jianSelect"></select></div>
             <div class="field-row"><label for="fenjinSelect">分金</label><select id="fenjinSelect"></select></div>
+            <div class="field-row"><label for="daguaSelect">大卦</label><select id="daguaSelect"></select></div>
           </section>
 
-          <section class="step">
-            <div class="step-title">第三步【添加福主年命】</div>
+          <section class="step" id="repairStep" hidden>
+            <div class="step-title" id="repairStepTitle">第三步【选择修方】</div>
+            <div class="field-column">
+              <div class="repair-title">选择方道</div>
+              <div class="repair-grid" id="repairDirectionGrid"></div>
+              <div class="repair-title">选择方位</div>
+              <div class="repair-grid repair-positions" id="repairPositionGrid"></div>
+              <div class="selected-repair" id="selectedRepair">未选择修方</div>
+              <button type="button" class="secondary-button" id="clearRepair">清空修方</button>
+            </div>
+          </section>
+
+          <section class="step" id="lifeStep">
+            <div class="step-title" id="lifeStepTitle">第三步【添加福主年命】</div>
             <div class="field-column">
               <input id="lifeYears" type="text" placeholder="如：1988, 1990 或 甲辰, 庚午">
               <div class="hint">可输入多个年份或干支，用逗号分隔。</div>
             </div>
           </section>
 
-          <section class="step">
-            <div class="step-title">第四步【添加利月】</div>
-            <div class="month-grid" id="monthGrid"></div>
-            <div class="hint">不勾选表示不强制限定月份，只按山家利月加权。</div>
+          <section class="step" id="deceasedStep" hidden>
+            <div class="step-title" id="deceasedStepTitle">第四步【添加仙命】</div>
+            <div class="field-column">
+              <input id="deceasedYears" type="text" placeholder="如：1950 或 庚寅">
+              <div class="hint">原站“仙命/亡命”输入；可输入年份或干支。</div>
+            </div>
           </section>
 
-          <section class="step">
-            <div class="step-title">第五步【日课筛选功能】</div>
+          <section class="step" id="yearShaStep">
+            <div class="step-title" id="yearShaStepTitle">第四步【查年煞】</div>
+            <div class="field-column">
+              <button type="button" class="secondary-button full-button" id="yearShaButton">点击查年煞</button>
+            </div>
+          </section>
+
+          <section class="step" id="monthStep">
+            <div class="step-title" id="monthStepTitle">第五步【添加利月】</div>
+            <div class="field-column compact-actions">
+              <button type="button" class="secondary-button full-button" id="autoMonths">自动添加利月</button>
+            </div>
+            <div class="relation-grid" id="relationGrid" hidden>
+              <label><input class="relation-check" type="checkbox" value="旺" checked>旺</label>
+              <label><input class="relation-check" type="checkbox" value="生" checked>生</label>
+              <label><input class="relation-check" type="checkbox" value="耗" checked>耗</label>
+              <label><input class="relation-check" type="checkbox" value="泄">泄</label>
+              <label><input class="relation-check" type="checkbox" value="克">克</label>
+            </div>
+            <div class="month-grid" id="monthGrid"></div>
+          </section>
+
+          <section class="step" id="filterStep">
+            <div class="step-title" id="filterStepTitle">第六步【日课筛选功能】</div>
             <label class="switch-line"><input type="checkbox" id="showReasons" checked>显示取舍原因</label>
           </section>
 

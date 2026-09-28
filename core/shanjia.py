@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from datetime import date, datetime, timedelta
+import re
 from typing import Iterable
 
 from lunar_python import Solar
@@ -13,6 +14,11 @@ ZHI = "子丑寅卯辰巳午未申酉戌亥"
 GAN_ELEMENT = {
     "甲": "木", "乙": "木", "丙": "火", "丁": "火", "戊": "土",
     "己": "土", "庚": "金", "辛": "金", "壬": "水", "癸": "水",
+}
+ZHI_ELEMENT = {
+    "寅": "木", "卯": "木", "巳": "火", "午": "火",
+    "申": "金", "酉": "金", "亥": "水", "子": "水",
+    "辰": "土", "戌": "土", "丑": "土", "未": "土",
 }
 
 GENERATES = {"木": "火", "火": "土", "土": "金", "金": "水", "水": "木"}
@@ -33,8 +39,8 @@ SAN_HE = (
     frozenset(("巳", "酉", "丑")),
 )
 
-# 网站 topzeri_info.php 中可见的“手动添加利月”规则。
-MONTH_FAVORABLE = {
+# 网站 topzeri_info.php 的“手动添加利月”说明，用于下拉提示。
+MONTH_ELEMENT_FAVORABLE = {
     "寅": {"木", "火"},
     "卯": {"木", "火"},
     "辰": {"土", "金"},
@@ -49,6 +55,35 @@ MONTH_FAVORABLE = {
     "丑": {"土", "金"},
 }
 
+# 网站 topzeri.js 的 arryueli0：点击“自动添加利月”时按二十四山直接取值。
+# 这不是简单的“按五行反推月份”，个别山（丑、艮、辰、未、坤、戌等）有专门表。
+MOUNTAIN_FAVORABLE_MONTHS = {
+    1: ("申", "酉", "亥", "子"),
+    2: ("申", "酉", "亥", "子"),
+    3: ("申", "酉", "亥", "子"),
+    4: ("巳", "辰", "丑"),
+    5: ("巳", "午", "辰", "未", "戌", "丑"),
+    6: ("寅", "卯", "亥", "子"),
+    7: ("寅", "卯", "亥", "子"),
+    8: ("寅", "卯", "亥", "子"),
+    9: ("寅", "卯", "亥", "子"),
+    10: ("巳", "午", "辰", "未"),
+    11: ("寅", "卯", "亥", "子"),
+    12: ("寅", "卯", "巳", "午"),
+    13: ("寅", "卯", "巳", "午"),
+    14: ("寅", "卯", "巳", "午"),
+    15: ("寅", "卯", "巳", "午"),
+    16: ("巳", "午", "未", "戌"),
+    17: ("巳", "午", "辰", "未", "戌", "丑"),
+    18: ("申", "酉", "辰", "戌", "丑"),
+    19: ("申", "酉", "辰", "戌", "丑"),
+    20: ("申", "酉", "辰", "戌", "丑"),
+    21: ("申", "酉", "辰", "戌", "丑"),
+    22: ("巳", "午", "戌"),
+    23: ("申", "酉", "辰", "戌", "丑"),
+    24: ("申", "酉", "亥", "子"),
+}
+
 # 三煞方：申子辰年煞南、寅午戌年煞北、亥卯未年煞西、巳酉丑年煞东。
 SAN_SHA_DIRECTION = {
     "申": "南", "子": "南", "辰": "南",
@@ -57,13 +92,90 @@ SAN_SHA_DIRECTION = {
     "巳": "东", "酉": "东", "丑": "东",
 }
 
-USE_TYPES = [
-    "建造", "进神", "安门", "修方兼竖造", "修方", "装修", "入宅", "造门楼",
-    "竖造动土", "修方动土", "开业", "作灶", "封顶上樑", "升层", "安葬",
-    "附葬", "修坟", "旧坟立碑", "安葬破土", "附葬破土", "造坟", "启攒",
-    "移香出火", "入宅归火", "拆卸", "避宅修方", "避宅装修", "空方动土",
-    "其它", "交易",
+USE_TYPE_OPTIONS = [
+    (0, "建造"), (1, "进神"), (2, "安门"), (3, "修方兼竖造"), (4, "修方"),
+    (5, "装修"), (6, "入宅"), (7, "造门楼"), (8, "竖造动土"), (9, "修方动土"),
+    (10, "开业"), (11, "作灶"), (12, "封顶上樑"), (13, "升层"), (14, "安葬"),
+    (15, "附葬"), (16, "修坟"), (17, "旧坟立碑"), (18, "安葬破土"),
+    (19, "附葬破土"), (20, "造坟"), (21, "启攒"), (30, "移香出火"),
+    (31, "入宅归火"), (32, "拆卸"), (33, "避宅修方"), (34, "避宅装修"),
+    (35, "空方动土"), (50, "其它"), (51, "交易"),
 ]
+USE_TYPES = [label for _, label in USE_TYPE_OPTIONS]
+USE_TYPE_CODE = {label: code for code, label in USE_TYPE_OPTIONS}
+
+
+TRIGRAM_OPTIONS = [
+    {"value": 1, "label": "【北方】坎卦", "name": "坎", "palace": "坎宫", "positions": ["壬", "子", "癸"]},
+    {"value": 2, "label": "【西南】坤卦", "name": "坤", "palace": "坤宫", "positions": ["未", "坤", "申"]},
+    {"value": 3, "label": "【东方】震卦", "name": "震", "palace": "震宫", "positions": ["甲", "卯", "乙"]},
+    {"value": 4, "label": "【东南】巽卦", "name": "巽", "palace": "巽宫", "positions": ["辰", "巽", "巳"]},
+    {"value": 5, "label": "【中央】中宫", "name": "中", "palace": "中宫", "positions": []},
+    {"value": 6, "label": "【西北】乾卦", "name": "乾", "palace": "乾宫", "positions": ["戌", "乾", "亥"]},
+    {"value": 7, "label": "【西方】兑卦", "name": "兑", "palace": "兑宫", "positions": ["庚", "酉", "辛"]},
+    {"value": 8, "label": "【东北】艮卦", "name": "艮", "palace": "艮宫", "positions": ["丑", "艮", "寅"]},
+    {"value": 9, "label": "【南方】离卦", "name": "离", "palace": "离宫", "positions": ["丙", "午", "丁"]},
+]
+
+REPAIR_DIRECTION_BUTTONS = [
+    ("东南巽", "巽宫"), ("正南离", "离宫"), ("西南坤", "坤宫"),
+    ("正东震", "震宫"), ("中", "中宫"), ("正西兑", "兑宫"),
+    ("东北艮", "艮宫"), ("正北坎", "坎宫"), ("西北乾", "乾宫"),
+]
+REPAIR_POSITIONS = {item["palace"]: item["positions"] for item in TRIGRAM_OPTIONS}
+
+BURIAL_USE_TYPES = {
+    "安葬破土", "启攒", "造坟", "安葬", "修坟", "附葬破土", "附葬", "旧坟立碑"
+}
+REPAIR_USE_TYPES = {
+    "修坟", "附葬破土", "附葬", "旧坟立碑", "修方动土",
+    "修方", "升层", "装修", "修方兼竖造", "造门楼", "作灶"
+}
+NO_MOUNTAIN_USE_TYPES = {"其它", "交易", "空方动土"}
+FACING_USE_TYPES = {"安门", "造门楼", "旧坟立碑"}
+AUTO_SEAT_REPAIR_USE_TYPES = {"装修", "作灶", "升层", "修坟"}
+
+WANGSHENG_MONTH_USE_TYPES = {
+    "造门楼", "修方", "修方动土", "作灶", "装修", "升层", "进神",
+    "入宅归火", "移香出火", "修方兼竖造", "修坟", "旧坟立碑", "附葬",
+}
+DEFAULT_MONTH_RELATIONS = ("旺", "生", "耗")
+
+def _use_meta(label: str) -> dict:
+    mountain_title = "第二步【选择坐山】"
+    if label in {"附葬", "修方兼竖造"}:
+        mountain_title = "第二步【选择新坐山】"
+    if label in {"安门", "造门楼"}:
+        mountain_title = "第二步【选择门向】"
+    if label == "旧坟立碑":
+        mountain_title = "第二步【选择碑向】"
+
+    life_name = "福主年命"
+    if label in BURIAL_USE_TYPES:
+        life_name = "祭主年命"
+    if label == "作灶":
+        life_name = "馈主年命"
+
+    return {
+        "code": USE_TYPE_CODE[label],
+        "label": label,
+        "show_mountain": label not in NO_MOUNTAIN_USE_TYPES,
+        "show_repair": label in REPAIR_USE_TYPES,
+        "show_deceased": label in BURIAL_USE_TYPES,
+        "show_year_sha": label not in NO_MOUNTAIN_USE_TYPES,
+        "mountain_mode": "facing" if label in FACING_USE_TYPES else "sitting",
+        "mountain_title": mountain_title,
+        "life_name": life_name,
+        "auto_repair": (
+            "seat_facing" if label == "旧坟立碑"
+            else "seat" if label in AUTO_SEAT_REPAIR_USE_TYPES
+            else ""
+        ),
+        "month_mode": "relation" if label in WANGSHENG_MONTH_USE_TYPES else "mountain",
+        "default_month_relations": list(DEFAULT_MONTH_RELATIONS) if label in WANGSHENG_MONTH_USE_TYPES else [],
+    }
+
+USE_META = {label: _use_meta(label) for label in USE_TYPES}
 
 USE_TYPE_YI_ALIASES = {
     "建造": ("修造", "竖造", "动土"),
@@ -165,6 +277,34 @@ FENJIN_ZHI_BY_MOUNTAIN_ID = {
     13: "巳", 14: "午", 15: "午", 16: "未", 17: "未", 18: "申",
     19: "申", 20: "酉", 21: "酉", 22: "戌", 23: "戌", 24: "亥",
 }
+
+# 网站 topzeri.js 的 arraydagua，按二十四山直接映射。
+DAGUA_OPTIONS = {
+    1: (("风地观", "2;2"), ("水地比", "7;7"), ("山地剥", "6;6")),
+    2: (("山地剥", "6;6"), ("坤为地", "1;1"), ("地雷复", "1;8"), ("山雷颐", "6;3")),
+    3: (("山雷颐", "6;3"), ("水雷屯", "7;4"), ("风雷益", "2;9")),
+    4: (("震为雷", "8;1"), ("火雷噬嗑", "3;6"), ("泽雷随", "4;7")),
+    5: (("泽雷随", "4;7"), ("天雷无妄", "9;2"), ("地火明夷", "1;3"), ("山火贲", "6;8")),
+    6: (("山火贲", "6;8"), ("水火既济", "7;9"), ("风火家人", "2;4")),
+    7: (("雷火丰", "8;6"), ("离为火", "3;1"), ("泽火革", "4;2")),
+    8: (("泽火革", "4;2"), ("天火同人", "9;7"), ("地泽临", "1;4"), ("山泽损", "6;9")),
+    9: (("山泽损", "6;9"), ("水泽节", "7;8"), ("风泽中孚", "2;3")),
+    10: (("雷泽归妹", "8;7"), ("火泽睽", "3;2"), ("兑为泽", "4;1")),
+    11: (("兑为泽", "4;1"), ("天泽履", "9;6"), ("地天泰", "1;9"), ("山天大畜", "6;4")),
+    12: (("山天大畜", "6;4"), ("水天需", "7;3"), ("风天小畜", "2;8")),
+    13: (("雷天大壮", "8;2"), ("火天大有", "3;7"), ("泽天夬", "4;6")),
+    14: (("泽天夬", "4;6"), ("乾为天", "9;1"), ("天风姤", "9;5"), ("泽风大过", "4;3")),
+    15: (("泽风大过", "4;3"), ("火风鼎", "3;4"), ("雷风恒", "8;9")),
+    16: (("巽为风", "2;1"), ("水风井", "7;6"), ("山风蛊", "6;7")),
+    17: (("山风蛊", "6;7"), ("地风升", "1;2"), ("天水讼", "9;3"), ("泽水困", "4;8")),
+    18: (("泽水困", "4;8"), ("火水未济", "3;9"), ("雷水解", "8;4")),
+    19: (("风水涣", "2;6"), ("坎为水", "7;1"), ("山水蒙", "6;2")),
+    20: (("山水蒙", "6;2"), ("地水师", "1;7"), ("天山遁", "9;4"), ("泽山咸", "4;9")),
+    21: (("泽山咸", "4;9"), ("火山旅", "3;8"), ("雷山小过", "8;3")),
+    22: (("风山渐", "2;7"), ("水山蹇", "7;2"), ("艮为山", "6;1")),
+    23: (("艮为山", "6;1"), ("地山谦", "1;6"), ("天地否", "9;6"), ("泽地萃", "4;4")),
+    24: (("泽地萃", "4;4"), ("火地晋", "3;3"), ("雷地豫", "8;8")),
+}
 YANG_ZHI = set("子寅辰午申戌")
 
 
@@ -183,6 +323,14 @@ def _fenjin_options(mountain_id: int) -> list[str]:
     zhi = FENJIN_ZHI_BY_MOUNTAIN_ID[mountain_id]
     stems = "甲丙戊庚壬" if zhi in YANG_ZHI else "乙丁己辛癸"
     return [f"{gan}{zhi}" for gan in stems]
+
+
+def _facing_direction(direction: str) -> str:
+    if "偏右" in direction:
+        return direction.replace("偏右", "偏左")
+    if "偏左" in direction:
+        return direction.replace("偏左", "偏右")
+    return direction
 
 
 def _mountain_cardinal(mountain: Mountain) -> str | None:
@@ -315,12 +463,21 @@ def get_options() -> dict:
             "name": m.name,
             "element": m.element,
             "label": f"{m.direction}【{m.name}山】{m.element}",
+            "facing_direction": _facing_direction(m.direction),
+            "facing_label": f"{_facing_direction(m.direction)}【{m.name}向】{m.element}",
             "jian": _jian_options(m.id),
             "fenjin": _fenjin_options(m.id),
+            "dagua": [{"label": label, "value": value} for label, value in DAGUA_OPTIONS[m.id]],
+            "auto_favorable_months": list(MOUNTAIN_FAVORABLE_MONTHS[m.id]),
         })
     return {
         "mountains": mountains,
+        "trigrams": TRIGRAM_OPTIONS,
+        "repair_directions": [{"label": label, "value": value} for label, value in REPAIR_DIRECTION_BUTTONS],
+        "repair_positions": REPAIR_POSITIONS,
         "use_types": USE_TYPES,
+        "use_type_options": [{"value": code, "label": label} for code, label in USE_TYPE_OPTIONS],
+        "use_meta": USE_META,
         "levels": [
             {"value": "全部", "label": "全部"},
             {"value": "大吉", "label": "1级大吉"},
@@ -329,7 +486,7 @@ def get_options() -> dict:
             {"value": "耗", "label": "4级日干次旺"},
         ],
         "hours": HOUR_OPTIONS,
-        "month_favorable": {k: sorted(v) for k, v in MONTH_FAVORABLE.items()},
+        "month_favorable": {k: sorted(v) for k, v in MONTH_ELEMENT_FAVORABLE.items()},
     }
 
 
@@ -350,8 +507,14 @@ def calculate_days(payload: dict) -> dict:
     if (end - start).days > 366:
         raise ValueError("一次最多计算367天")
 
-    level_filter = str(payload.get("level", "小吉"))
+    level_filter = str(payload.get("level", "大吉"))
     selected_months = {str(x) for x in payload.get("favorable_months", []) if str(x) in ZHI}
+    raw_month_relations = payload.get("month_relations", [])
+    if isinstance(raw_month_relations, str):
+        raw_month_relations = [x for x in re.split(r"[;,，\s]+", raw_month_relations) if x]
+    selected_month_relations = {str(x) for x in raw_month_relations if str(x) in {"旺", "生", "耗", "泄", "克"}}
+    if use_type in WANGSHENG_MONTH_USE_TYPES and not selected_month_relations:
+        selected_month_relations = set(DEFAULT_MONTH_RELATIONS)
 
     raw_hours = payload.get("hours") or [item["hour"] for item in HOUR_OPTIONS]
     hours = sorted({int(h) for h in raw_hours if int(h) in range(0, 24, 2)})
@@ -362,6 +525,15 @@ def calculate_days(payload: dict) -> dict:
     if isinstance(life_inputs, str):
         life_inputs = [x.strip() for x in life_inputs.replace("，", ",").split(",") if x.strip()]
     life_ganzhi = [g for g in (_life_ganzhi(x) for x in life_inputs) if g]
+
+    deceased_inputs = payload.get("deceased_years", [])
+    if isinstance(deceased_inputs, str):
+        deceased_inputs = [x.strip() for x in deceased_inputs.replace("，", ",").split(",") if x.strip()]
+    deceased_ganzhi = [g for g in (_life_ganzhi(x) for x in deceased_inputs) if g]
+
+    repair_positions = [str(x) for x in payload.get("repair_positions", []) if str(x)]
+    dagua = str(payload.get("dagua", ""))
+    dagua_value = str(payload.get("dagua_value", ""))
 
     results = []
     current = start
@@ -382,6 +554,11 @@ def calculate_days(payload: dict) -> dict:
             current += timedelta(days=1)
             continue
 
+        month_relation, _ = _day_relation(ZHI_ELEMENT[month_zhi], mountain.element)
+        if use_type in WANGSHENG_MONTH_USE_TYPES and selected_month_relations and month_relation not in selected_month_relations:
+            current += timedelta(days=1)
+            continue
+
         score = 0
         fatal = False
         good: list[str] = []
@@ -396,12 +573,20 @@ def calculate_days(payload: dict) -> dict:
         else:
             good.append(f"日干与山家关系：{relation}")
 
-        if mountain.element in MONTH_FAVORABLE.get(month_zhi, set()):
-            score += 3
-            good.append(f"{month_zhi}月为{mountain.element}山有利月")
+        if use_type in WANGSHENG_MONTH_USE_TYPES:
+            if month_relation in {"旺", "生"}:
+                score += 3
+            elif month_relation == "耗":
+                score += 1
+            good.append(f"{month_zhi}月对{mountain.name}山为{month_relation}")
         else:
-            score -= 1
-            bad.append(f"{month_zhi}月不在该山家自动利月内")
+            auto_months = MOUNTAIN_FAVORABLE_MONTHS[mountain.id]
+            if month_zhi in auto_months:
+                score += 3
+                good.append(f"{month_zhi}月在{mountain.name}山自动利月表内")
+            else:
+                score -= 1
+                bad.append(f"{month_zhi}月不在{mountain.name}山自动利月表内")
 
         if mountain.name in ZHI and CLASH[day_zhi] == mountain.name:
             score -= 8
@@ -493,6 +678,11 @@ def calculate_days(payload: dict) -> dict:
         },
         "use_type": use_type,
         "life_ganzhi": life_ganzhi,
+        "deceased_ganzhi": deceased_ganzhi,
+        "repair_positions": repair_positions,
+        "dagua": dagua,
+        "dagua_value": dagua_value,
+        "month_relations": sorted(selected_month_relations),
         "count": len(results),
         "results": results,
         "rule_notes": [

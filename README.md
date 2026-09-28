@@ -70,3 +70,27 @@ python app.py
 原站真正的最终日课评级权重在服务端 PHP 中，网页没有公开。当前 Python 内核没有假装获得那部分私有源码，而是使用已公开规则，加上正体五行常用的生克、冲合、三煞、通胜宜忌形成可执行评级。后续如果用同一组输入拿到原站输出样本，可以继续做差分校准，让评级结果进一步逼近原站。
 
 > 本项目实现的是传统民俗择日逻辑，不应替代建筑、施工、安全、法律或医疗等专业判断。
+
+
+## 原站黑盒对照采样
+
+为了校准原站服务端没有公开的日课判定规则，项目包含 `tools/capture_reference.py`。
+脚本使用普通 HTTP Session、标准浏览器请求头和固定请求间隔访问，不做 CAPTCHA 绕过、指纹伪装或代理轮换。
+
+Windows CMD：
+
+```bat
+set ZERIDASHI_PHONE=你的手机号
+set ZERIDASHI_PASSWORD=你的密码
+python tools\capture_reference.py
+```
+
+PowerShell：
+
+```powershell
+$env:ZERIDASHI_PHONE="你的手机号"
+$env:ZERIDASHI_PASSWORD="你的密码"
+python tools/capture_reference.py
+```
+
+输出位于 `reference_capture/<时间戳>/`，该目录已加入 `.gitignore`。脚本会在写文件前脱敏手机号和密码，也不会保存 Session Cookie。
