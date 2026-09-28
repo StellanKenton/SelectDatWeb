@@ -139,7 +139,40 @@ WANGSHENG_MONTH_USE_TYPES = {
     "造门楼", "修方", "修方动土", "作灶", "装修", "升层", "进神",
     "入宅归火", "移香出火", "修方兼竖造", "修坟", "旧坟立碑", "附葬",
 }
-DEFAULT_MONTH_RELATIONS = ("旺", "生", "耗")
+
+# 原站 topzeri_info.html 的 arryyongshiwangsheng 原值。
+REFERENCE_MONTH_RELATIONS = {
+    "建造": (),
+    "进神": ("旺", "生", "耗"),
+    "安门": (),
+    "修方兼竖造": ("旺", "生"),
+    "修方": ("旺", "生", "耗", "泄", "克"),
+    "装修": ("旺", "生", "耗"),
+    "入宅": (),
+    "造门楼": ("旺", "生", "耗"),
+    "竖造动土": (),
+    "修方动土": ("旺", "生", "耗", "泄", "克"),
+    "开业": (),
+    "作灶": ("旺", "生", "耗", "泄", "克"),
+    "封顶上樑": (),
+    "升层": ("旺", "生", "耗"),
+    "安葬": (),
+    "附葬": ("旺", "生"),
+    "修坟": ("旺", "生", "耗"),
+    "旧坟立碑": ("旺", "生", "耗"),
+    "安葬破土": (),
+    "附葬破土": ("旺", "生", "耗", "泄", "克"),
+    "造坟": (),
+    "启攒": (),
+    "移香出火": ("旺", "生", "耗"),
+    "入宅归火": ("旺", "生", "耗"),
+    "拆卸": (),
+    "避宅修方": ("旺", "生", "耗", "泄"),
+    "避宅装修": ("旺", "生", "耗", "泄"),
+    "空方动土": (),
+    "其它": (),
+    "交易": (),
+}
 
 def _use_meta(label: str) -> dict:
     mountain_title = "第二步【选择坐山】"
@@ -172,7 +205,7 @@ def _use_meta(label: str) -> dict:
             else ""
         ),
         "month_mode": "relation" if label in WANGSHENG_MONTH_USE_TYPES else "mountain",
-        "default_month_relations": list(DEFAULT_MONTH_RELATIONS) if label in WANGSHENG_MONTH_USE_TYPES else [],
+        "default_month_relations": list(REFERENCE_MONTH_RELATIONS.get(label, ())) if label in WANGSHENG_MONTH_USE_TYPES else [],
     }
 
 USE_META = {label: _use_meta(label) for label in USE_TYPES}
@@ -359,6 +392,12 @@ def _mountain_cardinal(mountain: Mountain) -> str | None:
     return None
 
 
+def _is_sansha_for_mountain(branch: str, mountain: Mountain) -> bool:
+    """Match the reference default 月/日/时三杀 hard filter."""
+    cardinal = _mountain_cardinal(mountain)
+    return bool(cardinal and SAN_SHA_DIRECTION.get(branch) == cardinal)
+
+
 def _day_relation(day_element: str, mountain_element: str) -> tuple[str, int]:
     # 以山家为主体：同我为旺，日干生山为生，山生日干为泄，
     # 山克日干为耗，日干克山为克。对应目标站点“旺/生/耗/泄/克”筛选项。
@@ -542,7 +581,7 @@ def calculate_days(payload: dict) -> dict:
         raw_month_relations = [x for x in re.split(r"[;,，\s]+", raw_month_relations) if x]
     selected_month_relations = {str(x) for x in raw_month_relations if str(x) in {"旺", "生", "耗", "泄", "克"}}
     if use_type in WANGSHENG_MONTH_USE_TYPES and not selected_month_relations:
-        selected_month_relations = set(DEFAULT_MONTH_RELATIONS)
+        selected_month_relations = set(REFERENCE_MONTH_RELATIONS.get(use_type, ()))
 
     raw_hours = payload.get("hours") or [item["hour"] for item in HOUR_OPTIONS]
     hours = sorted({int(h) for h in raw_hours if int(h) in range(0, 24, 2)})
@@ -593,6 +632,15 @@ def calculate_days(payload: dict) -> dict:
                 continue
 
         if selected_months and month_zhi not in selected_months:
+            current += timedelta(days=1)
+            continue
+
+        # 原站默认凶煞过滤包含“月三杀、日三杀、时三杀”，但不包含“年三杀”。
+        # 因此年三杀只显示提示；月/日/时三杀会把候选日课直接排除。
+        if _is_sansha_for_mountain(month_zhi, mountain):
+            current += timedelta(days=1)
+            continue
+        if _is_sansha_for_mountain(day_zhi, mountain):
             current += timedelta(days=1)
             continue
 
@@ -684,6 +732,8 @@ def calculate_days(payload: dict) -> dict:
             # 因此把所选时辰展开为独立 lesson；这也让顶部时辰勾选与
             # “显示：N个日课”计数语义和原站一致。
             for hour_row in _hour_rows(current, hours, mountain):
+                if _is_sansha_for_mountain(hour_row["zhi"], mountain):
+                    continue
                 results.append({
                     "lesson_id": f"{current.strftime('%Y%m%d')}{int(hour_row['hour']):02d}",
                     "date": current.isoformat(),
@@ -742,6 +792,6 @@ def calculate_days(payload: dict) -> dict:
         "rule_notes": [
             "二十四山编号/方位/五行、兼山结构、120分金结构与目标站点前端数据一致。",
             "利月按目标站点公开的寅卯木火、辰土金、巳午火土、未土、申酉金水、戌土金、亥子水木、丑土金规则。",
-            "每个结果按“日期+时辰”作为一个日课，和目标站点计数语义一致；生旺/耗按日干对山家五行关系独立筛选。",
+            "每个结果按“日期+时辰”作为一个日课；默认按原站启用月三杀、日三杀、时三杀硬过滤，年三杀仅显示不排除。",
         ],
     }
