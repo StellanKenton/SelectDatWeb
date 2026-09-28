@@ -177,36 +177,50 @@ def _use_meta(label: str) -> dict:
 
 USE_META = {label: _use_meta(label) for label in USE_TYPES}
 
-USE_TYPE_YI_ALIASES = {
-    "建造": ("修造", "竖造", "动土"),
-    "进神": ("祭祀", "祈福"),
+# 原站 topzeri.js 的 yijixuanze()/yijixuanze1()。
+# 这两个字段不是“宜事加分”，而是“排除日忌”：当天通书“忌”中命中任一项就直接排除。
+REFERENCE_DAY_JI_FILTERS_XIEJI = {
+    "建造": ("竖造",),
+    "进神": ("入宅", "安香火"),
     "安门": ("安门",),
-    "修方兼竖造": ("修造", "动土", "竖造"),
+    "修方兼竖造": ("竖造",),
     "修方": ("修造",),
     "装修": ("修造",),
     "入宅": ("入宅",),
-    "造门楼": ("安门", "修造"),
-    "竖造动土": ("竖造", "动土"),
+    "造门楼": ("修造", "动土"),
+    "竖造动土": ("动土",),
     "修方动土": ("修造", "动土"),
-    "开业": ("开市", "开业", "交易"),
+    "开业": ("开业",),
     "作灶": ("作灶",),
-    "封顶上樑": ("上梁", "竖柱"),
-    "升层": ("修造", "竖造"),
+    "封顶上樑": ("上梁",),
+    "升层": ("修造",),
     "安葬": ("安葬",),
     "附葬": ("安葬",),
-    "修坟": ("修坟", "修造"),
-    "旧坟立碑": ("立碑", "修坟"),
-    "安葬破土": ("安葬", "破土"),
-    "附葬破土": ("安葬", "破土"),
-    "造坟": ("安葬", "破土"),
+    "修坟": ("修造", "动土"),
+    "旧坟立碑": ("修造", "动土"),
+    "安葬破土": ("破土",),
+    "附葬破土": ("破土", "修造"),
+    "造坟": ("竖造",),
     "启攒": ("启攒",),
-    "移香出火": ("出火", "移徙"),
-    "入宅归火": ("入宅", "出火"),
-    "拆卸": ("拆卸",),
+    "移香出火": ("安香火",),
+    "入宅归火": ("入宅", "安香火"),
+    "拆卸": ("拆卸", "动土"),
     "避宅修方": ("修造",),
     "避宅装修": ("修造",),
     "空方动土": ("动土",),
-    "交易": ("交易", "立券"),
+    "其它": (),
+    "交易": ("交易",),
+}
+
+REFERENCE_DAY_JI_FILTERS_TONGSHU = {
+    **REFERENCE_DAY_JI_FILTERS_XIEJI,
+    # 原站 yijixuanze1() 唯一可见差异：通书版“拆卸”不再额外排除“动土”。
+    "拆卸": ("拆卸",),
+}
+
+REFERENCE_EDITIONS = {
+    "协纪版": REFERENCE_DAY_JI_FILTERS_XIEJI,
+    "通书版": REFERENCE_DAY_JI_FILTERS_TONGSHU,
 }
 
 HOUR_OPTIONS = [
@@ -391,21 +405,15 @@ def _same_san_he(a: str, b: str) -> bool:
     return any(a in group and b in group for group in SAN_HE)
 
 
-def _match_use_type(use_type: str, day_yi: Iterable[str], day_ji: Iterable[str]) -> tuple[int, list[str]]:
-    aliases = USE_TYPE_YI_ALIASES.get(use_type, (use_type,))
-    yi_text = "、".join(day_yi)
-    ji_text = "、".join(day_ji)
-    reasons: list[str] = []
-    score = 0
-    yi_hits = [x for x in aliases if x and x in yi_text]
-    ji_hits = [x for x in aliases if x and x in ji_text]
-    if yi_hits:
-        score += 2
-        reasons.append("宜：" + "、".join(yi_hits))
-    if ji_hits:
-        score -= 4
-        reasons.append("忌：" + "、".join(ji_hits))
-    return score, reasons
+def _reference_day_ji_filters(use_type: str, edition: str) -> tuple[str, ...]:
+    table = REFERENCE_EDITIONS.get(edition, REFERENCE_DAY_JI_FILTERS_XIEJI)
+    return tuple(table.get(use_type, ()))
+
+
+def _is_excluded_by_day_ji(use_type: str, edition: str, day_ji: Iterable[str]) -> tuple[bool, list[str]]:
+    ji = set(str(x) for x in day_ji)
+    hits = [item for item in _reference_day_ji_filters(use_type, edition) if item in ji]
+    return bool(hits), hits
 
 
 def _hour_rows(d: date, hours: list[int], mountain: Mountain) -> list[dict]:
@@ -478,6 +486,11 @@ def get_options() -> dict:
         "use_types": USE_TYPES,
         "use_type_options": [{"value": code, "label": label} for code, label in USE_TYPE_OPTIONS],
         "use_meta": USE_META,
+        "editions": list(REFERENCE_EDITIONS),
+        "day_ji_filters": {
+            edition: {k: list(v) for k, v in table.items()}
+            for edition, table in REFERENCE_EDITIONS.items()
+        },
         "levels": [
             {"value": "全部", "label": "全部"},
             {"value": "大吉", "label": "1级大吉"},
@@ -499,6 +512,9 @@ def calculate_days(payload: dict) -> dict:
     use_type = str(payload.get("use_type", "建造"))
     if use_type not in USE_TYPES:
         raise ValueError("无效的用事类型")
+    edition = str(payload.get("edition", "协纪版"))
+    if edition not in REFERENCE_EDITIONS:
+        raise ValueError("无效的宜忌版本")
 
     start = _parse_date(str(payload["start_date"]))
     end = _parse_date(str(payload["end_date"]))
@@ -635,10 +651,10 @@ def calculate_days(payload: dict) -> dict:
 
         day_yi = _safe_list(lunar, "getDayYi")
         day_ji = _safe_list(lunar, "getDayJi")
-        use_score, use_reasons = _match_use_type(use_type, day_yi, day_ji)
-        score += use_score
-        for reason in use_reasons:
-            (bad if reason.startswith("忌：") else good).append(reason)
+        excluded_by_ji, ji_hits = _is_excluded_by_day_ji(use_type, edition, day_ji)
+        if excluded_by_ji:
+            current += timedelta(days=1)
+            continue
 
         tian_shen_type = ""
         method = getattr(lunar, "getDayTianShenType", None)
@@ -695,6 +711,8 @@ def calculate_days(payload: dict) -> dict:
             "fenjin_options": _fenjin_options(mountain.id),
         },
         "use_type": use_type,
+        "edition": edition,
+        "day_ji_filters": list(_reference_day_ji_filters(use_type, edition)),
         "calendar_filter": {
             "ganzhi_year": ganzhi_year_filter,
             "ganzhi_month": ganzhi_month_filter,
