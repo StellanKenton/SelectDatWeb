@@ -18,7 +18,7 @@
 html,
 body {
   margin: 0;
-  min-width: 980px;
+  min-width: 1180px;
   height: 100%;
   background: var(--paper);
   color: #1b1712;
@@ -161,11 +161,12 @@ button {
 .main-grid {
   min-height: 0;
   display: grid;
-  grid-template-columns: 250px minmax(430px, 1fr) 310px;
+  grid-template-columns: 250px minmax(430px, 1fr) 250px 250px;
   background: var(--paper);
 }
 
 .left-panel,
+.year-panel,
 .input-panel,
 .result-panel {
   min-height: 0;
@@ -174,6 +175,11 @@ button {
 
 .left-panel {
   border-right: 10px solid #000;
+  background: var(--paper-2);
+}
+
+.year-panel {
+  border-left: 10px solid #000;
   background: var(--paper-2);
 }
 
@@ -508,14 +514,14 @@ button {
   color: #8a2020;
 }
 
-@media (max-width: 1150px) {
+@media (max-width: 1450px) {
   html,
   body {
-    min-width: 900px;
+    min-width: 1080px;
   }
 
   .main-grid {
-    grid-template-columns: 220px minmax(400px, 1fr) 290px;
+    grid-template-columns: 220px minmax(380px, 1fr) 220px 240px;
   }
 
   .day-main {
