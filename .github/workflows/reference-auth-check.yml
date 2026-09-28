@@ -24,9 +24,16 @@ jobs:
         run: |
           set -euo pipefail
           python tools/capture_reference.py
+      - name: Probe shanjia search result
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/probe_reference_search.py
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: reference-capture
-          path: reference_capture/
+          path: |
+            reference_capture/
+            reference_probe/
           if-no-files-found: warn
