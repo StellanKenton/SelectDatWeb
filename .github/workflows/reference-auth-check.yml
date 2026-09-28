@@ -14,6 +14,10 @@ jobs:
       ZERIDASHI_REQUEST_INTERVAL: "1.8"
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          path: main_src
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -40,6 +44,11 @@ jobs:
           set -euo pipefail
           google-chrome --version || true
           python tools/browser_reference_sample.py
+      - name: Compare captured levels with latest main
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/compare_reference_levels.py
       - name: Scan months for daji/xiaoji samples
         if: always()
         shell: bash
