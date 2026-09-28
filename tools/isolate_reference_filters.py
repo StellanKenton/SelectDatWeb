@@ -4,8 +4,10 @@ import json
 import os
 import re
 import time
+from html.parser import HTMLParser
 from pathlib import Path
 
+import requests
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select, WebDriverWait
@@ -117,31 +119,120 @@ def parse_html(html: str) -> dict:
     }
 
 
-def fetch_variant(driver, sha_values: list[str], day_ji: list[str]) -> str:
-    vals = list(day_ji[:4]) + [""] * (4 - len(day_ji[:4]))
-    script = r"""
-    const done = arguments[arguments.length - 1];
-    const sha = arguments[0];
-    const ji = arguments[1];
-    const form = document.getElementById('form1');
-    if (!form) { done({ok:false,error:'form1 missing'}); return; }
-    const fd = new FormData(form);
-    fd.set('Action', 'kaishisousuo');
-    fd.set('paichubiaozhi', '全部');
-    fd.set('xiongsha', sha.join(';'));
-    for (let i=0;i<4;i++) fd.set('rijishi'+i, ji[i] || '');
-    fetch(form.action || '/zeridashi/yixue/zeri.php', {
-      method:'POST',
-      body:fd,
-      credentials:'same-origin',
-      headers:{'X-Requested-With':'XMLHttpRequest'}
-    }).then(async r => done({ok:r.ok,status:r.status,text:await r.text()}))
-      .catch(e => done({ok:false,error:String(e)}));
-    """
-    result = driver.execute_async_script(script, sha_values, vals)
-    if not result or not result.get("ok"):
-        raise RuntimeError(f"variant POST failed: {result}")
-    return str(result["text"])
+class FormSnapshot(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.in_form = False
+        self.in_select = False
+        self.select_name = ""
+        self.select_value = None
+        self.fields: list[tuple[str, str]] = []
+        self.action = "/zeridashi/yixue/zeri.php"
+
+    def handle_starttag(self, tag, attrs):
+        a = dict(attrs)
+        if tag == "form" and a.get("id") == "form1":
+            self.in_form = True
+            self.action = a.get("action") or self.action
+            return
+        if not self.in_form:
+            return
+        if tag == "input":
+            name = a.get("name")
+            if not name:
+                return
+            typ = (a.get("type") or "text").lower()
+            if typ in {"checkbox", "radio"} and "checked" not in a:
+                return
+            self.fields.append((name, a.get("value") or ""))
+        elif tag == "select":
+            self.in_select = True
+            self.select_name = a.get("name") or ""
+            self.select_value = None
+        elif tag == "option" and self.in_select and "selected" in a:
+            self.select_value = a.get("value") or ""
+
+    def handle_endtag(self, tag):
+        if tag == "select" and self.in_select:
+            if self.select_name:
+                self.fields.append((self.select_name, self.select_value or ""))
+            self.in_select = False
+            self.select_name = ""
+            self.select_value = None
+        elif tag == "form" and self.in_form:
+            self.in_form = False
+
+
+def form_snapshot(html: str) -> FormSnapshot:
+    parser = FormSnapshot()
+    parser.feed(html)
+    return parser
+
+
+def browser_session(driver) -> requests.Session:
+    session = requests.Session()
+    session.headers.update({
+        "User-Agent": driver.execute_script("return navigator.userAgent"),
+        "Referer": f"{BASE}/zeridashi/yixue/zeri.php",
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    })
+    for cookie in driver.get_cookies():
+        session.cookies.set(
+            cookie["name"],
+            cookie["value"],
+            domain=cookie.get("domain") or "zeridashi.top",
+            path=cookie.get("path") or "/",
+        )
+    return session
+
+
+def mutate_fields(
+    base_fields: list[tuple[str, str]],
+    sha_values: list[str],
+    day_ji: list[str],
+) -> list[tuple[str, str]]:
+    replacements = {
+        "Action": "kaishisousuo",
+        "paichubiaozhi": "全部",
+        "xiongsha": ";".join(sha_values),
+        "rijishi0": day_ji[0] if len(day_ji) > 0 else "",
+        "rijishi1": day_ji[1] if len(day_ji) > 1 else "",
+        "rijishi2": day_ji[2] if len(day_ji) > 2 else "",
+        "rijishi3": day_ji[3] if len(day_ji) > 3 else "",
+    }
+    seen = set()
+    fields: list[tuple[str, str]] = []
+    for name, value in base_fields:
+        if name in replacements:
+            if name not in seen:
+                fields.append((name, replacements[name]))
+                seen.add(name)
+            continue
+        fields.append((name, value))
+    for name, value in replacements.items():
+        if name not in seen:
+            fields.append((name, value))
+    return fields
+
+
+def fetch_variant(
+    session: requests.Session,
+    action: str,
+    base_fields: list[tuple[str, str]],
+    sha_values: list[str],
+    day_ji: list[str],
+) -> str:
+    url = action if action.startswith("http") else BASE + action
+    response = session.post(
+        url,
+        data=mutate_fields(base_fields, sha_values, day_ji),
+        timeout=45,
+        allow_redirects=True,
+    )
+    response.raise_for_status()
+    response.encoding = response.apparent_encoding or response.encoding
+    return redact(response.text)
+
 
 
 def main() -> int:
@@ -158,13 +249,16 @@ def main() -> int:
         configure_baseline(driver)
         baseline_html = redact(driver.page_source)
         baseline = parse_html(baseline_html)
-
-        default_sha = driver.execute_script(
-            "return (document.getElementById('xiongsha')?.value || '').split(';').filter(Boolean);"
-        )
-        default_ji = driver.execute_script(
-            "return [0,1,2,3].map(i=>document.getElementById('rijishi'+i)?.value || '').filter(Boolean);"
-        )
+        snapshot = form_snapshot(baseline_html)
+        if not snapshot.fields:
+            raise RuntimeError("基准结果页未解析到 form1")
+        hidden = {}
+        for name, value in snapshot.fields:
+            hidden[name] = value
+        default_sha = [x for x in hidden.get("xiongsha", "").split(";") if x]
+        default_ji = [hidden.get(f"rijishi{i}", "") for i in range(4)]
+        default_ji = [x for x in default_ji if x]
+        session = browser_session(driver)
 
         variants = {}
         plan = [
@@ -174,14 +268,14 @@ def main() -> int:
             ("baseline", default_sha, default_ji),
         ]
         for name, sha, ji in plan:
-            html = fetch_variant(driver, sha, ji)
+            html = fetch_variant(session, snapshot.action, snapshot.fields, sha, ji)
             variants[name] = parse_html(html)
             time.sleep(1.4)
 
         none_ids = set(variants["none"]["lesson_ids"])
         individual = {}
         for rule in default_sha:
-            html = fetch_variant(driver, [rule], [])
+            html = fetch_variant(session, snapshot.action, snapshot.fields, [rule], [])
             parsed = parse_html(html)
             ids = set(parsed["lesson_ids"])
             parsed["excluded_ids"] = sorted(none_ids - ids)
