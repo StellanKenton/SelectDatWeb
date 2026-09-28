@@ -1,0 +1,27 @@
+name: Reference Detail Capture
+
+on:
+  push:
+    branches:
+      - probe/reference-details
+
+jobs:
+  capture-details:
+    runs-on: ubuntu-latest
+    env:
+      ZERIDASHI_PHONE: ${{ secrets.ZERIDASHI_PHONE }}
+      ZERIDASHI_PASSWORD: ${{ secrets.ZERIDASHI_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt selenium
+      - name: Capture two reference detail pages
+        run: python tools/capture_reference_details.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: reference-details
+          path: reference_details/
+          if-no-files-found: warn
