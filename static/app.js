@@ -1,8 +1,46 @@
 
 const S={options:null,mountains:[],repair:new Set(),repairPalace:""};
 const $=id=>document.getElementById(id);
+const GAN="甲乙丙丁戊己庚辛壬癸";
+const ZHI="子丑寅卯辰巳午未申酉戌亥";
+const MONTH_ZHI=["寅","卯","辰","巳","午","未","申","酉","戌","亥","子","丑"];
 
 function ymd(d){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");}
+function ymdParts(y,m,d){return y+"-"+String(m).padStart(2,"0")+"-"+String(d).padStart(2,"0");}
+function ganzhiYear(y){const i=((y-4)%60+60)%60;return GAN[i%10]+ZHI[i%12];}
+function ganzhiMonths(y){
+  const yStem=((y-4)%10+10)%10;
+  const firstStem=(yStem*2+2)%10;
+  return MONTH_ZHI.map((zhi,i)=>GAN[(firstStem+i)%10]+zhi);
+}
+function populateGanzhiToolbar(){
+  const now=new Date(), currentYear=now.getFullYear();
+  const years=[];
+  for(let y=1990;y<=2048;y++)years.push({value:String(y),label:y+ganzhiYear(y)+"年"});
+  setOpts($("ganzhiYearSelect"),years);
+  $("ganzhiYearSelect").value=String(Math.min(2048,Math.max(1990,currentYear)));
+  refreshGanzhiMonths();
+  const idx=(now.getMonth()+11)%12;
+  $("ganzhiMonthSelect").selectedIndex=idx;
+  setOpts($("ganzhiDaySelect"),["全部",...GAN.split(""),...ZHI.split("")].map(x=>({value:x,label:x==="全部"?"全部":x+"日"})));
+  syncGanzhiTitles();
+}
+function refreshGanzhiMonths(){
+  const y=Number($("ganzhiYearSelect").value)||new Date().getFullYear();
+  const old=$("ganzhiMonthSelect").value;
+  setOpts($("ganzhiMonthSelect"),ganzhiMonths(y).map(x=>({value:x,label:x+"月"})));
+  if(old && [...$("ganzhiMonthSelect").options].some(o=>o.value===old))$("ganzhiMonthSelect").value=old;
+  syncGanzhiTitles();
+}
+function syncGanzhiTitles(){
+  const year=$("ganzhiYearSelect")?.value;
+  const month=$("ganzhiMonthSelect")?.value;
+  if(year && month){
+    if($("monthShaTitle"))$("monthShaTitle").textContent=month+"月凶煞表";
+    if($("yearShaTitle"))$("yearShaTitle").textContent=ganzhiYear(Number(year))+"年凶煞【点击选择】不利";
+    if($("nextYearShaTitle"))$("nextYearShaTitle").textContent=ganzhiYear(Number(year)+1)+"年凶煞【点击选择】";
+  }
+}
 function parseDate(s){const a=s.split("-").map(Number);return new Date(a[0],a[1]-1,a[2]);}
 function addDays(d,n){const x=new Date(d);x.setDate(x.getDate()+n);return x;}
 function esc(v){return String(v==null?"":v).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;");}
@@ -139,10 +177,12 @@ function autoMonths(){
   document.querySelectorAll(".month-check").forEach(x=>x.checked=wanted.has(x.value));
 }
 function payload(){
-  const d=parseDate($("anchorDate").value),r=Number($("rangeSelect").value),m=currentMountain();
+  const y=Number($("ganzhiYearSelect").value),m=currentMountain();
   const dagua=$("daguaSelect");
   return{
-    start_date:ymd(r<0?addDays(d,r):d),end_date:ymd(r<0?d:addDays(d,r)),
+    start_date:ymdParts(y,1,15),end_date:ymdParts(y+1,2,15),
+    ganzhi_year:ganzhiYear(y),ganzhi_month:$("ganzhiMonthSelect").value,
+    ganzhi_day_filter:$("ganzhiDaySelect").value,
     use_type:$("useType").value,use_type_code:currentMeta().code,mountain_id:Number($("mountainSelect").value),
     jian:$("jianSelect").value,fenjin:$("fenjinSelect").value,
     dagua:dagua.options[dagua.selectedIndex]?.text||"",dagua_value:dagua.value,
@@ -192,10 +232,12 @@ async function calculate(){
   }catch(e){$("resultCount").textContent="计算失败";$("resultList").innerHTML='<div class="error-box">'+esc(e.message)+'</div>';}
 }
 async function init(){
-  $("anchorDate").value=ymd(new Date());
   const r=await fetch("/api/options");S.options=await r.json();S.mountains=S.options.mountains;
   setOpts($("useType"),S.options.use_types);setOpts($("levelSelect"),S.options.levels);$("levelSelect").value="大吉";
-  populateHours();populateMonths();populateTrigrams();setupRepair();
+  populateGanzhiToolbar();populateHours();populateMonths();populateTrigrams();setupRepair();
+  $("ganzhiYearSelect").onchange=()=>{refreshGanzhiMonths();calculate();};
+  $("ganzhiMonthSelect").onchange=()=>{syncGanzhiTitles();calculate();};
+  $("ganzhiDaySelect").onchange=calculate;
   $("trigramSelect").onchange=()=>populateMountains();
   $("mountainSelect").onchange=updateMountain;
   $("useType").onchange=updateUseMeta;

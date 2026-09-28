@@ -504,8 +504,12 @@ def calculate_days(payload: dict) -> dict:
     end = _parse_date(str(payload["end_date"]))
     if end < start:
         raise ValueError("结束日期不能早于开始日期")
-    if (end - start).days > 366:
-        raise ValueError("一次最多计算367天")
+    if (end - start).days > 420:
+        raise ValueError("一次最多计算421天")
+
+    ganzhi_year_filter = str(payload.get("ganzhi_year", "")).strip()
+    ganzhi_month_filter = str(payload.get("ganzhi_month", "")).strip()
+    ganzhi_day_filter = str(payload.get("ganzhi_day_filter", "")).strip()
 
     level_filter = str(payload.get("level", "大吉"))
     selected_months = {str(x) for x in payload.get("favorable_months", []) if str(x) in ZHI}
@@ -549,6 +553,20 @@ def calculate_days(payload: dict) -> dict:
         day_zhi = eight.getDayZhi()
         day_gan = eight.getDayGan()
         day_element = GAN_ELEMENT[day_gan]
+
+        if ganzhi_year_filter and year_gz != ganzhi_year_filter:
+            current += timedelta(days=1)
+            continue
+        if ganzhi_month_filter and month_gz != ganzhi_month_filter:
+            current += timedelta(days=1)
+            continue
+        if ganzhi_day_filter and ganzhi_day_filter != "全部":
+            if ganzhi_day_filter in GAN and day_gan != ganzhi_day_filter:
+                current += timedelta(days=1)
+                continue
+            if ganzhi_day_filter in ZHI and day_zhi != ganzhi_day_filter:
+                current += timedelta(days=1)
+                continue
 
         if selected_months and month_zhi not in selected_months:
             current += timedelta(days=1)
@@ -677,6 +695,11 @@ def calculate_days(payload: dict) -> dict:
             "fenjin_options": _fenjin_options(mountain.id),
         },
         "use_type": use_type,
+        "calendar_filter": {
+            "ganzhi_year": ganzhi_year_filter,
+            "ganzhi_month": ganzhi_month_filter,
+            "ganzhi_day_filter": ganzhi_day_filter,
+        },
         "life_ganzhi": life_ganzhi,
         "deceased_ganzhi": deceased_ganzhi,
         "repair_positions": repair_positions,
