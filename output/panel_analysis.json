@@ -1,0 +1,209 @@
+{
+  "source": "visible Edge site month/year panes, captured without a new search submission",
+  "year_cards_site": 10,
+  "year_cards_local": 10,
+  "year_checks": [
+    {
+      "year": 2026,
+      "ganzhi_equal": true,
+      "rows_equal": true,
+      "site_status": "不利",
+      "predicted_status_from_sansha": "不利",
+      "row_differences": []
+    },
+    {
+      "year": 2027,
+      "ganzhi_equal": true,
+      "rows_equal": true,
+      "site_status": "大利",
+      "predicted_status_from_sansha": "大利",
+      "row_differences": []
+    },
+    {
+      "year": 2028,
+      "ganzhi_equal": true,
+      "rows_equal": true,
+      "site_status": "大利",
+      "predicted_status_from_sansha": "大利",
+      "row_differences": []
+    },
+    {
+      "year": 2029,
+      "ganzhi_equal": true,
+      "rows_equal": true,
+      "site_status": "大利",
+      "predicted_status_from_sansha": "大利",
+      "row_differences": []
+    },
+    {
+      "year": 2030,
+      "ganzhi_equal": true,
+      "rows_equal": true,
+      "site_status": "不利",
+      "predicted_status_from_sansha": "不利",
+      "row_differences": []
+    },
+    {
+      "year": 2031,
+      "ganzhi_equal": true,
+      "rows_equal": true,
+      "site_status": "大利",
+      "predicted_status_from_sansha": "大利",
+      "row_differences": []
+    },
+    {
+      "year": 2032,
+      "ganzhi_equal": true,
+      "rows_equal": true,
+      "site_status": "大利",
+      "predicted_status_from_sansha": "大利",
+      "row_differences": []
+    },
+    {
+      "year": 2033,
+      "ganzhi_equal": true,
+      "rows_equal": true,
+      "site_status": "大利",
+      "predicted_status_from_sansha": "大利",
+      "row_differences": []
+    },
+    {
+      "year": 2034,
+      "ganzhi_equal": true,
+      "rows_equal": true,
+      "site_status": "不利",
+      "predicted_status_from_sansha": "不利",
+      "row_differences": []
+    },
+    {
+      "year": 2035,
+      "ganzhi_equal": true,
+      "rows_equal": true,
+      "site_status": "大利",
+      "predicted_status_from_sansha": "大利",
+      "row_differences": []
+    }
+  ],
+  "year_rows_all_equal": true,
+  "year_status_sansha_all_equal": true,
+  "bing_shen_month_title": "丙申月凶煞表",
+  "bing_shen_month_rows": [
+    [
+      "月破",
+      "寅山方"
+    ],
+    [
+      "月劫煞",
+      "巳山方"
+    ],
+    [
+      "月灾煞",
+      "午山方"
+    ],
+    [
+      "月煞",
+      "未山方"
+    ],
+    [
+      "伏兵（坐煞）",
+      "丙山方"
+    ],
+    [
+      "大祸（坐煞）",
+      "丁山方"
+    ],
+    [
+      "五黄煞",
+      "艮宫"
+    ],
+    [
+      "大月建",
+      "坤宫"
+    ],
+    [
+      "小月建",
+      "坤宫"
+    ],
+    [
+      "飞天官符",
+      "中宫"
+    ],
+    [
+      "飞地官符",
+      "兑宫"
+    ],
+    [
+      "罗天大退",
+      "天宫"
+    ],
+    [
+      "土符",
+      "卯方"
+    ],
+    [
+      "土皇杀",
+      "亥方"
+    ],
+    [
+      "正阴府",
+      "坤,子山"
+    ],
+    [
+      "傍阴府",
+      "癸,申,辰山"
+    ],
+    [
+      "克山运",
+      "艮,卯,巳山"
+    ],
+    [
+      "打头火",
+      "乾宫"
+    ],
+    [
+      "飞天独火",
+      "乾宫"
+    ],
+    [
+      "丙独火",
+      "中宫"
+    ],
+    [
+      "丁独火",
+      "乾宫"
+    ],
+    [
+      "月游火",
+      "艮宫"
+    ],
+    [
+      "巡山火星",
+      "震宫"
+    ],
+    [
+      "山家朱雀",
+      "离宫"
+    ],
+    [
+      "月建",
+      "申方"
+    ],
+    [
+      "月刑",
+      "寅山方"
+    ],
+    [
+      "月害",
+      "亥山方"
+    ],
+    [
+      "月厌",
+      "辰山方"
+    ],
+    [
+      "胎神",
+      "占碓磨"
+    ]
+  ],
+  "bing_shen_month_row_count": 29
+}

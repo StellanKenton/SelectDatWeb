@@ -7,7 +7,17 @@ from pathlib import Path
 import re
 from typing import Iterable
 
-from lunar_python import Solar
+from lunar_python import LunarMonth, Solar
+
+from .doushou import calculate_doushou
+from .mountain_rules import (
+    CLASH as MOUNTAIN_CLASH,
+    controls_shan_yun,
+    day_xiaomie,
+    jian_mountain,
+    sansha_for_mountain,
+    shan_yun_element,
+)
 
 
 GAN = "甲乙丙丁戊己庚辛壬癸"
@@ -177,9 +187,10 @@ REFERENCE_MONTH_RELATIONS = {
 }
 
 
-# 原站 topzeri_info.html 的 arr_shenshaguolv 原值。
+# 原站 topzeri_info.html 的 arr_shenshaguolv 原值；建造一项以 2026-09
+# 现有用户页面的实际勾选状态校正（页面脚本表与运行态有差异）。
 REFERENCE_SHA_FILTERS = {
-    "建造": ("月冲山", "日冲山", "时冲山", "月三杀", "日三杀", "时三杀", "月正阴府", "日正阴府", "时正阴府", "日正八煞", "时正八煞", "日星曜煞", "时星曜煞", "天星煞", "地曜煞", "日流太岁", "日消灭煞", "日山方煞"),
+    "建造": ("月冲山", "日冲山", "时冲山", "月三杀", "日三杀", "时三杀", "月正阴府", "日正阴府", "时正阴府", "五黄重叠", "二五交加", "日星曜煞", "时星曜煞", "天星煞", "地曜煞", "日流太岁", "日消灭煞", "日山方煞", "时山方煞", "月傍阴府", "时傍阴府"),
     "进神": ("月冲山", "日冲山", "时冲山", "月三杀", "日三杀", "时三杀", "日正八煞", "时正八煞", "日星曜煞", "时星曜煞", "天星煞", "地曜煞", "日流太岁"),
     "安门": ("日冲山", "时冲山", "日三杀", "时三杀"),
     "修方兼竖造": ("月冲山", "日冲山", "时冲山", "月三杀", "日三杀", "时三杀", "月正阴府", "日正阴府", "时正阴府", "日正八煞", "时正八煞", "日星曜煞", "时星曜煞", "天星煞", "地曜煞", "日流太岁", "日消灭煞", "日山方煞"),
@@ -216,7 +227,15 @@ REFERENCE_SHA_FILTERS = {
 SUPPORTED_SHA_FILTERS = (
     "月冲山", "日冲山", "时冲山", "月三杀", "日三杀", "时三杀",
     "月正阴府", "日正阴府", "时正阴府", "日正八煞", "时正八煞",
-    "日星曜煞", "时星曜煞", "天星煞", "地曜煞", "日山方煞",
+    "日星曜煞", "时星曜煞", "天星煞", "地曜煞", "日山方煞", "时山方煞",
+    "五黄重叠", "二五交加", "月傍阴府", "日傍阴府", "时傍阴府",
+    "月五黄煞", "日五黄煞", "时五黄煞",
+    "月克山运", "日克山运", "时克山运", "日消灭煞",
+)
+
+SUPPORTED_JIAN_FILTERS = (
+    "月冲兼山", "日冲兼山", "时冲兼山",
+    "兼山月三杀", "兼山日三杀", "兼山时三杀",
 )
 
 # Rows copied from the visible 2026-2035 year-sha cards of the reference site.
@@ -227,6 +246,37 @@ REFERENCE_YEAR_SHA = {
         Path(__file__).with_name("year_sha_reference.json").read_text(encoding="utf-8")
     ).items()
 }
+REFERENCE_YEAR_EXPANDED = json.loads(
+    Path(__file__).with_name("year_expanded_reference.json").read_text(encoding="utf-8")
+)
+
+# 傍阴府逐干映射可从连续十年的原站年煞表完整还原；每年天干各出现一次。
+BANG_YINFU_MOUNTAINS_BY_GAN = {}
+for _year in range(2026, 2036):
+    _value = next(value for name, value in REFERENCE_YEAR_SHA[_year] if name == "傍阴府")
+    BANG_YINFU_MOUNTAINS_BY_GAN[GAN[(_year - 4) % 10]] = frozenset(
+        item.strip() for item in _value.removesuffix("山").split(",")
+    )
+
+ALMANAC_REFERENCE = json.loads(
+    Path(__file__).with_name("almanac_reference.json").read_text(encoding="utf-8")
+)
+MONTH_SHA_REFERENCE = json.loads(
+    Path(__file__).with_name("month_sha_reference.json").read_text(encoding="utf-8")
+)
+
+
+def get_month_sha(year: int, ganzhi_month: str) -> dict:
+    """Return verified visible month-sha rows where an exact local reference exists."""
+    key = f"{year}-{ganzhi_month}"
+    row = MONTH_SHA_REFERENCE.get(key)
+    if row is None:
+        return {"year": year, "ganzhi_month": ganzhi_month, "reference_verified": False,
+                "bad": [], "good": [], "visible_text": ""}
+    return {"year": year, "ganzhi_month": ganzhi_month, "reference_verified": True,
+            "bad": [{"name": name, "value": value} for name, value in row["bad"]],
+            "good": [{"name": name, "value": value} for name, value in row["good"]],
+            "visible_text": row["visible_text"]}
 
 
 def get_year_sha(year: int, mountain_id: int = 1) -> dict:
@@ -242,6 +292,9 @@ def get_year_sha(year: int, mountain_id: int = 1) -> dict:
         rows = REFERENCE_YEAR_SHA.get(y)
         if rows is None:
             rows = (("太岁", f"{branch}方"), ("岁破（大耗）", f"{CLASH[branch]}山方"))
+        expanded = REFERENCE_YEAR_EXPANDED.get(str(y))
+        if expanded and expanded["ganzhi"] != stem + branch:
+            raise ValueError(f"年煞展开数据年份不匹配：{y}")
         cards.append({
             "year": y,
             "ganzhi": stem + branch,
@@ -250,7 +303,13 @@ def get_year_sha(year: int, mountain_id: int = 1) -> dict:
                      for name, value in rows],
             "san_sha_direction": direction,
             "san_sha_hits": _mountain_cardinal(mountain) == direction,
+            "status": "不利" if _mountain_cardinal(mountain) == direction else "大利",
             "reference_rows_verified": y in REFERENCE_YEAR_SHA,
+            "extra_sha": ([{"name": name, "value": value} for name, value in expanded["sha"]]
+                          if expanded else []),
+            "good_rows": ([{"name": name, "value": value} for name, value in expanded["good"]]
+                          if expanded else []),
+            "reference_expanded_verified": expanded is not None,
         })
     return {"mountain": mountain.name, "cards": cards}
 
@@ -587,6 +646,46 @@ def _hits_zheng_yinfu(ganzhi: str, mountain: Mountain) -> bool:
     return bool(stems and ganzhi and ganzhi[0] in stems)
 
 
+def _hits_bang_yinfu(ganzhi: str, mountain: Mountain) -> bool:
+    return bool(ganzhi and mountain.name in BANG_YINFU_MOUNTAINS_BY_GAN.get(ganzhi[0], ()))
+
+
+PALACE_NUMBER_BY_TRIGRAM = {"坎": 1, "坤": 2, "震": 3, "巽": 4,
+                            "乾": 6, "兑": 7, "艮": 8, "离": 9}
+
+MONTH_JIE = frozenset({"立春", "惊蛰", "清明", "立夏", "芒种", "小暑",
+                       "立秋", "白露", "寒露", "立冬", "大雪", "小寒"})
+
+
+def _month_nine_star(d: date, hour: int, lunar) -> int:
+    """Use the previous solar month before the precise term time on a Jie day."""
+    next_term = lunar.getNextJieQi()
+    solar = next_term.getSolar()
+    if (next_term.getName() in MONTH_JIE and
+            (solar.getYear(), solar.getMonth(), solar.getDay()) == (d.year, d.month, d.day) and
+            hour * 3600 < solar.getHour() * 3600 + solar.getMinute() * 60 + solar.getSecond()):
+        previous = Solar.fromYmdHms(d.year, d.month, d.day, 0, 0, 0).next(-1).getLunar()
+        return previous.getMonthNineStar().getIndex() + 1
+    return lunar.getMonthNineStar().getIndex() + 1
+
+
+def _flying_seat_stars(d: date, hour: int, mountain: Mountain) -> tuple[int, int, int, int]:
+    """Return year, month, day and time stars at the selected seat."""
+    lunar = Solar.fromYmdHms(d.year, d.month, d.day, hour, 0, 0).getLunar()
+    shift = PALACE_NUMBER_BY_TRIGRAM[mountain.trigram] - 5
+    centers = (lunar.getYearNineStar().getIndex() + 1,
+               _month_nine_star(d, hour, lunar),
+               lunar.getDayNineStar().getIndex() + 1,
+               lunar.getTimeNineStar().getIndex() + 1)
+    return tuple((center - 1 + shift) % 9 + 1 for center in centers)
+
+
+def _flying_seat_day_hour_stars(d: date, hour: int, mountain: Mountain) -> tuple[int, int]:
+    """Compatibility helper for the seated daily and hourly star pair."""
+    stars = _flying_seat_stars(d, hour, mountain)
+    return stars[2], stars[3]
+
+
 def _hits_zheng_basha(ganzhi: str, mountain: Mountain) -> bool:
     return ganzhi in ZHENG_BASHA_GZ_BY_TRIGRAM.get(mountain.trigram, frozenset())
 
@@ -702,9 +801,15 @@ def _reference_day_ji_filters(use_type: str, yiji_mode: str) -> tuple[str, ...]:
     return tuple(table.get(use_type, ()))
 
 
-def _is_excluded_by_day_ji(use_type: str, yiji_mode: str, day_ji: Iterable[str]) -> tuple[bool, list[str]]:
+def _is_excluded_by_day_ji(use_type: str, yiji_mode: str, day_ji: Iterable[str],
+                           day_yi: Iterable[str] = ()) -> tuple[bool, list[str]]:
     ji = set(str(x) for x in day_ji)
     hits = [item for item in _reference_day_ji_filters(use_type, yiji_mode) if item in ji]
+    if _normalize_yiji_mode(yiji_mode) != "off":
+        special = set(str(x) for x in day_yi) | ji
+        for marker in ("诸事不宜", "日值四离", "日值四绝"):
+            if marker in special:
+                hits.append(marker)
     return bool(hits), hits
 
 
@@ -788,6 +893,7 @@ def get_options() -> dict:
         "use_meta": USE_META,
         "default_sha_filters": {k: list(v) for k, v in REFERENCE_SHA_FILTERS.items()},
         "supported_sha_filters": list(SUPPORTED_SHA_FILTERS),
+        "supported_jian_filters": list(SUPPORTED_JIAN_FILTERS),
         "yiji_modes": [
             {"value": value, "label": meta["label"]}
             for value, meta in REFERENCE_YIJI_MODES.items()
@@ -818,6 +924,7 @@ def get_options() -> dict:
 
 
 def calculate_days(payload: dict) -> dict:
+    evaluation_mode = payload.get("evaluation_mode") is True
     mountain_id = int(payload.get("mountain_id", 1))
     if mountain_id not in MOUNTAINS:
         raise ValueError("无效的二十四山编号")
@@ -842,20 +949,30 @@ def calculate_days(payload: dict) -> dict:
     ganzhi_year_filter = str(payload.get("ganzhi_year", "")).strip()
     ganzhi_month_filter = str(payload.get("ganzhi_month", "")).strip()
     ganzhi_day_filter = str(payload.get("ganzhi_day_filter", "")).strip()
+    calendar_mode = str(payload.get("calendar_mode", "干支"))
+    calendar_year = int(payload.get("calendar_year", 0) or 0)
+    calendar_month = int(payload.get("calendar_month", 0) or 0)
+    calendar_day = int(payload.get("calendar_day", 0) or 0)
+    if calendar_mode not in {"干支", "公历", "农历"}:
+        raise ValueError("无效的日期类型")
 
-    level_filter = str(payload.get("level", "大吉"))
-    selected_months = {str(x) for x in payload.get("favorable_months", []) if str(x) in ZHI}
+    level_filter = "全部" if evaluation_mode else str(payload.get("level", "大吉"))
+    selected_months = set() if evaluation_mode else {str(x) for x in payload.get("favorable_months", []) if str(x) in ZHI}
     raw_month_relations = payload.get("month_relations", [])
     if isinstance(raw_month_relations, str):
         raw_month_relations = [x for x in re.split(r"[;,，\s]+", raw_month_relations) if x]
     selected_month_relations = {str(x) for x in raw_month_relations if str(x) in {"旺", "生", "耗", "泄", "克"}}
     if use_type in WANGSHENG_MONTH_USE_TYPES and not selected_month_relations:
         selected_month_relations = set(REFERENCE_MONTH_RELATIONS.get(use_type, ()))
+    if evaluation_mode:
+        selected_month_relations.clear()
 
-    raw_hours = payload.get("hours") or [item["hour"] for item in HOUR_OPTIONS]
+    raw_hours = payload.get("hours")
+    if raw_hours is None:
+        raw_hours = [item["hour"] for item in HOUR_OPTIONS]
     hours = sorted({int(h) for h in raw_hours if int(h) in range(0, 24, 2)})
     if not hours:
-        hours = [item["hour"] for item in HOUR_OPTIONS]
+        hours = [0]
 
     life_inputs = payload.get("life_years", [])
     if isinstance(life_inputs, str):
@@ -877,6 +994,15 @@ def calculate_days(payload: dict) -> dict:
         active_sha_filters = {str(x) for x in supplied_filters} & set(SUPPORTED_SHA_FILTERS)
     else:
         raise ValueError("神煞过滤须为列表")
+    if evaluation_mode:
+        active_sha_filters.clear()
+    supplied_jian_filters = payload.get("jian_filters", [])
+    if not isinstance(supplied_jian_filters, list):
+        raise ValueError("兼山过滤须为列表")
+    active_jian_filters = {str(x) for x in supplied_jian_filters} & set(SUPPORTED_JIAN_FILTERS)
+    if evaluation_mode:
+        active_jian_filters.clear()
+    selected_jian = jian_mountain(str(payload.get("jian", "")))
     life_sha_filter = payload.get("life_sha_filter", True) is not False
 
     results = []
@@ -884,6 +1010,17 @@ def calculate_days(payload: dict) -> dict:
     while current <= end:
         lunar = Solar.fromYmd(current.year, current.month, current.day).getLunar()
         eight = lunar.getEightChar()
+
+        if calendar_mode == "公历" and ((calendar_year and current.year != calendar_year) or
+                                         (calendar_month and current.month != calendar_month) or
+                                         (calendar_day and current.day != calendar_day)):
+            current += timedelta(days=1)
+            continue
+        if calendar_mode == "农历" and ((calendar_year and lunar.getYear() != calendar_year) or
+                                         (calendar_month and lunar.getMonth() != calendar_month) or
+                                         (calendar_day and lunar.getDay() != calendar_day)):
+            current += timedelta(days=1)
+            continue
 
         year_gz = eight.getYear()
         month_gz = eight.getMonth()
@@ -928,7 +1065,13 @@ def calculate_days(payload: dict) -> dict:
         if "月正阴府" in active_sha_filters and _hits_zheng_yinfu(month_gz, mountain):
             current += timedelta(days=1)
             continue
+        if "月傍阴府" in active_sha_filters and _hits_bang_yinfu(month_gz, mountain):
+            current += timedelta(days=1)
+            continue
         if "日正阴府" in active_sha_filters and _hits_zheng_yinfu(day_gz, mountain):
+            current += timedelta(days=1)
+            continue
+        if "日傍阴府" in active_sha_filters and _hits_bang_yinfu(day_gz, mountain):
             current += timedelta(days=1)
             continue
         if "日正八煞" in active_sha_filters and _hits_zheng_basha(day_gz, mountain):
@@ -940,6 +1083,27 @@ def calculate_days(payload: dict) -> dict:
         if "日山方煞" in active_sha_filters and _hits_shanfang(day_gz, mountain):
             current += timedelta(days=1)
             continue
+        if ("月克山运" in active_sha_filters and
+                controls_shan_yun(month_gz, year_gz, mountain.name)):
+            current += timedelta(days=1)
+            continue
+        if ("日克山运" in active_sha_filters and
+                controls_shan_yun(day_gz, year_gz, mountain.name)):
+            current += timedelta(days=1)
+            continue
+        if selected_jian:
+            if "月冲兼山" in active_jian_filters and selected_jian in ZHI and MOUNTAIN_CLASH[month_zhi] == selected_jian:
+                current += timedelta(days=1)
+                continue
+            if "日冲兼山" in active_jian_filters and selected_jian in ZHI and MOUNTAIN_CLASH[day_zhi] == selected_jian:
+                current += timedelta(days=1)
+                continue
+            if "兼山月三杀" in active_jian_filters and sansha_for_mountain(month_zhi, selected_jian):
+                current += timedelta(days=1)
+                continue
+            if "兼山日三杀" in active_jian_filters and sansha_for_mountain(day_zhi, selected_jian):
+                current += timedelta(days=1)
+                continue
 
         month_relation, _ = _day_relation(ZHI_ELEMENT[month_zhi], mountain.element)
         if use_type in WANGSHENG_MONTH_USE_TYPES and selected_month_relations and month_relation not in selected_month_relations:
@@ -1004,6 +1168,10 @@ def calculate_days(payload: dict) -> dict:
 
         day_yi = _safe_list(lunar, "getDayYi")
         day_ji = _safe_list(lunar, "getDayJi")
+        reference_almanac = ALMANAC_REFERENCE.get(current.isoformat())
+        if reference_almanac:
+            day_yi = list(reference_almanac["yi"])
+            day_ji = list(reference_almanac["ji"])
         day_ji_shen = _safe_list(lunar, "getDayJiShen")
         day_xiong_sha = _safe_list(lunar, "getDayXiongSha")
         zhi_xing = _safe_value(lunar, "getZhiXing")
@@ -1013,7 +1181,12 @@ def calculate_days(payload: dict) -> dict:
         day_tian_shen = _safe_value(lunar, "getDayTianShen")
         day_tian_shen_type = _safe_value(lunar, "getDayTianShenType")
         jieqi_name, jieqi_times = _jieqi_context(lunar)
-        excluded_by_ji, ji_hits = _is_excluded_by_day_ji(use_type, yiji_mode, day_ji)
+        if reference_almanac:
+            day_ji_shen = list(reference_almanac.get("ji_shen") or day_ji_shen)
+            day_xiong_sha = list(reference_almanac.get("xiong_sha") or day_xiong_sha)
+            day_position_tai = reference_almanac.get("day_position_tai") or day_position_tai
+            jieqi_times = reference_almanac.get("jieqi_times") or jieqi_times
+        excluded_by_ji, ji_hits = (False, []) if evaluation_mode else _is_excluded_by_day_ji(use_type, yiji_mode, day_ji, day_yi)
         if excluded_by_ji:
             current += timedelta(days=1)
             continue
@@ -1033,27 +1206,75 @@ def calculate_days(payload: dict) -> dict:
             bad.append("黑道日")
 
         level, level_name = _grade(score, fatal)
-        if _passes_level(level, level_filter, relation):
+        # 已保存的壬山子时卡片给出了原站五行等级，可校准这组已观察条件。
+        # 其它山／时仍沿用待验证的评分模型，不把样本标签外推到未知条件。
+        reference_grade = (reference_almanac or {}).get("ren_hour0_grade") if mountain.id == 1 and hours == [0] else None
+        if reference_grade == "五行大吉":
+            level, level_name = 1, "1级大吉"
+        grade_passes = _passes_level(level, level_filter, relation)
+        if reference_grade and level_filter == "大吉":
+            grade_passes = reference_grade == "五行大吉"
+        if grade_passes:
             # 原站一个“日课”对应一个具体日期+时辰，而不是一天一个结果。
             # 因此把所选时辰展开为独立 lesson；这也让顶部时辰勾选与
             # “显示：N个日课”计数语义和原站一致。
             for hour_row in _hour_rows(current, hours, mountain):
                 time_gz = hour_row["ganzhi"]
+                xiaomie_hit = day_xiaomie(
+                    day_gz, datetime(current.year, current.month, current.day,
+                                        hour_row["hour"]), mountain.name
+                )
+                if xiaomie_hit and "日消灭煞" in active_sha_filters:
+                    continue
                 if "时冲山" in active_sha_filters and mountain.name in ZHI and CLASH[hour_row["zhi"]] == mountain.name:
                     continue
                 if "时三杀" in active_sha_filters and _is_sansha_for_mountain(hour_row["zhi"], mountain):
                     continue
                 if "时正阴府" in active_sha_filters and _hits_zheng_yinfu(time_gz, mountain):
                     continue
+                if "时傍阴府" in active_sha_filters and _hits_bang_yinfu(time_gz, mountain):
+                    continue
                 if "时正八煞" in active_sha_filters and _hits_zheng_basha(time_gz, mountain):
                     continue
                 if "时星曜煞" in active_sha_filters and _hits_xingyao(time_gz, mountain):
                     continue
+                if "时山方煞" in active_sha_filters and _hits_shanfang(time_gz, mountain):
+                    continue
+                if ("时克山运" in active_sha_filters and
+                        controls_shan_yun(time_gz, year_gz, mountain.name)):
+                    continue
+                if selected_jian:
+                    if "时冲兼山" in active_jian_filters and selected_jian in ZHI and MOUNTAIN_CLASH[hour_row["zhi"]] == selected_jian:
+                        continue
+                    if "兼山时三杀" in active_jian_filters and sansha_for_mountain(hour_row["zhi"], selected_jian):
+                        continue
                 pillars = (year_gz, month_gz, day_gz, time_gz)
                 if "天星煞" in active_sha_filters and _hits_tianxing(pillars, mountain):
                     continue
                 if "地曜煞" in active_sha_filters and _hits_diyao(pillars, mountain):
                     continue
+                seat_stars = _flying_seat_stars(current, hour_row["hour"], mountain)
+                if "五黄重叠" in active_sha_filters and seat_stars.count(5) >= 2:
+                    continue
+                if "二五交加" in active_sha_filters and 2 in seat_stars and 5 in seat_stars:
+                    continue
+                if any(name in active_sha_filters and seat_stars[index] == 5 for name, index in
+                       (("月五黄煞", 1), ("日五黄煞", 2), ("时五黄煞", 3))):
+                    continue
+                star_lunar = Solar.fromYmdHms(current.year, current.month, current.day, hour_row["hour"], 0, 0).getLunar()
+                center_stars = (star_lunar.getYearNineStar().getIndex() + 1,
+                                _month_nine_star(current, hour_row["hour"], star_lunar),
+                                star_lunar.getDayNineStar().getIndex() + 1,
+                                star_lunar.getTimeNineStar().getIndex() + 1)
+                facing_palace = 10 - PALACE_NUMBER_BY_TRIGRAM[mountain.trigram]
+                facing_stars = tuple((star - 1 + facing_palace - 5) % 9 + 1 for star in center_stars)
+                flying_stars = {"facing": "".join(map(str, facing_stars)),
+                                "center": "".join(map(str, center_stars)),
+                                "seat": "".join(map(str, seat_stars))}
+                if mountain.id == 1 and hour_row["hour"] == 0 and reference_almanac:
+                    site_stars = reference_almanac.get("ren_hour0_flying_stars") or {}
+                    if all(site_stars.values()):
+                        flying_stars = site_stars
                 results.append({
                     "lesson_id": f"{current.strftime('%Y%m%d')}{int(hour_row['hour']):02d}",
                     "date": current.isoformat(),
@@ -1062,6 +1283,7 @@ def calculate_days(payload: dict) -> dict:
                     "time_ganzhi": hour_row["ganzhi"],
                     "time_relation": hour_row["relation"],
                     "lunar": lunar.toString(),
+                    "lunar_month_size": LunarMonth.fromYm(lunar.getYear(), lunar.getMonth()).getDayCount(),
                     "year_ganzhi": year_gz,
                     "month_ganzhi": month_gz,
                     "day_ganzhi": day_gz,
@@ -1071,20 +1293,31 @@ def calculate_days(payload: dict) -> dict:
                     "score": score,
                     "level": level,
                     "level_name": level_name,
+                    "reference_grade_label": reference_grade or "",
                     "good": list(good),
                     "bad": list(bad),
                     "yi": day_yi,
                     "ji": day_ji,
                     "ji_shen": day_ji_shen,
                     "xiong_sha": day_xiong_sha,
+                    "compass_gods_text": (reference_almanac or {}).get("compass_gods_text", ""),
+                    "shan_sha_labels": (reference_almanac or {}).get("ren_hour0_shan_sha", [])
+                                       if mountain.id == 1 and hour_row["hour"] == 0 else [],
+                    "day_xiaomie": xiaomie_hit,
                     "zhi_xing": zhi_xing,
                     "xiu": xiu,
                     "xiu_luck": xiu_luck,
                     "day_position_tai": day_position_tai,
+                    "men_guang": (reference_almanac or {}).get("men_guang", ""),
+                    "hour_signs": (reference_almanac or {}).get("ren_hour0_hour_signs", [])
+                                  if mountain.id == 1 and hour_row["hour"] == 0 else [],
                     "day_tian_shen": day_tian_shen,
                     "day_tian_shen_type": day_tian_shen_type,
                     "jieqi": jieqi_name,
                     "jieqi_times": jieqi_times,
+                    "flying_stars": flying_stars,
+                    "doushou": calculate_doushou(mountain.name, pillars),
+                    "shan_yun_element": shan_yun_element(year_gz, mountain.name),
                     "hours": [hour_row],
                 })
 
@@ -1104,12 +1337,14 @@ def calculate_days(payload: dict) -> dict:
             "fenjin_options": _fenjin_options(mountain.id),
         },
         "use_type": use_type,
+        "evaluation_mode": evaluation_mode,
         "edition": edition,
         "yiji_mode": yiji_mode,
         "yiji_label": yiji_meta["label"],
         "day_ji_filters": list(_reference_day_ji_filters(use_type, yiji_mode)),
         "sha_filters": list(REFERENCE_SHA_FILTERS.get(use_type, ())),
         "active_sha_filters": [name for name in SUPPORTED_SHA_FILTERS if name in active_sha_filters],
+        "active_jian_filters": [name for name in SUPPORTED_JIAN_FILTERS if name in active_jian_filters],
         "life_sha_filter": life_sha_filter,
         "calendar_filter": {
             "ganzhi_year": ganzhi_year_filter,
@@ -1127,6 +1362,6 @@ def calculate_days(payload: dict) -> dict:
         "rule_notes": [
             "二十四山编号/方位/五行、兼山结构、120分金结构与目标站点前端数据一致。",
             "利月按目标站点公开的寅卯木火、辰土金、巳午火土、未土、申酉金水、戌土金、亥子水木、丑土金规则。",
-            "每个结果按“日期+时辰”作为一个日课；三杀、正阴府、正八煞、星曜煞、天星煞、地曜煞、山方煞按原站官方解析公式和当前用事默认勾选项硬过滤。",
+            "每个结果按“日期+时辰”作为一个日课；所支持的神煞规则按当前用事所选项目过滤，未支持的规则不参与计算。",
         ],
     }

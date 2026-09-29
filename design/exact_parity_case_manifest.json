@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "case_count": 40,
+  "phase_counts": {
+    "baseline": 16,
+    "adaptive": 12,
+    "review_holdout": 12
+  },
+  "minimum_site_queries": 28,
+  "maximum_planned_site_queries": 40,
+  "adaptive_cases_are_optional": true,
+  "full_reference_text_captured": false,
+  "jsonl_sha256": "204407858ca186a9b5ba5ac1254e8d5dd5d4b65522d2802c1c97f4054636726a"
+}

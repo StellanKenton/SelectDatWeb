@@ -1,0 +1,283 @@
+{
+  "case_id": "B07_bing_mountain_reference",
+  "captured_at": "2026-09-28T10:49:59.125Z",
+  "source": "Edge现有用户标签页可见内容",
+  "search_action": "右侧择课搜索",
+  "top_selects": [
+    {
+      "id": "rilitype",
+      "text": "公历",
+      "value": "公历"
+    },
+    {
+      "id": "gonglinian",
+      "text": "2026年",
+      "value": "2026"
+    },
+    {
+      "id": "gongliyue",
+      "text": "9月",
+      "value": "9"
+    },
+    {
+      "id": "gongliri",
+      "text": "全部",
+      "value": "全部"
+    },
+    {
+      "id": "nonglinian",
+      "text": "2026年",
+      "value": "2026"
+    },
+    {
+      "id": "nongliyue",
+      "text": "八月",
+      "value": "八"
+    },
+    {
+      "id": "nongliri",
+      "text": "全部",
+      "value": "全部"
+    },
+    {
+      "id": "ganzhinian",
+      "text": "2026丙午年",
+      "value": "163"
+    },
+    {
+      "id": "ganzhiyue",
+      "text": "庚寅月",
+      "value": "1945"
+    },
+    {
+      "id": "ganzhiri",
+      "text": "全部",
+      "value": "全部"
+    },
+    {
+      "id": "fanwei",
+      "text": "范围",
+      "value": "范围"
+    }
+  ],
+  "right_selects": [
+    {
+      "id": "paichubiaozhi",
+      "text": "全部",
+      "value": "全部"
+    },
+    {
+      "id": "yiji",
+      "text": "不显示",
+      "value": "off"
+    },
+    {
+      "id": "yongshi",
+      "text": "建造",
+      "value": "0"
+    },
+    {
+      "id": "zuobagua",
+      "text": "【南方】离卦",
+      "value": "9"
+    },
+    {
+      "id": "ershisishan",
+      "text": "正南偏右【丙山】火",
+      "value": "13"
+    },
+    {
+      "id": "jian",
+      "text": "兼右【巳亥】",
+      "value": "巳亥"
+    },
+    {
+      "id": "fenjin",
+      "text": "【乙巳】分金",
+      "value": "乙巳"
+    },
+    {
+      "id": "dagua",
+      "text": "泽天夬",
+      "value": "4;6"
+    },
+    {
+      "id": "seltiangan",
+      "text": "甲",
+      "value": "甲"
+    },
+    {
+      "id": "seldizhi",
+      "text": "子",
+      "value": "子"
+    },
+    {
+      "id": "mingshaguolv",
+      "text": "命煞过滤",
+      "value": "命煞过滤"
+    },
+    {
+      "id": "seltiangan1",
+      "text": "甲",
+      "value": "甲"
+    },
+    {
+      "id": "seldizhi1",
+      "text": "子",
+      "value": "子"
+    },
+    {
+      "id": "huamingshaguolv",
+      "text": "命煞过滤",
+      "value": "命煞过滤"
+    },
+    {
+      "id": "xuanyueli",
+      "text": "手动添加利月",
+      "value": "月支"
+    },
+    {
+      "id": "rijishi0",
+      "text": "",
+      "value": ""
+    },
+    {
+      "id": "rijishi1",
+      "text": "",
+      "value": ""
+    },
+    {
+      "id": "rijishi2",
+      "text": "",
+      "value": ""
+    },
+    {
+      "id": "rijishi3",
+      "text": "",
+      "value": ""
+    },
+    {
+      "id": "shenshawei1",
+      "text": "【丙】位",
+      "value": "13"
+    },
+    {
+      "id": "shenshawei2",
+      "text": "",
+      "value": ""
+    }
+  ],
+  "selected_hours": [
+    0
+  ],
+  "active_filters": [
+    {
+      "label": "月冲山",
+      "name": "Arry_xiongsha[]",
+      "value": "月冲山"
+    },
+    {
+      "label": "日冲山",
+      "name": "Arry_xiongsha[]",
+      "value": "日冲山"
+    },
+    {
+      "label": "时冲山",
+      "name": "Arry_xiongsha[]",
+      "value": "时冲山"
+    },
+    {
+      "label": "月三杀",
+      "name": "Arry_xiongsha[]",
+      "value": "月三杀"
+    },
+    {
+      "label": "日三杀",
+      "name": "Arry_xiongsha[]",
+      "value": "日三杀"
+    },
+    {
+      "label": "时三杀",
+      "name": "Arry_xiongsha[]",
+      "value": "时三杀"
+    },
+    {
+      "label": "月正阴府",
+      "name": "Arry_xiongsha[]",
+      "value": "月正阴府"
+    },
+    {
+      "label": "日正阴府",
+      "name": "Arry_xiongsha[]",
+      "value": "日正阴府"
+    },
+    {
+      "label": "时正阴府",
+      "name": "Arry_xiongsha[]",
+      "value": "时正阴府"
+    },
+    {
+      "label": "五黄重叠",
+      "name": "Arry_xiongsha[]",
+      "value": "五黄重叠"
+    },
+    {
+      "label": "二五交加",
+      "name": "Arry_xiongsha[]",
+      "value": "二五交加"
+    },
+    {
+      "label": "日星曜煞",
+      "name": "Arry_xiongsha[]",
+      "value": "日星曜煞"
+    },
+    {
+      "label": "时星曜煞",
+      "name": "Arry_xiongsha[]",
+      "value": "时星曜煞"
+    },
+    {
+      "label": "天星煞",
+      "name": "Arry_xiongsha[]",
+      "value": "天星煞"
+    },
+    {
+      "label": "地曜煞",
+      "name": "Arry_xiongsha[]",
+      "value": "地曜煞"
+    },
+    {
+      "label": "日流太岁",
+      "name": "Arry_xiongsha[]",
+      "value": "日流太岁"
+    },
+    {
+      "label": "日消灭煞",
+      "name": "Arry_xiongsha[]",
+      "value": "日消灭煞"
+    },
+    {
+      "label": "日山方煞",
+      "name": "Arry_xiongsha[]",
+      "value": "日山方煞"
+    },
+    {
+      "label": "时山方煞",
+      "name": "Arry_xiongsha[]",
+      "value": "时山方煞"
+    },
+    {
+      "label": "月傍阴府",
+      "name": "Arry_xiongsha[]",
+      "value": "月傍阴府"
+    },
+    {
+      "label": "时傍阴府",
+      "name": "Arry_xiongsha[]",
+      "value": "时傍阴府"
+    }
+  ],
+  "result_count": 0,
+  "result_hours": [],
+  "center_text": "显示：0个日课。 ︴\n排列顺序: \n山煞\n斗首择日\n玄空大卦\n乌兔择日\n先天日课\n玄空紫白\n六爻择日\n奇门遁甲\n六壬择日\n选择要显示的择日法:  些子吊星  吊贵人到  斗首择日  玄空大卦  乌兔择日  先天日课  玄空紫白  六爻择日  奇门遁甲  六壬择日【昼夜】  六壬择日【时支】\n\t\t\n\t\n消息\n×\n\n没有这天的日课，请重新选择时间。\n\n确定\n\t\n\t\t"
+}

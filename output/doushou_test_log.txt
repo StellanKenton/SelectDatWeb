@@ -1,0 +1,19 @@
+test_visible_cards_match_eight_doushou_rows (test_doushou_parity.DoushouParityTest.test_visible_cards_match_eight_doushou_rows) ... ok
+test_month_star_switches_at_term_hour (test_mountain_rule_parity.MountainRuleParityTest.test_month_star_switches_at_term_hour) ... ok
+test_new_filters_change_only_matching_lessons (test_mountain_rule_parity.MountainRuleParityTest.test_new_filters_change_only_matching_lessons) ... ok
+test_visible_five_yellow_and_shan_yun_labels (test_mountain_rule_parity.MountainRuleParityTest.test_visible_five_yellow_and_shan_yun_labels) ... ok
+test_visible_jian_clash_labels (test_mountain_rule_parity.MountainRuleParityTest.test_visible_jian_clash_labels) ... ok
+test_2026_september_flying_day_hour_stars (test_reference_parity.ReferenceParityTest.test_2026_september_flying_day_hour_stars) ... ok
+test_60_saved_calendar_rows_reach_calculation_api (test_reference_parity.ReferenceParityTest.test_60_saved_calendar_rows_reach_calculation_api) ... ok
+test_60_saved_cards_time_bang_yinfu (test_reference_parity.ReferenceParityTest.test_60_saved_cards_time_bang_yinfu) ... ok
+test_60_site_cards_four_star_overlap_labels (test_reference_parity.ReferenceParityTest.test_60_site_cards_four_star_overlap_labels) ... ok
+test_bing_shen_month_table_full_visible_text (test_reference_parity.ReferenceParityTest.test_bing_shen_month_table_full_visible_text) ... ok
+test_calendar_modes_keep_selected_date_scope (test_reference_parity.ReferenceParityTest.test_calendar_modes_keep_selected_date_scope) ... ok
+test_saved_ding_you_month_table_and_page_sample (test_reference_parity.ReferenceParityTest.test_saved_ding_you_month_table_and_page_sample) ... ok
+test_six_right_search_date_sets (test_reference_parity.ReferenceParityTest.test_six_right_search_date_sets) ... ok
+test_two_mountains_ten_year_cards_each (test_reference_parity.ReferenceParityTest.test_two_mountains_ten_year_cards_each) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 3.277s
+
+OK

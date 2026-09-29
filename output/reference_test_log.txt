@@ -1,0 +1,12 @@
+test_2026_september_flying_day_hour_stars (tests.test_reference_parity.ReferenceParityTest.test_2026_september_flying_day_hour_stars) ... ok
+test_60_saved_calendar_rows_reach_calculation_api (tests.test_reference_parity.ReferenceParityTest.test_60_saved_calendar_rows_reach_calculation_api) ... ok
+test_60_saved_cards_time_bang_yinfu (tests.test_reference_parity.ReferenceParityTest.test_60_saved_cards_time_bang_yinfu) ... ok
+test_60_site_cards_four_star_overlap_labels (tests.test_reference_parity.ReferenceParityTest.test_60_site_cards_four_star_overlap_labels) ... ok
+test_bing_shen_month_table_full_visible_text (tests.test_reference_parity.ReferenceParityTest.test_bing_shen_month_table_full_visible_text) ... ok
+test_six_right_search_date_sets (tests.test_reference_parity.ReferenceParityTest.test_six_right_search_date_sets) ... ok
+test_two_mountains_ten_year_cards_each (tests.test_reference_parity.ReferenceParityTest.test_two_mountains_ten_year_cards_each) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.537s
+
+OK

@@ -11,46 +11,42 @@
   <header class="top-bar">
     <div class="top-left-gap"></div>
     <button id="calculateTop" class="green-action">评课搜索</button>
-    <select id="calendarType"><option value="干支" selected>干支</option></select>
+    <select id="calendarType" aria-label="日期类型"><option value="干支" selected>干支</option><option value="公历">公历</option><option value="农历">农历</option></select>
     <select id="ganzhiYearSelect" aria-label="干支年"></select>
     <select id="ganzhiMonthSelect" aria-label="干支月"></select>
     <select id="ganzhiDaySelect" aria-label="干支日"></select>
     <div class="hour-controls" id="hourControls">
-      <label class="hour-all"><input type="checkbox" id="allHours" checked>全选</label>
+      <label class="hour-all"><input type="checkbox" id="allHours">全选</label>
     </div>
   </header>
 
   <main class="main-grid">
     <aside class="left-panel panel">
-      <div class="panel-buttons"><button>隐藏窗口</button><button>恢复</button><button>满屏</button></div>
+      <div class="panel-buttons left-actions"><button type="button" class="hide-panel" data-panel="left">隐藏窗口</button><button type="button" id="leftTop">回到顶部</button></div>
       <div class="side-title" id="monthShaTitle">丁酉月凶煞表</div>
-      <div class="sha-static">
-        <div>【正阴府】 午山</div><div>【月破】 卯山方</div><div>【月劫煞】 寅山方</div>
-        <div>【月厌煞】 卯山方</div><div>【月煞】 辰山方</div><div>【伏兵（坐煞）】甲山方</div>
-        <div>【大祸（坐煞）】乙山方</div><div>【荒山运】 艮、卯、巳山</div><div>【罗天大退】 天宫</div>
-        <div>【傍阴府】甲、寅、戌山</div><div>【五黄煞】离宫</div><div class="danger">【大月建】坎宫</div>
-        <div>【小月建】震宫</div><div>【飞天官符】巽宫</div><div>【飞地官符】乾宫</div>
-        <div>【打头火】中宫</div><div>【天独火】中宫</div><div>【丙独火】中宫</div>
-        <div>【丁独火】中宫</div><div>【月游火】离宫</div><div>【土符】未方</div><div>【土皇杀】戌方</div>
-      </div>
-      <div class="left-summary">
+      <div class="sha-static" id="monthShaRows" aria-live="polite">正在读取月煞表……</div>
+      <div class="left-summary" id="leftExtras">
         <div class="mini-head">当前山家</div><div id="mountainSummary">壬山 · 水</div>
         <div class="mini-head">自动利月</div><div id="favorableSummary">—</div>
+        <div class="mini-head">山家墓运</div><div id="burialSummary">水山：子、寅、申、辰、巽、甲、辛、丙：墓运</div>
+        <div class="mini-head">社日</div><div id="societyDays">春社：二月初七<br>秋社：八月十一</div>
+        <div class="mini-head">三奇</div><div>【立春】乙坎　丙坤　丁震<br>【春分】乙中　丙乾　丁兑<br>【立夏】乙乾　丙兑　丁艮<br>【夏至】乙兑　丙乾　丁中<br>【立秋】乙中　丙兑　丁艮</div>
       </div>
     </aside>
 
     <section class="result-panel panel">
       <div class="result-toolbar">
-        <span>显示： <strong id="resultCount">尚未计算</strong></span>
-        <span>排列顺序：</span>
-        <select><option>斗首择日</option><option>吉度排序</option></select>
+        <span>显示： <strong id="resultCount">尚未计算</strong></span><span class="toolbar-divider">｛</span>
+        <label for="sortSelect">排列顺序：</label>
+        <select id="sortSelect"><option>山煞</option><option selected>斗首择日</option><option disabled>玄空大卦</option><option disabled>乌兔择日</option><option disabled>先天日课</option><option disabled>玄空紫白</option><option disabled>六爻择日</option><option disabled>奇门遁甲</option><option disabled>六壬择日</option></select>
       </div>
       <div class="method-row">
         <span>选择要显示的择日法：</span>
-        <label><input type="checkbox">些子吊星</label><label><input type="checkbox">吊贵人到</label>
-        <label><input type="checkbox" checked>斗首择日</label><label><input type="checkbox">玄空大卦</label>
-        <label><input type="checkbox">乌兔择日</label><label><input type="checkbox">先天日课</label>
-        <label><input type="checkbox">玄空紫白</label>
+        <label><input class="method-check" type="checkbox" value="些子吊星">些子吊星</label><label><input class="method-check" type="checkbox" value="吊贵人到">吊贵人到</label>
+        <label><input class="method-check" type="checkbox" value="斗首择日" checked>斗首择日</label><label><input class="method-check" type="checkbox" value="玄空大卦">玄空大卦</label>
+        <label><input class="method-check" type="checkbox" value="乌兔择日">乌兔择日</label><label><input class="method-check" type="checkbox" value="先天日课">先天日课</label>
+        <label><input class="method-check" type="checkbox" value="玄空紫白" checked>玄空紫白</label><label><input class="method-check" type="checkbox" value="六爻择日">六爻择日</label>
+        <label><input class="method-check" type="checkbox" value="奇门遁甲">奇门遁甲</label><label><input class="method-check" type="checkbox" value="六壬择日">六壬择日</label>
       </div>
       <div class="result-caption"><strong id="resultTitle">山家择日</strong><span id="statusText">正体五行日课</span></div>
       <div id="resultList" class="result-list">
@@ -149,12 +145,13 @@
 
   <footer class="bottom-bar">
     <span></span>
-    <select><option>山家择日</option></select>
-    <select><option>日历</option></select>
+    <select id="moduleSelect" aria-label="功能模块"><option>山家择日</option></select>
+    <select id="calendarViewSelect" aria-label="日历"><option value="lessons">日历</option><option value="calendar">打开日历</option></select>
     <button id="restoreView">显示</button>
     <span></span>
   </footer>
 </div>
+<dialog id="calendarDialog" class="calendar-dialog"><div class="calendar-dialog-head"><strong id="calendarDialogTitle">日历</strong><button type="button" id="closeCalendar">关闭</button></div><div id="calendarGrid" class="calendar-dialog-grid"></div></dialog>
 </body>
 <script src="{{ url_for('static', filename='app.js') }}"></script>
 </html>

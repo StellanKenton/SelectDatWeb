@@ -1,0 +1,275 @@
+{
+  "case_id": "B07_no_month_time_sansha_reference",
+  "captured_at": "2026-09-28T10:51:10.681Z",
+  "source": "Edge现有用户标签页可见内容",
+  "search_action": "右侧择课搜索",
+  "top_selects": [
+    {
+      "id": "rilitype",
+      "text": "公历",
+      "value": "公历"
+    },
+    {
+      "id": "gonglinian",
+      "text": "2026年",
+      "value": "2026"
+    },
+    {
+      "id": "gongliyue",
+      "text": "9月",
+      "value": "9"
+    },
+    {
+      "id": "gongliri",
+      "text": "全部",
+      "value": "全部"
+    },
+    {
+      "id": "nonglinian",
+      "text": "2026年",
+      "value": "2026"
+    },
+    {
+      "id": "nongliyue",
+      "text": "八月",
+      "value": "八"
+    },
+    {
+      "id": "nongliri",
+      "text": "全部",
+      "value": "全部"
+    },
+    {
+      "id": "ganzhinian",
+      "text": "2026丙午年",
+      "value": "163"
+    },
+    {
+      "id": "ganzhiyue",
+      "text": "庚寅月",
+      "value": "1945"
+    },
+    {
+      "id": "ganzhiri",
+      "text": "全部",
+      "value": "全部"
+    },
+    {
+      "id": "fanwei",
+      "text": "范围",
+      "value": "范围"
+    }
+  ],
+  "right_selects": [
+    {
+      "id": "paichubiaozhi",
+      "text": "全部",
+      "value": "全部"
+    },
+    {
+      "id": "yiji",
+      "text": "不显示",
+      "value": "off"
+    },
+    {
+      "id": "yongshi",
+      "text": "建造",
+      "value": "0"
+    },
+    {
+      "id": "zuobagua",
+      "text": "【南方】离卦",
+      "value": "9"
+    },
+    {
+      "id": "ershisishan",
+      "text": "正南偏右【丙山】火",
+      "value": "13"
+    },
+    {
+      "id": "jian",
+      "text": "兼右【巳亥】",
+      "value": "巳亥"
+    },
+    {
+      "id": "fenjin",
+      "text": "【乙巳】分金",
+      "value": "乙巳"
+    },
+    {
+      "id": "dagua",
+      "text": "泽天夬",
+      "value": "4;6"
+    },
+    {
+      "id": "seltiangan",
+      "text": "甲",
+      "value": "甲"
+    },
+    {
+      "id": "seldizhi",
+      "text": "子",
+      "value": "子"
+    },
+    {
+      "id": "mingshaguolv",
+      "text": "命煞过滤",
+      "value": "命煞过滤"
+    },
+    {
+      "id": "seltiangan1",
+      "text": "甲",
+      "value": "甲"
+    },
+    {
+      "id": "seldizhi1",
+      "text": "子",
+      "value": "子"
+    },
+    {
+      "id": "huamingshaguolv",
+      "text": "命煞过滤",
+      "value": "命煞过滤"
+    },
+    {
+      "id": "xuanyueli",
+      "text": "手动添加利月",
+      "value": "月支"
+    },
+    {
+      "id": "rijishi0",
+      "text": "",
+      "value": ""
+    },
+    {
+      "id": "rijishi1",
+      "text": "",
+      "value": ""
+    },
+    {
+      "id": "rijishi2",
+      "text": "",
+      "value": ""
+    },
+    {
+      "id": "rijishi3",
+      "text": "",
+      "value": ""
+    },
+    {
+      "id": "shenshawei1",
+      "text": "【丙】位",
+      "value": "13"
+    },
+    {
+      "id": "shenshawei2",
+      "text": "",
+      "value": ""
+    }
+  ],
+  "selected_hours": [
+    0
+  ],
+  "active_filters": [
+    {
+      "label": "月冲山",
+      "name": "Arry_xiongsha[]",
+      "value": "月冲山"
+    },
+    {
+      "label": "日冲山",
+      "name": "Arry_xiongsha[]",
+      "value": "日冲山"
+    },
+    {
+      "label": "时冲山",
+      "name": "Arry_xiongsha[]",
+      "value": "时冲山"
+    },
+    {
+      "label": "日三杀",
+      "name": "Arry_xiongsha[]",
+      "value": "日三杀"
+    },
+    {
+      "label": "月正阴府",
+      "name": "Arry_xiongsha[]",
+      "value": "月正阴府"
+    },
+    {
+      "label": "日正阴府",
+      "name": "Arry_xiongsha[]",
+      "value": "日正阴府"
+    },
+    {
+      "label": "时正阴府",
+      "name": "Arry_xiongsha[]",
+      "value": "时正阴府"
+    },
+    {
+      "label": "五黄重叠",
+      "name": "Arry_xiongsha[]",
+      "value": "五黄重叠"
+    },
+    {
+      "label": "二五交加",
+      "name": "Arry_xiongsha[]",
+      "value": "二五交加"
+    },
+    {
+      "label": "日星曜煞",
+      "name": "Arry_xiongsha[]",
+      "value": "日星曜煞"
+    },
+    {
+      "label": "时星曜煞",
+      "name": "Arry_xiongsha[]",
+      "value": "时星曜煞"
+    },
+    {
+      "label": "天星煞",
+      "name": "Arry_xiongsha[]",
+      "value": "天星煞"
+    },
+    {
+      "label": "地曜煞",
+      "name": "Arry_xiongsha[]",
+      "value": "地曜煞"
+    },
+    {
+      "label": "日流太岁",
+      "name": "Arry_xiongsha[]",
+      "value": "日流太岁"
+    },
+    {
+      "label": "日消灭煞",
+      "name": "Arry_xiongsha[]",
+      "value": "日消灭煞"
+    },
+    {
+      "label": "日山方煞",
+      "name": "Arry_xiongsha[]",
+      "value": "日山方煞"
+    },
+    {
+      "label": "时山方煞",
+      "name": "Arry_xiongsha[]",
+      "value": "时山方煞"
+    },
+    {
+      "label": "月傍阴府",
+      "name": "Arry_xiongsha[]",
+      "value": "月傍阴府"
+    },
+    {
+      "label": "时傍阴府",
+      "name": "Arry_xiongsha[]",
+      "value": "时傍阴府"
+    }
+  ],
+  "result_count": 1,
+  "result_hours": [
+    0
+  ],
+  "center_text": "显示：1个日课。 ︴\n排列顺序: \n山煞\n斗首择日\n玄空大卦\n乌兔择日\n先天日课\n玄空紫白\n六爻择日\n奇门遁甲\n六壬择日\n选择要显示的择日法:  些子吊星  吊贵人到  斗首择日  玄空大卦  乌兔择日  先天日课  玄空紫白  六爻择日  奇门遁甲  六壬择日【昼夜】  六壬择日【时支】\n[打印] 农历:2026七月廿三日小︴公历:9月4日︴星期五︴节气: 处暑︴ 十二建星:收日 ︴二十八宿:娄宿吉 ︴ [查收藏] [推荐] [分享]\n胎神占\n厨灶床\n.\n外正西\n.\n门光星\n \n安门\n周堂\n香火忌\n.\n入宅宜\n0点\n时凶\n白虎\n五鬼\n丙山属火\n五行大吉\n克\n克\n旺\n生\n丙\n丙\n辛\n戊\n午\n申\n巳\n子\n克\n令\n克\n泄\n查看十二时辰\n水\n火\n金\n火\n选中\n添加收藏\n斗首择日\n破\n破\n破\n元\n水\n水\n水\n火\n丙\n丙\n辛\n戊\n午\n申\n巳\n子\n胎\n长\n绝\n胎\n廉\n廉\n廉\n元\n土\n土\n土\n火\n帝\n病\n临\n胎\n山\n丙山斗首属 火\n丙山煞\n山运木\n时三杀\n月三杀\n日克山运\n飞星\n年五黄煞\n6798向\n1243中\n5687坐\n杀师煞\n日冲亥命\n时冲午命\n节气时间\n立秋:2026-08-07 19:42:26\n处暑:2026-08-23 10:18:31\n白露:2026-09-07 22:40:59\n显示：1个日课。"
+}

@@ -1,0 +1,438 @@
+{
+  "source": "B02 top evaluation cards and B15 right filtered cards",
+  "selected_sha_filters": [
+    "二五交加",
+    "五黄重叠",
+    "地曜煞",
+    "天星煞",
+    "日三杀",
+    "日冲山",
+    "日山方煞",
+    "日星曜煞",
+    "日正阴府",
+    "日流太岁",
+    "日消灭煞",
+    "时三杀",
+    "时傍阴府",
+    "时冲山",
+    "时山方煞",
+    "时星曜煞",
+    "时正阴府",
+    "月三杀",
+    "月傍阴府",
+    "月冲山",
+    "月正阴府"
+  ],
+  "top_dates": 30,
+  "right_dates": 6,
+  "rows": [
+    {
+      "date": "2026-09-01",
+      "included_by_right_search": false,
+      "visible_sha": [
+        "日三杀",
+        "年三杀",
+        "月日相冲"
+      ],
+      "selected_filter_name_hits": [
+        "日三杀"
+      ],
+      "site_ji_contains_竖造": true,
+      "site_ji_line": "安门.竖造.入宅.安香火.作灶.祭祀.祈福.求嗣.动土.修造.破土.启攒.安葬.纳采.问名.结婚领证.嫁娶.安床.开业.立劵.交易.纳财.开仓.出货.竖柱.上梁.出行.受封.赴任.解除.理发.治病.裁衣.冠笄.会友.进人口.伐木.修饰.补垣.坏垣.修仓.移徒.开渠.穿井.整甲.筑堤.畋猎.栽种.牧养.纳畜."
+    },
+    {
+      "date": "2026-09-02",
+      "included_by_right_search": false,
+      "visible_sha": [
+        "年三杀",
+        "时克山运"
+      ],
+      "selected_filter_name_hits": [],
+      "site_ji_contains_竖造": false,
+      "site_ji_line": "祈福.求嗣.动土.修造.破土.纳采.问名.结婚领证.嫁娶.安床.开业.立劵.交易.纳财.开仓.出货.竖柱.上梁.出行.受封.赴任.解除.治病.冠笄.进人口.修路.修饰.补垣.坏垣.修仓.移徒.开渠.穿井.筑堤.栽种.牧养.纳畜."
+    },
+    {
+      "date": "2026-09-03",
+      "included_by_right_search": false,
+      "visible_sha": [
+        "死阴府",
+        "日傍阴府",
+        "年三杀",
+        "日克山运"
+      ],
+      "selected_filter_name_hits": [],
+      "site_ji_contains_竖造": false,
+      "site_ji_line": "诸事不宜."
+    },
+    {
+      "date": "2026-09-04",
+      "included_by_right_search": true,
+      "visible_sha": [
+        "年三杀",
+        "日克山运",
+        "日冲兼"
+      ],
+      "selected_filter_name_hits": [],
+      "site_ji_contains_竖造": false,
+      "site_ji_line": "嫁娶.安床.入宅.安香火.出行.治病."
+    },
+    {
+      "date": "2026-09-05",
+      "included_by_right_search": false,
+      "visible_sha": [
+        "死阴府",
+        "时傍阴府",
+        "年三杀",
+        "日三杀",
+        "日时相冲"
+      ],
+      "selected_filter_name_hits": [
+        "时傍阴府",
+        "日三杀"
+      ],
+      "site_ji_contains_竖造": true,
+      "site_ji_line": "安门.竖造.入宅.治病.伐木.开渠.畋猎."
+    },
+    {
+      "date": "2026-09-06",
+      "included_by_right_search": true,
+      "visible_sha": [
+        "年三杀"
+      ],
+      "selected_filter_name_hits": [],
+      "site_ji_contains_竖造": false,
+      "site_ji_line": "入宅.安香火.祈福.求嗣.动土.修造.破土.启攒.安葬.纳采.问名.结婚领证.嫁娶.安床.开业.立劵.交易.纳财.开仓.出货.竖柱.上梁.出行.受封.赴任.解除.理发.治病.裁衣.冠笄.会友.进人口.修饰.补垣.坏垣.修仓.移徒.开渠.穿井.整甲.筑堤.畋猎.栽种.牧养.纳畜."
+    },
+    {
+      "date": "2026-09-07",
+      "included_by_right_search": false,
+      "visible_sha": [
+        "年三杀",
+        "时克山运",
+        "陈子性吉"
+      ],
+      "selected_filter_name_hits": [],
+      "site_ji_contains_竖造": true,
+      "site_ji_line": "竖造.安香火.作灶.祈福.求嗣.动土.修造.破土.启攒.安葬.纳采.问名.结婚领证.安床.立劵.交易.开仓.出货.竖柱.上梁.受封.解除.理发.治病.会友.伐木.修路.修饰.补垣.坏垣.修仓.开渠.穿井.整甲.筑堤.栽种."
+    },
+    {
+      "date": "2026-09-08",
+      "included_by_right_search": false,
+      "visible_sha": [
+        "死阴府",
+        "日傍阴府",
+        "年三杀"
+      ],
+      "selected_filter_name_hits": [],
+      "site_ji_contains_竖造": false,
+      "site_ji_line": "动土.修造.破土.治病.会友.伐木.修路.修饰.补垣.坏垣.修仓.开渠.穿井.筑堤.畋猎.栽种."
+    },
+    {
+      "date": "2026-09-09",
+      "included_by_right_search": false,
+      "visible_sha": [
+        "年三杀",
+        "日三杀"
+      ],
+      "selected_filter_name_hits": [
+        "日三杀"
+      ],
+      "site_ji_contains_竖造": true,
+      "site_ji_line": "安门.安床.竖造.安香火.作灶.祈福.求嗣.破土.启攒.安葬.纳采.问名.结婚领证.嫁娶.开业.立劵.交易.纳财.开仓.出货.受封.治病.会友.进人口.修仓.牧养.纳畜."
+    },
+    {
+      "date": "2026-09-10",
+      "included_by_right_search": false,
+      "visible_sha": [
+        "死阴府",
+        "时傍阴府",
+        "年三杀"
+      ],
+      "selected_filter_name_hits": [
+        "时傍阴府"
+      ],
+      "site_ji_contains_竖造": false,
+      "site_ji_line": "作灶.破土.启攒.安葬.纳采.问名.结婚领证.嫁娶.开仓.出货.受封.赴任.理发.治病.修仓."
+    },
+    {
+      "date": "2026-09-11",
+      "included_by_right_search": false,
+      "visible_sha": [
+        "年三杀",
+        "年日相冲"
+      ],
+      "selected_filter_name_hits": [],
+      "site_ji_contains_竖造": true,
+      "site_ji_line": "竖造.入宅.安香火.祈福.求嗣.动土.修造.破土.启攒.安葬.纳采.问名.结婚领证.嫁娶.安床.开业.立劵.交易.纳财.开仓.出货.竖柱.上梁.出行.受封.赴任.解除.治病.裁衣.冠笄.会友.进人口.修仓.移徒.开渠.穿井.筑堤.捕捉.栽种.牧养.纳畜."
+    },
+    {
+      "date": "2026-09-12",
+      "included_by_right_search": false,
+      "visible_sha": [
+        "年三杀",
+        "时克山运",
+        "日星曜煞",
+        "陈子性吉"
+      ],
+      "selected_filter_name_hits": [
+        "日星曜煞"
+      ],
+      "site_ji_contains_竖造": false,
+      "site_ji_line": "入宅.安香火.解除.治病.冠笄.栽种."
+    },
+    {
+      "date": "2026-09-13",
+      "included_by_right_search": false,
+      "visible_sha": [
+        "死阴府",
+        "日傍阴府",
+        "日三杀",
+        "年三杀"
+      ],
+      "selected_filter_name_hits": [
+        "日三杀"
+      ],
+      "site_ji_contains_竖造": false,
+      "site_ji_line": "嫁娶.祭祀.开业.立劵.交易.纳财.开仓.出货.治病.修仓.移徒.远回.畋猎."
+    },
+    {
+      "date": "2026-09-14",
+      "included_by_right_search": false,
+      "visible_sha": [
+        "年三杀",
+        "月日相冲"
+      ],
+      "selected_filter_name_hits": [],
+      "site_ji_contains_竖造": false,
+      "site_ji_line": "诸事不宜."
+    },
+    {
+      "date": "2026-09-15",
+      "included_by_right_search": false,
+      "visible_sha": [
+        "死阴府",
+        "时傍阴府",
+        "年三杀",
+        "陈子性吉"
+      ],
+      "selected_filter_name_hits": [
+        "时傍阴府"
+      ],
+      "site_ji_contains_竖造": false,
+      "site_ji_line": "入宅.安香火.受封.治病.开渠."
+    },
+    {
+      "date": "2026-09-16",
+      "included_by_right_search": true,
+      "visible_sha": [
+        "年三杀",
+        "日暗八煞",
+        "日冲兼",
+        "陈子性吉"
+      ],
+      "selected_filter_name_hits": [],
+      "site_ji_contains_竖造": false,
+      "site_ji_line": "安香火.破土.启攒.出行."
+    },
+    {
+      "date": "2026-09-17",
+      "included_by_right_search": false,
+      "visible_sha": [
+        "年三杀",
+        "日三杀",
+        "日克山运",
+        "时克山运",
+        "日时相冲"
+      ],
+      "selected_filter_name_hits": [
+        "日三杀"
+      ],
+      "site_ji_contains_竖造": true,
+      "site_ji_line": "安门.竖造.入宅.安香火.作灶.祈福.求嗣.动土.修造.破土.启攒.安葬.纳采.问名.结婚领证.嫁娶.安床.开业.立劵.交易.纳财.开仓.出货.竖柱.上梁.出行.受封.赴任.解除.治病.裁衣.冠笄.会友.进人口.补垣.修仓.移徒.开渠.穿井.筑堤.栽种.牧养.纳畜."
+    },
+    {
+      "date": "2026-09-18",
+      "included_by_right_search": true,
+      "visible_sha": [
+        "死阴府",
+        "日傍阴府",
+        "年三杀",
+        "日克山运"
+      ],
+      "selected_filter_name_hits": [],
+      "site_ji_contains_竖造": false,
+      "site_ji_line": "安门.安香火.动土.修造.破土.治病.伐木.修路.修饰.补垣.坏垣.修仓.开渠.穿井.筑堤.畋猎.栽种."
+    },
+    {
+      "date": "2026-09-19",
+      "included_by_right_search": false,
+      "visible_sha": [
+        "年三杀"
+      ],
+      "selected_filter_name_hits": [],
+      "site_ji_contains_竖造": true,
+      "site_ji_line": "安门.竖造.入宅.安香火.作灶.祈福.求嗣.动土.修造.破土.纳采.问名.结婚领证.嫁娶.安床.开业.立劵.交易.纳财.开仓.出货.竖柱.上梁.出行.受封.赴任.解除.治病.会友.进人口.修路.修饰.补垣.坏垣.修仓.移徒.开渠.穿井.筑堤.栽种."
+    },
+    {
+      "date": "2026-09-20",
+      "included_by_right_search": false,
+      "visible_sha": [
+        "死阴府",
+        "时傍阴府",
+        "年三杀"
+      ],
+      "selected_filter_name_hits": [
+        "时傍阴府"
+      ],
+      "site_ji_contains_竖造": true,
+      "site_ji_line": "竖造.作灶.祈福.求嗣.动土.修造.破土.启攒.安葬.纳采.问名.结婚领证.嫁娶.安床.开业.立劵.交易.纳财.开仓.出货.竖柱.上梁.出行.受封.赴任.解除.理发.治病.裁衣.冠笄.会友.进人口.伐木.修路.修饰.补垣.坏垣.修仓.移徒.开渠.穿井.整甲.筑堤.栽种.牧养.纳畜."
+    },
+    {
+      "date": "2026-09-21",
+      "included_by_right_search": false,
+      "visible_sha": [
+        "年三杀",
+        "日三杀",
+        "日正八煞",
+        "日星曜煞"
+      ],
+      "selected_filter_name_hits": [
+        "日三杀",
+        "日星曜煞"
+      ],
+      "site_ji_contains_竖造": true,
+      "site_ji_line": "安门.安床.竖造.入宅.安香火.作灶.祈福.求嗣.破土.启攒.安葬.纳采.问名.结婚领证.嫁娶.开业.立劵.交易.纳财.开仓.出货.受封.治病.会友.进人口.修仓.牧养.纳畜."
+    },
+    {
+      "date": "2026-09-22",
+      "included_by_right_search": false,
+      "visible_sha": [
+        "年三杀",
+        "时克山运"
+      ],
+      "selected_filter_name_hits": [],
+      "site_ji_contains_竖造": false,
+      "site_ji_line": "."
+    },
+    {
+      "date": "2026-09-23",
+      "included_by_right_search": true,
+      "visible_sha": [
+        "死阴府",
+        "日傍阴府",
+        "年三杀",
+        "年日相冲"
+      ],
+      "selected_filter_name_hits": [],
+      "site_ji_contains_竖造": false,
+      "site_ji_line": "安床.入宅.安香火.作灶.安葬.纳采.问名.结婚领证.嫁娶.出行.受封.赴任.治病.进人口.移徒.捕捉.畋猎."
+    },
+    {
+      "date": "2026-09-24",
+      "included_by_right_search": false,
+      "visible_sha": [
+        "年三杀"
+      ],
+      "selected_filter_name_hits": [],
+      "site_ji_contains_竖造": true,
+      "site_ji_line": "竖造.入宅.安香火.作灶.动土.修造.破土.启攒.安葬.纳采.问名.结婚领证.嫁娶.安床.开业.立劵.交易.竖柱.上梁.出行.赴任.解除.治病.冠笄.进人口.移徒.栽种.牧养.纳畜."
+    },
+    {
+      "date": "2026-09-25",
+      "included_by_right_search": false,
+      "visible_sha": [
+        "死阴府",
+        "时傍阴府",
+        "日三杀",
+        "年三杀",
+        "日克山运"
+      ],
+      "selected_filter_name_hits": [
+        "时傍阴府",
+        "日三杀"
+      ],
+      "site_ji_contains_竖造": false,
+      "site_ji_line": "入宅.安香火.作灶.祭祀.祈福.求嗣.动土.修造.破土.启攒.安葬.纳采.问名.结婚领证.嫁娶.安床.开业.立劵.交易.纳财.开仓.出货.竖柱.上梁.出行.受封.赴任.解除.理发.治病.裁衣.冠笄.会友.进人口.修饰.补垣.坏垣.修仓.移徒.远回.开渠.穿井.整甲.筑堤.栽种.牧养.纳畜."
+    },
+    {
+      "date": "2026-09-26",
+      "included_by_right_search": false,
+      "visible_sha": [
+        "年三杀",
+        "日克山运",
+        "月日相冲"
+      ],
+      "selected_filter_name_hits": [],
+      "site_ji_contains_竖造": false,
+      "site_ji_line": "诸事不宜."
+    },
+    {
+      "date": "2026-09-27",
+      "included_by_right_search": false,
+      "visible_sha": [
+        "年三杀",
+        "时克山运",
+        "陈子性吉"
+      ],
+      "selected_filter_name_hits": [],
+      "site_ji_contains_竖造": true,
+      "site_ji_line": "竖造.安香火.祈福.求嗣.动土.修造.竖柱.上梁.出行.受封.赴任.解除.理发.治病.裁衣.修饰.补垣.坏垣.修仓.开渠.穿井.整甲.筑堤."
+    },
+    {
+      "date": "2026-09-28",
+      "included_by_right_search": true,
+      "visible_sha": [
+        "死阴府",
+        "日傍阴府",
+        "年三杀",
+        "日冲兼",
+        "日冲丁煞"
+      ],
+      "selected_filter_name_hits": [],
+      "site_ji_contains_竖造": false,
+      "site_ji_line": "安床.出行.畋猎.栽种."
+    },
+    {
+      "date": "2026-09-29",
+      "included_by_right_search": false,
+      "visible_sha": [
+        "年三杀",
+        "日三杀",
+        "日时相冲"
+      ],
+      "selected_filter_name_hits": [
+        "日三杀"
+      ],
+      "site_ji_contains_竖造": true,
+      "site_ji_line": "竖造.入宅.安香火.作灶.祈福.求嗣.动土.修造.破土.启攒.安葬.纳采.问名.结婚领证.嫁娶.安床.开业.立劵.交易.纳财.开仓.出货.竖柱.上梁.出行.受封.赴任.解除.治病.裁衣.冠笄.会友.进人口.补垣.修仓.移徒.开渠.穿井.筑堤.栽种.牧养.纳畜."
+    },
+    {
+      "date": "2026-09-30",
+      "included_by_right_search": false,
+      "visible_sha": [
+        "死阴府",
+        "时傍阴府",
+        "年三杀"
+      ],
+      "selected_filter_name_hits": [
+        "时傍阴府"
+      ],
+      "site_ji_contains_竖造": true,
+      "site_ji_line": "安门.竖造.入宅.安香火.作灶.动土.修造.破土.纳采.问名.结婚领证.嫁娶.开业.立劵.交易.纳财.开仓.出货.理发.治病.进人口.伐木.修路.修饰.补垣.坏垣.修仓.开渠.穿井.筑堤.畋猎.栽种."
+    }
+  ],
+  "false_negative_candidates": [
+    "2026-09-02",
+    "2026-09-03",
+    "2026-09-07",
+    "2026-09-08",
+    "2026-09-11",
+    "2026-09-14",
+    "2026-09-19",
+    "2026-09-22",
+    "2026-09-24",
+    "2026-09-26",
+    "2026-09-27"
+  ],
+  "included_with_named_hit": []
+}

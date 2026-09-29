@@ -177,6 +177,8 @@ def test_ganzhi_day_stem_filter():
             "use_type": "建造",
             "mountain_id": 1,
             "level": "全部",
+            "sha_filters": [],
+            "yiji_mode": "off",
         }
     )
     assert result["results"]
@@ -233,6 +235,8 @@ def test_reference_shengwang_and_hao_are_independent_relations():
             "edition": "协纪版",
             "level": "生旺",
             "hours": [0],
+            "sha_filters": [],
+            "yiji_mode": "off",
         }
     )
     assert shengwang["results"]
@@ -247,6 +251,8 @@ def test_reference_shengwang_and_hao_are_independent_relations():
             "edition": "协纪版",
             "level": "耗",
             "hours": [0],
+            "sha_filters": [],
+            "yiji_mode": "off",
         }
     )
     assert hao["results"]
@@ -271,6 +277,11 @@ def test_reference_20260928_ren_mountain_hour_sansha_sample():
             "mountain_id": 1,
             "level": "全部",
             "hours": [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22],
+            "sha_filters": [
+                "月冲山", "日冲山", "时冲山", "月三杀", "日三杀", "时三杀",
+                "月正阴府", "日正阴府", "时正阴府", "日正八煞", "时正八煞",
+                "日星曜煞", "时星曜煞", "天星煞", "地曜煞", "日山方煞",
+            ],
         }
     )
     assert result["count"] == 9
@@ -283,9 +294,9 @@ def test_reference_default_sha_filters_are_exposed():
     options = get_options()
     assert options["default_sha_filters"]["建造"] == [
         "月冲山", "日冲山", "时冲山", "月三杀", "日三杀", "时三杀",
-        "月正阴府", "日正阴府", "时正阴府", "日正八煞", "时正八煞",
+        "月正阴府", "日正阴府", "时正阴府", "五黄重叠", "二五交加",
         "日星曜煞", "时星曜煞", "天星煞", "地曜煞", "日流太岁",
-        "日消灭煞", "日山方煞",
+        "日消灭煞", "日山方煞", "时山方煞", "月傍阴府", "时傍阴府",
     ]
     assert options["default_sha_filters"]["安门"] == ["日冲山", "时冲山", "日三杀", "时三杀"]
     assert options["default_sha_filters"]["拆卸"] == ["月冲山", "日冲山", "时冲山"]
@@ -303,7 +314,7 @@ def test_calculate_reports_reference_default_sha_filters():
             "hours": [0],
         }
     )
-    assert result["sha_filters"][-3:] == ["日流太岁", "日消灭煞", "日山方煞"]
+    assert result["sha_filters"][-3:] == ["时山方煞", "月傍阴府", "时傍阴府"]
 
 
 def test_year_sha_uses_reference_rows_and_marks_current_mountain():
@@ -418,6 +429,8 @@ def test_official_xingyao_filters_water_mountain_day_and_hour():
             "mountain_id": 1,
             "level": "全部",
             "hours": [0, 2, 6, 8, 10, 14, 16, 18, 22],
+            "sha_filters": ["日星曜煞", "时星曜煞"],
+            "yiji_mode": "off",
         }
     )
     assert day_hit["count"] == 0
@@ -430,6 +443,8 @@ def test_official_xingyao_filters_water_mountain_day_and_hour():
             "mountain_id": 1,
             "level": "全部",
             "hours": [14, 16],
+            "sha_filters": ["日星曜煞", "时星曜煞"],
+            "yiji_mode": "off",
         }
     )
     assert [(item["hour"], item["time_ganzhi"]) for item in time_hit["results"]] == [(16, "庚申")]
@@ -442,6 +457,8 @@ def test_official_xingyao_filters_water_mountain_day_and_hour():
             "mountain_id": 1,
             "level": "全部",
             "hours": [2, 6],
+            "sha_filters": ["日星曜煞", "时星曜煞"],
+            "yiji_mode": "off",
         }
     )
     assert [(item["hour"], item["time_ganzhi"]) for item in time_hit_2["results"]] == [(6, "辛卯")]

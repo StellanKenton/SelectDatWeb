@@ -1,0 +1,345 @@
+{
+  "scope": "Six saved UI captures; no network access in this analyzer",
+  "existing_tests": {
+    "runner": "direct function invocation; pytest unavailable in project venv",
+    "passed": [
+      "test_calculate_accepts_original_yiji_mode_values",
+      "test_calculate_accepts_reference_extra_inputs",
+      "test_calculate_days_returns_calendar_data",
+      "test_calculate_reports_reference_default_sha_filters",
+      "test_calculate_reports_reference_edition_and_filters",
+      "test_ganzhi_day_stem_filter",
+      "test_ganzhi_toolbar_filters_calendar_results",
+      "test_manual_favorable_month_filter",
+      "test_month_relation_filter_is_applied",
+      "test_official_shanfang_filters_kangua_day",
+      "test_official_xingyao_filters_water_mountain_day_and_hour",
+      "test_reference_20260928_almanac_metadata",
+      "test_reference_20260928_ren_mountain_hour_sansha_sample",
+      "test_reference_auto_favorable_month_table",
+      "test_reference_dagua_and_facing_labels",
+      "test_reference_day_ji_filter_tables",
+      "test_reference_default_sha_filters_are_exposed",
+      "test_reference_exact_month_relation_defaults",
+      "test_reference_jian_and_fenjin",
+      "test_reference_lesson_count_is_date_plus_hour",
+      "test_reference_month_relation_mode",
+      "test_reference_mountain_table",
+      "test_reference_repair_direction_table",
+      "test_reference_shengwang_and_hao_are_independent_relations",
+      "test_reference_use_type_semantics",
+      "test_reference_yiji_mode_options_match_site",
+      "test_selected_sha_filters_change_result_set",
+      "test_sha_filters_follow_use_type_default_table",
+      "test_year_and_ganzhi_input_do_not_count_same_life_twice",
+      "test_year_sha_uses_reference_rows_and_marks_current_mountain"
+    ],
+    "failed": []
+  },
+  "cases": [
+    {
+      "case_id": "B01",
+      "captured_at": "2026-09-28T10:30:30.187Z",
+      "search_action": "顶部评课搜索（前次会话已显示的结果）",
+      "effective_site_input": {
+        "date": [
+          "2011-09-01",
+          "2011-09-30"
+        ],
+        "hours": [
+          0
+        ],
+        "use_type": "建造",
+        "mountain": "正北偏右【壬山】水",
+        "level": "1级大吉",
+        "edition": "显示协纪版",
+        "jian": "兼右【亥巳】",
+        "fenjin": "【乙亥】分金",
+        "dagua": "风地观"
+      },
+      "reference_count": 30,
+      "reference_visible_card_count": 30,
+      "reference_first_date": "9月1日",
+      "reference_last_date": "9月30日",
+      "reference_card_hours": [
+        0
+      ],
+      "hour_echo_matches_selected": true,
+      "capture_valid": true,
+      "local_payload": {
+        "start_date": "2011-09-01",
+        "end_date": "2011-09-30",
+        "hours": [
+          0
+        ],
+        "use_type": "建造",
+        "mountain_id": 1,
+        "level": "大吉",
+        "edition": "协纪版"
+      },
+      "local_count": 0,
+      "local_first_lesson": null,
+      "count_equal": false,
+      "local_comparison_scope": "diagnostic_only_top_search_may_ignore_right_filters",
+      "reference_full_text_equal": null,
+      "reference_full_text_equal_reason": "本地界面未生成原站完整日课字段，无法逐字比较"
+    },
+    {
+      "case_id": "B02",
+      "captured_at": "2026-09-28T10:31:25.194Z",
+      "search_action": "顶部评课搜索",
+      "effective_site_input": {
+        "date": [
+          "2026-09-01",
+          "2026-09-30"
+        ],
+        "hours": [
+          0
+        ],
+        "use_type": "建造",
+        "mountain": "正北偏右【壬山】水",
+        "level": "1级大吉",
+        "edition": "显示协纪版",
+        "jian": "兼右【亥巳】",
+        "fenjin": "【乙亥】分金",
+        "dagua": "风地观"
+      },
+      "reference_count": 30,
+      "reference_visible_card_count": 30,
+      "reference_first_date": "9月1日",
+      "reference_last_date": "9月30日",
+      "reference_card_hours": [
+        0
+      ],
+      "hour_echo_matches_selected": true,
+      "capture_valid": true,
+      "local_payload": {
+        "start_date": "2026-09-01",
+        "end_date": "2026-09-30",
+        "hours": [
+          0
+        ],
+        "use_type": "建造",
+        "mountain_id": 1,
+        "level": "大吉",
+        "edition": "协纪版"
+      },
+      "local_count": 1,
+      "local_first_lesson": "2026090400",
+      "count_equal": false,
+      "local_comparison_scope": "diagnostic_only_top_search_may_ignore_right_filters",
+      "reference_full_text_equal": null,
+      "reference_full_text_equal_reason": "本地界面未生成原站完整日课字段，无法逐字比较"
+    },
+    {
+      "case_id": "B03",
+      "captured_at": "2026-09-28T10:31:36.333Z",
+      "search_action": "顶部评课搜索",
+      "effective_site_input": {
+        "date": [
+          "2026-09-28",
+          "2026-09-28"
+        ],
+        "hours": [
+          0
+        ],
+        "use_type": "建造",
+        "mountain": "正北偏右【壬山】水",
+        "level": "1级大吉",
+        "edition": "显示协纪版",
+        "jian": "兼右【亥巳】",
+        "fenjin": "【乙亥】分金",
+        "dagua": "风地观"
+      },
+      "reference_count": 1,
+      "reference_visible_card_count": 1,
+      "reference_first_date": "9月28日",
+      "reference_last_date": "9月28日",
+      "reference_card_hours": [
+        0
+      ],
+      "hour_echo_matches_selected": true,
+      "capture_valid": true,
+      "local_payload": {
+        "start_date": "2026-09-28",
+        "end_date": "2026-09-28",
+        "hours": [
+          0
+        ],
+        "use_type": "建造",
+        "mountain_id": 1,
+        "level": "大吉",
+        "edition": "协纪版"
+      },
+      "local_count": 0,
+      "local_first_lesson": null,
+      "count_equal": false,
+      "local_comparison_scope": "diagnostic_only_top_search_may_ignore_right_filters",
+      "reference_full_text_equal": null,
+      "reference_full_text_equal_reason": "本地界面未生成原站完整日课字段，无法逐字比较"
+    },
+    {
+      "case_id": "B04",
+      "captured_at": "2026-09-28T10:31:47.707Z",
+      "search_action": "顶部评课搜索",
+      "effective_site_input": {
+        "date": [
+          "2026-09-28",
+          "2026-09-28"
+        ],
+        "hours": [
+          12
+        ],
+        "use_type": "建造",
+        "mountain": "正北偏右【壬山】水",
+        "level": "1级大吉",
+        "edition": "显示协纪版",
+        "jian": "兼右【亥巳】",
+        "fenjin": "【乙亥】分金",
+        "dagua": "风地观"
+      },
+      "reference_count": 1,
+      "reference_visible_card_count": 1,
+      "reference_first_date": "9月28日",
+      "reference_last_date": "9月28日",
+      "reference_card_hours": [
+        12
+      ],
+      "hour_echo_matches_selected": true,
+      "capture_valid": true,
+      "local_payload": {
+        "start_date": "2026-09-28",
+        "end_date": "2026-09-28",
+        "hours": [
+          12
+        ],
+        "use_type": "建造",
+        "mountain_id": 1,
+        "level": "大吉",
+        "edition": "协纪版"
+      },
+      "local_count": 0,
+      "local_first_lesson": null,
+      "count_equal": false,
+      "local_comparison_scope": "diagnostic_only_top_search_may_ignore_right_filters",
+      "reference_full_text_equal": null,
+      "reference_full_text_equal_reason": "本地界面未生成原站完整日课字段，无法逐字比较"
+    },
+    {
+      "case_id": "B05",
+      "captured_at": "2026-09-28T10:31:55.751Z",
+      "search_action": "顶部评课搜索",
+      "effective_site_input": {
+        "date": [
+          "2026-09-28",
+          "2026-09-28"
+        ],
+        "hours": [
+          22
+        ],
+        "use_type": "建造",
+        "mountain": "正北偏右【壬山】水",
+        "level": "1级大吉",
+        "edition": "显示协纪版",
+        "jian": "兼右【亥巳】",
+        "fenjin": "【乙亥】分金",
+        "dagua": "风地观"
+      },
+      "reference_count": 1,
+      "reference_visible_card_count": 1,
+      "reference_first_date": "9月28日",
+      "reference_last_date": "9月28日",
+      "reference_card_hours": [
+        12
+      ],
+      "hour_echo_matches_selected": false,
+      "capture_valid": false,
+      "local_payload": {
+        "start_date": "2026-09-28",
+        "end_date": "2026-09-28",
+        "hours": [
+          22
+        ],
+        "use_type": "建造",
+        "mountain_id": 1,
+        "level": "大吉",
+        "edition": "协纪版"
+      },
+      "local_count": 0,
+      "local_first_lesson": null,
+      "count_equal": null,
+      "local_comparison_scope": "diagnostic_only_top_search_may_ignore_right_filters",
+      "reference_full_text_equal": null,
+      "reference_full_text_equal_reason": "本地界面未生成原站完整日课字段，无法逐字比较"
+    },
+    {
+      "case_id": "B06",
+      "captured_at": "2026-09-28T10:37:14.043Z",
+      "search_action": "右侧择课搜索",
+      "effective_site_input": {
+        "date": [
+          "2026-09-01",
+          "2026-09-30"
+        ],
+        "hours": [
+          0
+        ],
+        "use_type": "开业",
+        "mountain": "正北偏右【壬山】水",
+        "level": "1级大吉",
+        "edition": "显示协纪版",
+        "jian": "兼左【子午】",
+        "fenjin": "【癸亥】分金",
+        "dagua": "山地剥"
+      },
+      "reference_count": 1,
+      "reference_visible_card_count": 1,
+      "reference_first_date": "9月4日",
+      "reference_last_date": "9月4日",
+      "reference_card_hours": [
+        0
+      ],
+      "hour_echo_matches_selected": true,
+      "capture_valid": true,
+      "local_payload": {
+        "start_date": "2026-09-01",
+        "end_date": "2026-09-30",
+        "hours": [
+          0
+        ],
+        "use_type": "开业",
+        "mountain_id": 1,
+        "level": "大吉",
+        "edition": "协纪版"
+      },
+      "local_count": 1,
+      "local_first_lesson": "2026090400",
+      "count_equal": true,
+      "local_comparison_scope": "partial_right_search_jian_fenjin_dagua_not_calculated_locally",
+      "reference_full_text_equal": null,
+      "reference_full_text_equal_reason": "本地界面未生成原站完整日课字段，无法逐字比较"
+    }
+  ],
+  "reference_cross_check": {
+    "B02_contains_September_28_card": true,
+    "B02_September_28_vs_B03_full_card_equal": true
+  },
+  "word_cross_check": {
+    "source": "C:/Users/senki/Desktop/Destiny/Word/十天干日配六十甲子时_可搜索文字版.docx，第1页，乙日行",
+    "rule": {
+      "乙日子时": "丙子",
+      "乙日午时": "壬午"
+    },
+    "site_B03_pillars": "丙午 丁酉 乙巳 丙子",
+    "site_B04_pillars": "丙午 丁酉 乙巳 壬午",
+    "agrees_on_tested_hours": true
+  },
+  "limitations": [
+    "B01 was captured from the already visible query result; no new submission was made for it this turn.",
+    "B05 has a stale result: the hour selector says 22 but the card says 12; exclude it from comparisons.",
+    "B01-B05 used the top evaluation search, while B06 used the right lesson search. These actions may have different filtering semantics; do not infer an algorithm mismatch from the count differences alone.",
+    "B06 changed use type and the site also reset jian, fenjin and dagua; it is not a single-variable differential test.",
+    "The local calculation omits some website default sha filters, so count differences are diagnostic, not isolated causal proof.",
+    "No claim of complete-text parity or 95 percent population parity is supported."
+  ]
+}

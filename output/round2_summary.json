@@ -1,0 +1,143 @@
+{
+  "source": "saved visible Edge UI results; this program sends no website requests",
+  "website_queries_this_round": 6,
+  "month": {
+    "year": 2026,
+    "ganzhi": "丙申",
+    "bad_rows": 29,
+    "good_rows": 29,
+    "whole_saved_table_equal": true
+  },
+  "year": {
+    "start": 2026,
+    "end": 2035,
+    "mountain_ids_tested": [
+      1,
+      13
+    ],
+    "cards_per_mountain": 10,
+    "rows_per_card": 13
+  },
+  "right_search_cases": [
+    {
+      "source": "B02_right_reference.json",
+      "mountain_id": 1,
+      "level": "大吉",
+      "edition": "协纪版",
+      "site_count": 1,
+      "local_count": 1,
+      "site_dates": [
+        "2026-09-04"
+      ],
+      "local_dates": [
+        "2026-09-04"
+      ],
+      "exact_date_set": true
+    },
+    {
+      "source": "B15_right_all_reference.json",
+      "mountain_id": 1,
+      "level": "全部",
+      "edition": "协纪版",
+      "site_count": 6,
+      "local_count": 6,
+      "site_dates": [
+        "2026-09-04",
+        "2026-09-06",
+        "2026-09-16",
+        "2026-09-18",
+        "2026-09-23",
+        "2026-09-28"
+      ],
+      "local_dates": [
+        "2026-09-04",
+        "2026-09-06",
+        "2026-09-16",
+        "2026-09-18",
+        "2026-09-23",
+        "2026-09-28"
+      ],
+      "exact_date_set": true
+    },
+    {
+      "source": "B15_right_yiji_off_reference.json",
+      "mountain_id": 1,
+      "level": "全部",
+      "edition": "不显示",
+      "site_count": 13,
+      "local_count": 13,
+      "site_dates": [
+        "2026-09-03",
+        "2026-09-04",
+        "2026-09-06",
+        "2026-09-07",
+        "2026-09-14",
+        "2026-09-16",
+        "2026-09-18",
+        "2026-09-19",
+        "2026-09-22",
+        "2026-09-23",
+        "2026-09-24",
+        "2026-09-27",
+        "2026-09-28"
+      ],
+      "local_dates": [
+        "2026-09-03",
+        "2026-09-04",
+        "2026-09-06",
+        "2026-09-07",
+        "2026-09-14",
+        "2026-09-16",
+        "2026-09-18",
+        "2026-09-19",
+        "2026-09-22",
+        "2026-09-23",
+        "2026-09-24",
+        "2026-09-27",
+        "2026-09-28"
+      ],
+      "exact_date_set": true
+    },
+    {
+      "source": "B07_bing_mountain_reference.json",
+      "mountain_id": 13,
+      "level": "全部",
+      "edition": "不显示",
+      "site_count": 0,
+      "local_count": 0,
+      "site_dates": [],
+      "local_dates": [],
+      "exact_date_set": true
+    },
+    {
+      "source": "B07_no_month_sansha_reference.json",
+      "mountain_id": 13,
+      "level": "全部",
+      "edition": "不显示",
+      "site_count": 0,
+      "local_count": 0,
+      "site_dates": [],
+      "local_dates": [],
+      "exact_date_set": true
+    },
+    {
+      "source": "B07_no_month_time_sansha_reference.json",
+      "mountain_id": 13,
+      "level": "全部",
+      "edition": "不显示",
+      "site_count": 1,
+      "local_count": 1,
+      "site_dates": [
+        "2026-09-04"
+      ],
+      "local_dates": [
+        "2026-09-04"
+      ],
+      "exact_date_set": true
+    }
+  ],
+  "right_search_matching_cases": 6,
+  "right_search_total_cases": 6,
+  "full_lesson_text_equal": false,
+  "full_lesson_text_reason": "Local UI does not yet render all fields in the original cards."
+}
