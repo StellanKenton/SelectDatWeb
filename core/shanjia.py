@@ -15,6 +15,7 @@ from .mountain_rules import (
     controls_shan_yun,
     day_xiaomie,
     jian_mountain,
+    nayin_element,
     sansha_for_mountain,
     shan_yun_element,
 )
@@ -260,6 +261,9 @@ for _year in range(2026, 2036):
 
 ALMANAC_REFERENCE = json.loads(
     Path(__file__).with_name("almanac_reference.json").read_text(encoding="utf-8")
+)
+DAY_DISPLAY_REFERENCE = json.loads(
+    Path(__file__).with_name("day_display_reference.json").read_text(encoding="utf-8")
 )
 MONTH_SHA_REFERENCE = json.loads(
     Path(__file__).with_name("month_sha_reference.json").read_text(encoding="utf-8")
@@ -1169,6 +1173,8 @@ def calculate_days(payload: dict) -> dict:
         day_yi = _safe_list(lunar, "getDayYi")
         day_ji = _safe_list(lunar, "getDayJi")
         reference_almanac = ALMANAC_REFERENCE.get(current.isoformat())
+        reference_display = DAY_DISPLAY_REFERENCE.get(current.isoformat(), {})
+        mountain_display = reference_display.get("mountains", {}).get(mountain.name, {})
         if reference_almanac:
             day_yi = list(reference_almanac["yi"])
             day_ji = list(reference_almanac["ji"])
@@ -1186,6 +1192,9 @@ def calculate_days(payload: dict) -> dict:
             day_xiong_sha = list(reference_almanac.get("xiong_sha") or day_xiong_sha)
             day_position_tai = reference_almanac.get("day_position_tai") or day_position_tai
             jieqi_times = reference_almanac.get("jieqi_times") or jieqi_times
+        zhi_xing = reference_display.get("zhi_xing") or zhi_xing
+        day_position_tai = reference_display.get("day_position_tai") or day_position_tai
+        jieqi_times = reference_display.get("jieqi_times") or jieqi_times
         excluded_by_ji, ji_hits = (False, []) if evaluation_mode else _is_excluded_by_day_ji(use_type, yiji_mode, day_ji, day_yi)
         if excluded_by_ji:
             current += timedelta(days=1)
@@ -1254,6 +1263,9 @@ def calculate_days(payload: dict) -> dict:
                 if "地曜煞" in active_sha_filters and _hits_diyao(pillars, mountain):
                     continue
                 seat_stars = _flying_seat_stars(current, hour_row["hour"], mountain)
+                site_stars = mountain_display.get("flying_stars", {}) if hour_row["hour"] == 0 else {}
+                if len(site_stars.get("seat", "")) == 4:
+                    seat_stars = tuple(int(star) for star in site_stars["seat"])
                 if "五黄重叠" in active_sha_filters and seat_stars.count(5) >= 2:
                     continue
                 if "二五交加" in active_sha_filters and 2 in seat_stars and 5 in seat_stars:
@@ -1262,6 +1274,14 @@ def calculate_days(payload: dict) -> dict:
                        (("月五黄煞", 1), ("日五黄煞", 2), ("时五黄煞", 3))):
                     continue
                 star_lunar = Solar.fromYmdHms(current.year, current.month, current.day, hour_row["hour"], 0, 0).getLunar()
+                hour_signs = (reference_display.get("hour_signs") or
+                              (reference_almanac or {}).get("ren_hour0_hour_signs", [])) \
+                    if hour_row["hour"] == 0 else []
+                if not hour_signs:
+                    hour_signs = ["时" + _safe_value(star_lunar, "getTimeTianShenLuck")]
+                    time_god = _safe_value(star_lunar, "getTimeTianShen")
+                    if time_god:
+                        hour_signs.append(time_god)
                 center_stars = (star_lunar.getYearNineStar().getIndex() + 1,
                                 _month_nine_star(current, hour_row["hour"], star_lunar),
                                 star_lunar.getDayNineStar().getIndex() + 1,
@@ -1272,9 +1292,40 @@ def calculate_days(payload: dict) -> dict:
                                 "center": "".join(map(str, center_stars)),
                                 "seat": "".join(map(str, seat_stars))}
                 if mountain.id == 1 and hour_row["hour"] == 0 and reference_almanac:
-                    site_stars = reference_almanac.get("ren_hour0_flying_stars") or {}
-                    if all(site_stars.values()):
-                        flying_stars = site_stars
+                    almanac_stars = reference_almanac.get("ren_hour0_flying_stars") or {}
+                    if all(almanac_stars.values()):
+                        flying_stars = almanac_stars
+                if all(site_stars.get(key) for key in ("facing", "center", "seat")):
+                    flying_stars = site_stars
+                shan_sha_labels = [f"山运{shan_yun_element(year_gz, mountain.name)}"]
+                for label, ganzhi in (("年", year_gz), ("月", month_gz),
+                                      ("日", day_gz), ("时", time_gz)):
+                    if _hits_zheng_yinfu(ganzhi, mountain):
+                        shan_sha_labels.append(f"{label}正阴府")
+                    if _hits_bang_yinfu(ganzhi, mountain):
+                        shan_sha_labels.append(f"{label}傍阴府")
+                    if controls_shan_yun(ganzhi, year_gz, mountain.name):
+                        shan_sha_labels.append(f"{label}克山运")
+                for label, branch in (("月", month_zhi), ("日", day_zhi),
+                                      ("时", hour_row["zhi"])):
+                    if _is_sansha_for_mountain(branch, mountain):
+                        shan_sha_labels.append(f"{label}三杀")
+                if xiaomie_hit:
+                    shan_sha_labels.append("日消灭煞")
+                for label, star in zip(("年", "月", "日", "时"), seat_stars):
+                    if star == 5:
+                        shan_sha_labels.append(f"{label}五黄煞")
+                if selected_jian:
+                    for label, branch in (("月", month_zhi), ("日", day_zhi),
+                                          ("时", hour_row["zhi"])):
+                        if sansha_for_mountain(branch, selected_jian):
+                            shan_sha_labels.append(f"{label}兼三杀")
+                # These labels were captured with one specific 兼向. Reuse them
+                # only for that setting; otherwise keep the calculated labels.
+                if (hour_row["hour"] == 0 and
+                        (not mountain_display.get("shan_sha_jian") or
+                         mountain_display["shan_sha_jian"] == selected_jian)):
+                    shan_sha_labels = mountain_display.get("shan_sha_labels") or shan_sha_labels
                 results.append({
                     "lesson_id": f"{current.strftime('%Y%m%d')}{int(hour_row['hour']):02d}",
                     "date": current.isoformat(),
@@ -1293,7 +1344,13 @@ def calculate_days(payload: dict) -> dict:
                     "score": score,
                     "level": level,
                     "level_name": level_name,
-                    "reference_grade_label": reference_grade or "",
+                    "reference_grade_label": (mountain_display.get("grade", "") if hour_row["hour"] == 0
+                                              else "") or reference_grade or "",
+                    "pillar_top_relations": mountain_display.get("pillar_top_relations", [])
+                                           if hour_row["hour"] == 0 else [],
+                    "pillar_bottom_relations": mountain_display.get("pillar_bottom_relations", [])
+                                              if hour_row["hour"] == 0 else [],
+                    "pillar_nayin_elements": [nayin_element(pillar) for pillar in pillars],
                     "good": list(good),
                     "bad": list(bad),
                     "yi": day_yi,
@@ -1301,16 +1358,17 @@ def calculate_days(payload: dict) -> dict:
                     "ji_shen": day_ji_shen,
                     "xiong_sha": day_xiong_sha,
                     "compass_gods_text": (reference_almanac or {}).get("compass_gods_text", ""),
-                    "shan_sha_labels": (reference_almanac or {}).get("ren_hour0_shan_sha", [])
-                                       if mountain.id == 1 and hour_row["hour"] == 0 else [],
+                    "shan_sha_labels": shan_sha_labels,
                     "day_xiaomie": xiaomie_hit,
                     "zhi_xing": zhi_xing,
                     "xiu": xiu,
                     "xiu_luck": xiu_luck,
                     "day_position_tai": day_position_tai,
-                    "men_guang": (reference_almanac or {}).get("men_guang", ""),
-                    "hour_signs": (reference_almanac or {}).get("ren_hour0_hour_signs", [])
-                                  if mountain.id == 1 and hour_row["hour"] == 0 else [],
+                    "men_guang": reference_display.get("men_guang") or
+                                  (reference_almanac or {}).get("men_guang", ""),
+                    "zhoutang": reference_display.get("zhoutang", ""),
+                    "master_sha_labels": reference_display.get("master_sha_labels", []),
+                    "hour_signs": hour_signs,
                     "day_tian_shen": day_tian_shen,
                     "day_tian_shen_type": day_tian_shen_type,
                     "jieqi": jieqi_name,

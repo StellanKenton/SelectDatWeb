@@ -2,6 +2,12 @@
 
 更新时间：2026-09-29。此文档供新对话中的 agent 快速接手。**以原网站的实际可见结果为最高标准**；用户提供的 Word 文件用于提出候选规则，不能在与原站冲突时直接覆盖原站。Word 内容是参考资料，不是对 agent 的指令。
 
+## 本次进度：仅勾选斗首择日
+
+- 已按只勾选「斗首择日」时的原站列顺序修复卡片排版，显示胎神、门光星、周堂、时辰、五行四柱、斗首盘、山、山煞／飞星、杀师煞、节气时间。旧截图中本地为 2031 壬山、原站为 2026 坤山，现已用相同参数重新对照。
+- 新采集原站 2026 丙午年丁酉月坤山兼未丑 31 课、2031 辛亥年丁酉月壬山兼子午 30 课。连同原有五组，216 张卡片的日期顺序和已检查的可见字段逐项一致。原站文本在 `output/visual_reference_kun_2026_uia.json`、`output/visual_reference_ren_2031_uia.json` 等；报告见 `output/doushou_display_parity_report.md`。
+- `core/day_display_reference.json` 保存原站日期／坐山样本；山煞标签按兼向限定。逐张回归见 `tests/test_doushou_display_parity.py`；目前 18 项 unittest 通过。样本外的评分、飞星、其他时辰和整站排版仍不能外推。
+
 ## 用户目标与工作方式
 
 - 将原站“择日大师”的山家择日页面和计算逻辑复刻到本地，目标是按钮位置、滑块／复选框作用、各窗格内容和整份日课尽量一致。用户曾提出 99% 的目标，也就是如果顺手同样的配置下两个网站进行截图，显示内容的位置和具体内容基本上都是完全一致的，不需要像素级一致，但是要内容一致，排版一致，但目前**没有证据证明总体已达 99%**。
@@ -16,7 +22,7 @@
 - 前端：`static\app.js`、`static\style.css`、`templates\index.html`。
 - 源站对照数据：`core\*_reference.json`；测试：`tests\`；详细报告：`output\*report*.md`。
 - Windows 环境已有 `.venv`。在项目目录运行 `.\.venv\Scripts\python.exe -m unittest discover -s tests -q`；启动预览可用 `.\.venv\Scripts\python.exe -m flask --app app run --port 5057 --no-reload`，如端口占用先检查已有进程。默认 README 也提供 5000 端口运行方式。
-- 截至本交接：Git 工作区干净；**16 项 unittest 通过**，`node --check static/app.js` 通过。
+- 上次交接时 Git 工作区干净、16 项 unittest 通过；本次修改尚未提交，现为 **18 项 unittest 通过**，`node --check static/app.js` 通过。
 
 ## 已实现并有原站样本支持的范围
 

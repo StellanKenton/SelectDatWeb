@@ -116,6 +116,22 @@ button,select,input{cursor:pointer}
 .calendar-dialog{min-width:min(560px,90vw);border:2px solid #b27612;background:#1e2222;color:#e0d2bb;box-shadow:0 1em 3em #000b}.calendar-dialog::backdrop{background:#000b}.calendar-dialog-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:1em}.calendar-dialog-head button{background:#965d0b;color:#f5e0bd;border:0;padding:.3em .7em}.calendar-dialog-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:.3em;text-align:center}.calendar-dialog-grid button{min-height:3em;border:1px solid #6b5e43;background:#2e3030;color:#e0d5c2}.calendar-dialog-grid button.has-lesson{background:#42571a}.calendar-dialog-grid small{display:block;color:#dce6c6}
 .lesson-workbench{height:13.2em;min-height:0;grid-template-columns:2em 2em 4.1em 6.5em 2.2em 13.8em 6.4em 7.5em 5.4em 14em}
 .wb-jieqi{font-size:.8em}.wb-jieqi .jieqi-entry{display:flex;flex-direction:column;align-items:center;padding:.2em .1em;line-height:1.25;white-space:nowrap}.jieqi-entry span{display:block}
+.doushou-only .almanac-line{display:none}
+.lesson-workbench{width:max-content;min-width:100%;height:13.2em;grid-template-columns:1.7em 1.7em 1.7em 3.5em 8.2em 1.8em 7.8em 1.7em 5.2em 5em 11.8em}
+.wb-vertical{gap:.15em}.wb-vertical strong{width:100%;text-align:center}.wb-zhoutang span{color:#bcae9d}
+.wb-element{background:#30281c}.wb-element>div:first-child{background:#3b4548}.wb-element>div:nth-child(2){background:#4a433b}
+.pillar-line{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));line-height:1.15;text-align:center}
+.pillar-line span{min-width:0;border-right:1px solid #654d3c;white-space:nowrap;overflow:hidden}
+.pillar-relation{color:#b8aa95}.pillar-stem,.pillar-branch{color:#ee594e;font-size:1.2em}
+.pillar-element{background:#4f3a1e;color:#bcae96}.wb-element .twelve-hours{margin:0;font-size:.9em}
+.wb-hour>div:not(.wb-red-head){min-height:1.45em}.wb-hour .wb-red-head{line-height:1.45}
+.doushou-grid{line-height:1.05}.ds-row{min-height:1.1em}.ds-row span{border-bottom:1px solid #514840}.ds-star{color:#d18bdd}
+.wb-doushou-mountain{display:flex;flex-direction:column;align-items:center;background:#1b3640;text-align:center;line-height:1.25}
+.wb-doushou-mountain strong{width:100%;background:#970500;color:#f7eee5;font-weight:400}
+.wb-doushou-mountain span{writing-mode:vertical-rl;padding:.25em 0;color:#b5a78e}.wb-doushou-mountain b{color:#f3a637}
+.wb-sha,.wb-master-sha,.wb-jieqi{font-size:1em;line-height:1.3;white-space:nowrap;text-align:center}
+.wb-sha{overflow-y:auto!important;scrollbar-width:thin}.wb-master-sha>div:not(:first-child){line-height:1.5}
+.wb-sha .wb-accent{padding:.1em 0}.wb-jieqi .jieqi-entry{font-size:.8em;padding:.35em .1em;line-height:1.45}
 .year-expand{display:block;border:0;background:none;color:#e14935;font:inherit;padding:.2em 0;text-align:left;white-space:nowrap}.year-extra{padding:.2em;color:#b4aa99;white-space:normal;font-size:.82em}.year-extra[hidden]{display:none}
 .year-expand[data-expand="good"]{width:100%;margin:.3em 0 .15em;padding:.25em .35em;background:#4d290c;border:2px solid #7d511d;color:#bda77c}.year-extra .year-sha-row{font-size:1em;line-height:1.45;padding:.08em 0}
 .side-search{margin-top:13em}

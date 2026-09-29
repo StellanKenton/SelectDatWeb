@@ -1,0 +1,7651 @@
+{
+  "2026-09-08": {
+    "zhoutang": "香火宜 · 入宅宜",
+    "master_sha_labels": [
+      "日冲卯命",
+      "时冲午命"
+    ],
+    "mountains": {
+      "坤": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "泄",
+          "泄",
+          "克",
+          "泄"
+        ],
+        "pillar_bottom_relations": [
+          "泄",
+          "令",
+          "克",
+          "生"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "活阴府",
+          "年正阴府",
+          "时正阴府",
+          "时兼三杀"
+        ],
+        "source": "visual_reference_kun_2026_uia.json",
+        "shan_sha_jian": "未"
+      },
+      "壬": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "泄",
+          "泄",
+          "克",
+          "泄"
+        ],
+        "pillar_bottom_relations": [
+          "泄",
+          "令",
+          "克",
+          "生"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "死阴府",
+          "日傍阴府",
+          "年三杀"
+        ],
+        "source": "visual_reference_dingyou_2026.json",
+        "shan_sha_jian": "亥"
+      },
+      "甲": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "泄",
+          "泄",
+          "克",
+          "泄"
+        ],
+        "pillar_bottom_relations": [
+          "泄",
+          "令",
+          "克",
+          "生"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "死阴府",
+          "月傍阴府",
+          "月三杀",
+          "日三杀",
+          "月冲兼",
+          "日冲兼"
+        ],
+        "source": "visual_reference_jia_2026.json",
+        "shan_sha_jian": "卯"
+      },
+      "艮": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "泄",
+          "泄",
+          "克",
+          "泄"
+        ],
+        "pillar_bottom_relations": [
+          "泄",
+          "令",
+          "克",
+          "生"
+        ],
+        "shan_sha_labels": [
+          "山运金",
+          "月克山运",
+          "年兼三杀"
+        ],
+        "source": "visual_reference_gen_2026.json",
+        "shan_sha_jian": "丑"
+      },
+      "庚": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "泄",
+          "泄",
+          "克",
+          "泄"
+        ],
+        "pillar_bottom_relations": [
+          "泄",
+          "令",
+          "克",
+          "生"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "天星煞"
+        ],
+        "source": "visual_reference_geng_2026.json",
+        "shan_sha_jian": "酉"
+      }
+    }
+  },
+  "2026-09-09": {
+    "zhoutang": "香火忌 · 入宅宜",
+    "master_sha_labels": [
+      "日冲辰命",
+      "时冲午命"
+    ],
+    "mountains": {
+      "壬": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "旺",
+          "旺",
+          "耗",
+          "泄"
+        ],
+        "pillar_bottom_relations": [
+          "旺",
+          "令",
+          "泄",
+          "克"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "年三杀",
+          "日三杀"
+        ],
+        "source": "visual_reference_dingyou_2026.json",
+        "shan_sha_jian": "亥"
+      },
+      "甲": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "旺",
+          "旺",
+          "耗",
+          "泄"
+        ],
+        "pillar_bottom_relations": [
+          "旺",
+          "令",
+          "泄",
+          "克"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "死阴府",
+          "月傍阴府",
+          "月三杀",
+          "日克山运",
+          "月冲兼"
+        ],
+        "source": "visual_reference_jia_2026.json",
+        "shan_sha_jian": "卯"
+      },
+      "艮": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "旺",
+          "旺",
+          "耗",
+          "泄"
+        ],
+        "pillar_bottom_relations": [
+          "旺",
+          "令",
+          "泄",
+          "克"
+        ],
+        "shan_sha_labels": [
+          "山运金",
+          "月克山运",
+          "时克山运",
+          "年兼三杀",
+          "日兼三杀"
+        ],
+        "source": "visual_reference_gen_2026.json",
+        "shan_sha_jian": "丑"
+      },
+      "庚": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "旺",
+          "旺",
+          "耗",
+          "泄"
+        ],
+        "pillar_bottom_relations": [
+          "旺",
+          "令",
+          "泄",
+          "克"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "死阴府",
+          "时傍阴府",
+          "日克山运",
+          "天星煞"
+        ],
+        "source": "visual_reference_geng_2026.json",
+        "shan_sha_jian": "酉"
+      },
+      "坤": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "旺",
+          "旺",
+          "耗",
+          "泄"
+        ],
+        "pillar_bottom_relations": [
+          "旺",
+          "令",
+          "泄",
+          "克"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "活阴府",
+          "年正阴府",
+          "日正阴府",
+          "日克山运",
+          "时兼三杀"
+        ],
+        "source": "visual_reference_kun_2026_uia.json",
+        "shan_sha_jian": "未"
+      }
+    }
+  },
+  "2026-09-10": {
+    "zhoutang": "香火宜 · 入宅宜",
+    "master_sha_labels": [
+      "寅命真杀",
+      "日冲巳命",
+      "时冲午命"
+    ],
+    "mountains": {
+      "壬": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "旺",
+          "旺",
+          "耗",
+          "耗"
+        ],
+        "pillar_bottom_relations": [
+          "旺",
+          "令",
+          "克",
+          "克"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "死阴府",
+          "时傍阴府",
+          "年三杀"
+        ],
+        "source": "visual_reference_dingyou_2026.json",
+        "shan_sha_jian": "亥"
+      },
+      "甲": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "旺",
+          "旺",
+          "耗",
+          "耗"
+        ],
+        "pillar_bottom_relations": [
+          "旺",
+          "令",
+          "克",
+          "克"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "死阴府",
+          "月傍阴府",
+          "日傍阴府",
+          "月三杀",
+          "日克山运",
+          "时克山运",
+          "月冲兼"
+        ],
+        "source": "visual_reference_jia_2026.json",
+        "shan_sha_jian": "卯"
+      },
+      "艮": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "旺",
+          "旺",
+          "耗",
+          "耗"
+        ],
+        "pillar_bottom_relations": [
+          "旺",
+          "令",
+          "克",
+          "克"
+        ],
+        "shan_sha_labels": [
+          "山运金",
+          "月克山运",
+          "年兼三杀"
+        ],
+        "source": "visual_reference_gen_2026.json",
+        "shan_sha_jian": "丑"
+      },
+      "庚": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "旺",
+          "旺",
+          "耗",
+          "耗"
+        ],
+        "pillar_bottom_relations": [
+          "旺",
+          "令",
+          "克",
+          "克"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "日三杀",
+          "日克山运",
+          "时克山运",
+          "天星煞"
+        ],
+        "source": "visual_reference_geng_2026.json",
+        "shan_sha_jian": "酉"
+      },
+      "坤": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "旺",
+          "旺",
+          "耗",
+          "耗"
+        ],
+        "pillar_bottom_relations": [
+          "旺",
+          "令",
+          "克",
+          "克"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "活阴府",
+          "年正阴府",
+          "日克山运",
+          "时克山运",
+          "时兼三杀"
+        ],
+        "source": "visual_reference_kun_2026_uia.json",
+        "shan_sha_jian": "未"
+      }
+    }
+  },
+  "2026-09-11": {
+    "zhoutang": "香火宜 · 入宅宜",
+    "master_sha_labels": [
+      "日冲午命",
+      "时冲午命"
+    ],
+    "mountains": {
+      "壬": {
+        "grade": "岁破",
+        "pillar_top_relations": [
+          "生",
+          "生",
+          "泄",
+          "耗"
+        ],
+        "pillar_bottom_relations": [
+          "生",
+          "令",
+          "耗",
+          "耗"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "年三杀",
+          "年日相冲"
+        ],
+        "source": "visual_reference_dingyou_2026.json",
+        "shan_sha_jian": "亥"
+      },
+      "甲": {
+        "grade": "岁破",
+        "pillar_top_relations": [
+          "生",
+          "生",
+          "泄",
+          "耗"
+        ],
+        "pillar_bottom_relations": [
+          "生",
+          "令",
+          "耗",
+          "耗"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "死阴府",
+          "月傍阴府",
+          "时傍阴府",
+          "月三杀",
+          "年日相冲",
+          "月冲兼"
+        ],
+        "source": "visual_reference_jia_2026.json",
+        "shan_sha_jian": "卯"
+      },
+      "艮": {
+        "grade": "岁破",
+        "pillar_top_relations": [
+          "生",
+          "生",
+          "泄",
+          "耗"
+        ],
+        "pillar_bottom_relations": [
+          "生",
+          "令",
+          "耗",
+          "耗"
+        ],
+        "shan_sha_labels": [
+          "山运金",
+          "月克山运",
+          "日克山运",
+          "年日相冲",
+          "年兼三杀"
+        ],
+        "source": "visual_reference_gen_2026.json",
+        "shan_sha_jian": "丑"
+      },
+      "庚": {
+        "grade": "岁破",
+        "pillar_top_relations": [
+          "生",
+          "生",
+          "泄",
+          "耗"
+        ],
+        "pillar_bottom_relations": [
+          "生",
+          "令",
+          "耗",
+          "耗"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "死阴府",
+          "日傍阴府",
+          "天星煞",
+          "年日相冲"
+        ],
+        "source": "visual_reference_geng_2026.json",
+        "shan_sha_jian": "酉"
+      },
+      "坤": {
+        "grade": "岁破",
+        "pillar_top_relations": [
+          "生",
+          "生",
+          "泄",
+          "耗"
+        ],
+        "pillar_bottom_relations": [
+          "生",
+          "令",
+          "耗",
+          "耗"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "活阴府",
+          "年正阴府",
+          "年日相冲",
+          "日兼三杀",
+          "时兼三杀"
+        ],
+        "source": "visual_reference_kun_2026_uia.json",
+        "shan_sha_jian": "未"
+      }
+    }
+  },
+  "2026-09-12": {
+    "zhoutang": "香火宜 · 入宅宜",
+    "master_sha_labels": [
+      "四季龙穴",
+      "日冲未命",
+      "时冲午命"
+    ],
+    "mountains": {
+      "壬": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "生",
+          "生",
+          "泄",
+          "克"
+        ],
+        "pillar_bottom_relations": [
+          "生",
+          "令",
+          "旺",
+          "耗"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "年三杀",
+          "时克山运",
+          "日星曜煞",
+          "陈子性吉"
+        ],
+        "source": "visual_reference_dingyou_2026.json",
+        "shan_sha_jian": "亥"
+      },
+      "甲": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "生",
+          "生",
+          "泄",
+          "克"
+        ],
+        "pillar_bottom_relations": [
+          "生",
+          "令",
+          "旺",
+          "耗"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "死阴府",
+          "月傍阴府",
+          "日三杀",
+          "月三杀",
+          "月冲兼"
+        ],
+        "source": "visual_reference_jia_2026.json",
+        "shan_sha_jian": "卯"
+      },
+      "艮": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "生",
+          "生",
+          "泄",
+          "克"
+        ],
+        "pillar_bottom_relations": [
+          "生",
+          "令",
+          "旺",
+          "耗"
+        ],
+        "shan_sha_labels": [
+          "山运金",
+          "死阴府",
+          "时正阴府",
+          "日正阴府",
+          "月克山运",
+          "日克山运",
+          "年兼三杀"
+        ],
+        "source": "visual_reference_gen_2026.json",
+        "shan_sha_jian": "丑"
+      },
+      "庚": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "生",
+          "生",
+          "泄",
+          "克"
+        ],
+        "pillar_bottom_relations": [
+          "生",
+          "令",
+          "旺",
+          "耗"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "天星煞",
+          "陈子性吉"
+        ],
+        "source": "visual_reference_geng_2026.json",
+        "shan_sha_jian": "酉"
+      },
+      "坤": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "生",
+          "生",
+          "泄",
+          "克"
+        ],
+        "pillar_bottom_relations": [
+          "生",
+          "令",
+          "旺",
+          "耗"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "活阴府",
+          "年正阴府",
+          "时兼三杀",
+          "日冲兼",
+          "陈子性吉"
+        ],
+        "source": "visual_reference_kun_2026_uia.json",
+        "shan_sha_jian": "未"
+      }
+    }
+  },
+  "2026-09-13": {
+    "zhoutang": "香火宜 · 入宅宜",
+    "master_sha_labels": [
+      "日冲申命",
+      "时冲午命"
+    ],
+    "mountains": {
+      "壬": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "克",
+          "克",
+          "旺",
+          "克"
+        ],
+        "pillar_bottom_relations": [
+          "克",
+          "令",
+          "耗",
+          "泄"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "死阴府",
+          "日傍阴府",
+          "日三杀",
+          "年三杀"
+        ],
+        "source": "visual_reference_dingyou_2026.json",
+        "shan_sha_jian": "亥"
+      },
+      "甲": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "克",
+          "克",
+          "旺",
+          "克"
+        ],
+        "pillar_bottom_relations": [
+          "克",
+          "令",
+          "耗",
+          "泄"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "死阴府",
+          "月傍阴府",
+          "月三杀",
+          "月冲兼"
+        ],
+        "source": "visual_reference_jia_2026.json",
+        "shan_sha_jian": "卯"
+      },
+      "艮": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "克",
+          "克",
+          "旺",
+          "克"
+        ],
+        "pillar_bottom_relations": [
+          "克",
+          "令",
+          "耗",
+          "泄"
+        ],
+        "shan_sha_labels": [
+          "山运金",
+          "月克山运",
+          "年兼三杀",
+          "日兼三杀"
+        ],
+        "source": "visual_reference_gen_2026.json",
+        "shan_sha_jian": "丑"
+      },
+      "庚": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "克",
+          "克",
+          "旺",
+          "克"
+        ],
+        "pillar_bottom_relations": [
+          "克",
+          "令",
+          "耗",
+          "泄"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "天星煞",
+          "陈子性吉"
+        ],
+        "source": "visual_reference_geng_2026.json",
+        "shan_sha_jian": "酉"
+      },
+      "坤": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "克",
+          "克",
+          "旺",
+          "克"
+        ],
+        "pillar_bottom_relations": [
+          "克",
+          "令",
+          "耗",
+          "泄"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "活阴府",
+          "年正阴府",
+          "时正阴府",
+          "时兼三杀",
+          "陈子性吉"
+        ],
+        "source": "visual_reference_kun_2026_uia.json",
+        "shan_sha_jian": "未"
+      }
+    }
+  },
+  "2026-09-14": {
+    "zhoutang": "香火忌 · 入宅忌",
+    "master_sha_labels": [
+      "四季四正",
+      "日冲酉命",
+      "时冲午命"
+    ],
+    "mountains": {
+      "壬": {
+        "grade": "月破",
+        "pillar_top_relations": [
+          "克",
+          "克",
+          "旺",
+          "生"
+        ],
+        "pillar_bottom_relations": [
+          "克",
+          "令",
+          "耗",
+          "泄"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "年三杀",
+          "月日相冲"
+        ],
+        "source": "visual_reference_dingyou_2026.json",
+        "shan_sha_jian": "亥"
+      },
+      "甲": {
+        "grade": "月破",
+        "pillar_top_relations": [
+          "克",
+          "克",
+          "旺",
+          "生"
+        ],
+        "pillar_bottom_relations": [
+          "克",
+          "令",
+          "耗",
+          "泄"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "死阴府",
+          "月傍阴府",
+          "月三杀",
+          "月日相冲",
+          "月冲兼"
+        ],
+        "source": "visual_reference_jia_2026.json",
+        "shan_sha_jian": "卯"
+      },
+      "艮": {
+        "grade": "月破",
+        "pillar_top_relations": [
+          "克",
+          "克",
+          "旺",
+          "生"
+        ],
+        "pillar_bottom_relations": [
+          "克",
+          "令",
+          "耗",
+          "泄"
+        ],
+        "shan_sha_labels": [
+          "山运金",
+          "月克山运",
+          "时克山运",
+          "月日相冲",
+          "年兼三杀"
+        ],
+        "source": "visual_reference_gen_2026.json",
+        "shan_sha_jian": "丑"
+      },
+      "庚": {
+        "grade": "月破",
+        "pillar_top_relations": [
+          "克",
+          "克",
+          "旺",
+          "生"
+        ],
+        "pillar_bottom_relations": [
+          "克",
+          "令",
+          "耗",
+          "泄"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "死阴府",
+          "时傍阴府",
+          "日三杀",
+          "天星煞",
+          "月日相冲",
+          "日冲兼"
+        ],
+        "source": "visual_reference_geng_2026.json",
+        "shan_sha_jian": "酉"
+      },
+      "坤": {
+        "grade": "月破",
+        "pillar_top_relations": [
+          "克",
+          "克",
+          "旺",
+          "生"
+        ],
+        "pillar_bottom_relations": [
+          "克",
+          "令",
+          "耗",
+          "泄"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "活阴府",
+          "年正阴府",
+          "日正阴府",
+          "月日相冲",
+          "时兼三杀"
+        ],
+        "source": "visual_reference_kun_2026_uia.json",
+        "shan_sha_jian": "未"
+      }
+    }
+  },
+  "2026-09-15": {
+    "zhoutang": "香火宜 · 入宅宜",
+    "master_sha_labels": [
+      "日冲戌命",
+      "时冲午命"
+    ],
+    "mountains": {
+      "壬": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "耗",
+          "耗",
+          "生",
+          "生"
+        ],
+        "pillar_bottom_relations": [
+          "耗",
+          "令",
+          "克",
+          "旺"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "死阴府",
+          "时傍阴府",
+          "年三杀",
+          "陈子性吉"
+        ],
+        "source": "visual_reference_dingyou_2026.json",
+        "shan_sha_jian": "亥"
+      },
+      "甲": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "耗",
+          "耗",
+          "生",
+          "生"
+        ],
+        "pillar_bottom_relations": [
+          "耗",
+          "令",
+          "克",
+          "旺"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "死阴府",
+          "月傍阴府",
+          "日傍阴府",
+          "月三杀",
+          "时克山运",
+          "月冲兼"
+        ],
+        "source": "visual_reference_jia_2026.json",
+        "shan_sha_jian": "卯"
+      },
+      "艮": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "耗",
+          "耗",
+          "生",
+          "生"
+        ],
+        "pillar_bottom_relations": [
+          "耗",
+          "令",
+          "克",
+          "旺"
+        ],
+        "shan_sha_labels": [
+          "山运金",
+          "月克山运",
+          "年兼三杀",
+          "陈子性吉"
+        ],
+        "source": "visual_reference_gen_2026.json",
+        "shan_sha_jian": "丑"
+      },
+      "庚": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "耗",
+          "耗",
+          "生",
+          "生"
+        ],
+        "pillar_bottom_relations": [
+          "耗",
+          "令",
+          "克",
+          "旺"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "时克山运",
+          "天星煞",
+          "陈子性吉"
+        ],
+        "source": "visual_reference_geng_2026.json",
+        "shan_sha_jian": "酉"
+      },
+      "坤": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "耗",
+          "耗",
+          "生",
+          "生"
+        ],
+        "pillar_bottom_relations": [
+          "耗",
+          "令",
+          "克",
+          "旺"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "活阴府",
+          "年正阴府",
+          "时克山运",
+          "日兼三杀",
+          "时兼三杀"
+        ],
+        "source": "visual_reference_kun_2026_uia.json",
+        "shan_sha_jian": "未"
+      }
+    }
+  },
+  "2026-09-16": {
+    "zhoutang": "香火宜 · 入宅宜",
+    "master_sha_labels": [
+      "日冲亥命",
+      "时冲午命"
+    ],
+    "mountains": {
+      "壬": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "耗",
+          "耗",
+          "生",
+          "旺"
+        ],
+        "pillar_bottom_relations": [
+          "耗",
+          "令",
+          "耗",
+          "旺"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "年三杀",
+          "日暗八煞",
+          "日冲兼",
+          "陈子性吉"
+        ],
+        "source": "visual_reference_dingyou_2026.json",
+        "shan_sha_jian": "亥"
+      },
+      "甲": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "耗",
+          "耗",
+          "生",
+          "旺"
+        ],
+        "pillar_bottom_relations": [
+          "耗",
+          "令",
+          "耗",
+          "旺"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "死阴府",
+          "月傍阴府",
+          "时傍阴府",
+          "日三杀",
+          "月三杀",
+          "月冲兼"
+        ],
+        "source": "visual_reference_jia_2026.json",
+        "shan_sha_jian": "卯"
+      },
+      "艮": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "耗",
+          "耗",
+          "生",
+          "旺"
+        ],
+        "pillar_bottom_relations": [
+          "耗",
+          "令",
+          "耗",
+          "旺"
+        ],
+        "shan_sha_labels": [
+          "山运金",
+          "月克山运",
+          "年兼三杀",
+          "陈子性吉"
+        ],
+        "source": "visual_reference_gen_2026.json",
+        "shan_sha_jian": "丑"
+      },
+      "庚": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "耗",
+          "耗",
+          "生",
+          "旺"
+        ],
+        "pillar_bottom_relations": [
+          "耗",
+          "令",
+          "耗",
+          "旺"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "死阴府",
+          "日傍阴府",
+          "天星煞",
+          "地曜煞",
+          "陈子性吉"
+        ],
+        "source": "visual_reference_geng_2026.json",
+        "shan_sha_jian": "酉"
+      },
+      "坤": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "耗",
+          "耗",
+          "生",
+          "旺"
+        ],
+        "pillar_bottom_relations": [
+          "耗",
+          "令",
+          "耗",
+          "旺"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "活阴府",
+          "年正阴府",
+          "时兼三杀",
+          "陈子性吉"
+        ],
+        "source": "visual_reference_kun_2026_uia.json",
+        "shan_sha_jian": "未"
+      }
+    }
+  },
+  "2026-09-17": {
+    "zhoutang": "香火忌 · 入宅宜",
+    "master_sha_labels": [
+      "酉命真杀",
+      "日冲子命",
+      "时冲午命"
+    ],
+    "mountains": {
+      "壬": {
+        "grade": "日破",
+        "pillar_top_relations": [
+          "泄",
+          "泄",
+          "克",
+          "旺"
+        ],
+        "pillar_bottom_relations": [
+          "泄",
+          "令",
+          "泄",
+          "生"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "年三杀",
+          "日三杀",
+          "日克山运",
+          "时克山运",
+          "日时相冲"
+        ],
+        "source": "visual_reference_dingyou_2026.json",
+        "shan_sha_jian": "亥"
+      },
+      "甲": {
+        "grade": "日破",
+        "pillar_top_relations": [
+          "泄",
+          "泄",
+          "克",
+          "旺"
+        ],
+        "pillar_bottom_relations": [
+          "泄",
+          "令",
+          "泄",
+          "生"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "死阴府",
+          "月傍阴府",
+          "月三杀",
+          "日时相冲",
+          "月冲兼"
+        ],
+        "source": "visual_reference_jia_2026.json",
+        "shan_sha_jian": "卯"
+      },
+      "艮": {
+        "grade": "日破",
+        "pillar_top_relations": [
+          "泄",
+          "泄",
+          "克",
+          "旺"
+        ],
+        "pillar_bottom_relations": [
+          "泄",
+          "令",
+          "泄",
+          "生"
+        ],
+        "shan_sha_labels": [
+          "山运金",
+          "死阴府",
+          "日正阴府",
+          "时正阴府",
+          "月克山运",
+          "日时相冲",
+          "年兼三杀",
+          "日兼三杀"
+        ],
+        "source": "visual_reference_gen_2026.json",
+        "shan_sha_jian": "丑"
+      },
+      "庚": {
+        "grade": "日破",
+        "pillar_top_relations": [
+          "泄",
+          "泄",
+          "克",
+          "旺"
+        ],
+        "pillar_bottom_relations": [
+          "泄",
+          "令",
+          "泄",
+          "生"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "天星煞",
+          "日时相冲"
+        ],
+        "source": "visual_reference_geng_2026.json",
+        "shan_sha_jian": "酉"
+      },
+      "坤": {
+        "grade": "日破",
+        "pillar_top_relations": [
+          "泄",
+          "泄",
+          "克",
+          "旺"
+        ],
+        "pillar_bottom_relations": [
+          "泄",
+          "令",
+          "泄",
+          "生"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "活阴府",
+          "年正阴府",
+          "日时相冲",
+          "时兼三杀"
+        ],
+        "source": "visual_reference_kun_2026_uia.json",
+        "shan_sha_jian": "未"
+      }
+    }
+  },
+  "2026-09-18": {
+    "zhoutang": "香火忌 · 入宅忌",
+    "master_sha_labels": [
+      "四季龙穴",
+      "日冲丑命",
+      "时冲午命"
+    ],
+    "mountains": {
+      "壬": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "泄",
+          "泄",
+          "克",
+          "泄"
+        ],
+        "pillar_bottom_relations": [
+          "泄",
+          "令",
+          "耗",
+          "生"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "死阴府",
+          "日傍阴府",
+          "年三杀",
+          "日克山运"
+        ],
+        "source": "visual_reference_dingyou_2026.json",
+        "shan_sha_jian": "亥"
+      },
+      "甲": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "泄",
+          "泄",
+          "克",
+          "泄"
+        ],
+        "pillar_bottom_relations": [
+          "泄",
+          "令",
+          "耗",
+          "生"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "死阴府",
+          "月傍阴府",
+          "月三杀",
+          "月冲兼"
+        ],
+        "source": "visual_reference_jia_2026.json",
+        "shan_sha_jian": "卯"
+      },
+      "艮": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "泄",
+          "泄",
+          "克",
+          "泄"
+        ],
+        "pillar_bottom_relations": [
+          "泄",
+          "令",
+          "耗",
+          "生"
+        ],
+        "shan_sha_labels": [
+          "山运金",
+          "月克山运",
+          "年兼三杀",
+          "日冲兼",
+          "日冲丁煞"
+        ],
+        "source": "visual_reference_gen_2026.json",
+        "shan_sha_jian": "丑"
+      },
+      "庚": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "泄",
+          "泄",
+          "克",
+          "泄"
+        ],
+        "pillar_bottom_relations": [
+          "泄",
+          "令",
+          "耗",
+          "生"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "日三杀",
+          "天星煞"
+        ],
+        "source": "visual_reference_geng_2026.json",
+        "shan_sha_jian": "酉"
+      },
+      "坤": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "泄",
+          "泄",
+          "克",
+          "泄"
+        ],
+        "pillar_bottom_relations": [
+          "泄",
+          "令",
+          "耗",
+          "生"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "活阴府",
+          "年正阴府",
+          "时正阴府",
+          "时兼三杀"
+        ],
+        "source": "visual_reference_kun_2026_uia.json",
+        "shan_sha_jian": "未"
+      }
+    }
+  },
+  "2026-09-19": {
+    "zhoutang": "香火宜 · 入宅宜",
+    "master_sha_labels": [
+      "日冲寅命",
+      "时冲午命"
+    ],
+    "mountains": {
+      "壬": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "旺",
+          "旺",
+          "耗",
+          "泄"
+        ],
+        "pillar_bottom_relations": [
+          "旺",
+          "令",
+          "耗",
+          "克"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "年三杀"
+        ],
+        "source": "visual_reference_dingyou_2026.json",
+        "shan_sha_jian": "亥"
+      },
+      "甲": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "旺",
+          "旺",
+          "耗",
+          "泄"
+        ],
+        "pillar_bottom_relations": [
+          "旺",
+          "令",
+          "耗",
+          "克"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "死阴府",
+          "月傍阴府",
+          "月三杀",
+          "地曜煞",
+          "月冲兼"
+        ],
+        "source": "visual_reference_jia_2026.json",
+        "shan_sha_jian": "卯"
+      },
+      "艮": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "旺",
+          "旺",
+          "耗",
+          "泄"
+        ],
+        "pillar_bottom_relations": [
+          "旺",
+          "令",
+          "耗",
+          "克"
+        ],
+        "shan_sha_labels": [
+          "山运金",
+          "月克山运",
+          "日克山运",
+          "时克山运",
+          "年兼三杀"
+        ],
+        "source": "visual_reference_gen_2026.json",
+        "shan_sha_jian": "丑"
+      },
+      "庚": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "旺",
+          "旺",
+          "耗",
+          "泄"
+        ],
+        "pillar_bottom_relations": [
+          "旺",
+          "令",
+          "耗",
+          "克"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "死阴府",
+          "时傍阴府",
+          "天星煞"
+        ],
+        "source": "visual_reference_geng_2026.json",
+        "shan_sha_jian": "酉"
+      },
+      "坤": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "旺",
+          "旺",
+          "耗",
+          "泄"
+        ],
+        "pillar_bottom_relations": [
+          "旺",
+          "令",
+          "耗",
+          "克"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "活阴府",
+          "年正阴府",
+          "日正阴府",
+          "日兼三杀",
+          "时兼三杀"
+        ],
+        "source": "visual_reference_kun_2026_uia.json",
+        "shan_sha_jian": "未"
+      }
+    }
+  },
+  "2026-09-20": {
+    "zhoutang": "香火宜 · 入宅忌",
+    "master_sha_labels": [
+      "日冲卯命",
+      "时冲午命"
+    ],
+    "mountains": {
+      "壬": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "旺",
+          "旺",
+          "耗",
+          "耗"
+        ],
+        "pillar_bottom_relations": [
+          "旺",
+          "令",
+          "耗",
+          "克"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "死阴府",
+          "时傍阴府",
+          "年三杀"
+        ],
+        "source": "visual_reference_dingyou_2026.json",
+        "shan_sha_jian": "亥"
+      },
+      "甲": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "旺",
+          "旺",
+          "耗",
+          "耗"
+        ],
+        "pillar_bottom_relations": [
+          "旺",
+          "令",
+          "耗",
+          "克"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "死阴府",
+          "月傍阴府",
+          "日傍阴府",
+          "月三杀",
+          "日三杀",
+          "时克山运",
+          "月冲兼",
+          "日冲兼"
+        ],
+        "source": "visual_reference_jia_2026.json",
+        "shan_sha_jian": "卯"
+      },
+      "艮": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "旺",
+          "旺",
+          "耗",
+          "耗"
+        ],
+        "pillar_bottom_relations": [
+          "旺",
+          "令",
+          "耗",
+          "克"
+        ],
+        "shan_sha_labels": [
+          "山运金",
+          "月克山运",
+          "日克山运",
+          "年兼三杀"
+        ],
+        "source": "visual_reference_gen_2026.json",
+        "shan_sha_jian": "丑"
+      },
+      "庚": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "旺",
+          "旺",
+          "耗",
+          "耗"
+        ],
+        "pillar_bottom_relations": [
+          "旺",
+          "令",
+          "耗",
+          "克"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "时克山运",
+          "天星煞"
+        ],
+        "source": "visual_reference_geng_2026.json",
+        "shan_sha_jian": "酉"
+      },
+      "坤": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "旺",
+          "旺",
+          "耗",
+          "耗"
+        ],
+        "pillar_bottom_relations": [
+          "旺",
+          "令",
+          "耗",
+          "克"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "活阴府",
+          "年正阴府",
+          "时克山运",
+          "时兼三杀"
+        ],
+        "source": "visual_reference_kun_2026_uia.json",
+        "shan_sha_jian": "未"
+      }
+    }
+  },
+  "2026-09-21": {
+    "zhoutang": "香火宜 · 入宅宜",
+    "master_sha_labels": [
+      "日冲辰命",
+      "时冲午命"
+    ],
+    "mountains": {
+      "壬": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "生",
+          "生",
+          "泄",
+          "耗"
+        ],
+        "pillar_bottom_relations": [
+          "生",
+          "令",
+          "旺",
+          "耗"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "年三杀",
+          "日三杀",
+          "日正八煞",
+          "日星曜煞"
+        ],
+        "source": "visual_reference_dingyou_2026.json",
+        "shan_sha_jian": "亥"
+      },
+      "甲": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "生",
+          "生",
+          "泄",
+          "耗"
+        ],
+        "pillar_bottom_relations": [
+          "生",
+          "令",
+          "旺",
+          "耗"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "死阴府",
+          "月傍阴府",
+          "时傍阴府",
+          "月三杀",
+          "月冲兼"
+        ],
+        "source": "visual_reference_jia_2026.json",
+        "shan_sha_jian": "卯"
+      },
+      "艮": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "生",
+          "生",
+          "泄",
+          "耗"
+        ],
+        "pillar_bottom_relations": [
+          "生",
+          "令",
+          "旺",
+          "耗"
+        ],
+        "shan_sha_labels": [
+          "山运金",
+          "月克山运",
+          "年兼三杀",
+          "日兼三杀"
+        ],
+        "source": "visual_reference_gen_2026.json",
+        "shan_sha_jian": "丑"
+      },
+      "庚": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "生",
+          "生",
+          "泄",
+          "耗"
+        ],
+        "pillar_bottom_relations": [
+          "生",
+          "令",
+          "旺",
+          "耗"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "死阴府",
+          "日傍阴府",
+          "天星煞"
+        ],
+        "source": "visual_reference_geng_2026.json",
+        "shan_sha_jian": "酉"
+      },
+      "坤": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "生",
+          "生",
+          "泄",
+          "耗"
+        ],
+        "pillar_bottom_relations": [
+          "生",
+          "令",
+          "旺",
+          "耗"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "活阴府",
+          "年正阴府",
+          "时兼三杀"
+        ],
+        "source": "visual_reference_kun_2026_uia.json",
+        "shan_sha_jian": "未"
+      }
+    }
+  },
+  "2026-09-22": {
+    "zhoutang": "香火忌 · 入宅宜",
+    "master_sha_labels": [
+      "日冲巳命",
+      "时冲午命"
+    ],
+    "mountains": {
+      "壬": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "生",
+          "生",
+          "泄",
+          "克"
+        ],
+        "pillar_bottom_relations": [
+          "生",
+          "令",
+          "耗",
+          "耗"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "年三杀",
+          "时克山运"
+        ],
+        "source": "visual_reference_dingyou_2026.json",
+        "shan_sha_jian": "亥"
+      },
+      "甲": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "生",
+          "生",
+          "泄",
+          "克"
+        ],
+        "pillar_bottom_relations": [
+          "生",
+          "令",
+          "耗",
+          "耗"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "死阴府",
+          "月傍阴府",
+          "月三杀",
+          "日山方煞",
+          "月冲兼"
+        ],
+        "source": "visual_reference_jia_2026.json",
+        "shan_sha_jian": "卯"
+      },
+      "艮": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "生",
+          "生",
+          "泄",
+          "克"
+        ],
+        "pillar_bottom_relations": [
+          "生",
+          "令",
+          "耗",
+          "耗"
+        ],
+        "shan_sha_labels": [
+          "山运金",
+          "死阴府",
+          "时正阴府",
+          "日正阴府",
+          "月克山运",
+          "年兼三杀"
+        ],
+        "source": "visual_reference_gen_2026.json",
+        "shan_sha_jian": "丑"
+      },
+      "庚": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "生",
+          "生",
+          "泄",
+          "克"
+        ],
+        "pillar_bottom_relations": [
+          "生",
+          "令",
+          "耗",
+          "耗"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "日三杀",
+          "天星煞"
+        ],
+        "source": "visual_reference_geng_2026.json",
+        "shan_sha_jian": "酉"
+      },
+      "坤": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "生",
+          "生",
+          "泄",
+          "克"
+        ],
+        "pillar_bottom_relations": [
+          "生",
+          "令",
+          "耗",
+          "耗"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "活阴府",
+          "年正阴府",
+          "时兼三杀"
+        ],
+        "source": "visual_reference_kun_2026_uia.json",
+        "shan_sha_jian": "未"
+      }
+    }
+  },
+  "2026-09-23": {
+    "zhoutang": "香火宜 · 入宅宜",
+    "master_sha_labels": [
+      "日冲午命",
+      "时冲午命"
+    ],
+    "mountains": {
+      "壬": {
+        "grade": "岁破",
+        "pillar_top_relations": [
+          "克",
+          "克",
+          "旺",
+          "克"
+        ],
+        "pillar_bottom_relations": [
+          "克",
+          "令",
+          "泄",
+          "泄"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "死阴府",
+          "日傍阴府",
+          "年三杀",
+          "年日相冲"
+        ],
+        "source": "visual_reference_dingyou_2026.json",
+        "shan_sha_jian": "亥"
+      },
+      "甲": {
+        "grade": "岁破",
+        "pillar_top_relations": [
+          "克",
+          "克",
+          "旺",
+          "克"
+        ],
+        "pillar_bottom_relations": [
+          "克",
+          "令",
+          "泄",
+          "泄"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "死阴府",
+          "月傍阴府",
+          "月三杀",
+          "日克山运",
+          "年日相冲",
+          "月冲兼"
+        ],
+        "source": "visual_reference_jia_2026.json",
+        "shan_sha_jian": "卯"
+      },
+      "艮": {
+        "grade": "岁破",
+        "pillar_top_relations": [
+          "克",
+          "克",
+          "旺",
+          "克"
+        ],
+        "pillar_bottom_relations": [
+          "克",
+          "令",
+          "泄",
+          "泄"
+        ],
+        "shan_sha_labels": [
+          "山运金",
+          "月克山运",
+          "年日相冲",
+          "年兼三杀"
+        ],
+        "source": "visual_reference_gen_2026.json",
+        "shan_sha_jian": "丑"
+      },
+      "庚": {
+        "grade": "岁破",
+        "pillar_top_relations": [
+          "克",
+          "克",
+          "旺",
+          "克"
+        ],
+        "pillar_bottom_relations": [
+          "克",
+          "令",
+          "泄",
+          "泄"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "日克山运",
+          "天星煞",
+          "年日相冲"
+        ],
+        "source": "visual_reference_geng_2026.json",
+        "shan_sha_jian": "酉"
+      },
+      "坤": {
+        "grade": "岁破",
+        "pillar_top_relations": [
+          "克",
+          "克",
+          "旺",
+          "克"
+        ],
+        "pillar_bottom_relations": [
+          "克",
+          "令",
+          "泄",
+          "泄"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "活阴府",
+          "年正阴府",
+          "时正阴府",
+          "日克山运",
+          "年日相冲",
+          "日兼三杀",
+          "时兼三杀"
+        ],
+        "source": "visual_reference_kun_2026_uia.json",
+        "shan_sha_jian": "未"
+      }
+    }
+  },
+  "2026-09-24": {
+    "zhoutang": "香火宜 · 入宅忌",
+    "master_sha_labels": [
+      "四季龙穴",
+      "日冲未命",
+      "时冲午命"
+    ],
+    "mountains": {
+      "壬": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "克",
+          "克",
+          "旺",
+          "生"
+        ],
+        "pillar_bottom_relations": [
+          "克",
+          "令",
+          "生",
+          "泄"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "年三杀"
+        ],
+        "source": "visual_reference_dingyou_2026.json",
+        "shan_sha_jian": "亥"
+      },
+      "甲": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "克",
+          "克",
+          "旺",
+          "生"
+        ],
+        "pillar_bottom_relations": [
+          "克",
+          "令",
+          "生",
+          "泄"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "死阴府",
+          "月傍阴府",
+          "日三杀",
+          "月三杀",
+          "日克山运",
+          "月冲兼"
+        ],
+        "source": "visual_reference_jia_2026.json",
+        "shan_sha_jian": "卯"
+      },
+      "艮": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "克",
+          "克",
+          "旺",
+          "生"
+        ],
+        "pillar_bottom_relations": [
+          "克",
+          "令",
+          "生",
+          "泄"
+        ],
+        "shan_sha_labels": [
+          "山运金",
+          "月克山运",
+          "时克山运",
+          "年兼三杀"
+        ],
+        "source": "visual_reference_gen_2026.json",
+        "shan_sha_jian": "丑"
+      },
+      "庚": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "克",
+          "克",
+          "旺",
+          "生"
+        ],
+        "pillar_bottom_relations": [
+          "克",
+          "令",
+          "生",
+          "泄"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "死阴府",
+          "时傍阴府",
+          "日克山运",
+          "天星煞"
+        ],
+        "source": "visual_reference_geng_2026.json",
+        "shan_sha_jian": "酉"
+      },
+      "坤": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "克",
+          "克",
+          "旺",
+          "生"
+        ],
+        "pillar_bottom_relations": [
+          "克",
+          "令",
+          "生",
+          "泄"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "活阴府",
+          "年正阴府",
+          "日正阴府",
+          "日克山运",
+          "时兼三杀",
+          "日冲兼"
+        ],
+        "source": "visual_reference_kun_2026_uia.json",
+        "shan_sha_jian": "未"
+      }
+    }
+  },
+  "2026-09-25": {
+    "zhoutang": "香火忌 · 入宅宜",
+    "master_sha_labels": [
+      "日冲申命",
+      "时冲午命"
+    ],
+    "mountains": {
+      "壬": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "耗",
+          "耗",
+          "生",
+          "生"
+        ],
+        "pillar_bottom_relations": [
+          "耗",
+          "令",
+          "泄",
+          "旺"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "死阴府",
+          "时傍阴府",
+          "日三杀",
+          "年三杀",
+          "日克山运"
+        ],
+        "source": "visual_reference_dingyou_2026.json",
+        "shan_sha_jian": "亥"
+      },
+      "甲": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "耗",
+          "耗",
+          "生",
+          "生"
+        ],
+        "pillar_bottom_relations": [
+          "耗",
+          "令",
+          "泄",
+          "旺"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "死阴府",
+          "月傍阴府",
+          "日傍阴府",
+          "月三杀",
+          "时克山运",
+          "月冲兼"
+        ],
+        "source": "visual_reference_jia_2026.json",
+        "shan_sha_jian": "卯"
+      },
+      "艮": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "耗",
+          "耗",
+          "生",
+          "生"
+        ],
+        "pillar_bottom_relations": [
+          "耗",
+          "令",
+          "泄",
+          "旺"
+        ],
+        "shan_sha_labels": [
+          "山运金",
+          "月克山运",
+          "年兼三杀",
+          "日兼三杀"
+        ],
+        "source": "visual_reference_gen_2026.json",
+        "shan_sha_jian": "丑"
+      },
+      "庚": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "耗",
+          "耗",
+          "生",
+          "生"
+        ],
+        "pillar_bottom_relations": [
+          "耗",
+          "令",
+          "泄",
+          "旺"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "时克山运",
+          "天星煞",
+          "日冲丁煞",
+          "陈子性吉"
+        ],
+        "source": "visual_reference_geng_2026.json",
+        "shan_sha_jian": "酉"
+      },
+      "坤": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "耗",
+          "耗",
+          "生",
+          "生"
+        ],
+        "pillar_bottom_relations": [
+          "耗",
+          "令",
+          "泄",
+          "旺"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "活阴府",
+          "年正阴府",
+          "时克山运",
+          "时兼三杀",
+          "陈子性吉"
+        ],
+        "source": "visual_reference_kun_2026_uia.json",
+        "shan_sha_jian": "未"
+      }
+    }
+  },
+  "2026-09-26": {
+    "zhoutang": "香火忌 · 入宅忌",
+    "master_sha_labels": [
+      "四季四正",
+      "日冲酉命",
+      "时冲午命"
+    ],
+    "mountains": {
+      "壬": {
+        "grade": "月破",
+        "pillar_top_relations": [
+          "耗",
+          "耗",
+          "生",
+          "旺"
+        ],
+        "pillar_bottom_relations": [
+          "耗",
+          "令",
+          "泄",
+          "旺"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "年三杀",
+          "日克山运",
+          "月日相冲"
+        ],
+        "source": "visual_reference_dingyou_2026.json",
+        "shan_sha_jian": "亥"
+      },
+      "甲": {
+        "grade": "月破",
+        "pillar_top_relations": [
+          "耗",
+          "耗",
+          "生",
+          "旺"
+        ],
+        "pillar_bottom_relations": [
+          "耗",
+          "令",
+          "泄",
+          "旺"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "死阴府",
+          "月傍阴府",
+          "时傍阴府",
+          "月三杀",
+          "月日相冲",
+          "月冲兼"
+        ],
+        "source": "visual_reference_jia_2026.json",
+        "shan_sha_jian": "卯"
+      },
+      "艮": {
+        "grade": "月破",
+        "pillar_top_relations": [
+          "耗",
+          "耗",
+          "生",
+          "旺"
+        ],
+        "pillar_bottom_relations": [
+          "耗",
+          "令",
+          "泄",
+          "旺"
+        ],
+        "shan_sha_labels": [
+          "山运金",
+          "月克山运",
+          "月日相冲",
+          "年兼三杀"
+        ],
+        "source": "visual_reference_gen_2026.json",
+        "shan_sha_jian": "丑"
+      },
+      "庚": {
+        "grade": "月破",
+        "pillar_top_relations": [
+          "耗",
+          "耗",
+          "生",
+          "旺"
+        ],
+        "pillar_bottom_relations": [
+          "耗",
+          "令",
+          "泄",
+          "旺"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "死阴府",
+          "日傍阴府",
+          "日三杀",
+          "天星煞",
+          "月日相冲",
+          "日冲兼"
+        ],
+        "source": "visual_reference_geng_2026.json",
+        "shan_sha_jian": "酉"
+      },
+      "坤": {
+        "grade": "月破",
+        "pillar_top_relations": [
+          "耗",
+          "耗",
+          "生",
+          "旺"
+        ],
+        "pillar_bottom_relations": [
+          "耗",
+          "令",
+          "泄",
+          "旺"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "活阴府",
+          "年正阴府",
+          "月日相冲",
+          "时兼三杀"
+        ],
+        "source": "visual_reference_kun_2026_uia.json",
+        "shan_sha_jian": "未"
+      }
+    }
+  },
+  "2026-09-27": {
+    "zhoutang": "香火宜 · 入宅宜",
+    "master_sha_labels": [
+      "未命真杀",
+      "日冲戌命",
+      "时冲午命"
+    ],
+    "mountains": {
+      "壬": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "泄",
+          "泄",
+          "克",
+          "旺"
+        ],
+        "pillar_bottom_relations": [
+          "泄",
+          "令",
+          "耗",
+          "生"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "年三杀",
+          "时克山运",
+          "陈子性吉"
+        ],
+        "source": "visual_reference_dingyou_2026.json",
+        "shan_sha_jian": "亥"
+      },
+      "甲": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "泄",
+          "泄",
+          "克",
+          "旺"
+        ],
+        "pillar_bottom_relations": [
+          "泄",
+          "令",
+          "耗",
+          "生"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "死阴府",
+          "月傍阴府",
+          "月三杀",
+          "月冲兼"
+        ],
+        "source": "visual_reference_jia_2026.json",
+        "shan_sha_jian": "卯"
+      },
+      "艮": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "泄",
+          "泄",
+          "克",
+          "旺"
+        ],
+        "pillar_bottom_relations": [
+          "泄",
+          "令",
+          "耗",
+          "生"
+        ],
+        "shan_sha_labels": [
+          "山运金",
+          "死阴府",
+          "日正阴府",
+          "时正阴府",
+          "月克山运",
+          "日克山运",
+          "年兼三杀"
+        ],
+        "source": "visual_reference_gen_2026.json",
+        "shan_sha_jian": "丑"
+      },
+      "庚": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "泄",
+          "泄",
+          "克",
+          "旺"
+        ],
+        "pillar_bottom_relations": [
+          "泄",
+          "令",
+          "耗",
+          "生"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "天星煞"
+        ],
+        "source": "visual_reference_geng_2026.json",
+        "shan_sha_jian": "酉"
+      },
+      "坤": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "泄",
+          "泄",
+          "克",
+          "旺"
+        ],
+        "pillar_bottom_relations": [
+          "泄",
+          "令",
+          "耗",
+          "生"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "活阴府",
+          "年正阴府",
+          "日兼三杀",
+          "时兼三杀"
+        ],
+        "source": "visual_reference_kun_2026_uia.json",
+        "shan_sha_jian": "未"
+      }
+    }
+  },
+  "2026-09-28": {
+    "zhoutang": "香火宜 · 入宅宜",
+    "master_sha_labels": [
+      "日冲亥命",
+      "时冲午命"
+    ],
+    "mountains": {
+      "壬": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "泄",
+          "泄",
+          "克",
+          "泄"
+        ],
+        "pillar_bottom_relations": [
+          "泄",
+          "令",
+          "泄",
+          "生"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "死阴府",
+          "日傍阴府",
+          "年三杀",
+          "日冲兼",
+          "日冲丁煞"
+        ],
+        "source": "visual_reference_dingyou_2026.json",
+        "shan_sha_jian": "亥"
+      },
+      "甲": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "泄",
+          "泄",
+          "克",
+          "泄"
+        ],
+        "pillar_bottom_relations": [
+          "泄",
+          "令",
+          "泄",
+          "生"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "死阴府",
+          "月傍阴府",
+          "日三杀",
+          "月三杀",
+          "月冲兼"
+        ],
+        "source": "visual_reference_jia_2026.json",
+        "shan_sha_jian": "卯"
+      },
+      "艮": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "泄",
+          "泄",
+          "克",
+          "泄"
+        ],
+        "pillar_bottom_relations": [
+          "泄",
+          "令",
+          "泄",
+          "生"
+        ],
+        "shan_sha_labels": [
+          "山运金",
+          "月克山运",
+          "日克山运",
+          "年兼三杀"
+        ],
+        "source": "visual_reference_gen_2026.json",
+        "shan_sha_jian": "丑"
+      },
+      "庚": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "泄",
+          "泄",
+          "克",
+          "泄"
+        ],
+        "pillar_bottom_relations": [
+          "泄",
+          "令",
+          "泄",
+          "生"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "天星煞",
+          "地曜煞"
+        ],
+        "source": "visual_reference_geng_2026.json",
+        "shan_sha_jian": "酉"
+      },
+      "坤": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "泄",
+          "泄",
+          "克",
+          "泄"
+        ],
+        "pillar_bottom_relations": [
+          "泄",
+          "令",
+          "泄",
+          "生"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "活阴府",
+          "年正阴府",
+          "时正阴府",
+          "时兼三杀"
+        ],
+        "source": "visual_reference_kun_2026_uia.json",
+        "shan_sha_jian": "未"
+      }
+    }
+  },
+  "2026-09-29": {
+    "zhoutang": "香火宜 · 入宅宜",
+    "master_sha_labels": [
+      "日冲子命",
+      "时冲午命"
+    ],
+    "mountains": {
+      "壬": {
+        "grade": "日破",
+        "pillar_top_relations": [
+          "旺",
+          "旺",
+          "耗",
+          "泄"
+        ],
+        "pillar_bottom_relations": [
+          "旺",
+          "令",
+          "旺",
+          "克"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "年三杀",
+          "日三杀",
+          "日时相冲"
+        ],
+        "source": "visual_reference_dingyou_2026.json",
+        "shan_sha_jian": "亥"
+      },
+      "甲": {
+        "grade": "日破",
+        "pillar_top_relations": [
+          "旺",
+          "旺",
+          "耗",
+          "泄"
+        ],
+        "pillar_bottom_relations": [
+          "旺",
+          "令",
+          "旺",
+          "克"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "死阴府",
+          "月傍阴府",
+          "月三杀",
+          "日时相冲",
+          "月冲兼"
+        ],
+        "source": "visual_reference_jia_2026.json",
+        "shan_sha_jian": "卯"
+      },
+      "艮": {
+        "grade": "日破",
+        "pillar_top_relations": [
+          "旺",
+          "旺",
+          "耗",
+          "泄"
+        ],
+        "pillar_bottom_relations": [
+          "旺",
+          "令",
+          "旺",
+          "克"
+        ],
+        "shan_sha_labels": [
+          "山运金",
+          "月克山运",
+          "时克山运",
+          "日时相冲",
+          "年兼三杀",
+          "日兼三杀"
+        ],
+        "source": "visual_reference_gen_2026.json",
+        "shan_sha_jian": "丑"
+      },
+      "庚": {
+        "grade": "日破",
+        "pillar_top_relations": [
+          "旺",
+          "旺",
+          "耗",
+          "泄"
+        ],
+        "pillar_bottom_relations": [
+          "旺",
+          "令",
+          "旺",
+          "克"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "死阴府",
+          "时傍阴府",
+          "日星曜煞",
+          "天星煞",
+          "日时相冲"
+        ],
+        "source": "visual_reference_geng_2026.json",
+        "shan_sha_jian": "酉"
+      },
+      "坤": {
+        "grade": "日破",
+        "pillar_top_relations": [
+          "旺",
+          "旺",
+          "耗",
+          "泄"
+        ],
+        "pillar_bottom_relations": [
+          "旺",
+          "令",
+          "旺",
+          "克"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "活阴府",
+          "年正阴府",
+          "日正阴府",
+          "日时相冲",
+          "时兼三杀"
+        ],
+        "source": "visual_reference_kun_2026_uia.json",
+        "shan_sha_jian": "未"
+      }
+    }
+  },
+  "2026-09-30": {
+    "zhoutang": "香火忌 · 入宅忌",
+    "master_sha_labels": [
+      "四季龙穴",
+      "戌命真杀",
+      "日冲丑命",
+      "时冲午命"
+    ],
+    "mountains": {
+      "壬": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "旺",
+          "旺",
+          "耗",
+          "耗"
+        ],
+        "pillar_bottom_relations": [
+          "旺",
+          "令",
+          "泄",
+          "克"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "死阴府",
+          "时傍阴府",
+          "年三杀"
+        ],
+        "source": "visual_reference_dingyou_2026.json",
+        "shan_sha_jian": "亥"
+      },
+      "甲": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "旺",
+          "旺",
+          "耗",
+          "耗"
+        ],
+        "pillar_bottom_relations": [
+          "旺",
+          "令",
+          "泄",
+          "克"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "死阴府",
+          "月傍阴府",
+          "日傍阴府",
+          "月三杀",
+          "时克山运",
+          "月冲兼"
+        ],
+        "source": "visual_reference_jia_2026.json",
+        "shan_sha_jian": "卯"
+      },
+      "艮": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "旺",
+          "旺",
+          "耗",
+          "耗"
+        ],
+        "pillar_bottom_relations": [
+          "旺",
+          "令",
+          "泄",
+          "克"
+        ],
+        "shan_sha_labels": [
+          "山运金",
+          "月克山运",
+          "年兼三杀",
+          "日冲兼"
+        ],
+        "source": "visual_reference_gen_2026.json",
+        "shan_sha_jian": "丑"
+      },
+      "庚": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "旺",
+          "旺",
+          "耗",
+          "耗"
+        ],
+        "pillar_bottom_relations": [
+          "旺",
+          "令",
+          "泄",
+          "克"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "日三杀",
+          "时克山运",
+          "天星煞"
+        ],
+        "source": "visual_reference_geng_2026.json",
+        "shan_sha_jian": "酉"
+      },
+      "坤": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "旺",
+          "旺",
+          "耗",
+          "耗"
+        ],
+        "pillar_bottom_relations": [
+          "旺",
+          "令",
+          "泄",
+          "克"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "活阴府",
+          "年正阴府",
+          "时克山运",
+          "时兼三杀"
+        ],
+        "source": "visual_reference_kun_2026_uia.json",
+        "shan_sha_jian": "未"
+      }
+    }
+  },
+  "2026-10-01": {
+    "zhoutang": "香火宜 · 入宅宜",
+    "master_sha_labels": [
+      "日冲寅命",
+      "时冲午命"
+    ],
+    "mountains": {
+      "壬": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "生",
+          "生",
+          "泄",
+          "耗"
+        ],
+        "pillar_bottom_relations": [
+          "生",
+          "令",
+          "泄",
+          "耗"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "年三杀"
+        ],
+        "source": "visual_reference_dingyou_2026.json",
+        "shan_sha_jian": "亥"
+      },
+      "甲": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "生",
+          "生",
+          "泄",
+          "耗"
+        ],
+        "pillar_bottom_relations": [
+          "生",
+          "令",
+          "泄",
+          "耗"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "死阴府",
+          "月傍阴府",
+          "时傍阴府",
+          "月三杀",
+          "日克山运",
+          "地曜煞",
+          "月冲兼"
+        ],
+        "source": "visual_reference_jia_2026.json",
+        "shan_sha_jian": "卯"
+      },
+      "艮": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "生",
+          "生",
+          "泄",
+          "耗"
+        ],
+        "pillar_bottom_relations": [
+          "生",
+          "令",
+          "泄",
+          "耗"
+        ],
+        "shan_sha_labels": [
+          "山运金",
+          "月克山运",
+          "年兼三杀"
+        ],
+        "source": "visual_reference_gen_2026.json",
+        "shan_sha_jian": "丑"
+      },
+      "庚": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "生",
+          "生",
+          "泄",
+          "耗"
+        ],
+        "pillar_bottom_relations": [
+          "生",
+          "令",
+          "泄",
+          "耗"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "死阴府",
+          "日傍阴府",
+          "日克山运",
+          "天星煞"
+        ],
+        "source": "visual_reference_geng_2026.json",
+        "shan_sha_jian": "酉"
+      },
+      "坤": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "生",
+          "生",
+          "泄",
+          "耗"
+        ],
+        "pillar_bottom_relations": [
+          "生",
+          "令",
+          "泄",
+          "耗"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "活阴府",
+          "年正阴府",
+          "日克山运",
+          "日兼三杀",
+          "时兼三杀"
+        ],
+        "source": "visual_reference_kun_2026_uia.json",
+        "shan_sha_jian": "未"
+      }
+    }
+  },
+  "2026-10-02": {
+    "zhoutang": "香火宜 · 入宅宜",
+    "master_sha_labels": [
+      "日冲卯命",
+      "时冲午命"
+    ],
+    "mountains": {
+      "壬": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "生",
+          "生",
+          "泄",
+          "克"
+        ],
+        "pillar_bottom_relations": [
+          "生",
+          "令",
+          "泄",
+          "耗"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "年三杀",
+          "时克山运"
+        ],
+        "source": "visual_reference_dingyou_2026.json",
+        "shan_sha_jian": "亥"
+      },
+      "甲": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "生",
+          "生",
+          "泄",
+          "克"
+        ],
+        "pillar_bottom_relations": [
+          "生",
+          "令",
+          "泄",
+          "耗"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "死阴府",
+          "月傍阴府",
+          "月三杀",
+          "日三杀",
+          "日克山运",
+          "月冲兼",
+          "日冲兼"
+        ],
+        "source": "visual_reference_jia_2026.json",
+        "shan_sha_jian": "卯"
+      },
+      "艮": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "生",
+          "生",
+          "泄",
+          "克"
+        ],
+        "pillar_bottom_relations": [
+          "生",
+          "令",
+          "泄",
+          "耗"
+        ],
+        "shan_sha_labels": [
+          "山运金",
+          "死阴府",
+          "时正阴府",
+          "日正阴府",
+          "月克山运",
+          "年兼三杀"
+        ],
+        "source": "visual_reference_gen_2026.json",
+        "shan_sha_jian": "丑"
+      },
+      "庚": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "生",
+          "生",
+          "泄",
+          "克"
+        ],
+        "pillar_bottom_relations": [
+          "生",
+          "令",
+          "泄",
+          "耗"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "日克山运",
+          "天星煞"
+        ],
+        "source": "visual_reference_geng_2026.json",
+        "shan_sha_jian": "酉"
+      },
+      "坤": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "生",
+          "生",
+          "泄",
+          "克"
+        ],
+        "pillar_bottom_relations": [
+          "生",
+          "令",
+          "泄",
+          "耗"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "活阴府",
+          "年正阴府",
+          "日暗八煞",
+          "日克山运",
+          "时兼三杀"
+        ],
+        "source": "visual_reference_kun_2026_uia.json",
+        "shan_sha_jian": "未"
+      }
+    }
+  },
+  "2026-10-03": {
+    "zhoutang": "香火忌 · 入宅宜",
+    "master_sha_labels": [
+      "日冲辰命",
+      "时冲午命"
+    ],
+    "mountains": {
+      "壬": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "克",
+          "克",
+          "旺",
+          "克"
+        ],
+        "pillar_bottom_relations": [
+          "克",
+          "令",
+          "生",
+          "泄"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "死阴府",
+          "日傍阴府",
+          "年三杀",
+          "日三杀",
+          "日克山运"
+        ],
+        "source": "visual_reference_dingyou_2026.json",
+        "shan_sha_jian": "亥"
+      },
+      "甲": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "克",
+          "克",
+          "旺",
+          "克"
+        ],
+        "pillar_bottom_relations": [
+          "克",
+          "令",
+          "生",
+          "泄"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "死阴府",
+          "月傍阴府",
+          "月三杀",
+          "月冲兼"
+        ],
+        "source": "visual_reference_jia_2026.json",
+        "shan_sha_jian": "卯"
+      },
+      "艮": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "克",
+          "克",
+          "旺",
+          "克"
+        ],
+        "pillar_bottom_relations": [
+          "克",
+          "令",
+          "生",
+          "泄"
+        ],
+        "shan_sha_labels": [
+          "山运金",
+          "月克山运",
+          "年兼三杀",
+          "日兼三杀"
+        ],
+        "source": "visual_reference_gen_2026.json",
+        "shan_sha_jian": "丑"
+      },
+      "庚": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "克",
+          "克",
+          "旺",
+          "克"
+        ],
+        "pillar_bottom_relations": [
+          "克",
+          "令",
+          "生",
+          "泄"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "天星煞"
+        ],
+        "source": "visual_reference_geng_2026.json",
+        "shan_sha_jian": "酉"
+      },
+      "坤": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "克",
+          "克",
+          "旺",
+          "克"
+        ],
+        "pillar_bottom_relations": [
+          "克",
+          "令",
+          "生",
+          "泄"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "活阴府",
+          "年正阴府",
+          "时正阴府",
+          "时兼三杀"
+        ],
+        "source": "visual_reference_kun_2026_uia.json",
+        "shan_sha_jian": "未"
+      }
+    }
+  },
+  "2026-10-04": {
+    "zhoutang": "香火忌 · 入宅忌",
+    "master_sha_labels": [
+      "日冲巳命",
+      "时冲午命"
+    ],
+    "mountains": {
+      "壬": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "克",
+          "克",
+          "旺",
+          "生"
+        ],
+        "pillar_bottom_relations": [
+          "克",
+          "令",
+          "泄",
+          "泄"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "年三杀",
+          "日克山运"
+        ],
+        "source": "visual_reference_dingyou_2026.json",
+        "shan_sha_jian": "亥"
+      },
+      "甲": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "克",
+          "克",
+          "旺",
+          "生"
+        ],
+        "pillar_bottom_relations": [
+          "克",
+          "令",
+          "泄",
+          "泄"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "死阴府",
+          "月傍阴府",
+          "月三杀",
+          "月冲兼"
+        ],
+        "source": "visual_reference_jia_2026.json",
+        "shan_sha_jian": "卯"
+      },
+      "艮": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "克",
+          "克",
+          "旺",
+          "生"
+        ],
+        "pillar_bottom_relations": [
+          "克",
+          "令",
+          "泄",
+          "泄"
+        ],
+        "shan_sha_labels": [
+          "山运金",
+          "月克山运",
+          "时克山运",
+          "年兼三杀"
+        ],
+        "source": "visual_reference_gen_2026.json",
+        "shan_sha_jian": "丑"
+      },
+      "庚": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "克",
+          "克",
+          "旺",
+          "生"
+        ],
+        "pillar_bottom_relations": [
+          "克",
+          "令",
+          "泄",
+          "泄"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "死阴府",
+          "时傍阴府",
+          "日三杀",
+          "天星煞"
+        ],
+        "source": "visual_reference_geng_2026.json",
+        "shan_sha_jian": "酉"
+      },
+      "坤": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "克",
+          "克",
+          "旺",
+          "生"
+        ],
+        "pillar_bottom_relations": [
+          "克",
+          "令",
+          "泄",
+          "泄"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "活阴府",
+          "年正阴府",
+          "日正阴府",
+          "时兼三杀"
+        ],
+        "source": "visual_reference_kun_2026_uia.json",
+        "shan_sha_jian": "未"
+      }
+    }
+  },
+  "2026-10-05": {
+    "zhoutang": "香火宜 · 入宅宜",
+    "master_sha_labels": [
+      "日冲午命",
+      "时冲午命"
+    ],
+    "mountains": {
+      "壬": {
+        "grade": "岁破",
+        "pillar_top_relations": [
+          "耗",
+          "耗",
+          "生",
+          "生"
+        ],
+        "pillar_bottom_relations": [
+          "耗",
+          "令",
+          "旺",
+          "旺"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "死阴府",
+          "时傍阴府",
+          "年三杀",
+          "年日相冲"
+        ],
+        "source": "visual_reference_dingyou_2026.json",
+        "shan_sha_jian": "亥"
+      },
+      "甲": {
+        "grade": "岁破",
+        "pillar_top_relations": [
+          "耗",
+          "耗",
+          "生",
+          "生"
+        ],
+        "pillar_bottom_relations": [
+          "耗",
+          "令",
+          "旺",
+          "旺"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "死阴府",
+          "月傍阴府",
+          "日傍阴府",
+          "月三杀",
+          "时克山运",
+          "年日相冲",
+          "月冲兼"
+        ],
+        "source": "visual_reference_jia_2026.json",
+        "shan_sha_jian": "卯"
+      },
+      "艮": {
+        "grade": "岁破",
+        "pillar_top_relations": [
+          "耗",
+          "耗",
+          "生",
+          "生"
+        ],
+        "pillar_bottom_relations": [
+          "耗",
+          "令",
+          "旺",
+          "旺"
+        ],
+        "shan_sha_labels": [
+          "山运金",
+          "月克山运",
+          "年日相冲",
+          "年兼三杀"
+        ],
+        "source": "visual_reference_gen_2026.json",
+        "shan_sha_jian": "丑"
+      },
+      "庚": {
+        "grade": "岁破",
+        "pillar_top_relations": [
+          "耗",
+          "耗",
+          "生",
+          "生"
+        ],
+        "pillar_bottom_relations": [
+          "耗",
+          "令",
+          "旺",
+          "旺"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "时克山运",
+          "天星煞",
+          "年日相冲"
+        ],
+        "source": "visual_reference_geng_2026.json",
+        "shan_sha_jian": "酉"
+      },
+      "坤": {
+        "grade": "岁破",
+        "pillar_top_relations": [
+          "耗",
+          "耗",
+          "生",
+          "生"
+        ],
+        "pillar_bottom_relations": [
+          "耗",
+          "令",
+          "旺",
+          "旺"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "活阴府",
+          "年正阴府",
+          "时克山运",
+          "年日相冲",
+          "日兼三杀",
+          "时兼三杀"
+        ],
+        "source": "visual_reference_kun_2026_uia.json",
+        "shan_sha_jian": "未"
+      }
+    }
+  },
+  "2026-10-06": {
+    "zhoutang": "香火宜 · 入宅忌",
+    "master_sha_labels": [
+      "四季龙穴",
+      "日冲未命",
+      "时冲午命"
+    ],
+    "mountains": {
+      "壬": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "耗",
+          "耗",
+          "生",
+          "旺"
+        ],
+        "pillar_bottom_relations": [
+          "耗",
+          "令",
+          "克",
+          "旺"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "年三杀",
+          "陈子性吉"
+        ],
+        "source": "visual_reference_dingyou_2026.json",
+        "shan_sha_jian": "亥"
+      },
+      "甲": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "耗",
+          "耗",
+          "生",
+          "旺"
+        ],
+        "pillar_bottom_relations": [
+          "耗",
+          "令",
+          "克",
+          "旺"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "死阴府",
+          "月傍阴府",
+          "时傍阴府",
+          "日三杀",
+          "月三杀",
+          "日暗八煞",
+          "月冲兼"
+        ],
+        "source": "visual_reference_jia_2026.json",
+        "shan_sha_jian": "卯"
+      },
+      "艮": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "耗",
+          "耗",
+          "生",
+          "旺"
+        ],
+        "pillar_bottom_relations": [
+          "耗",
+          "令",
+          "克",
+          "旺"
+        ],
+        "shan_sha_labels": [
+          "山运金",
+          "月克山运",
+          "年兼三杀",
+          "陈子性吉"
+        ],
+        "source": "visual_reference_gen_2026.json",
+        "shan_sha_jian": "丑"
+      },
+      "庚": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "耗",
+          "耗",
+          "生",
+          "旺"
+        ],
+        "pillar_bottom_relations": [
+          "耗",
+          "令",
+          "克",
+          "旺"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "死阴府",
+          "日傍阴府",
+          "天星煞",
+          "陈子性吉"
+        ],
+        "source": "visual_reference_geng_2026.json",
+        "shan_sha_jian": "酉"
+      },
+      "坤": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "耗",
+          "耗",
+          "生",
+          "旺"
+        ],
+        "pillar_bottom_relations": [
+          "耗",
+          "令",
+          "克",
+          "旺"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "活阴府",
+          "年正阴府",
+          "时兼三杀",
+          "日冲兼",
+          "陈子性吉"
+        ],
+        "source": "visual_reference_kun_2026_uia.json",
+        "shan_sha_jian": "未"
+      }
+    }
+  },
+  "2026-10-07": {
+    "zhoutang": "香火宜 · 入宅宜",
+    "master_sha_labels": [
+      "巳命真杀",
+      "日冲申命",
+      "时冲午命"
+    ],
+    "mountains": {
+      "壬": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "泄",
+          "泄",
+          "克",
+          "旺"
+        ],
+        "pillar_bottom_relations": [
+          "泄",
+          "令",
+          "旺",
+          "生"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "日三杀",
+          "年三杀",
+          "时克山运"
+        ],
+        "source": "visual_reference_dingyou_2026.json",
+        "shan_sha_jian": "亥"
+      },
+      "甲": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "泄",
+          "泄",
+          "克",
+          "旺"
+        ],
+        "pillar_bottom_relations": [
+          "泄",
+          "令",
+          "旺",
+          "生"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "死阴府",
+          "月傍阴府",
+          "月三杀",
+          "月冲兼"
+        ],
+        "source": "visual_reference_jia_2026.json",
+        "shan_sha_jian": "卯"
+      },
+      "艮": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "泄",
+          "泄",
+          "克",
+          "旺"
+        ],
+        "pillar_bottom_relations": [
+          "泄",
+          "令",
+          "旺",
+          "生"
+        ],
+        "shan_sha_labels": [
+          "山运金",
+          "死阴府",
+          "日正阴府",
+          "时正阴府",
+          "月克山运",
+          "日星曜煞",
+          "年兼三杀",
+          "日兼三杀"
+        ],
+        "source": "visual_reference_gen_2026.json",
+        "shan_sha_jian": "丑"
+      },
+      "庚": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "泄",
+          "泄",
+          "克",
+          "旺"
+        ],
+        "pillar_bottom_relations": [
+          "泄",
+          "令",
+          "旺",
+          "生"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "天星煞"
+        ],
+        "source": "visual_reference_geng_2026.json",
+        "shan_sha_jian": "酉"
+      },
+      "坤": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "泄",
+          "泄",
+          "克",
+          "旺"
+        ],
+        "pillar_bottom_relations": [
+          "泄",
+          "令",
+          "旺",
+          "生"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "活阴府",
+          "年正阴府",
+          "日星曜煞",
+          "时兼三杀"
+        ],
+        "source": "visual_reference_kun_2026_uia.json",
+        "shan_sha_jian": "未"
+      }
+    }
+  },
+  "2026-10-08": {
+    "zhoutang": "香火忌 · 入宅宜",
+    "master_sha_labels": [
+      "四季四正",
+      "日冲酉命",
+      "时冲午命"
+    ],
+    "mountains": {
+      "壬": {
+        "grade": "月破",
+        "pillar_top_relations": [
+          "泄",
+          "泄",
+          "克",
+          "泄"
+        ],
+        "pillar_bottom_relations": [
+          "泄",
+          "令",
+          "旺",
+          "生"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "死阴府",
+          "日傍阴府",
+          "年三杀",
+          "日山方煞",
+          "月日相冲"
+        ],
+        "source": "visual_reference_dingyou_2026.json",
+        "shan_sha_jian": "亥"
+      },
+      "甲": {
+        "grade": "月破",
+        "pillar_top_relations": [
+          "泄",
+          "泄",
+          "克",
+          "泄"
+        ],
+        "pillar_bottom_relations": [
+          "泄",
+          "令",
+          "旺",
+          "生"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "死阴府",
+          "月傍阴府",
+          "月三杀",
+          "月日相冲",
+          "月冲兼"
+        ],
+        "source": "visual_reference_jia_2026.json",
+        "shan_sha_jian": "卯"
+      },
+      "艮": {
+        "grade": "月破",
+        "pillar_top_relations": [
+          "泄",
+          "泄",
+          "克",
+          "泄"
+        ],
+        "pillar_bottom_relations": [
+          "泄",
+          "令",
+          "旺",
+          "生"
+        ],
+        "shan_sha_labels": [
+          "山运金",
+          "月克山运",
+          "日星曜煞",
+          "月日相冲",
+          "年兼三杀"
+        ],
+        "source": "visual_reference_gen_2026.json",
+        "shan_sha_jian": "丑"
+      },
+      "庚": {
+        "grade": "月破",
+        "pillar_top_relations": [
+          "泄",
+          "泄",
+          "克",
+          "泄"
+        ],
+        "pillar_bottom_relations": [
+          "泄",
+          "令",
+          "旺",
+          "生"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "日三杀",
+          "日暗八煞",
+          "天星煞",
+          "月日相冲",
+          "日冲兼"
+        ],
+        "source": "visual_reference_geng_2026.json",
+        "shan_sha_jian": "酉"
+      },
+      "坤": {
+        "grade": "月破",
+        "pillar_top_relations": [
+          "泄",
+          "泄",
+          "克",
+          "泄"
+        ],
+        "pillar_bottom_relations": [
+          "泄",
+          "令",
+          "旺",
+          "生"
+        ],
+        "shan_sha_labels": [
+          "山运水",
+          "活阴府",
+          "年正阴府",
+          "时正阴府",
+          "日正八煞",
+          "日星曜煞",
+          "月日相冲",
+          "时兼三杀"
+        ],
+        "source": "visual_reference_kun_2026_uia.json",
+        "shan_sha_jian": "未"
+      }
+    },
+    "zhi_xing": "破"
+  },
+  "2027-07-01": {
+    "zhoutang": "香火宜 · 入宅宜",
+    "men_guang": "损畜",
+    "hour_signs": [
+      "时吉",
+      "贵登",
+      "时凶",
+      "白虎",
+      "五鬼"
+    ],
+    "master_sha_labels": [
+      "日冲亥命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "芒种",
+        "time": "2027-06-06 05:25:29"
+      },
+      {
+        "name": "夏至",
+        "time": "2027-06-21 22:10:30"
+      },
+      {
+        "name": "小暑",
+        "time": "2027-07-07 15:36:44"
+      }
+    ],
+    "zhi_xing": "闭",
+    "day_position_tai": "厨灶床 外正西",
+    "mountains": {
+      "巽": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "克",
+          "克",
+          "克",
+          "生"
+        ],
+        "pillar_bottom_relations": [
+          "生",
+          "令",
+          "克",
+          "泄"
+        ],
+        "shan_sha_labels": [
+          "山运火",
+          "年克山运",
+          "月克山运",
+          "日兼三杀"
+        ],
+        "source": "xiaomie_xun_2027_0726_off_reference.json",
+        "shan_sha_jian": "辰"
+      }
+    }
+  },
+  "2027-07-02": {
+    "zhoutang": "香火忌 · 入宅宜",
+    "men_guang": "安门",
+    "hour_signs": [
+      "时吉",
+      "金匮",
+      "时凶",
+      "日破"
+    ],
+    "master_sha_labels": [
+      "四季四正",
+      "日冲子命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "芒种",
+        "time": "2027-06-06 05:25:29"
+      },
+      {
+        "name": "夏至",
+        "time": "2027-06-21 22:10:30"
+      },
+      {
+        "name": "小暑",
+        "time": "2027-07-07 15:36:44"
+      }
+    ],
+    "zhi_xing": "建",
+    "day_position_tai": "仓库碓 外西北",
+    "mountains": {
+      "巽": {
+        "grade": "日破",
+        "pillar_top_relations": [
+          "耗",
+          "耗",
+          "耗",
+          "生"
+        ],
+        "pillar_bottom_relations": [
+          "克",
+          "令",
+          "耗",
+          "旺"
+        ],
+        "shan_sha_labels": [
+          "山运火",
+          "年克山运",
+          "月克山运",
+          "日时相冲"
+        ],
+        "source": "xiaomie_xun_2027_0726_off_reference.json",
+        "shan_sha_jian": "辰"
+      }
+    }
+  },
+  "2027-07-03": {
+    "zhoutang": "香火宜 · 入宅宜",
+    "men_guang": "安门",
+    "hour_signs": [
+      "时吉",
+      "日禄",
+      "大进",
+      "时凶",
+      "日害",
+      "天刑",
+      "截路"
+    ],
+    "master_sha_labels": [
+      "日冲丑命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "芒种",
+        "time": "2027-06-06 05:25:29"
+      },
+      {
+        "name": "夏至",
+        "time": "2027-06-21 22:10:30"
+      },
+      {
+        "name": "小暑",
+        "time": "2027-07-07 15:36:44"
+      }
+    ],
+    "zhi_xing": "除",
+    "day_position_tai": "房床厕 外西北",
+    "mountains": {
+      "巽": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "耗",
+          "耗",
+          "耗",
+          "旺"
+        ],
+        "pillar_bottom_relations": [
+          "克",
+          "令",
+          "克",
+          "旺"
+        ],
+        "shan_sha_labels": [
+          "山运火",
+          "年克山运",
+          "月克山运",
+          "陈子性吉"
+        ],
+        "source": "xiaomie_xun_2027_0726_off_reference.json",
+        "shan_sha_jian": "辰"
+      }
+    }
+  },
+  "2027-07-04": {
+    "zhoutang": "香火宜 · 入宅宜",
+    "men_guang": "安门",
+    "hour_signs": [
+      "时吉",
+      "青龙",
+      "大进"
+    ],
+    "master_sha_labels": [
+      "亥命真杀",
+      "日冲寅命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "芒种",
+        "time": "2027-06-06 05:25:29"
+      },
+      {
+        "name": "夏至",
+        "time": "2027-06-21 22:10:30"
+      },
+      {
+        "name": "小暑",
+        "time": "2027-07-07 15:36:44"
+      }
+    ],
+    "zhi_xing": "满",
+    "day_position_tai": "占门炉 外西北",
+    "mountains": {
+      "巽": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "泄",
+          "泄",
+          "泄",
+          "旺"
+        ],
+        "pillar_bottom_relations": [
+          "耗",
+          "令",
+          "克",
+          "生"
+        ],
+        "shan_sha_labels": [
+          "山运火",
+          "死阴府",
+          "日正阴府",
+          "时正阴府",
+          "年克山运",
+          "月克山运",
+          "日克山运"
+        ],
+        "source": "xiaomie_xun_2027_0726_off_reference.json",
+        "shan_sha_jian": "辰"
+      }
+    }
+  },
+  "2027-07-05": {
+    "zhoutang": "香火宜 · 入宅宜",
+    "men_guang": "安门",
+    "hour_signs": [
+      "时吉",
+      "罗纹",
+      "司命",
+      "阴贵"
+    ],
+    "master_sha_labels": [
+      "四季龙穴",
+      "日冲卯命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "芒种",
+        "time": "2027-06-06 05:25:29"
+      },
+      {
+        "name": "夏至",
+        "time": "2027-06-21 22:10:30"
+      },
+      {
+        "name": "小暑",
+        "time": "2027-07-07 15:36:44"
+      }
+    ],
+    "zhi_xing": "平",
+    "day_position_tai": "碓磨门 外西北",
+    "mountains": {
+      "巽": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "泄",
+          "泄",
+          "泄",
+          "泄"
+        ],
+        "pillar_bottom_relations": [
+          "耗",
+          "令",
+          "克",
+          "生"
+        ],
+        "shan_sha_labels": [
+          "山运火",
+          "年克山运",
+          "月克山运",
+          "日克山运",
+          "时克山运",
+          "日兼三杀"
+        ],
+        "source": "xiaomie_xun_2027_0726_off_reference.json",
+        "shan_sha_jian": "辰"
+      }
+    }
+  },
+  "2027-07-06": {
+    "zhoutang": "香火宜 · 入宅宜",
+    "men_guang": "损畜",
+    "hour_signs": [
+      "时吉",
+      "天官",
+      "福星",
+      "唐符",
+      "时凶",
+      "天牢",
+      "五鬼"
+    ],
+    "master_sha_labels": [
+      "日冲辰命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "芒种",
+        "time": "2027-06-06 05:25:29"
+      },
+      {
+        "name": "夏至",
+        "time": "2027-06-21 22:10:30"
+      },
+      {
+        "name": "小暑",
+        "time": "2027-07-07 15:36:44"
+      }
+    ],
+    "zhi_xing": "定",
+    "day_position_tai": "厨灶栖 外西北",
+    "mountains": {
+      "巽": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "旺",
+          "旺",
+          "旺",
+          "泄"
+        ],
+        "pillar_bottom_relations": [
+          "泄",
+          "令",
+          "泄",
+          "克"
+        ],
+        "shan_sha_labels": [
+          "山运火",
+          "年克山运",
+          "月克山运",
+          "日冲兼",
+          "陈子性吉"
+        ],
+        "source": "xiaomie_xun_2027_0726_off_reference.json",
+        "shan_sha_jian": "辰"
+      }
+    }
+  },
+  "2027-07-07": {
+    "zhoutang": "香火忌 · 入宅忌",
+    "men_guang": "损畜",
+    "hour_signs": [
+      "时凶",
+      "白虎"
+    ],
+    "master_sha_labels": [
+      "寅命真杀",
+      "日冲巳命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "交小暑",
+        "time": "2027-07-07 15:36:44"
+      },
+      {
+        "name": "芒种",
+        "time": "2027-06-06 05:25:29"
+      },
+      {
+        "name": "夏至",
+        "time": "2027-06-21 22:10:30"
+      },
+      {
+        "name": "小暑",
+        "time": "2027-07-07 15:36:44"
+      }
+    ],
+    "zhi_xing": "执",
+    "day_position_tai": "仓库床 外西北",
+    "mountains": {
+      "巽": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "旺",
+          "旺",
+          "旺",
+          "耗"
+        ],
+        "pillar_bottom_relations": [
+          "泄",
+          "令",
+          "克",
+          "克"
+        ],
+        "shan_sha_labels": [
+          "山运火",
+          "年克山运",
+          "月克山运"
+        ],
+        "source": "xiaomie_xun_2027_0726_off_reference.json",
+        "shan_sha_jian": "辰"
+      }
+    }
+  },
+  "2027-07-08": {
+    "zhoutang": "香火宜 · 入宅宜",
+    "men_guang": "损畜",
+    "hour_signs": [
+      "时吉",
+      "金匮",
+      "大进",
+      "唐符",
+      "时凶",
+      "截路"
+    ],
+    "master_sha_labels": [
+      "日冲午命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "小暑",
+        "time": "2027-07-07 15:36:44"
+      },
+      {
+        "name": "大暑",
+        "time": "2027-07-23 09:04:20"
+      },
+      {
+        "name": "立秋",
+        "time": "2027-08-08 01:26:27"
+      }
+    ],
+    "zhi_xing": "执",
+    "day_position_tai": "房床碓 外正北",
+    "mountains": {
+      "巽": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "生",
+          "生",
+          "旺",
+          "耗"
+        ],
+        "pillar_bottom_relations": [
+          "旺",
+          "令",
+          "耗",
+          "耗"
+        ],
+        "shan_sha_labels": [
+          "山运火",
+          "年克山运",
+          "月克山运"
+        ],
+        "source": "xiaomie_xun_2027_0726_off_reference.json",
+        "shan_sha_jian": "辰"
+      }
+    }
+  },
+  "2027-07-09": {
+    "zhoutang": "香火宜 · 入宅宜",
+    "men_guang": "安门",
+    "hour_signs": [
+      "时吉",
+      "罗纹",
+      "日合",
+      "阳贵",
+      "大进",
+      "时凶",
+      "天刑"
+    ],
+    "master_sha_labels": [
+      "日冲未命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "小暑",
+        "time": "2027-07-07 15:36:44"
+      },
+      {
+        "name": "大暑",
+        "time": "2027-07-23 09:04:20"
+      },
+      {
+        "name": "立秋",
+        "time": "2027-08-08 01:26:27"
+      }
+    ],
+    "zhi_xing": "破",
+    "day_position_tai": "占门厕 外正北",
+    "mountains": {
+      "巽": {
+        "grade": "岁破;月破",
+        "pillar_top_relations": [
+          "生",
+          "生",
+          "旺",
+          "克"
+        ],
+        "pillar_bottom_relations": [
+          "旺",
+          "令",
+          "旺",
+          "耗"
+        ],
+        "shan_sha_labels": [
+          "山运火",
+          "死阴府",
+          "时正阴府",
+          "日正阴府",
+          "年克山运",
+          "月克山运",
+          "年日相冲",
+          "月日相冲",
+          "日兼三杀"
+        ],
+        "source": "xiaomie_xun_2027_0726_off_reference.json",
+        "shan_sha_jian": "辰"
+      }
+    }
+  },
+  "2027-07-10": {
+    "zhoutang": "香火忌 · 入宅宜",
+    "men_guang": "安门",
+    "hour_signs": [
+      "时吉",
+      "青龙",
+      "时凶",
+      "七殺"
+    ],
+    "master_sha_labels": [
+      "日冲申命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "小暑",
+        "time": "2027-07-07 15:36:44"
+      },
+      {
+        "name": "大暑",
+        "time": "2027-07-23 09:04:20"
+      },
+      {
+        "name": "立秋",
+        "time": "2027-08-08 01:26:27"
+      }
+    ],
+    "zhi_xing": "危",
+    "day_position_tai": "碓磨炉 外正北",
+    "mountains": {
+      "巽": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "克",
+          "克",
+          "生",
+          "克"
+        ],
+        "pillar_bottom_relations": [
+          "生",
+          "令",
+          "耗",
+          "泄"
+        ],
+        "shan_sha_labels": [
+          "山运火",
+          "年克山运",
+          "月克山运",
+          "时克山运",
+          "陈子性吉"
+        ],
+        "source": "xiaomie_xun_2027_0726_off_reference.json",
+        "shan_sha_jian": "辰"
+      }
+    }
+  },
+  "2027-07-11": {
+    "zhoutang": "香火忌 · 入宅忌",
+    "men_guang": "损人",
+    "hour_signs": [
+      "时吉",
+      "司命",
+      "贵登",
+      "时凶",
+      "日刑",
+      "五鬼"
+    ],
+    "master_sha_labels": [
+      "四季龙穴",
+      "日冲酉命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "小暑",
+        "time": "2027-07-07 15:36:44"
+      },
+      {
+        "name": "大暑",
+        "time": "2027-07-23 09:04:20"
+      },
+      {
+        "name": "立秋",
+        "time": "2027-08-08 01:26:27"
+      }
+    ],
+    "zhi_xing": "成",
+    "day_position_tai": "厨灶门 外正北",
+    "mountains": {
+      "巽": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "克",
+          "克",
+          "生",
+          "生"
+        ],
+        "pillar_bottom_relations": [
+          "生",
+          "令",
+          "耗",
+          "泄"
+        ],
+        "shan_sha_labels": [
+          "山运火",
+          "年克山运",
+          "月克山运"
+        ],
+        "source": "xiaomie_xun_2027_0726_off_reference.json",
+        "shan_sha_jian": "辰"
+      }
+    }
+  },
+  "2027-07-12": {
+    "zhoutang": "香火宜 · 入宅宜",
+    "men_guang": "损人",
+    "hour_signs": [
+      "时凶",
+      "天牢"
+    ],
+    "master_sha_labels": [
+      "日冲戌命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "小暑",
+        "time": "2027-07-07 15:36:44"
+      },
+      {
+        "name": "大暑",
+        "time": "2027-07-23 09:04:20"
+      },
+      {
+        "name": "立秋",
+        "time": "2027-08-08 01:26:27"
+      }
+    ],
+    "zhi_xing": "收",
+    "day_position_tai": "仓库栖 外正北",
+    "mountains": {
+      "巽": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "耗",
+          "耗",
+          "克",
+          "生"
+        ],
+        "pillar_bottom_relations": [
+          "克",
+          "令",
+          "克",
+          "旺"
+        ],
+        "shan_sha_labels": [
+          "山运火",
+          "年克山运",
+          "月克山运",
+          "日克山运"
+        ],
+        "source": "xiaomie_xun_2027_0726_off_reference.json",
+        "shan_sha_jian": "辰"
+      }
+    }
+  },
+  "2027-07-13": {
+    "zhoutang": "香火宜 · 入宅忌",
+    "men_guang": "损人",
+    "hour_signs": [
+      "时吉",
+      "交驰",
+      "日禄",
+      "大进",
+      "时凶",
+      "白虎",
+      "截路"
+    ],
+    "master_sha_labels": [
+      "日冲亥命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "小暑",
+        "time": "2027-07-07 15:36:44"
+      },
+      {
+        "name": "大暑",
+        "time": "2027-07-23 09:04:20"
+      },
+      {
+        "name": "立秋",
+        "time": "2027-08-08 01:26:27"
+      }
+    ],
+    "zhi_xing": "开",
+    "day_position_tai": "占房床 房内北",
+    "mountains": {
+      "巽": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "耗",
+          "耗",
+          "克",
+          "旺"
+        ],
+        "pillar_bottom_relations": [
+          "克",
+          "令",
+          "耗",
+          "旺"
+        ],
+        "shan_sha_labels": [
+          "山运火",
+          "年克山运",
+          "月克山运",
+          "日克山运",
+          "日兼三杀"
+        ],
+        "source": "xiaomie_xun_2027_0726_off_reference.json",
+        "shan_sha_jian": "辰"
+      }
+    }
+  },
+  "2027-07-14": {
+    "zhoutang": "香火宜 · 入宅宜",
+    "men_guang": "安门",
+    "hour_signs": [
+      "时吉",
+      "金匮",
+      "大进",
+      "时凶",
+      "日破"
+    ],
+    "master_sha_labels": [
+      "四季四正",
+      "酉命真杀",
+      "日冲子命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "小暑",
+        "time": "2027-07-07 15:36:44"
+      },
+      {
+        "name": "大暑",
+        "time": "2027-07-23 09:04:20"
+      },
+      {
+        "name": "立秋",
+        "time": "2027-08-08 01:26:27"
+      }
+    ],
+    "zhi_xing": "闭",
+    "day_position_tai": "占门碓 房内北",
+    "mountains": {
+      "巽": {
+        "grade": "日破",
+        "pillar_top_relations": [
+          "泄",
+          "泄",
+          "耗",
+          "旺"
+        ],
+        "pillar_bottom_relations": [
+          "耗",
+          "令",
+          "泄",
+          "生"
+        ],
+        "shan_sha_labels": [
+          "山运火",
+          "死阴府",
+          "日正阴府",
+          "时正阴府",
+          "年克山运",
+          "月克山运",
+          "日时相冲"
+        ],
+        "source": "xiaomie_xun_2027_0726_off_reference.json",
+        "shan_sha_jian": "辰"
+      }
+    }
+  },
+  "2027-07-15": {
+    "zhoutang": "香火忌 · 入宅宜",
+    "men_guang": "安门",
+    "hour_signs": [
+      "时吉",
+      "阴贵",
+      "时凶",
+      "日害",
+      "天刑"
+    ],
+    "master_sha_labels": [
+      "日冲丑命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "小暑",
+        "time": "2027-07-07 15:36:44"
+      },
+      {
+        "name": "大暑",
+        "time": "2027-07-23 09:04:20"
+      },
+      {
+        "name": "立秋",
+        "time": "2027-08-08 01:26:27"
+      }
+    ],
+    "zhi_xing": "建",
+    "day_position_tai": "碓磨厕 房内北",
+    "mountains": {
+      "巽": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "泄",
+          "泄",
+          "耗",
+          "泄"
+        ],
+        "pillar_bottom_relations": [
+          "耗",
+          "令",
+          "耗",
+          "生"
+        ],
+        "shan_sha_labels": [
+          "山运火",
+          "年克山运",
+          "月克山运",
+          "时克山运"
+        ],
+        "source": "xiaomie_xun_2027_0726_off_reference.json",
+        "shan_sha_jian": "辰"
+      }
+    }
+  },
+  "2027-07-16": {
+    "zhoutang": "香火宜 · 入宅宜",
+    "men_guang": "安门",
+    "hour_signs": [
+      "时吉",
+      "青龙",
+      "天官",
+      "福星",
+      "唐符",
+      "时凶",
+      "五鬼"
+    ],
+    "master_sha_labels": [
+      "日冲寅命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "小暑",
+        "time": "2027-07-07 15:36:44"
+      },
+      {
+        "name": "大暑",
+        "time": "2027-07-23 09:04:20"
+      },
+      {
+        "name": "立秋",
+        "time": "2027-08-08 01:26:27"
+      }
+    ],
+    "zhi_xing": "除",
+    "day_position_tai": "厨灶炉 房内北",
+    "mountains": {
+      "巽": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "旺",
+          "旺",
+          "泄",
+          "泄"
+        ],
+        "pillar_bottom_relations": [
+          "泄",
+          "令",
+          "耗",
+          "克"
+        ],
+        "shan_sha_labels": [
+          "山运火",
+          "年克山运",
+          "月克山运",
+          "陈子性吉"
+        ],
+        "source": "xiaomie_xun_2027_0726_off_reference.json",
+        "shan_sha_jian": "辰"
+      }
+    }
+  },
+  "2027-07-17": {
+    "zhoutang": "香火宜 · 入宅忌",
+    "men_guang": "损畜",
+    "hour_signs": [
+      "时吉",
+      "司命"
+    ],
+    "master_sha_labels": [
+      "四季龙穴",
+      "日冲卯命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "小暑",
+        "time": "2027-07-07 15:36:44"
+      },
+      {
+        "name": "大暑",
+        "time": "2027-07-23 09:04:20"
+      },
+      {
+        "name": "立秋",
+        "time": "2027-08-08 01:26:27"
+      }
+    ],
+    "zhi_xing": "满",
+    "day_position_tai": "仓库门 房内北",
+    "mountains": {
+      "巽": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "旺",
+          "旺",
+          "泄",
+          "耗"
+        ],
+        "pillar_bottom_relations": [
+          "泄",
+          "令",
+          "耗",
+          "克"
+        ],
+        "shan_sha_labels": [
+          "山运火",
+          "年克山运",
+          "月克山运",
+          "日兼三杀"
+        ],
+        "source": "xiaomie_xun_2027_0726_off_reference.json",
+        "shan_sha_jian": "辰"
+      }
+    }
+  },
+  "2027-07-18": {
+    "zhoutang": "香火忌 · 入宅宜",
+    "men_guang": "损畜",
+    "hour_signs": [
+      "时吉",
+      "大进",
+      "唐符",
+      "时凶",
+      "天牢",
+      "截路"
+    ],
+    "master_sha_labels": [
+      "日冲辰命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "小暑",
+        "time": "2027-07-07 15:36:44"
+      },
+      {
+        "name": "大暑",
+        "time": "2027-07-23 09:04:20"
+      },
+      {
+        "name": "立秋",
+        "time": "2027-08-08 01:26:27"
+      }
+    ],
+    "zhi_xing": "平",
+    "day_position_tai": "房床栖 房内南",
+    "mountains": {
+      "巽": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "生",
+          "生",
+          "旺",
+          "耗"
+        ],
+        "pillar_bottom_relations": [
+          "旺",
+          "令",
+          "旺",
+          "耗"
+        ],
+        "shan_sha_labels": [
+          "山运火",
+          "年克山运",
+          "月克山运",
+          "日冲兼"
+        ],
+        "source": "xiaomie_xun_2027_0726_off_reference.json",
+        "shan_sha_jian": "辰"
+      }
+    }
+  },
+  "2027-07-19": {
+    "zhoutang": "香火忌 · 入宅忌",
+    "men_guang": "损畜",
+    "hour_signs": [
+      "时吉",
+      "阳贵",
+      "大进",
+      "时凶",
+      "白虎"
+    ],
+    "master_sha_labels": [
+      "日冲巳命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "小暑",
+        "time": "2027-07-07 15:36:44"
+      },
+      {
+        "name": "大暑",
+        "time": "2027-07-23 09:04:20"
+      },
+      {
+        "name": "立秋",
+        "time": "2027-08-08 01:26:27"
+      }
+    ],
+    "zhi_xing": "定",
+    "day_position_tai": "占门床 房内南",
+    "mountains": {
+      "巽": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "生",
+          "生",
+          "旺",
+          "克"
+        ],
+        "pillar_bottom_relations": [
+          "旺",
+          "令",
+          "耗",
+          "耗"
+        ],
+        "shan_sha_labels": [
+          "山运火",
+          "死阴府",
+          "时正阴府",
+          "日正阴府",
+          "年克山运",
+          "月克山运"
+        ],
+        "source": "xiaomie_xun_2027_0726_off_reference.json",
+        "shan_sha_jian": "辰"
+      }
+    }
+  },
+  "2027-07-20": {
+    "zhoutang": "香火宜 · 入宅宜",
+    "men_guang": "安门",
+    "hour_signs": [
+      "时吉",
+      "金匮",
+      "时凶",
+      "七殺"
+    ],
+    "master_sha_labels": [
+      "日冲午命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "小暑",
+        "time": "2027-07-07 15:36:44"
+      },
+      {
+        "name": "大暑",
+        "time": "2027-07-23 09:04:20"
+      },
+      {
+        "name": "立秋",
+        "time": "2027-08-08 01:26:27"
+      }
+    ],
+    "zhi_xing": "执",
+    "day_position_tai": "占碓磨 房内南",
+    "mountains": {
+      "巽": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "克",
+          "克",
+          "生",
+          "克"
+        ],
+        "pillar_bottom_relations": [
+          "生",
+          "令",
+          "泄",
+          "泄"
+        ],
+        "shan_sha_labels": [
+          "山运火",
+          "年克山运",
+          "月克山运",
+          "时克山运"
+        ],
+        "source": "xiaomie_xun_2027_0726_off_reference.json",
+        "shan_sha_jian": "辰"
+      }
+    }
+  },
+  "2027-07-21": {
+    "zhoutang": "香火宜 · 入宅宜",
+    "men_guang": "安门",
+    "hour_signs": [
+      "时吉",
+      "日合",
+      "贵登",
+      "时凶",
+      "天刑",
+      "五鬼"
+    ],
+    "master_sha_labels": [
+      "日冲未命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "小暑",
+        "time": "2027-07-07 15:36:44"
+      },
+      {
+        "name": "大暑",
+        "time": "2027-07-23 09:04:20"
+      },
+      {
+        "name": "立秋",
+        "time": "2027-08-08 01:26:27"
+      }
+    ],
+    "zhi_xing": "破",
+    "day_position_tai": "厨灶厕 房内南",
+    "mountains": {
+      "巽": {
+        "grade": "岁破;月破",
+        "pillar_top_relations": [
+          "克",
+          "克",
+          "生",
+          "生"
+        ],
+        "pillar_bottom_relations": [
+          "生",
+          "令",
+          "生",
+          "泄"
+        ],
+        "shan_sha_labels": [
+          "山运火",
+          "年克山运",
+          "月克山运",
+          "年日相冲",
+          "月日相冲",
+          "日兼三杀"
+        ],
+        "source": "xiaomie_xun_2027_0726_off_reference.json",
+        "shan_sha_jian": "辰"
+      }
+    }
+  },
+  "2027-07-22": {
+    "zhoutang": "香火宜 · 入宅宜",
+    "men_guang": "安门",
+    "hour_signs": [
+      "时吉",
+      "青龙"
+    ],
+    "master_sha_labels": [
+      "日冲申命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "小暑",
+        "time": "2027-07-07 15:36:44"
+      },
+      {
+        "name": "大暑",
+        "time": "2027-07-23 09:04:20"
+      },
+      {
+        "name": "立秋",
+        "time": "2027-08-08 01:26:27"
+      }
+    ],
+    "zhi_xing": "危",
+    "day_position_tai": "仓库炉 房内南",
+    "mountains": {
+      "巽": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "耗",
+          "耗",
+          "克",
+          "生"
+        ],
+        "pillar_bottom_relations": [
+          "克",
+          "令",
+          "泄",
+          "旺"
+        ],
+        "shan_sha_labels": [
+          "山运火",
+          "年克山运",
+          "月克山运",
+          "陈子性吉"
+        ],
+        "source": "xiaomie_xun_2027_0726_off_reference.json",
+        "shan_sha_jian": "辰"
+      }
+    }
+  },
+  "2027-07-23": {
+    "zhoutang": "香火忌 · 入宅忌",
+    "men_guang": "损人",
+    "hour_signs": [
+      "时吉",
+      "交驰",
+      "日禄",
+      "司命",
+      "大进",
+      "时凶",
+      "日刑",
+      "截路"
+    ],
+    "master_sha_labels": [
+      "四季龙穴",
+      "日冲酉命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "交大暑",
+        "time": "2027-07-23 09:04:20"
+      },
+      {
+        "name": "小暑",
+        "time": "2027-07-07 15:36:44"
+      },
+      {
+        "name": "大暑",
+        "time": "2027-07-23 09:04:20"
+      },
+      {
+        "name": "立秋",
+        "time": "2027-08-08 01:26:27"
+      }
+    ],
+    "zhi_xing": "成",
+    "day_position_tai": "房床门 房内南",
+    "mountains": {
+      "巽": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "耗",
+          "耗",
+          "克",
+          "旺"
+        ],
+        "pillar_bottom_relations": [
+          "克",
+          "令",
+          "泄",
+          "旺"
+        ],
+        "shan_sha_labels": [
+          "山运火",
+          "年克山运",
+          "月克山运"
+        ],
+        "source": "xiaomie_xun_2027_0726_off_reference.json",
+        "shan_sha_jian": "辰"
+      }
+    }
+  },
+  "2027-07-24": {
+    "zhoutang": "香火宜 · 入宅宜",
+    "men_guang": "损人",
+    "hour_signs": [
+      "时吉",
+      "大进",
+      "时凶",
+      "天牢"
+    ],
+    "master_sha_labels": [
+      "未命真杀",
+      "日冲戌命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "小暑",
+        "time": "2027-07-07 15:36:44"
+      },
+      {
+        "name": "大暑",
+        "time": "2027-07-23 09:04:20"
+      },
+      {
+        "name": "立秋",
+        "time": "2027-08-08 01:26:27"
+      }
+    ],
+    "zhi_xing": "收",
+    "day_position_tai": "门雞栖 房内东",
+    "mountains": {
+      "巽": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "泄",
+          "泄",
+          "耗",
+          "旺"
+        ],
+        "pillar_bottom_relations": [
+          "耗",
+          "令",
+          "耗",
+          "生"
+        ],
+        "shan_sha_labels": [
+          "山运火",
+          "死阴府",
+          "日正阴府",
+          "时正阴府",
+          "年克山运",
+          "月克山运"
+        ],
+        "source": "xiaomie_xun_2027_0726_off_reference.json",
+        "shan_sha_jian": "辰"
+      }
+    }
+  },
+  "2027-07-25": {
+    "zhoutang": "香火宜 · 入宅宜",
+    "men_guang": "损人",
+    "hour_signs": [
+      "时吉",
+      "交驰",
+      "阴贵",
+      "时凶",
+      "白虎"
+    ],
+    "master_sha_labels": [
+      "日冲亥命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "小暑",
+        "time": "2027-07-07 15:36:44"
+      },
+      {
+        "name": "大暑",
+        "time": "2027-07-23 09:04:20"
+      },
+      {
+        "name": "立秋",
+        "time": "2027-08-08 01:26:27"
+      }
+    ],
+    "zhi_xing": "开",
+    "day_position_tai": "碓磨床 房内东",
+    "mountains": {
+      "巽": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "泄",
+          "泄",
+          "耗",
+          "泄"
+        ],
+        "pillar_bottom_relations": [
+          "耗",
+          "令",
+          "泄",
+          "生"
+        ],
+        "shan_sha_labels": [
+          "山运火",
+          "年克山运",
+          "月克山运",
+          "时克山运",
+          "日兼三杀"
+        ],
+        "source": "xiaomie_xun_2027_0726_off_reference.json",
+        "shan_sha_jian": "辰"
+      }
+    }
+  },
+  "2027-07-26": {
+    "zhoutang": "香火忌 · 入宅宜",
+    "men_guang": "安门",
+    "hour_signs": [
+      "时吉",
+      "金匮",
+      "天官",
+      "福星",
+      "唐符",
+      "时凶",
+      "日破",
+      "五鬼"
+    ],
+    "master_sha_labels": [
+      "四季四正",
+      "日冲子命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "小暑",
+        "time": "2027-07-07 15:36:44"
+      },
+      {
+        "name": "大暑",
+        "time": "2027-07-23 09:04:20"
+      },
+      {
+        "name": "立秋",
+        "time": "2027-08-08 01:26:27"
+      }
+    ],
+    "zhi_xing": "闭",
+    "day_position_tai": "厨灶碓 房内东",
+    "mountains": {
+      "巽": {
+        "grade": "日破",
+        "pillar_top_relations": [
+          "旺",
+          "旺",
+          "泄",
+          "泄"
+        ],
+        "pillar_bottom_relations": [
+          "泄",
+          "令",
+          "旺",
+          "克"
+        ],
+        "shan_sha_labels": [
+          "山运火",
+          "年克山运",
+          "月克山运",
+          "日克山运",
+          "日消灭煞",
+          "日时相冲"
+        ],
+        "source": "xiaomie_xun_2027_0726_off_reference.json",
+        "shan_sha_jian": "辰"
+      }
+    }
+  },
+  "2027-07-27": {
+    "zhoutang": "香火忌 · 入宅忌",
+    "men_guang": "安门",
+    "hour_signs": [
+      "时凶",
+      "日害",
+      "天刑"
+    ],
+    "master_sha_labels": [
+      "戌命真杀",
+      "日冲丑命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "小暑",
+        "time": "2027-07-07 15:36:44"
+      },
+      {
+        "name": "大暑",
+        "time": "2027-07-23 09:04:20"
+      },
+      {
+        "name": "立秋",
+        "time": "2027-08-08 01:26:27"
+      }
+    ],
+    "zhi_xing": "建",
+    "day_position_tai": "仓库厕 房内东",
+    "mountains": {
+      "巽": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "旺",
+          "旺",
+          "泄",
+          "耗"
+        ],
+        "pillar_bottom_relations": [
+          "泄",
+          "令",
+          "泄",
+          "克"
+        ],
+        "shan_sha_labels": [
+          "山运火",
+          "年克山运",
+          "月克山运",
+          "日克山运"
+        ],
+        "source": "xiaomie_xun_2027_0726_off_reference.json",
+        "shan_sha_jian": "辰"
+      }
+    }
+  },
+  "2027-07-28": {
+    "zhoutang": "香火宜 · 入宅宜",
+    "men_guang": "损畜",
+    "hour_signs": [
+      "时吉",
+      "青龙",
+      "大进",
+      "唐符",
+      "时凶",
+      "截路"
+    ],
+    "master_sha_labels": [
+      "日冲寅命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "小暑",
+        "time": "2027-07-07 15:36:44"
+      },
+      {
+        "name": "大暑",
+        "time": "2027-07-23 09:04:20"
+      },
+      {
+        "name": "立秋",
+        "time": "2027-08-08 01:26:27"
+      }
+    ],
+    "zhi_xing": "除",
+    "day_position_tai": "房床炉 房内东",
+    "mountains": {
+      "巽": {
+        "grade": "五行平安",
+        "pillar_top_relations": [
+          "生",
+          "生",
+          "旺",
+          "耗"
+        ],
+        "pillar_bottom_relations": [
+          "旺",
+          "令",
+          "泄",
+          "耗"
+        ],
+        "shan_sha_labels": [
+          "山运火",
+          "年克山运",
+          "月克山运"
+        ],
+        "source": "xiaomie_xun_2027_0726_off_reference.json",
+        "shan_sha_jian": "辰"
+      }
+    }
+  },
+  "2027-07-29": {
+    "zhoutang": "香火宜 · 入宅忌",
+    "men_guang": "损畜",
+    "hour_signs": [
+      "时吉",
+      "司命",
+      "阳贵",
+      "大进"
+    ],
+    "master_sha_labels": [
+      "四季龙穴",
+      "日冲卯命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "小暑",
+        "time": "2027-07-07 15:36:44"
+      },
+      {
+        "name": "大暑",
+        "time": "2027-07-23 09:04:20"
+      },
+      {
+        "name": "立秋",
+        "time": "2027-08-08 01:26:27"
+      }
+    ],
+    "zhi_xing": "满",
+    "day_position_tai": "占大门 外东北",
+    "mountains": {
+      "巽": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "生",
+          "生",
+          "旺",
+          "克"
+        ],
+        "pillar_bottom_relations": [
+          "旺",
+          "令",
+          "泄",
+          "耗"
+        ],
+        "shan_sha_labels": [
+          "山运火",
+          "死阴府",
+          "时正阴府",
+          "日正阴府",
+          "年克山运",
+          "月克山运",
+          "日兼三杀"
+        ],
+        "source": "xiaomie_xun_2027_0726_off_reference.json",
+        "shan_sha_jian": "辰"
+      }
+    }
+  },
+  "2027-07-30": {
+    "zhoutang": "香火宜 · 入宅宜",
+    "men_guang": "损畜",
+    "hour_signs": [
+      "时凶",
+      "七殺",
+      "天牢"
+    ],
+    "master_sha_labels": [
+      "日冲辰命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "小暑",
+        "time": "2027-07-07 15:36:44"
+      },
+      {
+        "name": "大暑",
+        "time": "2027-07-23 09:04:20"
+      },
+      {
+        "name": "立秋",
+        "time": "2027-08-08 01:26:27"
+      }
+    ],
+    "zhi_xing": "平",
+    "day_position_tai": "碓磨栖 外东北",
+    "mountains": {
+      "巽": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "克",
+          "克",
+          "生",
+          "克"
+        ],
+        "pillar_bottom_relations": [
+          "生",
+          "令",
+          "生",
+          "泄"
+        ],
+        "shan_sha_labels": [
+          "山运火",
+          "年克山运",
+          "月克山运",
+          "时克山运",
+          "日冲兼"
+        ],
+        "source": "xiaomie_xun_2027_0726_off_reference.json",
+        "shan_sha_jian": "辰"
+      }
+    }
+  },
+  "2027-07-31": {
+    "zhoutang": "香火忌 · 入宅宜",
+    "men_guang": "安门",
+    "hour_signs": [
+      "时凶",
+      "白虎",
+      "五鬼"
+    ],
+    "master_sha_labels": [
+      "日冲巳命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "小暑",
+        "time": "2027-07-07 15:36:44"
+      },
+      {
+        "name": "大暑",
+        "time": "2027-07-23 09:04:20"
+      },
+      {
+        "name": "立秋",
+        "time": "2027-08-08 01:26:27"
+      }
+    ],
+    "zhi_xing": "定",
+    "day_position_tai": "厨灶床 外东北",
+    "mountains": {
+      "巽": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "克",
+          "克",
+          "生",
+          "生"
+        ],
+        "pillar_bottom_relations": [
+          "生",
+          "令",
+          "泄",
+          "泄"
+        ],
+        "shan_sha_labels": [
+          "山运火",
+          "年克山运",
+          "月克山运"
+        ],
+        "source": "xiaomie_xun_2027_0726_off_reference.json",
+        "shan_sha_jian": "辰"
+      }
+    }
+  },
+  "2031-09-09": {
+    "zhoutang": "香火宜 · 入宅宜",
+    "men_guang": "损人",
+    "hour_signs": [
+      "时吉",
+      "金匮"
+    ],
+    "master_sha_labels": [
+      "日冲午命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "白露",
+        "time": "2031-09-08 03:49:45"
+      },
+      {
+        "name": "秋分",
+        "time": "2031-09-23 13:14:54"
+      },
+      {
+        "name": "寒露",
+        "time": "2031-10-08 19:42:33"
+      }
+    ],
+    "zhi_xing": "平",
+    "day_position_tai": "仓库碓 外东北",
+    "mountains": {
+      "壬": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "生",
+          "耗",
+          "生",
+          "生"
+        ],
+        "pillar_bottom_relations": [
+          "旺",
+          "令",
+          "旺",
+          "旺"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "死阴府",
+          "时傍阴府",
+          "年克山运"
+        ],
+        "flying_stars": {
+          "facing": "9844",
+          "center": "5499",
+          "seat": "1955"
+        },
+        "source": "visual_reference_ren_2031_uia.json",
+        "shan_sha_jian": "子"
+      }
+    }
+  },
+  "2031-09-10": {
+    "zhoutang": "香火忌 · 入宅宜",
+    "men_guang": "安门",
+    "hour_signs": [
+      "时吉",
+      "日禄",
+      "日合",
+      "大进",
+      "时凶",
+      "天刑",
+      "截路"
+    ],
+    "master_sha_labels": [
+      "四季龙穴",
+      "日冲未命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "白露",
+        "time": "2031-09-08 03:49:45"
+      },
+      {
+        "name": "秋分",
+        "time": "2031-09-23 13:14:54"
+      },
+      {
+        "name": "寒露",
+        "time": "2031-10-08 19:42:33"
+      }
+    ],
+    "zhi_xing": "定",
+    "day_position_tai": "房床厕 外东北",
+    "mountains": {
+      "壬": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "生",
+          "耗",
+          "生",
+          "旺"
+        ],
+        "pillar_bottom_relations": [
+          "旺",
+          "令",
+          "克",
+          "旺"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "年克山运",
+          "陈子性吉"
+        ],
+        "flying_stars": {
+          "facing": "9831",
+          "center": "5486",
+          "seat": "1942"
+        },
+        "source": "visual_reference_ren_2031_uia.json",
+        "shan_sha_jian": "子"
+      }
+    }
+  },
+  "2031-09-11": {
+    "zhoutang": "香火宜 · 入宅宜",
+    "men_guang": "安门",
+    "hour_signs": [
+      "时吉",
+      "青龙",
+      "大进"
+    ],
+    "master_sha_labels": [
+      "巳命真杀",
+      "日冲申命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "白露",
+        "time": "2031-09-08 03:49:45"
+      },
+      {
+        "name": "秋分",
+        "time": "2031-09-23 13:14:54"
+      },
+      {
+        "name": "寒露",
+        "time": "2031-10-08 19:42:33"
+      }
+    ],
+    "zhi_xing": "执",
+    "day_position_tai": "占门炉 外东北",
+    "mountains": {
+      "壬": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "克",
+          "泄",
+          "克",
+          "旺"
+        ],
+        "pillar_bottom_relations": [
+          "生",
+          "令",
+          "旺",
+          "生"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "日三杀",
+          "年克山运",
+          "时克山运"
+        ],
+        "flying_stars": {
+          "facing": "9827",
+          "center": "5473",
+          "seat": "1938"
+        },
+        "source": "visual_reference_ren_2031_uia.json",
+        "shan_sha_jian": "子"
+      }
+    }
+  },
+  "2031-09-12": {
+    "zhoutang": "香火宜 · 入宅忌",
+    "men_guang": "损畜",
+    "hour_signs": [
+      "时吉",
+      "司命",
+      "阴贵",
+      "时凶",
+      "日刑"
+    ],
+    "master_sha_labels": [
+      "四季四正",
+      "日冲酉命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "白露",
+        "time": "2031-09-08 03:49:45"
+      },
+      {
+        "name": "秋分",
+        "time": "2031-09-23 13:14:54"
+      },
+      {
+        "name": "寒露",
+        "time": "2031-10-08 19:42:33"
+      }
+    ],
+    "zhi_xing": "破",
+    "day_position_tai": "碓磨门 外正东",
+    "mountains": {
+      "壬": {
+        "grade": "月破",
+        "pillar_top_relations": [
+          "克",
+          "泄",
+          "克",
+          "泄"
+        ],
+        "pillar_bottom_relations": [
+          "生",
+          "令",
+          "旺",
+          "生"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "死阴府",
+          "日傍阴府",
+          "年克山运",
+          "日山方煞",
+          "月日相冲"
+        ],
+        "flying_stars": {
+          "facing": "9814",
+          "center": "5469",
+          "seat": "1925"
+        },
+        "source": "visual_reference_ren_2031_uia.json",
+        "shan_sha_jian": "子"
+      }
+    }
+  },
+  "2031-09-13": {
+    "zhoutang": "香火宜 · 入宅宜",
+    "men_guang": "损畜",
+    "hour_signs": [
+      "时吉",
+      "天官",
+      "福星",
+      "唐符",
+      "时凶",
+      "天牢",
+      "五鬼"
+    ],
+    "master_sha_labels": [
+      "日冲戌命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "白露",
+        "time": "2031-09-08 03:49:45"
+      },
+      {
+        "name": "秋分",
+        "time": "2031-09-23 13:14:54"
+      },
+      {
+        "name": "寒露",
+        "time": "2031-10-08 19:42:33"
+      }
+    ],
+    "zhi_xing": "危",
+    "day_position_tai": "厨灶栖 外正东",
+    "mountains": {
+      "壬": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "耗",
+          "旺",
+          "耗",
+          "泄"
+        ],
+        "pillar_bottom_relations": [
+          "克",
+          "令",
+          "泄",
+          "克"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "年克山运",
+          "陈子性吉"
+        ],
+        "flying_stars": {
+          "facing": "9891",
+          "center": "5456",
+          "seat": "1912"
+        },
+        "source": "visual_reference_ren_2031_uia.json",
+        "shan_sha_jian": "子"
+      }
+    }
+  },
+  "2031-09-14": {
+    "zhoutang": "香火忌 · 入宅宜",
+    "men_guang": "损畜",
+    "hour_signs": [
+      "时凶",
+      "白虎"
+    ],
+    "master_sha_labels": [
+      "日冲亥命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "白露",
+        "time": "2031-09-08 03:49:45"
+      },
+      {
+        "name": "秋分",
+        "time": "2031-09-23 13:14:54"
+      },
+      {
+        "name": "寒露",
+        "time": "2031-10-08 19:42:33"
+      }
+    ],
+    "zhi_xing": "成",
+    "day_position_tai": "仓库床 外正东",
+    "mountains": {
+      "壬": {
+        "grade": "岁破",
+        "pillar_top_relations": [
+          "耗",
+          "旺",
+          "耗",
+          "耗"
+        ],
+        "pillar_bottom_relations": [
+          "克",
+          "令",
+          "旺",
+          "克"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "死阴府",
+          "时傍阴府",
+          "年克山运",
+          "日山方煞",
+          "年日相冲",
+          "陈子性吉"
+        ],
+        "flying_stars": {
+          "facing": "9887",
+          "center": "5443",
+          "seat": "1998"
+        },
+        "source": "visual_reference_ren_2031_uia.json",
+        "shan_sha_jian": "子"
+      }
+    }
+  },
+  "2031-09-15": {
+    "zhoutang": "香火忌 · 入宅宜",
+    "men_guang": "安门",
+    "hour_signs": [
+      "时吉",
+      "金匮",
+      "大进",
+      "唐符",
+      "时凶",
+      "日破",
+      "截路"
+    ],
+    "master_sha_labels": [
+      "日冲子命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "白露",
+        "time": "2031-09-08 03:49:45"
+      },
+      {
+        "name": "秋分",
+        "time": "2031-09-23 13:14:54"
+      },
+      {
+        "name": "寒露",
+        "time": "2031-10-08 19:42:33"
+      }
+    ],
+    "zhi_xing": "收",
+    "day_position_tai": "房床碓 外正东",
+    "mountains": {
+      "壬": {
+        "grade": "日破",
+        "pillar_top_relations": [
+          "泄",
+          "生",
+          "泄",
+          "耗"
+        ],
+        "pillar_bottom_relations": [
+          "耗",
+          "令",
+          "生",
+          "耗"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "日三杀",
+          "年克山运",
+          "日时相冲",
+          "日冲兼"
+        ],
+        "flying_stars": {
+          "facing": "9874",
+          "center": "5439",
+          "seat": "1985"
+        },
+        "source": "visual_reference_ren_2031_uia.json",
+        "shan_sha_jian": "子"
+      }
+    }
+  },
+  "2031-09-16": {
+    "zhoutang": "香火宜 · 入宅忌",
+    "men_guang": "安门",
+    "hour_signs": [
+      "时吉",
+      "罗纹",
+      "阳贵",
+      "大进",
+      "时凶",
+      "日害",
+      "天刑"
+    ],
+    "master_sha_labels": [
+      "四季龙穴",
+      "日冲丑命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "白露",
+        "time": "2031-09-08 03:49:45"
+      },
+      {
+        "name": "秋分",
+        "time": "2031-09-23 13:14:54"
+      },
+      {
+        "name": "寒露",
+        "time": "2031-10-08 19:42:33"
+      }
+    ],
+    "zhi_xing": "开",
+    "day_position_tai": "占门厕 外正东",
+    "mountains": {
+      "壬": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "泄",
+          "生",
+          "泄",
+          "克"
+        ],
+        "pillar_bottom_relations": [
+          "耗",
+          "令",
+          "旺",
+          "耗"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "年克山运",
+          "时克山运",
+          "日星曜煞"
+        ],
+        "flying_stars": {
+          "facing": "9861",
+          "center": "5426",
+          "seat": "1972"
+        },
+        "source": "visual_reference_ren_2031_uia.json",
+        "shan_sha_jian": "子"
+      }
+    }
+  },
+  "2031-09-17": {
+    "zhoutang": "香火宜 · 入宅宜",
+    "men_guang": "安门",
+    "hour_signs": [
+      "时吉",
+      "青龙",
+      "时凶",
+      "七殺"
+    ],
+    "master_sha_labels": [
+      "日冲寅命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "白露",
+        "time": "2031-09-08 03:49:45"
+      },
+      {
+        "name": "秋分",
+        "time": "2031-09-23 13:14:54"
+      },
+      {
+        "name": "寒露",
+        "time": "2031-10-08 19:42:33"
+      }
+    ],
+    "zhi_xing": "闭",
+    "day_position_tai": "碓磨炉 外东南",
+    "mountains": {
+      "壬": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "旺",
+          "克",
+          "旺",
+          "克"
+        ],
+        "pillar_bottom_relations": [
+          "泄",
+          "令",
+          "旺",
+          "泄"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "死阴府",
+          "日傍阴府",
+          "年克山运"
+        ],
+        "flying_stars": {
+          "facing": "9857",
+          "center": "5413",
+          "seat": "1968"
+        },
+        "source": "visual_reference_ren_2031_uia.json",
+        "shan_sha_jian": "子"
+      }
+    }
+  },
+  "2031-09-18": {
+    "zhoutang": "香火宜 · 入宅宜",
+    "men_guang": "安门",
+    "hour_signs": [
+      "时吉",
+      "司命",
+      "时凶",
+      "五鬼"
+    ],
+    "master_sha_labels": [
+      "日冲卯命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "白露",
+        "time": "2031-09-08 03:49:45"
+      },
+      {
+        "name": "秋分",
+        "time": "2031-09-23 13:14:54"
+      },
+      {
+        "name": "寒露",
+        "time": "2031-10-08 19:42:33"
+      }
+    ],
+    "zhi_xing": "建",
+    "day_position_tai": "厨灶门 外东南",
+    "mountains": {
+      "壬": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "旺",
+          "克",
+          "旺",
+          "生"
+        ],
+        "pillar_bottom_relations": [
+          "泄",
+          "令",
+          "旺",
+          "泄"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "年克山运"
+        ],
+        "flying_stars": {
+          "facing": "9844",
+          "center": "5499",
+          "seat": "1955"
+        },
+        "source": "visual_reference_ren_2031_uia.json",
+        "shan_sha_jian": "子"
+      }
+    }
+  },
+  "2031-09-19": {
+    "zhoutang": "香火宜 · 入宅宜",
+    "men_guang": "损畜",
+    "hour_signs": [
+      "时凶",
+      "天牢"
+    ],
+    "master_sha_labels": [
+      "日冲辰命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "白露",
+        "time": "2031-09-08 03:49:45"
+      },
+      {
+        "name": "秋分",
+        "time": "2031-09-23 13:14:54"
+      },
+      {
+        "name": "寒露",
+        "time": "2031-10-08 19:42:33"
+      }
+    ],
+    "zhi_xing": "除",
+    "day_position_tai": "仓库栖 外东南",
+    "mountains": {
+      "壬": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "生",
+          "耗",
+          "生",
+          "生"
+        ],
+        "pillar_bottom_relations": [
+          "旺",
+          "令",
+          "克",
+          "旺"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "死阴府",
+          "时傍阴府",
+          "日三杀",
+          "年克山运"
+        ],
+        "flying_stars": {
+          "facing": "9831",
+          "center": "5486",
+          "seat": "1942"
+        },
+        "source": "visual_reference_ren_2031_uia.json",
+        "shan_sha_jian": "子"
+      }
+    }
+  },
+  "2031-09-20": {
+    "zhoutang": "香火忌 · 入宅忌",
+    "men_guang": "损畜",
+    "hour_signs": [
+      "时吉",
+      "交禄",
+      "日禄",
+      "大进",
+      "时凶",
+      "白虎",
+      "截路",
+      "大败"
+    ],
+    "master_sha_labels": [
+      "日冲巳命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "白露",
+        "time": "2031-09-08 03:49:45"
+      },
+      {
+        "name": "秋分",
+        "time": "2031-09-23 13:14:54"
+      },
+      {
+        "name": "寒露",
+        "time": "2031-10-08 19:42:33"
+      }
+    ],
+    "zhi_xing": "满",
+    "day_position_tai": "占房床 外东南",
+    "mountains": {
+      "壬": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "生",
+          "耗",
+          "生",
+          "旺"
+        ],
+        "pillar_bottom_relations": [
+          "旺",
+          "令",
+          "旺",
+          "旺"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "日暗八煞",
+          "年克山运"
+        ],
+        "flying_stars": {
+          "facing": "9827",
+          "center": "5473",
+          "seat": "1938"
+        },
+        "source": "visual_reference_ren_2031_uia.json",
+        "shan_sha_jian": "子"
+      }
+    }
+  },
+  "2031-09-21": {
+    "zhoutang": "香火宜 · 入宅宜",
+    "men_guang": "损畜",
+    "hour_signs": [
+      "时吉",
+      "金匮",
+      "大进"
+    ],
+    "master_sha_labels": [
+      "卯命真杀",
+      "日冲午命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "白露",
+        "time": "2031-09-08 03:49:45"
+      },
+      {
+        "name": "秋分",
+        "time": "2031-09-23 13:14:54"
+      },
+      {
+        "name": "寒露",
+        "time": "2031-10-08 19:42:33"
+      }
+    ],
+    "zhi_xing": "平",
+    "day_position_tai": "占门碓 外东南",
+    "mountains": {
+      "壬": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "克",
+          "泄",
+          "克",
+          "旺"
+        ],
+        "pillar_bottom_relations": [
+          "生",
+          "令",
+          "生",
+          "生"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "年克山运",
+          "日克山运",
+          "时克山运"
+        ],
+        "flying_stars": {
+          "facing": "9874",
+          "center": "5439",
+          "seat": "1985"
+        },
+        "source": "visual_reference_ren_2031_uia.json",
+        "shan_sha_jian": "子"
+      }
+    }
+  },
+  "2031-09-22": {
+    "zhoutang": "香火宜 · 入宅宜",
+    "men_guang": "安门",
+    "hour_signs": [
+      "时吉",
+      "日合",
+      "阴贵",
+      "时凶",
+      "天刑"
+    ],
+    "master_sha_labels": [
+      "四季龙穴",
+      "辰命真杀",
+      "日冲未命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "白露",
+        "time": "2031-09-08 03:49:45"
+      },
+      {
+        "name": "秋分",
+        "time": "2031-09-23 13:14:54"
+      },
+      {
+        "name": "寒露",
+        "time": "2031-10-08 19:42:33"
+      }
+    ],
+    "zhi_xing": "定",
+    "day_position_tai": "碓磨厕 外东南",
+    "mountains": {
+      "壬": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "克",
+          "泄",
+          "克",
+          "泄"
+        ],
+        "pillar_bottom_relations": [
+          "生",
+          "令",
+          "耗",
+          "生"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "死阴府",
+          "日傍阴府",
+          "年克山运",
+          "日克山运",
+          "陈子性吉"
+        ],
+        "flying_stars": {
+          "facing": "9861",
+          "center": "5426",
+          "seat": "1972"
+        },
+        "source": "visual_reference_ren_2031_uia.json",
+        "shan_sha_jian": "子"
+      }
+    }
+  },
+  "2031-09-23": {
+    "zhoutang": "香火忌 · 入宅宜",
+    "men_guang": "安门",
+    "hour_signs": [
+      "时吉",
+      "青龙",
+      "天官",
+      "福星",
+      "唐符",
+      "时凶",
+      "五鬼"
+    ],
+    "master_sha_labels": [
+      "日冲申命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "交秋分",
+        "time": "2031-09-23 13:14:54"
+      },
+      {
+        "name": "白露",
+        "time": "2031-09-08 03:49:45"
+      },
+      {
+        "name": "秋分",
+        "time": "2031-09-23 13:14:54"
+      },
+      {
+        "name": "寒露",
+        "time": "2031-10-08 19:42:33"
+      }
+    ],
+    "zhi_xing": "执",
+    "day_position_tai": "厨灶炉 外正南",
+    "mountains": {
+      "壬": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "耗",
+          "旺",
+          "耗",
+          "泄"
+        ],
+        "pillar_bottom_relations": [
+          "克",
+          "令",
+          "生",
+          "克"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "日三杀",
+          "年克山运"
+        ],
+        "flying_stars": {
+          "facing": "9857",
+          "center": "5413",
+          "seat": "1968"
+        },
+        "source": "visual_reference_ren_2031_uia.json",
+        "shan_sha_jian": "子"
+      }
+    }
+  },
+  "2031-09-24": {
+    "zhoutang": "香火忌 · 入宅忌",
+    "men_guang": "损人",
+    "hour_signs": [
+      "时吉",
+      "司命",
+      "时凶",
+      "日刑"
+    ],
+    "master_sha_labels": [
+      "四季四正",
+      "午命真杀",
+      "日冲酉命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "白露",
+        "time": "2031-09-08 03:49:45"
+      },
+      {
+        "name": "秋分",
+        "time": "2031-09-23 13:14:54"
+      },
+      {
+        "name": "寒露",
+        "time": "2031-10-08 19:42:33"
+      }
+    ],
+    "zhi_xing": "破",
+    "day_position_tai": "门仓库 外正南",
+    "mountains": {
+      "壬": {
+        "grade": "月破",
+        "pillar_top_relations": [
+          "耗",
+          "旺",
+          "耗",
+          "耗"
+        ],
+        "pillar_bottom_relations": [
+          "克",
+          "令",
+          "生",
+          "克"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "死阴府",
+          "时傍阴府",
+          "年克山运",
+          "月日相冲"
+        ],
+        "flying_stars": {
+          "facing": "9844",
+          "center": "5499",
+          "seat": "1955"
+        },
+        "source": "visual_reference_ren_2031_uia.json",
+        "shan_sha_jian": "子"
+      }
+    }
+  },
+  "2031-09-25": {
+    "zhoutang": "香火宜 · 入宅宜",
+    "men_guang": "损人",
+    "hour_signs": [
+      "时吉",
+      "大进",
+      "唐符",
+      "时凶",
+      "天牢",
+      "截路"
+    ],
+    "master_sha_labels": [
+      "日冲戌命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "白露",
+        "time": "2031-09-08 03:49:45"
+      },
+      {
+        "name": "秋分",
+        "time": "2031-09-23 13:14:54"
+      },
+      {
+        "name": "寒露",
+        "time": "2031-10-08 19:42:33"
+      }
+    ],
+    "zhi_xing": "危",
+    "day_position_tai": "房床栖 外正南",
+    "mountains": {
+      "壬": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "泄",
+          "生",
+          "泄",
+          "耗"
+        ],
+        "pillar_bottom_relations": [
+          "耗",
+          "令",
+          "旺",
+          "耗"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "日正八煞",
+          "年克山运",
+          "日星曜煞"
+        ],
+        "flying_stars": {
+          "facing": "9831",
+          "center": "5486",
+          "seat": "1942"
+        },
+        "source": "visual_reference_ren_2031_uia.json",
+        "shan_sha_jian": "子"
+      }
+    }
+  },
+  "2031-09-26": {
+    "zhoutang": "香火宜 · 入宅忌",
+    "men_guang": "损人",
+    "hour_signs": [
+      "时吉",
+      "阳贵",
+      "大进",
+      "时凶",
+      "白虎"
+    ],
+    "master_sha_labels": [
+      "申命真杀",
+      "日冲亥命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "白露",
+        "time": "2031-09-08 03:49:45"
+      },
+      {
+        "name": "秋分",
+        "time": "2031-09-23 13:14:54"
+      },
+      {
+        "name": "寒露",
+        "time": "2031-10-08 19:42:33"
+      }
+    ],
+    "zhi_xing": "成",
+    "day_position_tai": "占门床 外正南",
+    "mountains": {
+      "壬": {
+        "grade": "岁破",
+        "pillar_top_relations": [
+          "泄",
+          "生",
+          "泄",
+          "克"
+        ],
+        "pillar_bottom_relations": [
+          "耗",
+          "令",
+          "生",
+          "耗"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "年克山运",
+          "时克山运",
+          "年日相冲",
+          "陈子性吉"
+        ],
+        "flying_stars": {
+          "facing": "9827",
+          "center": "5473",
+          "seat": "1938"
+        },
+        "source": "visual_reference_ren_2031_uia.json",
+        "shan_sha_jian": "子"
+      }
+    }
+  },
+  "2031-09-27": {
+    "zhoutang": "香火宜 · 入宅宜",
+    "men_guang": "安门",
+    "hour_signs": [
+      "时吉",
+      "金匮",
+      "时凶",
+      "日破",
+      "七殺"
+    ],
+    "master_sha_labels": [
+      "日冲子命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "白露",
+        "time": "2031-09-08 03:49:45"
+      },
+      {
+        "name": "秋分",
+        "time": "2031-09-23 13:14:54"
+      },
+      {
+        "name": "寒露",
+        "time": "2031-10-08 19:42:33"
+      }
+    ],
+    "zhi_xing": "收",
+    "day_position_tai": "占碓磨 外正南",
+    "mountains": {
+      "壬": {
+        "grade": "日破",
+        "pillar_top_relations": [
+          "旺",
+          "克",
+          "旺",
+          "克"
+        ],
+        "pillar_bottom_relations": [
+          "泄",
+          "令",
+          "克",
+          "泄"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "死阴府",
+          "日傍阴府",
+          "日三杀",
+          "年克山运",
+          "日时相冲",
+          "日冲兼"
+        ],
+        "flying_stars": {
+          "facing": "9814",
+          "center": "5469",
+          "seat": "1925"
+        },
+        "source": "visual_reference_ren_2031_uia.json",
+        "shan_sha_jian": "子"
+      }
+    }
+  },
+  "2031-09-28": {
+    "zhoutang": "香火忌 · 入宅宜",
+    "men_guang": "安门",
+    "hour_signs": [
+      "时凶",
+      "日害",
+      "天刑",
+      "五鬼"
+    ],
+    "master_sha_labels": [
+      "四季龙穴",
+      "日冲丑命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "白露",
+        "time": "2031-09-08 03:49:45"
+      },
+      {
+        "name": "秋分",
+        "time": "2031-09-23 13:14:54"
+      },
+      {
+        "name": "寒露",
+        "time": "2031-10-08 19:42:33"
+      }
+    ],
+    "zhi_xing": "开",
+    "day_position_tai": "厨厕灶 外西南",
+    "mountains": {
+      "壬": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "旺",
+          "克",
+          "旺",
+          "生"
+        ],
+        "pillar_bottom_relations": [
+          "泄",
+          "令",
+          "生",
+          "泄"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "年克山运"
+        ],
+        "flying_stars": {
+          "facing": "9891",
+          "center": "5456",
+          "seat": "1912"
+        },
+        "source": "visual_reference_ren_2031_uia.json",
+        "shan_sha_jian": "子"
+      }
+    }
+  },
+  "2031-09-29": {
+    "zhoutang": "香火宜 · 入宅宜",
+    "men_guang": "安门",
+    "hour_signs": [
+      "时吉",
+      "青龙"
+    ],
+    "master_sha_labels": [
+      "日冲寅命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "白露",
+        "time": "2031-09-08 03:49:45"
+      },
+      {
+        "name": "秋分",
+        "time": "2031-09-23 13:14:54"
+      },
+      {
+        "name": "寒露",
+        "time": "2031-10-08 19:42:33"
+      }
+    ],
+    "zhi_xing": "闭",
+    "day_position_tai": "仓库炉 外西南",
+    "mountains": {
+      "壬": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "生",
+          "耗",
+          "生",
+          "生"
+        ],
+        "pillar_bottom_relations": [
+          "旺",
+          "令",
+          "生",
+          "旺"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "死阴府",
+          "时傍阴府",
+          "年克山运",
+          "日克山运"
+        ],
+        "flying_stars": {
+          "facing": "9887",
+          "center": "5443",
+          "seat": "1998"
+        },
+        "source": "visual_reference_ren_2031_uia.json",
+        "shan_sha_jian": "子"
+      }
+    }
+  },
+  "2031-09-30": {
+    "zhoutang": "香火宜 · 入宅忌",
+    "men_guang": "损畜",
+    "hour_signs": [
+      "时吉",
+      "日禄",
+      "司命",
+      "贵登",
+      "大进",
+      "时凶",
+      "截路"
+    ],
+    "master_sha_labels": [
+      "子命真杀",
+      "日冲卯命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "白露",
+        "time": "2031-09-08 03:49:45"
+      },
+      {
+        "name": "秋分",
+        "time": "2031-09-23 13:14:54"
+      },
+      {
+        "name": "寒露",
+        "time": "2031-10-08 19:42:33"
+      }
+    ],
+    "zhi_xing": "建",
+    "day_position_tai": "房床门 外西南",
+    "mountains": {
+      "壬": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "生",
+          "耗",
+          "生",
+          "旺"
+        ],
+        "pillar_bottom_relations": [
+          "旺",
+          "令",
+          "生",
+          "旺"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "年克山运",
+          "日克山运"
+        ],
+        "flying_stars": {
+          "facing": "9874",
+          "center": "5439",
+          "seat": "1985"
+        },
+        "source": "visual_reference_ren_2031_uia.json",
+        "shan_sha_jian": "子"
+      }
+    }
+  },
+  "2031-10-01": {
+    "zhoutang": "香火忌 · 入宅宜",
+    "men_guang": "损畜",
+    "hour_signs": [
+      "时吉",
+      "大进",
+      "时凶",
+      "天牢"
+    ],
+    "master_sha_labels": [
+      "丑命真杀",
+      "日冲辰命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "白露",
+        "time": "2031-09-08 03:49:45"
+      },
+      {
+        "name": "秋分",
+        "time": "2031-09-23 13:14:54"
+      },
+      {
+        "name": "寒露",
+        "time": "2031-10-08 19:42:33"
+      }
+    ],
+    "zhi_xing": "除",
+    "day_position_tai": "门雞栖 外西南",
+    "mountains": {
+      "壬": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "克",
+          "泄",
+          "克",
+          "旺"
+        ],
+        "pillar_bottom_relations": [
+          "生",
+          "令",
+          "耗",
+          "生"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "日三杀",
+          "年克山运",
+          "时克山运"
+        ],
+        "flying_stars": {
+          "facing": "9861",
+          "center": "5426",
+          "seat": "1972"
+        },
+        "source": "visual_reference_ren_2031_uia.json",
+        "shan_sha_jian": "子"
+      }
+    }
+  },
+  "2031-10-02": {
+    "zhoutang": "香火忌 · 入宅忌",
+    "men_guang": "损畜",
+    "hour_signs": [
+      "时吉",
+      "罗纹",
+      "阴贵",
+      "时凶",
+      "白虎"
+    ],
+    "master_sha_labels": [
+      "日冲巳命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "白露",
+        "time": "2031-09-08 03:49:45"
+      },
+      {
+        "name": "秋分",
+        "time": "2031-09-23 13:14:54"
+      },
+      {
+        "name": "寒露",
+        "time": "2031-10-08 19:42:33"
+      }
+    ],
+    "zhi_xing": "满",
+    "day_position_tai": "碓磨床 外西南",
+    "mountains": {
+      "壬": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "克",
+          "泄",
+          "克",
+          "泄"
+        ],
+        "pillar_bottom_relations": [
+          "生",
+          "令",
+          "生",
+          "生"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "死阴府",
+          "日傍阴府",
+          "年克山运"
+        ],
+        "flying_stars": {
+          "facing": "9857",
+          "center": "5413",
+          "seat": "1968"
+        },
+        "source": "visual_reference_ren_2031_uia.json",
+        "shan_sha_jian": "子"
+      }
+    }
+  },
+  "2031-10-03": {
+    "zhoutang": "香火宜 · 入宅宜",
+    "men_guang": "安门",
+    "hour_signs": [
+      "时吉",
+      "金匮",
+      "天官",
+      "福星",
+      "唐符",
+      "时凶",
+      "五鬼"
+    ],
+    "master_sha_labels": [
+      "日冲午命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "白露",
+        "time": "2031-09-08 03:49:45"
+      },
+      {
+        "name": "秋分",
+        "time": "2031-09-23 13:14:54"
+      },
+      {
+        "name": "寒露",
+        "time": "2031-10-08 19:42:33"
+      }
+    ],
+    "zhi_xing": "平",
+    "day_position_tai": "厨灶碓 外西南",
+    "mountains": {
+      "壬": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "耗",
+          "旺",
+          "耗",
+          "泄"
+        ],
+        "pillar_bottom_relations": [
+          "克",
+          "令",
+          "克",
+          "克"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "年克山运"
+        ],
+        "flying_stars": {
+          "facing": "9844",
+          "center": "5499",
+          "seat": "1955"
+        },
+        "source": "visual_reference_ren_2031_uia.json",
+        "shan_sha_jian": "子"
+      }
+    }
+  },
+  "2031-10-04": {
+    "zhoutang": "香火宜 · 入宅宜",
+    "men_guang": "安门",
+    "hour_signs": [
+      "时吉",
+      "日合",
+      "时凶",
+      "天刑"
+    ],
+    "master_sha_labels": [
+      "四季龙穴",
+      "日冲未命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "白露",
+        "time": "2031-09-08 03:49:45"
+      },
+      {
+        "name": "秋分",
+        "time": "2031-09-23 13:14:54"
+      },
+      {
+        "name": "寒露",
+        "time": "2031-10-08 19:42:33"
+      }
+    ],
+    "zhi_xing": "定",
+    "day_position_tai": "仓库厕 外正西",
+    "mountains": {
+      "壬": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "耗",
+          "旺",
+          "耗",
+          "耗"
+        ],
+        "pillar_bottom_relations": [
+          "克",
+          "令",
+          "泄",
+          "克"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "死阴府",
+          "时傍阴府",
+          "年克山运",
+          "陈子性吉"
+        ],
+        "flying_stars": {
+          "facing": "9831",
+          "center": "5486",
+          "seat": "1942"
+        },
+        "source": "visual_reference_ren_2031_uia.json",
+        "shan_sha_jian": "子"
+      }
+    }
+  },
+  "2031-10-05": {
+    "zhoutang": "香火宜 · 入宅宜",
+    "men_guang": "安门",
+    "hour_signs": [
+      "时吉",
+      "青龙",
+      "大进",
+      "唐符",
+      "时凶",
+      "截路"
+    ],
+    "master_sha_labels": [
+      "日冲申命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "白露",
+        "time": "2031-09-08 03:49:45"
+      },
+      {
+        "name": "秋分",
+        "time": "2031-09-23 13:14:54"
+      },
+      {
+        "name": "寒露",
+        "time": "2031-10-08 19:42:33"
+      }
+    ],
+    "zhi_xing": "执",
+    "day_position_tai": "房床炉 外正西",
+    "mountains": {
+      "壬": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "泄",
+          "生",
+          "泄",
+          "耗"
+        ],
+        "pillar_bottom_relations": [
+          "耗",
+          "令",
+          "克",
+          "耗"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "日三杀",
+          "年克山运"
+        ],
+        "flying_stars": {
+          "facing": "9827",
+          "center": "5473",
+          "seat": "1938"
+        },
+        "source": "visual_reference_ren_2031_uia.json",
+        "shan_sha_jian": "子"
+      }
+    }
+  },
+  "2031-10-06": {
+    "zhoutang": "香火忌 · 入宅忌",
+    "men_guang": "损人",
+    "hour_signs": [
+      "时吉",
+      "司命",
+      "阳贵",
+      "大进",
+      "时凶",
+      "日刑"
+    ],
+    "master_sha_labels": [
+      "四季四正",
+      "日冲酉命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "白露",
+        "time": "2031-09-08 03:49:45"
+      },
+      {
+        "name": "秋分",
+        "time": "2031-09-23 13:14:54"
+      },
+      {
+        "name": "寒露",
+        "time": "2031-10-08 19:42:33"
+      }
+    ],
+    "zhi_xing": "破",
+    "day_position_tai": "占大门 外正西",
+    "mountains": {
+      "壬": {
+        "grade": "月破",
+        "pillar_top_relations": [
+          "泄",
+          "生",
+          "泄",
+          "克"
+        ],
+        "pillar_bottom_relations": [
+          "耗",
+          "令",
+          "克",
+          "耗"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "年克山运",
+          "时克山运",
+          "月日相冲"
+        ],
+        "flying_stars": {
+          "facing": "9814",
+          "center": "5469",
+          "seat": "1925"
+        },
+        "source": "visual_reference_ren_2031_uia.json",
+        "shan_sha_jian": "子"
+      }
+    }
+  },
+  "2031-10-07": {
+    "zhoutang": "香火宜 · 入宅宜",
+    "men_guang": "损人",
+    "hour_signs": [
+      "时凶",
+      "七殺",
+      "天牢"
+    ],
+    "master_sha_labels": [
+      "日冲戌命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "白露",
+        "time": "2031-09-08 03:49:45"
+      },
+      {
+        "name": "秋分",
+        "time": "2031-09-23 13:14:54"
+      },
+      {
+        "name": "寒露",
+        "time": "2031-10-08 19:42:33"
+      }
+    ],
+    "zhi_xing": "危",
+    "day_position_tai": "碓磨栖 外正西",
+    "mountains": {
+      "壬": {
+        "grade": "五行欠吉",
+        "pillar_top_relations": [
+          "旺",
+          "克",
+          "旺",
+          "克"
+        ],
+        "pillar_bottom_relations": [
+          "泄",
+          "令",
+          "生",
+          "泄"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "死阴府",
+          "日傍阴府",
+          "年克山运",
+          "日克山运",
+          "陈子性吉"
+        ],
+        "flying_stars": {
+          "facing": "9891",
+          "center": "5456",
+          "seat": "1912"
+        },
+        "source": "visual_reference_ren_2031_uia.json",
+        "shan_sha_jian": "子"
+      }
+    }
+  },
+  "2031-10-08": {
+    "zhoutang": "香火宜 · 入宅宜",
+    "men_guang": "损人",
+    "hour_signs": [
+      "时凶",
+      "白虎",
+      "五鬼"
+    ],
+    "master_sha_labels": [
+      "流月损师",
+      "日冲亥命",
+      "时冲午命"
+    ],
+    "jieqi_times": [
+      {
+        "name": "交寒露",
+        "time": "2031-10-08 19:42:33"
+      },
+      {
+        "name": "白露",
+        "time": "2031-09-08 03:49:45"
+      },
+      {
+        "name": "秋分",
+        "time": "2031-09-23 13:14:54"
+      },
+      {
+        "name": "寒露",
+        "time": "2031-10-08 19:42:33"
+      }
+    ],
+    "zhi_xing": "成",
+    "day_position_tai": "厨灶床 外正西",
+    "mountains": {
+      "壬": {
+        "grade": "岁破",
+        "pillar_top_relations": [
+          "旺",
+          "克",
+          "旺",
+          "生"
+        ],
+        "pillar_bottom_relations": [
+          "泄",
+          "令",
+          "克",
+          "泄"
+        ],
+        "shan_sha_labels": [
+          "山运木",
+          "年克山运",
+          "日克山运",
+          "年日相冲"
+        ],
+        "flying_stars": {
+          "facing": "9887",
+          "center": "5443",
+          "seat": "1998"
+        },
+        "source": "visual_reference_ren_2031_uia.json",
+        "shan_sha_jian": "子"
+      }
+    }
+  }
+}

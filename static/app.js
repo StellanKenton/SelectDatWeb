@@ -392,6 +392,12 @@ function dayHeader(x){
 function methodPane(x,mountain){
   const checked=new Set(selected('.method-check'));
   const pillars=[x.year_ganzhi,x.month_ganzhi,x.day_ganzhi,x.time_ganzhi];
+  const elements={甲:'木',乙:'木',丙:'火',丁:'火',戊:'土',己:'土',庚:'金',辛:'金',壬:'水',癸:'水'};
+  const generates={木:'火',火:'土',土:'金',金:'水',水:'木'};
+  const controls={木:'土',土:'水',水:'火',火:'金',金:'木'};
+  const relation=(element)=>element===mountain.element?'旺':generates[element]===mountain.element?'泄':generates[mountain.element]===element?'生':controls[element]===mountain.element?'克':'耗';
+  const pillarRow=(values,cls='')=>'<div class="pillar-line '+cls+'">'+values.map(v=>'<span>'+esc(v||'—')+'</span>').join('')+'</div>';
+  const stemElements=pillars.map(p=>elements[p?.[0]]||'');
   const ds=x.doushou,dsRows=ds?.pillars||[];
   const dsLine=(field,cls='')=>'<div class="ds-row '+cls+'">'+dsRows.map(row=>'<span>'+esc(row[field]||'—')+'</span>').join('')+'</div>';
   const pillarsHtml=checked.has('斗首择日')?'<div class="wb-pillars" title="斗首五神、化气五行与十二长生"><div class="wb-red-head">斗首择日</div><div class="doushou-grid">'+
@@ -400,26 +406,27 @@ function methodPane(x,mountain){
     '<div class="ds-row ds-branch">'+pillars.map(p=>'<span>'+esc(p?.[1]||'—')+'</span>').join('')+'</div>'+
     dsLine('upper_stage','ds-stage')+dsLine('lower_star','ds-star')+
     dsLine('lower_element','ds-element')+dsLine('lower_stage','ds-stage')+
-    '</div><div class="wb-subline">'+esc(mountain.name)+'山斗首属 '+esc(ds?.mountain_element||'—')+'</div></div>':'<div class="wb-pillars method-muted">斗首择日已隐藏</div>';
+    '</div></div><div class="wb-doushou-mountain"><strong>山</strong><span>'+esc(mountain.name)+'山斗首属 <b>'+esc(ds?.mountain_element||'—')+'</b></span></div>':'<div class="wb-pillars method-muted">斗首择日已隐藏</div><div class="wb-doushou-mountain"></div>';
   const shanLabels=[...(x.shan_sha_labels?.length?x.shan_sha_labels:x.bad)];
   if(x.day_xiaomie&&!shanLabels.includes('日消灭煞'))shanLabels.push('日消灭煞');
   const hasShanYun=shanLabels.some(v=>/^山运[金木水火土]$/.test(v));
   const bad=shanLabels.length?shanLabels.map(v=>'<div'+(/^山运[金木水火土]$/.test(v)?' class="wb-accent"':'')+'>'+esc(v)+'</div>').join(''):'<div>本课未列山煞</div>';
-  const shanHtml='<div class="wb-sha"><div class="wb-gray-head">'+esc(mountain.name)+'山煞</div>'+(hasShanYun?'':'<div class="wb-accent">山运'+esc(x.shan_yun_element||mountain.element)+'</div>')+bad+'</div>';
   const star=x.flying_stars||{};
-  const starHtml='<div class="wb-stars"><div class="wb-gray-head">飞星</div><div>'+esc(star.facing||'—')+'向</div><div>'+esc(star.center||'—')+'中</div><div class="wb-star-seat">'+esc(star.seat||'—')+'坐</div></div>';
+  const shanHtml='<div class="wb-sha"><div class="wb-gray-head">'+esc(mountain.name)+'山煞</div>'+(hasShanYun?'':'<div class="wb-accent">山运'+esc(x.shan_yun_element||mountain.element)+'</div>')+bad+'<div class="wb-accent">飞星</div><div>'+esc(star.facing||'—')+'向</div><div>'+esc(star.center||'—')+'中</div><div class="wb-star-seat">'+esc(star.seat||'—')+'坐</div></div>';
   const times=(x.jieqi_times||[]).map(t=>{const [day,time]=String(t.time||'').split(' ');return '<div class="jieqi-entry"><span>'+esc(t.name)+':'+esc(day||'')+'</span><span>'+esc(time||'')+'</span></div>';}).join('');
   const jieqiHtml='<div class="wb-jieqi"><div class="wb-red-head">节气时间</div>'+times+'</div>';
   const pieces=[pillarsHtml,shanHtml];
-  if(checked.has('玄空紫白'))pieces.push(starHtml);
+  // 原站的飞星和杀师煞属于日课基础列，单独显示斗首时仍在排盘右侧。
+  pieces.push('<div class="wb-master-sha"><div class="wb-gray-head">杀师煞</div>'+(x.master_sha_labels||[]).map(v=>'<div>'+esc(v)+'</div>').join('')+'</div>');
   pieces.push(jieqiHtml);
   const unavailable=[...checked].filter(name=>!['斗首择日','玄空紫白'].includes(name));
   const signs=x.hour_signs?.length?x.hour_signs:[x.hours?.[0]?.recommended?'时吉':'时凶'];
   return '<div class="lesson-workbench">'+
     '<div class="wb-vertical"><strong>胎神</strong><span>'+esc(x.day_position_tai||'—')+'</span></div>'+
     '<div class="wb-vertical"><strong>门光星</strong><span>'+esc(x.men_guang||'—')+'</span></div>'+
-    '<div class="wb-hour"><div class="wb-red-head">'+esc(x.hour)+'点</div>'+signs.slice(0,4).map((sign,i)=>'<div class="'+(i===0?'wb-red-head':'')+'">'+esc(sign)+'</div>').join('')+'<button type="button" class="twelve-hours" data-hours="'+esc(x.lesson_id)+'">查看十二时辰</button></div>'+
-    '<div class="wb-element"><div>'+esc(mountain.name)+'山属'+esc(mountain.element)+'</div><div>'+esc(x.reference_grade_label||x.level_name)+'</div><div class="element-lines">'+pillars.map(p=>esc(p||'—')).join('<br>')+'</div></div>'+
+    '<div class="wb-vertical wb-zhoutang"><strong>周堂</strong><span>'+esc(x.zhoutang||'—')+'</span></div>'+
+    '<div class="wb-hour"><div class="wb-red-head">'+esc(x.hour)+'点</div>'+signs.slice(0,6).map((sign,i)=>'<div class="'+(i===0?'wb-red-head':'')+'">'+esc(sign)+'</div>').join('')+'</div>'+
+    '<div class="wb-element"><div>'+esc(mountain.name)+'山属'+esc(mountain.element)+'</div><div>'+esc(x.reference_grade_label||x.level_name)+'</div>'+pillarRow(x.pillar_top_relations?.length===4?x.pillar_top_relations:stemElements.map(relation),'pillar-relation')+pillarRow(pillars.map(p=>p?.[0]),'pillar-stem')+pillarRow(pillars.map(p=>p?.[1]),'pillar-branch')+pillarRow(x.pillar_bottom_relations?.length===4?x.pillar_bottom_relations:stemElements.map((e,i)=>i===1?'令':relation(e)),'pillar-relation')+'<button type="button" class="twelve-hours" data-hours="'+esc(x.lesson_id)+'">查看十二时辰</button>'+pillarRow(x.pillar_nayin_elements||stemElements,'pillar-element')+'</div>'+
     '<div class="wb-choose"><label><input class="lesson-select" data-lesson="'+esc(x.lesson_id)+'" type="checkbox" '+(S.selectedLessons.has(x.lesson_id)?'checked':'')+'>选中</label><button type="button" class="favorite-button" data-favorite="'+esc(x.lesson_id)+'">'+(S.favorites.has(x.lesson_id)?'已收藏':'添加收藏')+'</button></div>'+
     pieces.join('')+'</div>'+
     (unavailable.length?'<div class="method-notice">'+unavailable.map(esc).join('、')+'：当前本地计算尚无排盘数据</div>':'')+
@@ -445,10 +452,11 @@ function render(data){
   $("statusText").textContent=status;
   if(!data.results.length){$("resultList").innerHTML='<div class="empty-state">当前条件没有匹配日课。可改变日期、时辰或筛选项后重新搜索。</div>';return;}
   const order=$("sortSelect").value;
+  const doushouOnly=selected('.method-check').length===1&&selected('.method-check')[0]==='斗首择日';
   const lessons=[...data.results];
   if(order==='山煞')lessons.sort((a,b)=>(a.shan_sha_labels?.length||a.bad.length)-(b.shan_sha_labels?.length||b.bad.length)||a.date.localeCompare(b.date)||a.hour-b.hour);
   else if(order!=='斗首择日')lessons.sort((a,b)=>b.score-a.score||a.date.localeCompare(b.date)||a.hour-b.hour);
-  $("resultList").innerHTML=lessons.map(x=>'<article class="day-card" data-card="'+esc(x.lesson_id)+'">'+
+  $("resultList").innerHTML=lessons.map(x=>'<article class="day-card'+(doushouOnly?' doushou-only':'')+'" data-card="'+esc(x.lesson_id)+'">'+
     '<div class="day-head">'+dayHeader(x)+'</div>'+
     '<div class="almanac-line line-yi"><b>宜事:</b> '+dotList(x.yi)+'</div>'+
     '<div class="almanac-line"><b>忌事:</b> '+dotList(x.ji)+'</div>'+
