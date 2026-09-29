@@ -6,6 +6,9 @@ from core import calculate_days, get_month_sha, get_options, get_year_sha
 
 
 app = Flask(__name__)
+# Keep the HTML template in step with updated static files even when a local
+# development server was started with --no-reload.
+app.config["TEMPLATES_AUTO_RELOAD"] = True
 
 
 @app.get("/")

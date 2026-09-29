@@ -113,9 +113,10 @@
         </section>
 
         <section class="step" id="monthStep">
-          <div class="step-title" id="monthStepTitle">第五步【添加利月】</div>
-          <button type="button" id="autoMonths" class="wide-blue">自动添加利月</button>
-          <div class="step-center"><select id="manualMonth" aria-label="手动添加利月"><option value="">手动添加利月</option></select></div>
+          <div class="month-step-heading">
+            <div class="step-title" id="monthStepTitle">第五步【添加利月】</div>
+            <button type="button" id="autoMonths">自动添加利月</button>
+          </div>
           <div class="relation-grid" id="relationGrid" hidden>
             <label><input class="relation-check" type="checkbox" value="旺" checked>旺</label>
             <label><input class="relation-check" type="checkbox" value="生" checked>生</label>
@@ -124,7 +125,8 @@
             <label><input class="relation-check" type="checkbox" value="克">克</label>
           </div>
           <div class="month-grid" id="monthGrid" hidden></div>
-          <div class="selected-months" id="selectedMonths" aria-live="polite" hidden></div>
+          <div class="month-manual"><select id="manualMonth" aria-label="手动添加利月"><option value="">手动添加利月</option></select></div>
+          <div class="selected-months" id="selectedMonths" aria-live="polite"></div>
         </section>
 
         <section class="step" id="filterStep">

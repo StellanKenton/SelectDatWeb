@@ -1,5 +1,5 @@
 
-const S={options:null,mountains:[],repair:new Set(),repairPalace:"",lifeEntries:[],deceasedEntries:[],yearRequest:0,monthRequest:0,calculateRequest:0,searchMode:"evaluation",lastData:null,favorites:new Set(),selectedLessons:new Set(),initialPanelsPositioned:false};
+const S={options:null,mountains:[],repair:new Set(),repairPalace:"",lifeEntries:[],deceasedEntries:[],favorableMonths:[],yearRequest:0,monthRequest:0,calculateRequest:0,searchMode:"evaluation",lastData:null,favorites:new Set(),selectedLessons:new Set(),initialPanelsPositioned:false};
 const $=id=>document.getElementById(id);
 const GAN="甲乙丙丁戊己庚辛壬癸";
 const ZHI="子丑寅卯辰巳午未申酉戌亥";
@@ -181,19 +181,50 @@ function populateHours(){
 function populateMonths(){
   const months=["寅","卯","辰","巳","午","未","申","酉","戌","亥","子","丑"];
   const monthHints={寅:"木火",卯:"木火",辰:"土金",巳:"火土",午:"火土",未:"土",申:"金水",酉:"金水",戌:"土金",亥:"水木",子:"水木",丑:"土金"};
-  $("monthGrid").innerHTML=months
-    .map(x=>'<label><input class="month-check" type="checkbox" value="'+x+'">'+x+'月</label>').join("");
-  setOpts($("manualMonth"),[{value:"",label:"手动添加利月"},...months.map(x=>({value:x,label:x+"月"+monthHints[x]+"山有利"}))]);
-  $("manualMonth").onchange=e=>{
-    if(e.target.value){$("monthGrid").querySelector('input[value="'+e.target.value+'"]').checked=true;updateMonthSummary();}
-    e.target.value="";
+  // 下拉选项文字来自原站；星旺月的点击结果尚未逐项采集。
+  // 这里按子星为命主所生、夫星为克命主的五行及各五行当令月份推算。
+  const starMonths={
+    "child:甲乙":["巳","午"],"child:丙丁":["辰","未","戌","丑"],
+    "child:戊己":["申","酉"],"child:庚辛":["亥","子"],"child:壬癸":["寅","卯"],
+    "spouse:甲乙":["申","酉"],"spouse:丙丁":["亥","子"],
+    "spouse:戊己":["寅","卯"],"spouse:庚辛":["巳","午"],
+    "spouse:壬癸":["辰","未","戌","丑"]
   };
-  $("monthGrid").onchange=updateMonthSummary;
-  updateMonthSummary();
+  const lifeGroups=["甲乙","丙丁","戊己","庚辛","壬癸"];
+  const options=[{value:"",label:"手动添加利月"},
+    ...months.map(x=>({value:x,label:x+"月"+monthHints[x]+"山有利"})),
+    {value:"all",label:"十二个月"},{value:"stove-heading",label:"以下是作灶馈主"},
+    ...lifeGroups.map(x=>({value:"child:"+x,label:x+"命子星旺月"})),
+    ...lifeGroups.map(x=>({value:"spouse:"+x,label:x+"命夫星旺月"}))];
+  setOpts($("manualMonth"),options);
+  for(const option of $("manualMonth").options){
+    option.dataset.kind=option.value==="stove-heading"?"heading":option.value.startsWith("child:")?"child":option.value.startsWith("spouse:")?"spouse":"month";
+    if(option.value==="stove-heading")option.disabled=true;
+  }
+  $("manualMonth").onchange=e=>{
+    if(e.target.value==="all")S.favorableMonths=[...months];
+    else if(months.includes(e.target.value)&&!S.favorableMonths.includes(e.target.value))S.favorableMonths.push(e.target.value);
+    else if(starMonths[e.target.value]){
+      for(const month of starMonths[e.target.value])if(!S.favorableMonths.includes(month))S.favorableMonths.push(month);
+    }
+    e.target.value="";
+    renderMonths();
+  };
+  $("monthGrid").onclick=e=>{
+    const remove=e.target.closest(".month-remove");
+    if(!remove)return;
+    S.favorableMonths=S.favorableMonths.filter(month=>month!==remove.dataset.month);
+    renderMonths();
+  };
+  renderMonths();
 }
-function updateMonthSummary(){
-  const months=selected(".month-check");
-  $("selectedMonths").textContent=months.length?"已选利月："+months.join("、")+"月":"未限定利月";
+function renderMonths(){
+  $("monthGrid").innerHTML=S.favorableMonths.map(month=>
+    '<div class="month-card"><input class="month-name" type="text" value="'+esc(month)+'" readonly tabindex="-1" aria-label="已选'+esc(month)+'月">'+
+    '<button type="button" class="month-remove" data-month="'+esc(month)+'" aria-label="移除'+esc(month)+'月">X</button></div>'
+  ).join("");
+  $("monthGrid").hidden=currentMeta().month_mode==="relation"||!S.favorableMonths.length;
+  $("selectedMonths").textContent=S.favorableMonths.length?"已选利月："+S.favorableMonths.join("、")+"月":"未限定利月";
 }
 function populateShaFilters(){
   const defaults=new Set(currentMeta().default_sha_filters||[]);
@@ -282,8 +313,8 @@ function updateUseMeta(){
   setHidden("yearShaStep",!meta.show_year_sha);
   setHidden("relationGrid",meta.month_mode!=="relation");
   setHidden("manualMonth",meta.month_mode==="relation");
-  setHidden("monthGrid",meta.month_mode==="relation");
-  setHidden("selectedMonths",meta.month_mode==="relation");
+  renderMonths();
+  $("monthStep").classList.toggle("month-mode",meta.month_mode!=="relation");
 
   $("trigramLabel").textContent=meta.mountain_mode==="facing"?"向卦":"坐卦";
   $("mountainLabel").textContent=meta.mountain_mode==="facing"?"向位":"坐山";
@@ -352,8 +383,8 @@ function autoMonths(){
     return;
   }
   const wanted=new Set(currentMountain()?.auto_favorable_months||[]);
-  document.querySelectorAll(".month-check").forEach(x=>x.checked=wanted.has(x.value));
-  updateMonthSummary();
+  S.favorableMonths=[...wanted];
+  renderMonths();
 }
 function payload(mode=S.searchMode){
   const y=Number($("ganzhiYearSelect").value),m=currentMountain();
@@ -378,7 +409,7 @@ function payload(mode=S.searchMode){
     dagua:dagua.options[dagua.selectedIndex]?.text||"",dagua_value:dagua.value,
     repair_positions:[...new Set([...S.repair,...[$("filterPositionOne").value,$("filterPositionTwo").value].filter(Boolean)])],life_years:yearEntries("life"),deceased_years:yearEntries("deceased"),
     life_sha_filter:$("lifeShaFilter").value==="on",sha_filters:selected(".sha-filter-check"),jian_filters:selected(".jian-filter-check"),
-    favorable_months:currentMeta().month_mode==="relation"?[]:selected(".month-check"),month_relations:selected(".relation-check"),level:$("levelSelect").value,
+    favorable_months:currentMeta().month_mode==="relation"?[]:[...S.favorableMonths],month_relations:selected(".relation-check"),level:$("levelSelect").value,
     hours:selected(".hour-check").map(Number)
   };
 }
